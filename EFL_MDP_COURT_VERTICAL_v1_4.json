@@ -1,0 +1,661 @@
+{
+  "meta": {
+    "name": "EFL Movement Demand Profile - Court Vertical (Basketball Focus)",
+    "mdp_id": "MDP_COURT_VERTICAL",
+    "version": "1.4.1",
+    "generated": "2026-01-06",
+    "owner": "Austin Lawrence, Director of Performance Systems",
+    "status": "ACTIVE · PRODUCTION READY",
+    "parent_document": "EFL_MOVEMENT_DEMAND_PROFILES_v1_2_COMPLETE.json",
+    "codexReference": "§4.4 Population Architecture; Sport Demands Grid v2.2.2; FV Schema v2.1; Load Standards v2.2.0; ICP Definitions v2.3.1",
+    "changes_from_v1_4_0": [
+      "Normalized F-V zone identifiers to canonical Z-style format (Z1-Z8) per ICP Definitions v2.3.1 schema_hints",
+      "No functional changes; schema alignment only for cross-document validation compatibility"
+    ],
+    "integration_points": [
+      "EFL_SPECIALIZATION_BLOCK_ELASTIC_BASKETBALL_v1_0_1.json",
+      "EFL_SPECIALIZATION_BLOCK_DECELERATION_BASKETBALL_v1_0.json",
+      "EFL_ICP_DEFINITIONS_v2_3_1.json (basketball ICPs)",
+      "EFL_EXERCISE_PROGRESSION_LAW_v1_0_1.json"
+    ]
+  },
+
+  "mdp_definition": {
+    "display_name": "Court Vertical Movement Demand Profile",
+    "mdp_id": "MDP_COURT_VERTICAL",
+    "description": "High-frequency vertical jumping, short-distance sprinting, and rapid direction changes in a confined court space. Emphasizes elastic power, reactive strength, and multi-directional agility.",
+    "applies_to_sports": ["Basketball", "Volleyball", "Handball"],
+    
+    "primary_movement_demands": {
+      "vertical_jump_frequency": "very_high",
+      "sprint_distance_per_event": "short",
+      "cod_frequency": "very_high",
+      "contact_level": "low_to_moderate",
+      "endurance_requirement": "anaerobic_alactic_capacity",
+      "elastic_demand": "very_high",
+      "deceleration_frequency": "very_high"
+    },
+
+    "fv_zone_priorities": {
+      "primary": ["Z3", "Z4"],
+      "secondary": ["Z2", "Z6"],
+      "recovery": ["Z8", "Z5"],
+      "notes": "Z3 (Elastic-Reactive Power) and Z4 (Velocity) are dominant across all seasons. Z2 (Explosive Strength) supports in off-season. Z6 (Strength-Endurance) used for conditioning blocks."
+    },
+
+    "biomechanical_emphasis": {
+      "ankle_stiffness": "critical",
+      "hip_extension_power": "critical",
+      "knee_flexion_eccentric": "critical",
+      "trunk_stability": "high",
+      "ankle_dorsiflexion_mobility": "high",
+      "unilateral_deceleration_control": "critical",
+      "lateral_force_production": "high",
+      "landing_mechanics": "critical"
+    },
+
+    "training_goals": [
+      "increase_vertical_jump",
+      "improve_repeated_jump_ability",
+      "enhance_short_sprint_acceleration",
+      "develop_multidirectional_speed",
+      "improve_deceleration_mechanics",
+      "increase_cod_efficiency",
+      "build_reactive_strength_index",
+      "reduce_injury_risk_knee_ankle"
+    ]
+  },
+
+  "population_parameters": {
+    "Youth_8_12": {
+      "governance_profile": "Youth_8_12",
+      "plyo_ceiling_per_session": 80,
+      "plyo_ceiling_per_week": 160,
+      "sprint_ceiling_per_week_m": 400,
+      "load_band_ceiling": "Band_1",
+      "node_access": ["A", "B", "C", "D"],
+      "e_node_ceiling": "E2",
+      "tier_3_max_percent": 0,
+      "default_readiness": "GREEN",
+      "specialization_blocks_allowed": false,
+      "notes": "Focus on movement skill acquisition, no depth jumps (E3+), no specialization blocks. Emphasize coordination over performance. General development only."
+    },
+
+    "Youth_13_17": {
+      "governance_profile": "Youth_13_17_Performance",
+      "plyo_ceiling_per_session": 120,
+      "plyo_ceiling_per_week": 240,
+      "sprint_ceiling_per_week_m": 600,
+      "load_band_ceiling": "Band_2",
+      "node_access": ["A", "B", "C", "D"],
+      "e_node_ceiling": "E4",
+      "tier_3_max_percent": 40,
+      "default_readiness": "GREEN",
+      "specialization_blocks_allowed": true,
+      "specialization_blocks_limit": "ONE block maximum per training year",
+      "notes": "Can progress to elastic plyometrics (E1-E3), introduce E4 cautiously with tier 3 cap. Specialization blocks allowed but limited to ONE per year due to tissue maturation constraints."
+    },
+
+    "Adult": {
+      "governance_profile": "Adult_Performance",
+      "plyo_ceiling_per_session": 140,
+      "plyo_ceiling_per_week": 280,
+      "sprint_ceiling_per_week_m": 1000,
+      "load_band_ceiling": "Band_4",
+      "node_access": ["A", "B", "C", "D"],
+      "e_node_ceiling": "E4",
+      "tier_3_max_percent": 50,
+      "default_readiness": "GREEN",
+      "specialization_blocks_allowed": true,
+      "specialization_blocks_limit": "TWO blocks maximum per training year (if properly sequenced)",
+      "notes": "Full access to elastic spectrum. Can run both elastic + deceleration blocks in single training year if separated by 2+ week baseline buffer."
+    }
+  },
+
+  "specialization_blocks_available": {
+    "description": "Basketball-specific specialization blocks that operate within MDP_COURT_VERTICAL framework. These are time-limited, gated, intensive training windows focusing on specific adaptations.",
+    
+    "elastic_specialization": {
+      "block_id": "elastic_specialization_basketball",
+      "block_reference": "EFL_SPECIALIZATION_BLOCK_ELASTIC_BASKETBALL_v1_0_1.json",
+      "display_name": "Elastic Specialization Block (Basketball)",
+      "duration_weeks": 4,
+      "training_emphasis": "Vertical/reactive power, elastic strength, RSI",
+      "adaptation_targets": [
+        "Vertical jump height ≥5% improvement",
+        "RSI ≥2.0 or ≥10% improvement",
+        "Repeat-jump capacity (decrement <15%)",
+        "Landing quality maintenance"
+      ],
+      
+      "legal_seasons": ["OFF_SEASON"],
+      "legal_populations": ["Youth_13_17", "Adult"],
+      "cns_load_category": "HIGH",
+      
+      "entry_requirements_summary": [
+        "Readiness GREEN",
+        "Season OFF_SEASON",
+        "Landing quality ≥7/10",
+        "Knee valgus ABSENT",
+        "8+ weeks plyo exposure"
+      ],
+
+      "weekly_volume_profile": {
+        "Youth_13_17": {
+          "weeks_1_3": "160-180 contacts/week (83% of ceiling)",
+          "week_4": "100-120 contacts/week (deload)",
+          "tier_3_max": "40% of session",
+          "sprint_meters": "0-600/week (minimal)"
+        },
+        "Adult": {
+          "weeks_1_3": "200-220 contacts/week (86% of ceiling)",
+          "week_4": "140-160 contacts/week (deload)",
+          "tier_3_max": "50% of session",
+          "sprint_meters": "0-800/week (minimal)"
+        }
+      },
+
+      "weekly_emphasis_progression": [
+        "Week 1: Vertical elastic (pogos, box jumps, hurdle hops)",
+        "Week 2: Horizontal elastic (bounds, broad jumps, lateral work)",
+        "Week 3: Reactive + multi-directional (depth jumps, reactive hurdles) - PEAK INTENSITY",
+        "Week 4: Deload + assessment (40% volume reduction)"
+      ],
+
+      "exit_criteria_summary": [
+        "Vertical jump ≥5% improvement",
+        "RSI ≥2.0",
+        "Landing quality ≥7/10 maintained",
+        "No tissue health issues",
+        "Readiness GREEN ≥3 weeks"
+      ],
+
+      "post_block_transition": {
+        "minimum_recovery_days": 3,
+        "maximum_recovery_days": 7,
+        "re_entry_volume": "60% week 1, 75% week 2, normal week 3",
+        "minimum_weeks_to_next_specialization": 8
+      }
+    },
+
+    "deceleration_specialization": {
+      "block_id": "deceleration_specialization_basketball",
+      "block_reference": "EFL_SPECIALIZATION_BLOCK_DECELERATION_BASKETBALL_v1_0.json",
+      "display_name": "Deceleration Specialization Block (Basketball)",
+      "duration_weeks": 4,
+      "training_emphasis": "Braking mechanics, COD efficiency, eccentric control, injury prevention",
+      "adaptation_targets": [
+        "505 agility test ≥3% improvement",
+        "Deceleration asymmetry <10%",
+        "Braking mechanics quality ≥7/10",
+        "Single-leg control maintenance"
+      ],
+
+      "legal_seasons": ["OFF_SEASON", "PREP_SEASON"],
+      "legal_populations": ["Youth_13_17", "Adult"],
+      "cns_load_category": "MODERATE",
+
+      "entry_requirements_summary": [
+        "Readiness GREEN",
+        "Season OFF_SEASON or PREP_SEASON",
+        "Single-leg squat quality ≥7/10",
+        "Knee valgus ABSENT",
+        "4+ weeks eccentric exposure"
+      ],
+
+      "weekly_volume_profile": {
+        "Youth_13_17": {
+          "weeks_1_3": "100-180 contacts/week (progressive 58-75% of ceiling)",
+          "week_4": "60-100 contacts/week (deload)",
+          "tier_3_max": "20-30% of session",
+          "sprint_meters": "300-800/week (integrated)"
+        },
+        "Adult": {
+          "weeks_1_3": "120-220 contacts/week (progressive 64-86% of ceiling)",
+          "week_4": "80-120 contacts/week (deload)",
+          "tier_3_max": "30-40% of session",
+          "sprint_meters": "400-1000/week (integrated)"
+        }
+      },
+
+      "weekly_emphasis_progression": [
+        "Week 1: Bilateral braking (eccentric squats, jump stops, decel drills)",
+        "Week 2: Unilateral decel + lateral (single-leg work, lateral shuffles)",
+        "Week 3: COD + re-acceleration (45/90° cuts, L-drill, multi-directional) - PEAK COMPLEXITY",
+        "Week 4: Deload + COD assessment (45% volume reduction)"
+      ],
+
+      "exit_criteria_summary": [
+        "505 test ≥3% improvement OR <10% asymmetry",
+        "Deceleration force symmetry <10%",
+        "Single-leg squat ≥7/10 maintained",
+        "No knee/ankle pain",
+        "Readiness GREEN ≥3 weeks"
+      ],
+
+      "post_block_transition": {
+        "minimum_recovery_days": 3,
+        "maximum_recovery_days": 5,
+        "re_entry_volume": "60% week 1, 75% week 2, normal week 3",
+        "minimum_weeks_to_next_specialization": 8,
+        "minimum_weeks_to_elastic_block": 2
+      }
+    }
+  },
+
+  "specialization_block_sequencing": {
+    "description": "Rules for safely combining elastic and deceleration blocks within annual plan",
+
+    "single_block_athletes": {
+      "populations": ["Youth_13_17"],
+      "rule": "Maximum ONE specialization block per training year",
+      "decision": "Choose elastic OR deceleration based on athlete limiter",
+      "rationale": "Tissue maturation and training age constraints limit specialization frequency"
+    },
+
+    "dual_block_athletes": {
+      "populations": ["Adult"],
+      "rule": "Maximum TWO specialization blocks per training year if properly sequenced",
+      "legal_sequences": [
+        {
+          "sequence_id": "elastic_first",
+          "order": "Elastic (weeks 1-4) → Baseline (weeks 5-6) → Deceleration (weeks 7-10)",
+          "rationale": "Elastic = higher CNS demand, run first when freshest. Decel can extend into prep season."
+        },
+        {
+          "sequence_id": "decel_first",
+          "order": "Deceleration (weeks 1-4) → Baseline (weeks 5-6) → Elastic (weeks 7-10)",
+          "rationale": "Decel = lower CNS demand, can prime movement quality before elastic. Both stay in off-season."
+        }
+      ],
+      "forbidden_sequences": [
+        {
+          "forbidden": "Elastic → Deceleration (no baseline buffer)",
+          "reason": "Insufficient recovery between high-intensity blocks"
+        },
+        {
+          "forbidden": "Deceleration → Elastic (no baseline buffer)",
+          "reason": "Insufficient recovery between blocks"
+        },
+        {
+          "forbidden": "Elastic → Elastic (consecutive specializations)",
+          "reason": "Overuse injury risk, tissue adaptation failure"
+        }
+      ],
+      "minimum_baseline_buffer_weeks": 2,
+      "minimum_weeks_between_blocks_same_type": 16
+    },
+
+    "timing_within_annual_plan": {
+      "early_offseason": {
+        "weeks": "1-8 post-competition",
+        "recommended_blocks": ["Elastic OR Deceleration (choose one)"],
+        "rationale": "Highest recovery capacity, zero competition load"
+      },
+      "mid_offseason": {
+        "weeks": "9-16 post-competition",
+        "recommended_blocks": ["Second block if adult AND first block successful"],
+        "rationale": "Still adequate recovery capacity if first block went well"
+      },
+      "late_offseason_prep": {
+        "weeks": "4-8 weeks before competition",
+        "recommended_blocks": ["Deceleration only (NOT elastic)"],
+        "rationale": "Decel legal in prep season, supports sport-specific movement prep"
+      },
+      "in_season": {
+        "weeks": "Competition phase",
+        "recommended_blocks": ["NONE - use baseline MDP programming"],
+        "rationale": "Competition load precludes specialization intensity"
+      }
+    }
+  },
+
+  "block_selector_guidance": {
+    "description": "Decision tree for coaches selecting between elastic and deceleration blocks",
+
+    "elastic_block_indicators": [
+      "Vertical jump is primary limiter (below position avg)",
+      "RSI <1.8",
+      "Repeat-jump capacity poor (>20% decrement)",
+      "Athlete reports feeling 'slow off ground'",
+      "Landing quality good but elastic output low",
+      "No injury history - focus is performance enhancement"
+    ],
+
+    "deceleration_block_indicators": [
+      "COD speed is primary limiter",
+      "505 test >10% asymmetry L vs R",
+      "Previous knee injury (ACL, meniscus) - prevention focus",
+      "Knee valgus present on cuts (corrective emphasis)",
+      "Ankle instability issues",
+      "Braking mechanics poor (long deceleration distance)",
+      "Athlete reports feeling 'out of control on cuts'"
+    ],
+
+    "baseline_programming_indicators": [
+      "Athlete is Youth 13-17 AND already completed one specialization block this year",
+      "Current season is IN_SEASON (any tier)",
+      "Multiple movement limiters present (needs general development)",
+      "Recent injury or training interruption (needs foundational rebuild)",
+      "Readiness frequently YELLOW/RED",
+      "No clear performance limiter identified"
+    ],
+
+    "decision_flowchart": {
+      "step_1": {
+        "question": "Has athlete completed a specialization block in the last 8 weeks?",
+        "if_yes": "USE BASELINE PROGRAMMING (too soon for next block)",
+        "if_no": "Proceed to step 2"
+      },
+      "step_2": {
+        "question": "Is athlete Youth 13-17 AND already completed one block this training year?",
+        "if_yes": "USE BASELINE PROGRAMMING (youth limit reached)",
+        "if_no": "Proceed to step 3"
+      },
+      "step_3": {
+        "question": "Is current season IN_SEASON (any tier)?",
+        "if_yes": "USE BASELINE PROGRAMMING (in-season precludes specialization)",
+        "if_no": "Proceed to step 4"
+      },
+      "step_4": {
+        "question": "Does athlete meet entry requirements for specialization blocks? (Readiness GREEN, movement quality ≥7/10, no valgus, adequate training exposure)",
+        "if_no": "USE BASELINE PROGRAMMING (build prerequisites first)",
+        "if_yes": "Proceed to step 5"
+      },
+      "step_5": {
+        "question": "What is the PRIMARY performance limiter?",
+        "if_vertical_jump_rsi": "ELASTIC SPECIALIZATION BLOCK",
+        "if_cod_braking_mechanics": "DECELERATION SPECIALIZATION BLOCK",
+        "if_both_or_unclear": "BASELINE PROGRAMMING (general development needed)",
+        "if_neither": "BASELINE PROGRAMMING (no clear specialization target)"
+      }
+    }
+  },
+
+  "movement_mechanics_framework": {
+    "description": "Basketball-specific movement priorities integrated across all programming",
+
+    "vertical_elastic": {
+      "priority": "CRITICAL",
+      "frequency_per_week": "2-3x",
+      "rationale": "Vertical jump central to basketball performance (rebounding, shot blocking, finishing)",
+      "primary_patterns": ["vertical_jump", "repeat_jumps", "depth_jumps", "hurdle_hops"],
+      "assessment_methods": ["CMJ height", "RSI from 30cm", "repeat jump decrement"],
+      "baseline_programming_emphasis": "E1-E2 work, 60-100 contacts/session",
+      "specialization_block_emphasis": "E2-E3 work, 100-120 contacts/session (elastic block only)"
+    },
+
+    "deceleration": {
+      "priority": "CRITICAL",
+      "frequency_per_week": "2-3x",
+      "rationale": "Injury prevention (ACL, ankle) and game performance (defensive positioning, closing out)",
+      "primary_patterns": ["jump_stops", "decel_step_downs", "eccentric_squats", "braking_drills"],
+      "assessment_methods": ["Jump stop quality", "deceleration force symmetry", "single-leg squat"],
+      "baseline_programming_emphasis": "Bilateral patterns, controlled tempo, E0-E1",
+      "specialization_block_emphasis": "Unilateral patterns, COD integration, E0-E2 (decel block only)"
+    },
+
+    "lateral_force": {
+      "priority": "CRITICAL",
+      "frequency_per_week": "2-3x",
+      "rationale": "Defensive sliding, lateral cuts, help-side rotations",
+      "primary_patterns": ["lateral_shuffles", "lateral_bounds", "defensive_slides", "lateral_landings"],
+      "assessment_methods": ["Lateral hop distance", "defensive slide speed", "lateral deceleration control"],
+      "baseline_programming_emphasis": "Bilateral lateral work, controlled speeds",
+      "specialization_block_emphasis": "Included in both blocks (elastic: lateral bounds, decel: lateral COD)"
+    },
+
+    "landing_control": {
+      "priority": "CRITICAL",
+      "frequency_per_week": "3x minimum",
+      "rationale": "Injury prevention and elastic efficiency - poor landing = injury risk + power loss",
+      "primary_patterns": ["stick_landings", "bilateral_landings", "single_leg_landings"],
+      "assessment_methods": ["Landing quality score", "knee valgus screening", "landing sound"],
+      "baseline_programming_emphasis": "Every session includes landing work (PREP or WORK phase)",
+      "specialization_block_emphasis": "Assessed pre-session, maintained throughout, exit criteria"
+    },
+
+    "horizontal_acceleration": {
+      "priority": "IMPORTANT",
+      "frequency_per_week": "2x",
+      "rationale": "Transition offense, closeouts, defensive rotations",
+      "primary_patterns": ["sprint_starts", "acceleration_drills", "bounds", "wall_drills"],
+      "assessment_methods": ["10y sprint time", "first step quickness"],
+      "baseline_programming_emphasis": "Sprint work 300-600m/week, acceleration focus",
+      "specialization_block_emphasis": "Integrated into decel block (brake-to-sprint transitions)"
+    },
+
+    "rotational_trunk": {
+      "priority": "SUPPORTIVE",
+      "frequency_per_week": "2x",
+      "rationale": "Shot fakes, passes, defensive denial, contact absorption",
+      "primary_patterns": ["anti_rotation", "med_ball_rotations", "trunk_control_under_load"],
+      "assessment_methods": ["Pallof press hold time", "rotational power"],
+      "baseline_programming_emphasis": "WORK_B phase most sessions, anti-rotation emphasis",
+      "specialization_block_emphasis": "Maintained in WORK_B of both blocks"
+    }
+  },
+
+  "upper_body_requirements": {
+    "description": "Basketball-specific upper body work - must NOT interfere with shooting mechanics",
+
+    "rationale": "Shooting mechanics require neurological precision. Heavy upper body work creates soreness that disrupts shot quality. Upper body work must support basketball demands without compromising shooting.",
+
+    "basketball_specific_demands": [
+      "Shot release arm deceleration (eccentric shoulder control)",
+      "Scapular endurance for sustained shooting volume",
+      "Contact tolerance for rebounding and post play",
+      "Anti-rotation for defensive denial and ball protection",
+      "Core control for shot stability under fatigue"
+    ],
+
+    "programming_guidelines": {
+      "frequency": "2x per week",
+      "timing": "Post-plyometric work (WORK_B phase)",
+      "volume": "8-12 minutes per session",
+      "load_range": "Band_1 to Band_2 (submaximal only)",
+      "intensity_ceiling": "Never exceed 80% 1RM, avoid training to failure",
+      "tempo_emphasis": "Eccentric emphasis for arm deceleration (3-5 second lowers)",
+      "shooting_compatibility_rule": "CRITICAL - If upper body soreness present before shooting practice, volume was too high"
+    },
+
+    "priority_movement_categories": {
+      "scapular_endurance": {
+        "exercises": ["Push-Up Plus", "Scapular Wall Slides", "YTW Series"],
+        "sets_reps": "3x10-15",
+        "rationale": "Scapular control supports shot mechanics and overhead rebounding"
+      },
+      "arm_deceleration": {
+        "exercises": ["Eccentric Push-Up (5/0/1)", "Eccentric DB Press", "Eccentric Cable Press"],
+        "sets_reps": "3x6-8",
+        "rationale": "Eccentric strength protects shoulder from repeated shot release deceleration"
+      },
+      "anti_rotation": {
+        "exercises": ["Pallof Press", "Half-Kneeling Cable Press", "Anti-Rotation Holds"],
+        "sets_reps": "3x8-10/side",
+        "rationale": "Trunk control for defensive denial and shot stability under contact"
+      },
+      "contact_tolerance": {
+        "exercises": ["Trap Bar Carry", "Farmer Walks", "Front Plank Variations"],
+        "sets_reps": "3x20-40y or 30-45s",
+        "rationale": "Postural strength for rebounding contact and post play"
+      }
+    },
+
+    "contraindications": {
+      "avoid": [
+        "Heavy pressing >85% 1RM (interferes with shooting)",
+        "Overhead pressing to failure (shoulder fatigue)",
+        "High-rep bench press (pec soreness affects shot)",
+        "Maximal effort upper body days (CNS + soreness)",
+        "Any exercise that causes upper body soreness >24 hours"
+      ],
+      "rationale": "Basketball is lower-body dominant sport. Upper body work is supportive, not primary. Shooting precision > upper body strength."
+    }
+  },
+
+  "seasonal_programming_defaults": {
+    "OFF_SEASON": {
+      "duration_weeks": "12-16",
+      "phase_structure": [
+        "Weeks 1-4: General development OR Elastic Specialization Block",
+        "Weeks 5-6: Baseline programming (transition/recovery)",
+        "Weeks 7-10: Continued development OR Deceleration Specialization Block",
+        "Weeks 11-16: Power transfer / sport-specific preparation"
+      ],
+      "zone_emphasis": ["Z3", "Z2", "Z4", "Z8"],
+      "plyo_volume": {
+        "Youth_13_17": "80-120 contacts/session, 160-240/week",
+        "Adult": "100-140 contacts/session, 200-280/week"
+      },
+      "sprint_volume": {
+        "Youth_13_17": "400-600m/week",
+        "Adult": "600-1000m/week"
+      },
+      "cns_budget": "HIGH (full access to all intensities)",
+      "specialization_blocks_legal": ["elastic_specialization", "deceleration_specialization"]
+    },
+
+    "PREP_SEASON": {
+      "duration_weeks": "4-6",
+      "phase_structure": "Bridge to competition, sport-specific movement emphasis, volume reduction",
+      "zone_emphasis": ["Z4", "Z3", "Z8"],
+      "plyo_volume": {
+        "Youth_13_17": "60-100 contacts/session, 120-180/week",
+        "Adult": "80-120 contacts/session, 160-220/week"
+      },
+      "sprint_volume": {
+        "Youth_13_17": "300-500m/week",
+        "Adult": "500-800m/week"
+      },
+      "cns_budget": "MODERATE-HIGH",
+      "specialization_blocks_legal": ["deceleration_specialization"],
+      "specialization_blocks_forbidden": ["elastic_specialization"],
+      "note": "Decel block can extend into prep if started in off-season"
+    },
+
+    "IN_SEASON_TIER_1": {
+      "description": "High fixture density (3+ games/week)",
+      "zone_emphasis": ["Z8", "Z5", "Z3_minimal"],
+      "plyo_volume": {
+        "Youth_13_17": "40-60 contacts/session, 60-100/week",
+        "Adult": "60-100 contacts/session, 120-160/week"
+      },
+      "sprint_volume": {
+        "Youth_13_17": "200-400m/week",
+        "Adult": "400-600m/week"
+      },
+      "cns_budget": "LOW (maintenance only)",
+      "specialization_blocks_legal": []
+    },
+
+    "IN_SEASON_TIER_2": {
+      "description": "Moderate fixture density (2 games/week)",
+      "zone_emphasis": ["Z3", "Z5", "Z8"],
+      "plyo_volume": {
+        "Youth_13_17": "60-80 contacts/session, 120-180/week",
+        "Adult": "80-120 contacts/session, 160-220/week"
+      },
+      "sprint_volume": {
+        "Youth_13_17": "300-500m/week",
+        "Adult": "500-800m/week"
+      },
+      "cns_budget": "MODERATE",
+      "specialization_blocks_legal": []
+    },
+
+    "IN_SEASON_TIER_3": {
+      "description": "Low fixture density (1 game/week)",
+      "zone_emphasis": ["Z3", "Z2", "Z5"],
+      "plyo_volume": {
+        "Youth_13_17": "80-100 contacts/session, 160-200/week",
+        "Adult": "100-120 contacts/session, 200-240/week"
+      },
+      "sprint_volume": {
+        "Youth_13_17": "400-600m/week",
+        "Adult": "600-900m/week"
+      },
+      "cns_budget": "MODERATE-HIGH",
+      "specialization_blocks_legal": []
+    },
+
+    "POST_SEASON": {
+      "duration_weeks": "2-4",
+      "phase_structure": "Active recovery, movement quality restoration, tissue healing",
+      "zone_emphasis": ["Z8", "Z5"],
+      "plyo_volume": {
+        "Youth_13_17": "20-40 contacts/session, 40-80/week",
+        "Adult": "40-60 contacts/session, 80-120/week"
+      },
+      "sprint_volume": {
+        "Youth_13_17": "200-300m/week",
+        "Adult": "300-500m/week"
+      },
+      "cns_budget": "VERY LOW (recovery emphasis)",
+      "specialization_blocks_legal": []
+    }
+  },
+
+  "epa_integration_notes": {
+    "baseline_programming": {
+      "description": "Default MDP_COURT_VERTICAL programming when NOT in specialization block",
+      "session_structure": "PRIME → PREP → WORK_A (plyo/sprint) → WORK_B (upper body) → CLEAR",
+      "exercise_selection": "Filter AETHER by season, population, readiness, then apply zone emphasis",
+      "volume_calculation": "Use seasonal_programming_defaults for contacts/sprint meters per session",
+      "specialization_check": "Before generating any session, check if athlete is in active specialization block"
+    },
+
+    "specialization_block_activation": {
+      "trigger": "Coach/ICP selects specialization block_id",
+      "validation": "EPA validates entry_requirements before generating week 1",
+      "generation": "EPA uses block-specific weekly_structure, not baseline MDP rules",
+      "transition": "EPA validates exit_criteria before returning to baseline programming"
+    },
+
+    "block_to_baseline_transition": {
+      "post_block_recovery": "EPA generates 3-7 day recovery window (Z8 only)",
+      "re_entry_programming": "EPA uses transition_protocol (60% → 75% → 100% volume)",
+      "next_block_timing": "EPA enforces minimum_weeks_between_specializations"
+    }
+  },
+
+  "version_control": {
+    "v1.4.1": {
+      "date": "2026-01-06",
+      "status": "ACTIVE · PRODUCTION READY",
+      "changes": [
+        "Normalized F-V zone identifiers to canonical Z-style format (Z1-Z8) per ICP Definitions v2.3.1 schema_hints",
+        "No functional changes; schema alignment only for cross-document validation compatibility"
+      ],
+      "integration_ready": true,
+      "validated_blocks": [
+        "elastic_specialization_basketball v1.0.1",
+        "deceleration_specialization_basketball v1.0.0"
+      ],
+      "parent_version": "v1.4.0"
+    },
+    "v1.4.0": {
+      "date": "2025-12-22",
+      "status": "SUPERSEDED",
+      "changes": [
+        "Added specialization_blocks_available (elastic + deceleration)",
+        "Added specialization_block_sequencing rules",
+        "Added movement_mechanics_framework (basketball-specific)",
+        "Added upper_body_requirements (shooting compatibility)",
+        "Added block_selector_guidance (decision tree)",
+        "Expanded training_goals to include specialization outcomes",
+        "Added epa_integration_notes for block handling"
+      ],
+      "integration_ready": true,
+      "validated_blocks": [
+        "elastic_specialization_basketball v1.0.1",
+        "deceleration_specialization_basketball v1.0.0"
+      ]
+    },
+    "v1.3.0": {
+      "date": "2025-12-16",
+      "status": "ARCHIVED",
+      "changes": "Previous version without specialization block integration"
+    }
+  }
+}

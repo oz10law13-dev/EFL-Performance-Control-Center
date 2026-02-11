@@ -1,0 +1,506 @@
+{
+  "$id": "https://elitefitlab.com/schemas/EFL_OUTPUT_ARTIFACT_SCHEMA_v1.0.1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EFL Output Artifact Schema",
+  "description": "Machine-enforceable validation schema for all EFL training artifacts. Implements EFL_OUTPUT_SPEC_GLOBAL_CONTRACT_v1.0. Version 1.0.1: Enhanced cap_proof presence enforcement.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["header", "legality_snapshot", "metadata"],
+  "properties": {
+    "header": {
+      "$ref": "#/$defs/GlobalHeader"
+    },
+    "legality_snapshot": {
+      "$ref": "#/$defs/LegalitySnapshot"
+    },
+    "cap_proof": {
+      "$ref": "#/$defs/CapProof"
+    },
+    "exposure_summary": {
+      "$ref": "#/$defs/ExposureSummary"
+    },
+    "content_payload": {
+      "$ref": "#/$defs/ContentPayload"
+    },
+    "metadata": {
+      "$ref": "#/$defs/ArtifactMetadata"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "header": {
+            "properties": {
+              "artifact_class": {
+                "enum": ["SESSION", "MICROSESSION", "MESOCYCLE"]
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": ["cap_proof", "exposure_summary", "content_payload"],
+        "properties": {
+          "content_payload": {
+            "not": { "type": "null" }
+          },
+          "cap_proof": {
+            "not": { "type": "null" }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "header": {
+            "properties": {
+              "artifact_class": { "const": "NOTICE_DENIAL" }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "content_payload": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "header": {
+            "properties": {
+              "artifact_class": { "const": "COMPLIANCE_SUMMARY" }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": ["cap_proof", "exposure_summary"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "header": {
+            "properties": {
+              "eligible_for_training_today": { "const": false }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "header": {
+            "properties": {
+              "artifact_class": { "const": "NOTICE_DENIAL" }
+            }
+          },
+          "content_payload": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "GlobalHeader": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "clientid",
+        "artifact_id",
+        "artifact_class",
+        "target",
+        "generated_at",
+        "projectid",
+        "routerversion",
+        "state_lastupdated",
+        "seasontype",
+        "eligible_for_training_today",
+        "reasoncodes"
+      ],
+      "properties": {
+        "clientid": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Unique athlete/client identifier"
+        },
+        "artifact_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique artifact identifier (UUID)"
+        },
+        "artifact_class": {
+          "type": "string",
+          "enum": ["SESSION", "MICROSESSION", "MESOCYCLE", "NOTICE_DENIAL", "COMPLIANCE_SUMMARY"],
+          "description": "Artifact classification for validation and routing"
+        },
+        "target": {
+          "type": "string",
+          "enum": ["BRIDGEATHLETIC", "COACHSHEET", "MICROSESSION", "MESOCYCLE", "NOTICE"],
+          "description": "Output target/format"
+        },
+        "generated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO8601 timestamp of artifact generation"
+        },
+        "projectid": {
+          "type": "string",
+          "enum": [
+            "R2P_ACL",
+            "COURT_SPORT_FOUNDATIONS",
+            "ELASTIC_RELOAD",
+            "ELASTIC_SPECIALIZATION",
+            "DECEL_SPECIALIZATION",
+            "FORCE_SPECIALIZATION",
+            "ICP_BASKETBALL_INSEASON",
+            "ICP_VOLLEYBALL_INSEASON",
+            "ICP_BASKETBALL_POSTSEASON",
+            "ICP_VOLLEYBALL_POSTSEASON",
+            "OFF_SEASON_BASELINE_COURT_VERTICAL",
+            "ADULT_STRENGTH",
+            "ADULT_MOBILITY",
+            "ADULT_ERL",
+            "NONE"
+          ],
+          "description": "Project selected by Router"
+        },
+        "routerversion": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Router version that made project decision"
+        },
+        "state_lastupdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp from ClientState snapshot"
+        },
+        "seasontype": {
+          "type": "string",
+          "enum": ["OFFSEASON", "PRESEASON", "INSEASON", "POSTSEASON"],
+          "description": "Training season context"
+        },
+        "eligible_for_training_today": {
+          "type": "boolean",
+          "description": "Global permission flag from Router"
+        },
+        "reasoncodes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "description": "Router reason codes explaining decision (precedence-ordered)"
+        }
+      }
+    },
+    "LegalitySnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["activeproject", "eligible", "reasoncodes"],
+      "properties": {
+        "activeproject": {
+          "type": "string",
+          "enum": [
+            "R2P_ACL",
+            "COURT_SPORT_FOUNDATIONS",
+            "ELASTIC_RELOAD",
+            "ELASTIC_SPECIALIZATION",
+            "DECEL_SPECIALIZATION",
+            "FORCE_SPECIALIZATION",
+            "ICP_BASKETBALL_INSEASON",
+            "ICP_VOLLEYBALL_INSEASON",
+            "ICP_BASKETBALL_POSTSEASON",
+            "ICP_VOLLEYBALL_POSTSEASON",
+            "OFF_SEASON_BASELINE_COURT_VERTICAL",
+            "ADULT_STRENGTH",
+            "ADULT_MOBILITY",
+            "ADULT_ERL",
+            "NONE"
+          ],
+          "description": "Active project from Router decision"
+        },
+        "eligible": {
+          "type": "boolean",
+          "description": "Training eligibility flag"
+        },
+        "reasoncodes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "description": "Reason codes explaining eligibility status (must match header.reasoncodes exactly)"
+        },
+        "legal_projects": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "description": "All legal project options (optional context)"
+        },
+        "rationale_snippet": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["rule", "layer", "decision", "timestamp"],
+            "properties": {
+              "rule": { "type": "string" },
+              "layer": { "type": "string" },
+              "decision": { "type": "string" },
+              "timestamp": { "type": "string", "format": "date-time" }
+            }
+          },
+          "description": "Top rules fired (optional audit trail)"
+        },
+        "denial_explanation": {
+          "type": "string",
+          "description": "Human-readable denial explanation (required when eligible=false)"
+        }
+      },
+      "if": {
+        "properties": { "eligible": { "const": false } }
+      },
+      "then": {
+        "required": ["denial_explanation"]
+      }
+    },
+    "CapProof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "caps_exist",
+        "population_enforced",
+        "readinessflag",
+        "weeklymultiplier",
+        "sessionmultiplier",
+        "weeklycontactscap_base",
+        "weeklycontactscap_applied",
+        "sessioncontactscap_base",
+        "sessioncontactscap_applied",
+        "maxbandallowed_population",
+        "maxenodeallowed_population"
+      ],
+      "properties": {
+        "caps_exist": {
+          "type": "boolean",
+          "description": "Predicate: (derived != null AND populationoverrides != null AND readinessmultipliers != null)",
+          "const": true
+        },
+        "population_enforced": {
+          "type": "string",
+          "enum": ["Youth812", "Youth1316", "Youth17Advanced", "Adult_GENERAL", "Adult_ATHLETE"],
+          "description": "Computed population class"
+        },
+        "readinessflag": {
+          "type": "string",
+          "enum": ["GREEN", "YELLOW", "RED"],
+          "description": "Readiness state from ClientState"
+        },
+        "weeklymultiplier": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Weekly cap multiplier based on readiness"
+        },
+        "sessionmultiplier": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "Session cap multiplier based on readiness"
+        },
+        "weeklycontactscap_base": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Base weekly plyo contact cap (before multiplier)"
+        },
+        "weeklycontactscap_applied": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Applied weekly cap (base × multiplier)"
+        },
+        "sessioncontactscap_base": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Base session plyo contact cap (before multiplier)"
+        },
+        "sessioncontactscap_applied": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Applied session cap (base × multiplier)"
+        },
+        "enode_accent_cap_pct": {
+          "type": ["number", "null"],
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "description": "E-node accent cap percentage (0.40 for Youth812/1316, null otherwise)"
+        },
+        "maxbandallowed_population": {
+          "type": "string",
+          "enum": ["Band1", "Band2", "Band3", "Band4"],
+          "description": "Maximum resistance band allowed for population"
+        },
+        "maxenodeallowed_population": {
+          "type": "string",
+          "enum": ["E1", "E2", "E3", "E4"],
+          "description": "Maximum E-node allowed for population"
+        },
+        "adjustments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CapAdjustment"
+          },
+          "description": "Structured cap adjustments (truncations, denials, limits). Required when content was modified to respect caps."
+        }
+      },
+      "if": {
+        "properties": {
+          "population_enforced": {
+            "enum": ["Youth812", "Youth1316"]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "enode_accent_cap_pct": {
+            "const": 0.40
+          }
+        },
+        "required": ["enode_accent_cap_pct"]
+      },
+      "else": {
+        "properties": {
+          "enode_accent_cap_pct": {
+            "type": "null"
+          }
+        }
+      }
+    },
+    "CapAdjustment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cap_type", "action", "reason"],
+      "properties": {
+        "cap_type": {
+          "type": "string",
+          "enum": [
+            "SESSION_CONTACT_CAP",
+            "WEEKLY_CONTACT_CAP",
+            "ENODE_ACCENT_CAP",
+            "BAND_CEILING",
+            "PROVIDER_CLEARANCE_GATE"
+          ],
+          "description": "Type of cap that triggered adjustment"
+        },
+        "action": {
+          "type": "string",
+          "enum": ["TRUNCATED", "DENIED", "AUTO_LIMITED", "DOWNGRADED", "BLOCKED"],
+          "description": "Action taken by generator"
+        },
+        "original_value": {
+          "type": ["integer", "number", "string"],
+          "description": "Original requested value (contacts, band, exposure type)"
+        },
+        "applied_cap": {
+          "type": ["integer", "number", "string"],
+          "description": "Cap ceiling applied"
+        },
+        "adjusted_value": {
+          "type": ["integer", "number", "string"],
+          "description": "Final value after adjustment"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-readable explanation of adjustment"
+        }
+      }
+    },
+    "ExposureSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total_contacts", "total_sets"],
+      "properties": {
+        "total_contacts": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Sum of all plyo contacts in content_payload. Must match actual content."
+        },
+        "total_sets": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Count of work sets (project-defined; must be specified in project output spec)"
+        },
+        "exposure_breakdown": {
+          "type": "object",
+          "description": "Contacts by category (project-specific structure allowed)",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "key_exposures": {
+          "type": "object",
+          "description": "Project-specific exposure highlights (max E-node, COD angle, etc.)",
+          "additionalProperties": true
+        }
+      }
+    },
+    "ContentPayload": {
+      "oneOf": [
+        {
+          "type": "null",
+          "description": "No content (used for NOTICE_DENIAL)"
+        },
+        {
+          "type": "object",
+          "description": "Training content structure (project-specific, defined by project output spec)",
+          "additionalProperties": true
+        }
+      ]
+    },
+    "ArtifactMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["generator_version", "wrapper_version", "outputspec_version", "global_contract_version"],
+      "properties": {
+        "generator_version": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Version of generator that produced artifact"
+        },
+        "wrapper_version": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Version of project wrapper used"
+        },
+        "outputspec_version": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Version of project output spec used"
+        },
+        "global_contract_version": {
+          "type": "string",
+          "pattern": "^1\\.0(\\.\\d+)?$",
+          "description": "Version of EFL_OUTPUT_SPEC_GLOBAL_CONTRACT implemented"
+        },
+        "validation_timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of schema validation"
+        }
+      }
+    }
+  }
+}

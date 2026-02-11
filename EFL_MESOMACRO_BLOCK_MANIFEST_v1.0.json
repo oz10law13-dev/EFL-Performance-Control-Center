@@ -1,0 +1,3119 @@
+{
+  "schema_id": "EFL_MESOMACRO_MANIFEST",
+  "manifest_version": "1.0.2",
+  "manifest_created": "2025-12-16",
+  "manifest_description": "Authoritative source of truth for EFL meso/macro block declarations. Maps block_id → internal intent, constraints, assessment gates, exit conditions. Does NOT contain exercises, reps, or loads—only declarative intent. Legality computed first; session ceilings are not targets.",
+  "blocks": [
+    {
+      "block_id": "SP_OFFSEASON_MULTI_13-17_12WK_v1",
+      "block_tags": ["SP", "OFF_SEASON", "YOUTH_13_17", "MULTI_SPORT", "2X_WEEK"],
+      "service_line": "SP_Performance",
+      "population_icp": "Youth_13_17_SP_Default",
+      "season": "Off_Season",
+      "mdp_primary": "MULTI_FIELD_COURT_HYBRID",
+      "mdp_secondary_bias_decision_deadline_week": 6,
+      "mdp_secondary_bias_effective_week": 7,
+      "mdp_secondary_bias_options": ["JUMP", "SPEED", "COD"],
+      "duration_weeks": 12,
+      "sessions_per_week": 2,
+      "total_sessions": 24,
+      
+      "legality_check": {
+        "population_ceiling_band": "Band_2",
+        "population_ceiling_node": "C",
+        "max_e_node_allowed": "E2",
+        "plyo_contacts_cap_session": 120,
+        "plyo_contacts_cap_week": 240,
+        "cns_budget": "HIGH",
+        "sprint_counting_standard": "TRUE_SPRINT_METERS_ONLY_90PCT_VMAX",
+        "requires_intensity_percent_vmax": true,
+        "required_governance": [
+          "Tier3_E3_E4_FORBIDDEN",
+          "PRIME_PREP_WORK_CLEAR_REQUIRED",
+          "SESSION_CEILING_NOT_TARGET",
+          "OFF_SEASON_WEEKLY_RANGE_ENFORCED"
+        ]
+      },
+
+      "macro_structure": [
+        {
+          "meso_num": 1,
+          "meso_name": "FOUNDATION / POSITION",
+          "weeks": [1, 2, 3],
+          "primary_goal": "Own positions under load and low elasticity. Build movement quality before force production.",
+          "fv_zones_allowed": ["Z5", "Z6", "Z2", "Z8"],
+          "fv_zone_emphasis": {
+            "Z5": "Isometric / Position",
+            "Z6": "Tempo / Control",
+            "Z2": "Low velocity strength",
+            "Z8": "Low elastic"
+          },
+          "sprint_intent": ["ACCEL_ONLY"],
+          "sprint_intent_description": "Acceleration mechanics only. No max-velocity exposure. Distance: 100–200m/week (true sprint meters only).",
+          "plyo_contact_range": {
+            "min": 40,
+            "max": 60,
+            "unit": "contacts/week",
+            "note": "Operating range; not a target. Stay toward lower end for quality."
+          },
+          "sprint_meters_range": {
+            "min": 100,
+            "max": 200,
+            "unit": "m/week",
+            "note": "TRUE_SPRINT_METERS_ONLY (≥90% Vmax). Intensity below threshold zeros the meter count."
+          },
+          "cns_per_day": {
+            "day_A": "LOW",
+            "day_B": "LOW",
+            "day_A_description": "Bilateral strength + landing mechanics",
+            "day_B_description": "Unilateral strength + accel mechanics"
+          },
+          "cns_weekly_intent": "Low–Moderate",
+          "elastic_strategy": "No reactive shock. Emphasis on symmetry, decel, stiffness at low amplitude.",
+          "notes": "Foundation block. Stay below ceilings. Accumulate quality exposures."
+        },
+        {
+          "meso_num": 2,
+          "meso_name": "FORCE DEVELOPMENT",
+          "weeks": [4, 5, 6],
+          "primary_goal": "Increase force output while maintaining control. Volume rises before intensity.",
+          "fv_zones_allowed": ["Z2", "Z3", "Z8"],
+          "fv_zone_emphasis": {
+            "Z2": "Strength",
+            "Z3": "Strength–Speed",
+            "Z8": "Elastic base"
+          },
+          "sprint_intent": ["ACCEL", "SHORT_BUILD"],
+          "sprint_intent_description": "Acceleration + short build-up (≤20m). Distance: 200–350m/week (true sprint meters only).",
+          "plyo_contact_range": {
+            "min": 60,
+            "max": 80,
+            "unit": "contacts/week",
+            "note": "Operating range; not a target."
+          },
+          "sprint_meters_range": {
+            "min": 200,
+            "max": 350,
+            "unit": "m/week",
+            "note": "TRUE_SPRINT_METERS_ONLY (≥90% Vmax). Intensity below threshold zeros the meter count."
+          },
+          "cns_per_day": {
+            "day_A": "MODERATE",
+            "day_B": "LOW",
+            "day_A_description": "Bilateral force + short accel (≤20m)",
+            "day_B_description": "Unilateral force + med-ball / elastic prep"
+          },
+          "cns_weekly_intent": "Moderate",
+          "elastic_strategy": "Still E1–E2 only. Elastic work minimal; focus on force base.",
+          "assessment_gate_ref": "week_4",
+          "notes": "Volume rises, intensity stays controlled. Gate check at Week 4."
+        },
+        {
+          "meso_num": 3,
+          "meso_name": "FORCE → ELASTIC TRANSFER",
+          "weeks": [7, 8, 9],
+          "primary_goal": "Convert strength into usable athletic output. Begin elastic integration.",
+          "fv_zones_allowed": ["Z3", "Z4", "Z8"],
+          "fv_zone_emphasis": {
+            "Z3": "Strength–Speed",
+            "Z4": "Speed–Strength",
+            "Z8": "Elastic"
+          },
+          "sprint_intent": ["BUILD", "CONTROLLED_MAXV"],
+          "sprint_intent_description": "Build-up speed + controlled max-V exposure (low volume). Distance: 300–500m/week (true sprint meters only).",
+          "plyo_contact_range": {
+            "min": 80,
+            "max": 100,
+            "unit": "contacts/week",
+            "note": "Operating range; not a target."
+          },
+          "sprint_meters_range": {
+            "min": 300,
+            "max": 500,
+            "unit": "m/week",
+            "note": "TRUE_SPRINT_METERS_ONLY (≥90% Vmax). Intensity below threshold zeros the meter count."
+          },
+          "cns_per_day": {
+            "day_A": "HIGH",
+            "day_B": "MODERATE",
+            "day_A_description": "Contrast strength + low-amplitude elastic",
+            "day_B_description": "Acceleration → build-up speed (≤30m)"
+          },
+          "cns_weekly_intent": "Moderate–High",
+          "elastic_strategy": "Still no Tier 3. Elastic work remains sub-max. Rhythm and coordination intro.",
+          "assessment_gate_ref": "week_8",
+          "secondary_mdp_bias_active": true,
+          "notes": "Secondary MDP bias (JUMP/SPEED/COD) becomes active in routing at Week 7. Gate check at Week 8."
+        },
+        {
+          "meso_num": 4,
+          "meso_name": "ATHLETIC OUTPUT / CONSOLIDATION",
+          "weeks": [10, 11, 12],
+          "primary_goal": "Solidify speed, coordination, and rhythm without peaking. Prepare for pre-season pivot.",
+          "fv_zones_allowed": ["Z4", "Z1", "Z8"],
+          "fv_zone_emphasis": {
+            "Z4": "Speed–Strength",
+            "Z1": "Speed exposure",
+            "Z8": "Elastic rhythm"
+          },
+          "sprint_intent": ["MAXV_CONTROLLED"],
+          "sprint_intent_description": "Max-velocity controlled (high-quality, low-volume transition). Prep for unrestricted in pre-season. Distance: 400–600m/week (true sprint meters only).",
+          "plyo_contact_range": {
+            "min": 100,
+            "max": 120,
+            "unit": "contacts/week",
+            "note": "Operating range; not a target. Creep toward pre-season entry (80–120)."
+          },
+          "sprint_meters_range": {
+            "min": 400,
+            "max": 600,
+            "unit": "m/week",
+            "note": "TRUE_SPRINT_METERS_ONLY (≥90% Vmax). Intensity below threshold zeros the meter count."
+          },
+          "cns_per_day": {
+            "day_A": "HIGH",
+            "day_B": "MODERATE",
+            "day_A_description": "Speed emphasis + low-volume strength",
+            "day_B_description": "COD rhythm + elastic sequencing"
+          },
+          "cns_weekly_intent": "High but controlled",
+          "elastic_strategy": "Elastic rhythm under control. No peak fatigue. No new PRs expected.",
+          "notes": "Exit block. No taper. Leaves buffer to pivot into pre-season or sport-specific meso. Secondary MDP bias should be locked by Week 9."
+        }
+      ],
+
+      "assessment_gates": {
+        "week_4": {
+          "gate_type": "MID_MACRO_CHECK",
+          "assessments": ["movement_quality", "sprint_tolerance"],
+          "purpose": "Confirm Foundation → Force transition is safe. Catch asymmetry or sprint intolerance early.",
+          "action_if_fail": "Extend Meso 2 by 1 week or regress to Meso 1 sprint intent",
+          "action_if_pass": "Proceed to Meso 3 as planned"
+        },
+        "week_8": {
+          "gate_type": "MID_MACRO_CHECK",
+          "assessments": ["elastic_tolerance", "cns_response"],
+          "purpose": "Confirm elastic transfer is tracking. Confirm CNS is not overloaded before final push.",
+          "action_if_fail": "Extend Meso 3 by 1 week or reduce Meso 4 contact volume",
+          "action_if_pass": "Proceed to Meso 4 (final consolidation) as planned"
+        }
+      },
+
+      "exit_state": {
+        "ready_for_block": "SP_PRESEASON_MULTI_13-17_6WK_v1",
+        "exit_conditions": [
+          "stable_sprint_exposure",
+          "elastic_rhythm_tolerance",
+          "no_peak_fatigue",
+          "symmetric_movement_quality"
+        ],
+        "exit_assessment": "Conducted end of Week 12. Athlete should not be fatigued or sore.",
+        "handoff_intent": "Athlete exits with a durable athletic base and controlled max-V exposure. No deload taper. Pre-season meso stacks immediately with unrestricted sprint access and secondary MDP bias routing."
+      },
+
+      "special_rules": {
+        "no_makeup_rule": "Missed session = skipped stimulus. Do not attempt to catch up. Resume where you are in the progression.",
+        "secondary_mdp_bias_decision_deadline_week": 6,
+        "secondary_mdp_bias_decision_note": "Must be communicated by end of Week 6. Effective for routing starting Week 7 (Meso 3).",
+        "calendar_shift_allowed": true,
+        "calendar_shift_rule": "Maintain meso order; do not compress missed volume; preserve weekly operating ranges. Shift timeline but preserve structure.",
+        "tier_3_prohibition": "Tier 3 (E3, E4) remains forbidden throughout. Max E-node allowed: E2.",
+        "peaking_rule": "Off-season is NOT a peak block. Athletes should feel strong, not exhausted, exiting Week 12. Session ceilings are NOT targets."
+      },
+
+      "governance_status": "PASS",
+      "governance_checklist": [
+        "✅ Population ceilings respected (Band_2, Node C)",
+        "✅ Off-season weekly ranges enforced (2x/week)",
+        "✅ E-node legality enforced (E2 max)",
+        "✅ CNS budget appropriate for frequency",
+        "✅ No injury or R2P conflicts",
+        "✅ Session structure required (PRIME → CLEAR)",
+        "✅ Plyo contacts: weekly operating range defined per meso",
+        "✅ Sprint meters: TRUE_SPRINT_METERS_ONLY (≥90% Vmax) enforced",
+        "✅ Weekly ranges enforced; session ceilings not targets",
+        "✅ Assessment gates defined (Week 4, Week 8)",
+        "✅ Meso 4 sprint intent revised to MAXV_CONTROLLED (prep for unrestricted)",
+        "✅ Meso 4 plyo contacts increased to 100–120 (bridge to pre-season 80–120)"
+      ]
+    }
+  ],
+  
+  "integration_notes": {
+    "enforcement_owner": {
+      "weekly_volume_ranges": "WEEKLY_ACCUMULATOR",
+      "sprint_intensity_validation": "EXERCISE_SELECTION_ALGORITHM",
+      "session_caps_and_zone_routing": "EXERCISE_SELECTION_ALGORITHM",
+      "gate_advance_logic": "GATE_ENGINE",
+      "block_selection": "BLOCK_SELECTOR",
+      "meso_progression": "GATE_ENGINE"
+    },
+    "block_selector_responsibility": "Read block_id, load meso_structure, pass block_tags + legality_check constraints to downstream layers. Do NOT advance progression; that is Gate Engine's job.",
+    "weekly_accumulator_responsibility": "Sum plyo_contacts and sprint_meters across the week. Validate against [min, max] operating ranges per meso. Flag if weekly total exceeds max or falls below min (informational only; does not block session execution).",
+    "exercise_selection_algorithm_responsibility": "Enforce FV zones, CNS per_day splits, sprint_intent type. Validate sprint intensity ≥90% Vmax for meter counting. Enforce session caps (informational). Perform final fail-safe selection. This is the decision layer.",
+    "gate_engine_responsibility": "Evaluate assessment_gates at Week 4 and Week 8. Require explicit pass flag before advancing to next meso. If gate fails, route to meso extension or regression action per assessment_gates definition. Gate Engine controls meso progression, not Block Selector.",
+    "ai_playbook_reference": "Coach & AI Playbook should cross-reference this file to explain secondary MDP bias decision deadline, exit conditions, no-makeup rule, calendar flexibility rules, and enforcement ownership.",
+    "integration_sequence": "Block Selector → WEEKLY_ACCUMULATOR (passive monitoring) → EXERCISE_SELECTION_ALGORITHM (zone/intent enforcement, sprint validation, fail-safe selection) → GATE_ENGINE (Week 4 & 8 assessment, meso advance decision)",
+    "future_versioning": "As EFL scales, create separate blocks: SP_PRESEASON_*, SP_INSEASON_*, REHAB_*, etc. Each gets its own block_id and meso_structure following this schema. Use block_tags for routing and filtering."
+  },
+
+  "changelog": {
+    "v1.0.1_to_v1.0.2": [
+      "REVISION 1: Meso 4 sprint_intent changed from MAXV_RHYTHM to MAXV_CONTROLLED. Rationale: Better narrative bridge to pre-season MAX_V_UNRESTRICTED. Same distance range (400–600m), same intent (high-quality), clearer progression label.",
+      "REVISION 2: Meso 4 plyo_contact_range increased from 80–100 to 100–120/week. Rationale: Smoother entry into pre-season Meso 1 (80–120). If athletes gate-pass, they're ready for higher contact volume in pre-season.",
+      "REVISION 3: exit_state.ready_for_block now references SP_PRESEASON_MULTI_13-17_6WK_v1 (explicit next block). Rationale: Deterministic Block Selector routing.",
+      "REVISION 4: Added changelog section for version tracking and transparency."
+    ]
+  }
+}
+{
+  "schema_id": "EFL_MESOMACRO_MANIFEST",
+  "manifest_version": "1.0.2",
+  "manifest_created": "2025-12-16",
+  "manifest_description": "Pre-season SP Performance block for Youth 13-17, 6-week bridge from off-season base to in-season readiness. Uses Load Standards v2.1.2 and Governance v4.0. Session ceilings are not targets.",
+  "blocks": [
+    {
+      "block_id": "SP_PRESEASON_MULTI_13-17_6WK_v1",
+      "block_tags": ["SP", "PRESEASON", "YOUTH_13_17", "MULTI_SPORT", "2X_WEEK"],
+      "service_line": "SP_Performance",
+      "population_icp": "Youth_13_17_SP_Default",
+      "season": "Pre_Season",
+      "mdp_primary": "MULTI_FIELD_COURT_HYBRID",
+      "mdp_secondary_bias_required": true,
+      "mdp_secondary_bias_source_block": "SP_OFFSEASON_MULTI_13-17_12WK_v1",
+      "mdp_secondary_bias_effective_week": 1,
+      "mdp_secondary_bias_options": ["JUMP", "SPEED", "COD"],
+      "duration_weeks": 6,
+      "sessions_per_week": 2,
+      "total_sessions": 12,
+
+      "legality_check": {
+        "population_ceiling_band": "Band_2",
+        "population_ceiling_node": "C",
+        "max_e_node_allowed": "E3",
+        "plyo_contacts_cap_session": 120,
+        "plyo_contacts_cap_week": 240,
+        "cns_budget": "HIGH",
+        "sprint_counting_standard": "TRUE_SPRINT_METERS_ONLY_90PCT_VMAX",
+        "requires_intensity_percent_vmax": true,
+        "required_governance": [
+          "Tier3_E3_E4_<=40PCT_SESSION_CONTACTS",
+          "PRIME_PREP_WORK_CLEAR_REQUIRED",
+          "SESSION_CEILING_NOT_TARGET",
+          "PRE_SEASON_WEEKLY_RANGE_ENFORCED"
+        ],
+        "season_operating_ranges_ref": "Youth_13_17.PRE_SEASON"
+      },
+
+      "macro_structure": [
+        {
+          "meso_num": 1,
+          "meso_name": "BRIDGE & E3 EARN",
+          "weeks": [1, 2, 3],
+          "primary_goal": "Bridge from controlled max-V off-season work to sport-like speed and COD while testing elastic tolerance.",
+          "fv_zones_allowed": ["Z3", "Z4", "Z1", "Z8"],
+          "fv_zone_emphasis": {
+            "Z3": "Speed–Strength (velocity-biased power)",
+            "Z4": "Speed–Strength / Elastic-reactive without shock",
+            "Z1": "Speed exposure",
+            "Z8": "Agility / COD rhythm"
+          },
+          "sprint_intent": ["MAX_V_UNRESTRICTED", "FLYING_ACCEL", "CONTROLLED_COD_ENTRY"],
+          "sprint_intent_description": "Unrestricted max-V and flying sprints at ≥90% Vmax, plus controlled COD-entry sprints. Distance: 600–800m/week (true sprint meters only).",
+          "plyo_contact_range": {
+            "min": 120,
+            "max": 160,
+            "unit": "contacts/week",
+            "note": "Within Youth 13-17 PRE_SEASON band (120–180). Operating range; not a target."
+          },
+          "sprint_meters_range": {
+            "min": 600,
+            "max": 800,
+            "unit": "m/week",
+            "note": "Within Youth 13-17 PRE_SEASON band (600–1000). TRUE_SPRINT_METERS_ONLY (≥90% Vmax)."
+          },
+          "cns_per_day": {
+            "day_A": "HIGH",
+            "day_B": "MODERATE",
+            "day_A_description": "Max-V / flying emphasis + strength contrast.",
+            "day_B_description": "COD entry, decel skill, sub-max elastic."
+          },
+          "cns_weekly_intent": "High but ramped from off-season.",
+          "elastic_strategy": "E1–E2 only; E3 locked pending Week 3 gate. Emphasis on controlled stiffness, landing quality, and COD entry angles.",
+          "assessment_gate_ref": "week_3",
+          "notes": "This meso makes speed and COD look and feel like sport, but holds back E3 shock until tolerance is proven."
+        },
+        {
+          "meso_num": 2,
+          "meso_name": "SPORT-SPECIFIC CONSOLIDATION",
+          "weeks": [4, 5, 6],
+          "primary_goal": "Consolidate sport-speed, COD, and elastic tolerance with conditional E3 access while preserving freshness for season start.",
+          "fv_zones_allowed": ["Z4", "Z1", "Z8"],
+          "fv_zone_emphasis": {
+            "Z4": "Speed–Strength (high-velocity force, some E3 plyo)",
+            "Z1": "Max speed exposure",
+            "Z8": "COD variability and deceleration control"
+          },
+          "sprint_intent": ["MAX_V_UNRESTRICTED", "COD_VARIABILITY", "DECEL_EMPHASIS"],
+          "sprint_intent_description": "Max-V, COD variability, and decel-heavy sprints at ≥90% Vmax. Distance: 800–1000m/week (true sprint meters only).",
+          "plyo_contact_range": {
+            "min": 140,
+            "max": 180,
+            "unit": "contacts/week",
+            "note": "Upper half of Youth 13-17 PRE_SEASON band. Tier 3 (E3) contacts ≤40% of session total."
+          },
+          "sprint_meters_range": {
+            "min": 800,
+            "max": 1000,
+            "unit": "m/week",
+            "note": "Upper end of Youth 13-17 PRE_SEASON band (600–1000). Only ≥90% Vmax counts."
+          },
+          "cns_per_day": {
+            "day_A": "HIGH",
+            "day_B": "MODERATE",
+            "day_A_description": "E3-access plyos (if earned) + max-V or COD emphasis by bias.",
+            "day_B_description": "Supportive strength, sub-max elastic, and COD rhythm."
+          },
+          "cns_weekly_intent": "High but controlled; preserve readiness for in-season.",
+          "elastic_strategy": "E1–E3 allowed if Week 3 gate passes, with Tier 3 ≤40% of contacts. If gate fails, stay E1–E2 and bias volume toward quality COD and landing.",
+          "secondary_mdp_bias_active": true,
+          "notes": "This meso is where sport bias matters most. JUMP, SPEED, or COD bias drives exercise selection, not block legality."
+        }
+      ],
+
+      "assessment_gates": {
+        "week_3": {
+          "gate_type": "MID_BLOCK_E3_UNLOCK",
+          "assessments": ["elastic_tolerance", "cns_response", "movement_quality"],
+          "purpose": "Decide if athlete can safely access E3 plyos in Meso 2 while respecting Tier 3 ≤40% contact rule.",
+          "action_if_fail": "Keep E3 locked (E1–E2 only) for Weeks 4–6. Adjust plyo weekly range to 120–140 and sprint range to 600–800m/week.",
+          "action_if_pass": "Set e3_unlocked = true for Weeks 4–6. Maintain plyo 140–180 and sprint 800–1000m/week within Youth 13-17 PRE_SEASON band."
+        },
+        "week_6": {
+          "gate_type": "EXIT_BLOCK_CHECK",
+          "assessments": ["true_sprint_tolerance", "elastic_rhythm", "fatigue_status"],
+          "purpose": "Confirm athlete is ready to enter in-season with full-speed exposures and no peak fatigue.",
+          "action_if_fail": "Route to a low-CNS consolidation or partial deload meso, or repeat final 2 weeks at reduced volume.",
+          "action_if_pass": "Advance to in-season maintenance or sport-specific in-season block as defined by Block Selector."
+        }
+      },
+
+      "exit_state": {
+        "ready_for_block": "SP_INSEASON_MULTI_13-17_6WK_MAINT_v1",
+        "exit_conditions": [
+          "stable_true_sprint_exposure_600_1000m_per_week",
+          "no_unresolved_pain_or_flagged_cns_overload",
+          "demonstrated_elastic_rhythm_tolerance",
+          "movement_quality_maintained_under_speed"
+        ],
+        "exit_assessment": "Conducted end of Week 6. Athlete should feel fast, coordinated, and fresh—not in a fatigue peak.",
+        "handoff_intent": "Athlete exits with full-speed and COD exposure that resembles sport. E3 is earned, not assumed. In-season block can safely reduce volume while preserving speed qualities."
+      },
+
+      "special_rules": {
+        "no_makeup_rule": "Missed session = skipped stimulus. Do not attempt to catch up. Resume where you are in the progression.",
+        "calendar_shift_allowed": true,
+        "calendar_shift_rule": "Maintain meso order; do not compress missed volume; preserve weekly operating ranges. Shift timeline but preserve structure.",
+        "tier_3_fraction_rule": "E3/E4 (Tier 3) contacts must remain ≤40% of total session contacts in all weeks.",
+        "max_sprint_sessions_per_week": 3,
+        "sprint_session_rule": "Maximum 3 sprint exposures per week for Youth 13-17. No single session should exceed 800m true sprint meters.",
+        "peaking_rule": "Pre-season is a bridge, not a peak. Athletes should feel fast and prepared, not exhausted, at Week 6."
+      },
+
+      "governance_status": "PASS",
+      "governance_checklist": [
+        "✅ Youth 13-17 absolute ceilings respected (120 contacts/session, 240/week, 800m/session, 2000m/week).",
+        "✅ Pre-season weekly operating ranges enforced (120–180 plyo, 600–1000m sprint).",
+        "✅ E3 access conditional on Week 3 gate; Tier 3 ≤40% per session.",
+        "✅ TRUE_SPRINT_METERS_ONLY (≥90% Vmax) enforced with missing-intensity quarantine.",
+        "✅ CNS budget marked HIGH but controlled via 2x/week structure.",
+        "✅ No change to Load Standards or Governance rules; block intent layered on top.",
+        "✅ Exit state explicitly routes to in-season maintenance block."
+      ]
+    }
+  ],
+
+  "integration_notes": {
+    "enforcement_owner": {
+      "weekly_volume_ranges": "WEEKLY_ACCUMULATOR",
+      "sprint_intensity_validation": "EXERCISE_SELECTION_ALGORITHM",
+      "session_caps_and_zone_routing": "EXERCISE_SELECTION_ALGORITHM",
+      "gate_advance_logic": "GATE_ENGINE",
+      "block_selection": "BLOCK_SELECTOR",
+      "meso_progression": "GATE_ENGINE"
+    },
+    "block_selector_responsibility": "When season_type = PRESEASON and block_id from off-season exit_state is SP_PRESEASON_MULTI_13-17_6WK_v1, select this block and pass legality_check and block_tags downstream. Do not manage E3 unlock or meso progression.",
+    "weekly_accumulator_responsibility": "Track plyo_contacts and sprint_meters per week. Validate against Youth_13_17 PRE_SEASON band: 120–180 plyo, 600–1000m sprint. Flag but do not block if outside range.",
+    "exercise_selection_algorithm_responsibility": "Enforce fv_zones_allowed, cns_per_day, sprint_intent, and Tier 3 ≤40% contacts when e3_unlocked = true. Validate intensity_percent_vmax ≥90% before counting sprint meters.",
+    "gate_engine_responsibility": "At Week 3, evaluate elastic_tolerance, cns_response, movement_quality to set e3_unlocked flag. At Week 6, evaluate exit conditions to decide in-season advancement.",
+    "ai_playbook_reference": "Coach & AI Playbook should describe how off-season secondary MDP bias carries into this block, how E3 is earned via Week 3 gate, and why pre-season is not a peaking phase.",
+    "integration_sequence": "Block Selector → WEEKLY_ACCUMULATOR → EXERCISE_SELECTION_ALGORITHM → GATE_ENGINE.",
+    "future_versioning": "Future variants may include sport-specific pre-season blocks (FIELD, COURT) with same legality but different macro_structure and block_tags."
+  }
+}
+{
+  "schema_id": "EFL_MESOMACRO_MANIFEST",
+  "manifest_version": "1.0.2",
+  "manifest_created": "2025-12-16",
+  "manifest_description": "In-season SP Performance maintenance block for Youth 13-17, 6-week cycle designed for high fixture density (Tier 1). Preserves speed and strength with minimal fatigue and strict respect for Load Standards v2.1.2.",
+  "blocks": [
+    {
+      "block_id": "SP_INSEASON_MULTI_13-17_6WK_MAINT_v1",
+      "block_tags": ["SP", "IN_SEASON_TIER_1", "YOUTH_13_17", "MULTI_SPORT", "2X_WEEK", "MAINTENANCE"],
+      "service_line": "SP_Performance",
+      "population_icp": "Youth_13_17_SP_Default",
+      "season": "In_Season",
+      "season_type": "IN_SEASON_TIER_1",
+      "mdp_primary": "MULTI_FIELD_COURT_HYBRID",
+      "mdp_secondary_bias_required": true,
+      "mdp_secondary_bias_source_block": "SP_PRESEASON_MULTI_13-17_6WK_v1",
+      "mdp_secondary_bias_effective_week": 1,
+      "mdp_secondary_bias_options": ["JUMP", "SPEED", "COD"],
+      "duration_weeks": 6,
+      "sessions_per_week": 2,
+      "total_sessions": 12,
+
+      "legality_check": {
+        "population_ceiling_band": "Band_3",
+        "population_ceiling_node": "C",
+        "max_e_node_allowed": "E3",
+        "plyo_contacts_cap_session": 120,
+        "plyo_contacts_cap_week": 240,
+        "cns_budget": "MODERATE",
+        "sprint_counting_standard": "TRUE_SPRINT_METERS_ONLY_90PCT_VMAX",
+        "requires_intensity_percent_vmax": true,
+        "required_governance": [
+          "Tier3_E3_E4_<=40PCT_SESSION_CONTACTS",
+          "PRIME_PREP_WORK_CLEAR_REQUIRED",
+          "SESSION_CEILING_NOT_TARGET",
+          "IN_SEASON_TIER_1_WEEKLY_RANGE_ENFORCED"
+        ],
+        "season_operating_ranges_ref": "Youth_13_17.IN_SEASON_TIER_1"
+      },
+
+      "macro_structure": [
+        {
+          "meso_num": 1,
+          "meso_name": "IN-SEASON STABILIZE",
+          "weeks": [1, 2, 3],
+          "primary_goal": "Stabilize strength and speed qualities built in pre-season while accommodating high game load.",
+          "fv_zones_allowed": ["Z3", "Z4", "Z5", "Z8"],
+          "fv_zone_emphasis": {
+            "Z3": "Speed–Strength (low volume)",
+            "Z4": "Speed–Strength / elastic (minimal E3, if at all)",
+            "Z5": "Strength-endurance / tissue maintenance",
+            "Z8": "COD rhythm tuned to sport demands"
+          },
+          "sprint_intent": ["MAX_V_TOUCHES", "SHORT_ACCEl", "COD_MAINTENANCE"],
+          "sprint_intent_description": "Maintain exposure to max-V and short accelerations at ≥90% Vmax, with COD that mirrors sport but stays low-volume. Distance: 400–600m/week (true sprint meters only).",
+          "plyo_contact_range": {
+            "min": 60,
+            "max": 80,
+            "unit": "contacts/week",
+            "note": "Lower half of Youth 13-17 IN_SEASON_TIER_1 band (60–100). Operating range; not a target."
+          },
+          "sprint_meters_range": {
+            "min": 400,
+            "max": 600,
+            "unit": "m/week",
+            "note": "Lower to mid of Youth 13-17 IN_SEASON_TIER_1 band (400–800). TRUE_SPRINT_METERS_ONLY (≥90% Vmax)."
+          },
+          "cns_per_day": {
+            "day_A": "MODERATE",
+            "day_B": "LOW",
+            "day_A_description": "Brief speed/accel touches + low-volume strength.",
+            "day_B_description": "Tissue maintenance, decel skill, mobility."
+          },
+          "cns_weekly_intent": "Moderate overall, with clear contrast to game load.",
+          "elastic_strategy": "E1–E2 primary; E3 use extremely limited or zero if game density is high. Tier 3 ≤40% of contacts but most weeks should sit near 0–10%.",
+          "notes": "Assumes practice and games carry majority of COD and high-speed load. Training preserves quality, not volume."
+        },
+        {
+          "meso_num": 2,
+          "meso_name": "IN-SEASON REINFORCE",
+          "weeks": [4, 5, 6],
+          "primary_goal": "Reinforce key qualities (speed, COD, and robustness) without increasing fatigue as season progresses.",
+          "fv_zones_allowed": ["Z3", "Z4", "Z5", "Z8"],
+          "fv_zone_emphasis": {
+            "Z3": "Speed–Strength maintenance",
+            "Z4": "Elastic/reactive sprinkles if tolerance and schedule allow",
+            "Z5": "Strength-endurance maintenance",
+            "Z8": "COD and decel maintenance"
+          },
+          "sprint_intent": ["MAX_V_TOUCHES", "COD_VARIABILITY_LIGHT"],
+          "sprint_intent_description": "Small doses of max-V and light COD variability at ≥90% Vmax. Distance: 400–800m/week (true sprint meters only), depending on fixture load.",
+          "plyo_contact_range": {
+            "min": 60,
+            "max": 100,
+            "unit": "contacts/week",
+            "note": "Full Youth 13-17 IN_SEASON_TIER_1 band (60–100). Adjust toward lower end in heavy game weeks."
+          },
+          "sprint_meters_range": {
+            "min": 400,
+            "max": 800,
+            "unit": "m/week",
+            "note": "Full Youth 13-17 IN_SEASON_TIER_1 band (400–800). Practice/game sprints may consume part of this budget."
+          },
+          "cns_per_day": {
+            "day_A": "MODERATE",
+            "day_B": "LOW",
+            "day_A_description": "Short, sharp exposures to speed/COD based on bias (JUMP/SPEED/COD).",
+            "day_B_description": "Tissue robustness, isometrics, and controlled landing patterns."
+          },
+          "cns_weekly_intent": "Moderate, trending slightly down if fixture density increases.",
+          "elastic_strategy": "Tier 3 (E3) allowed but not required; if used, keep to small sprinkles and respect ≤40% of session contacts.",
+          "secondary_mdp_bias_active": true,
+          "notes": "Adjust intensity and Tier 3 usage week-to-week based on games_per_week and readiness_flag."
+        }
+      ],
+
+      "assessment_gates": {
+        "week_3": {
+          "gate_type": "MID_BLOCK_HEALTH_CHECK",
+          "assessments": ["pain_status", "cns_response", "movement_quality"],
+          "purpose": "Ensure in-season maintenance is not accumulating problematic fatigue or pain.",
+          "action_if_fail": "Reduce plyo and sprint ranges to lower half of band (e.g., 60 contacts/week, 400m/week) and remove E3 entirely for remaining weeks.",
+          "action_if_pass": "Continue with planned ranges; allow small Tier 3 sprinkles when schedule allows."
+        },
+        "week_6": {
+          "gate_type": "EXIT_BLOCK_CHECK",
+          "assessments": ["true_sprint_tolerance", "elastic_rhythm", "fatigue_status"],
+          "purpose": "Confirm readiness to either continue in-season maintenance or transition to post-season or another in-season tier.",
+          "action_if_fail": "Route to deload or post-season restoration block with lower volumes and Zone 8 emphasis.",
+          "action_if_pass": "Extend or repeat in-season maintenance block or transition to appropriate next block per season context."
+        }
+      },
+
+      "exit_state": {
+        "ready_for_block": "AUTO_ROUTED_BY_BLOCK_SELECTOR_INSEASON_OR_POST",
+        "exit_conditions": [
+          "speed_and_cod_qualities_maintained",
+          "no_progressive_increase_in_pain_or_red_flags",
+          "fatigue_state_compatible_with_fixture_demands",
+          "movement_quality_preserved_under_game_load"
+        ],
+        "exit_assessment": "Conducted end of Week 6. Athlete should feel stable, resilient, and not trending toward overuse.",
+        "handoff_intent": "Block can be repeated for another 6 weeks, downshifted to a lower-load in-season variant, or routed to post-season, depending on calendar and readiness."
+      },
+
+      "special_rules": {
+        "no_makeup_rule": "Missed session = skipped stimulus. Do not attempt to catch up. Resume where you are in the progression.",
+        "calendar_shift_allowed": true,
+        "calendar_shift_rule": "Maintain meso order; do not compress missed volume; preserve weekly operating ranges. Adapt around game/tournament weeks without breaking structure.",
+        "tier_3_fraction_rule": "E3/E4 (Tier 3) contacts must remain ≤40% of total session contacts; in high fixture weeks, target near 0–10%.",
+        "max_sprint_sessions_per_week": 3,
+        "sprint_session_rule": "Maximum 3 sprint exposures per week for Youth 13-17 (practice + training). No single session should exceed 800m true sprint meters.",
+        "fixture_dependency_note": "If games_per_week ≥3, default to lower ends of plyo and sprint ranges and remove planned E3.",
+        "peaking_rule": "In-season maintenance is not a peak block. Objective is robustness and quality, not new max outputs."
+      },
+
+      "governance_status": "PASS",
+      "governance_checklist": [
+        "✅ Youth 13-17 absolute ceilings respected (120 contacts/session, 240/week, 800m/session, 2000m/week).",
+        "✅ In-season Tier 1 weekly operating ranges enforced (60–100 plyo, 400–800m sprint).",
+        "✅ Tier 3 (E3/E4) fraction constrained to ≤40% of session contacts, with guidance to minimize in high fixture weeks.",
+        "✅ TRUE_SPRINT_METERS_ONLY (≥90% Vmax) enforced and intensity field required.",
+        "✅ CNS load labeled MODERATE and compatible with high fixture density.",
+        "✅ Block relies on practice/games for majority of high-CNS load; training preserves qualities.",
+        "✅ Exit state permits repeat, downshift, or transition based on calendar and readiness."
+      ]
+    }
+  ],
+
+  "integration_notes": {
+    "enforcement_owner": {
+      "weekly_volume_ranges": "WEEKLY_ACCUMULATOR",
+      "sprint_intensity_validation": "EXERCISE_SELECTION_ALGORITHM",
+      "session_caps_and_zone_routing": "EXERCISE_SELECTION_ALGORITHM",
+      "gate_advance_logic": "GATE_ENGINE",
+      "block_selection": "BLOCK_SELECTOR",
+      "meso_progression": "GATE_ENGINE"
+    },
+    "block_selector_responsibility": "When season_type = IN_SEASON_TIER_1 and prior block exit_state allows in-season maintenance, select SP_INSEASON_MULTI_13-17_6WK_MAINT_v1. Use games_per_week to decide whether to continue or downshift on next cycle.",
+    "weekly_accumulator_responsibility": "Track plyo_contacts and sprint_meters per week. Validate against Youth_13_17 IN_SEASON_TIER_1 band: 60–100 plyo, 400–800m sprint. Flag trend toward upper range in heavy fixture weeks.",
+    "exercise_selection_algorithm_responsibility": "Enforce fv_zones_allowed, cns_per_day, sprint_intent, and Tier 3 ≤40% contacts, with bias to minimal Tier 3 when games_per_week is high. Validate intensity_percent_vmax ≥90% before counting sprint meters.",
+    "gate_engine_responsibility": "At Week 3 and Week 6, evaluate health/fatigue gates and decide whether to adjust volume ranges, remove Tier 3, or route to deload/post-season.",
+    "ai_playbook_reference": "Coach & AI Playbook should explain that in-season blocks are maintenance-focused, rely on sport for most high-CNS load, and treat Tier 3 and volume ceilings as levers to pull back, not to chase.",
+    "integration_sequence": "Block Selector → WEEKLY_ACCUMULATOR → EXERCISE_SELECTION_ALGORITHM → GATE_ENGINE.",
+    "future_versioning": "Future variants may include IN_SEASON_TIER_2 and IN_SEASON_TIER_3 blocks with higher operating ranges and different CNS strategies."
+  }
+}
+{
+  "schema_id": "EFL_MESOMACRO_MANIFEST",
+  "manifest_version": "1.0.2",
+  "manifest_created": "2025-12-16",
+  "manifest_description": "Post-season SP Performance restoration block for Youth 13-17, 6-week cycle. Downshifts load after a full season, emphasizes tissue restoration, movement quality, and low-CNS agility. Uses Load Standards v2.1.2 POST_SEASON ranges.",
+  "blocks": [
+    {
+      "block_id": "SP_POSTSEASON_MULTI_13-17_6WK_RESTORE_v1",
+      "block_tags": ["SP", "POST_SEASON", "YOUTH_13_17", "MULTI_SPORT", "2X_WEEK", "RESTORATION"],
+      "service_line": "SP_Performance",
+      "population_icp": "Youth_13_17_SP_Default",
+      "season": "Post_Season",
+      "season_type": "POST_SEASON",
+      "mdp_primary": "MULTI_FIELD_COURT_HYBRID",
+      "mdp_secondary_bias_required": false,
+      "duration_weeks": 6,
+      "sessions_per_week": 2,
+      "total_sessions": 12,
+
+      "legality_check": {
+        "population_ceiling_band": "Band_2",
+        "population_ceiling_node": "C",
+        "max_e_node_allowed": "E2",
+        "plyo_contacts_cap_session": 120,
+        "plyo_contacts_cap_week": 240,
+        "cns_budget": "LOW",
+        "sprint_counting_standard": "TRUE_SPRINT_METERS_ONLY",
+        "requires_intensity_percent_vmax": true,
+        "required_governance": [
+          "Tier3_E3_E4_MINIMIZED_POSTSEASON",
+          "SESSION_CEILING_NOT_TARGET",
+          "POST_SEASON_WEEKLY_RANGE_ENFORCED"
+        ],
+        "season_operating_ranges_ref": "Youth_13_17.POST_SEASON"
+      },
+
+      "macro_structure": [
+        {
+          "meso_num": 1,
+          "meso_name": "RESET_AND_RESTORE",
+          "weeks": [1, 2, 3],
+          "primary_goal": "Downshift from in-season stress, restore tissues, and clean up movement quality with low-CNS work.",
+          "fv_zones_allowed": ["Z5", "Z6", "Z8"],
+          "fv_zone_emphasis": {
+            "Z5": "Strength-endurance and robustness at Band 1–2",
+            "Z6": "Hypertrophy / capacity only where needed",
+            "Z8": "Mobility, coordination, and low-intensity agility"
+          },
+          "sprint_intent": ["LIGHT_ACCEL", "TECHNICAL_SPRINT_DRILLS"],
+          "sprint_intent_description": "Short, technical accelerations and form drills at 70–85% Vmax. Only reps at ≥90% Vmax count as sprint meters.",
+          "plyo_contact_range": {
+            "min": 60,
+            "max": 90,
+            "unit": "contacts/week",
+            "note": "Within Youth 13-17 POST_SEASON band (60–120). Emphasis on low-intensity E1–E2 contacts."
+          },
+          "sprint_meters_range": {
+            "min": 300,
+            "max": 450,
+            "unit": "m/week",
+            "note": "Lower half of Youth 13-17 POST_SEASON band (300–600). Use TRUE_SPRINT_METERS_ONLY at ≥90% Vmax."
+          },
+          "cns_per_day": {
+            "day_A": "LOW",
+            "day_B": "LOW",
+            "day_A_description": "Strength robustness + gentle elastic work.",
+            "day_B_description": "Movement quality, mobility, and low-impact COD."
+          },
+          "cns_weekly_intent": "Low; purpose is restoration, not pushing new peaks.",
+          "elastic_strategy": "E1–E2 allowed with focus on landing quality and decel control. Avoid Tier 3 shock and high boxes.",
+          "notes": "Ideal time for technical work, asymmetry clean-up, and pain reduction."
+        },
+        {
+          "meso_num": 2,
+          "meso_name": "GENTLE_BUILD_FORWARD",
+          "weeks": [4, 5, 6],
+          "primary_goal": "Maintain restored state while gently nudging strength and speed qualities toward next off-season.",
+          "fv_zones_allowed": ["Z3", "Z5", "Z8"],
+          "fv_zone_emphasis": {
+            "Z3": "Light speed–strength (short accelerations, low volume)",
+            "Z5": "Strength maintenance with moderate load",
+            "Z8": "Agility and coordination in multiple planes"
+          },
+          "sprint_intent": ["TECHNICAL_MAX_V_TOUCHES"],
+          "sprint_intent_description": "Occasional near-max accelerations at ≥90% Vmax in very low volume. Distance still sits in 300–600m/week band.",
+          "plyo_contact_range": {
+            "min": 80,
+            "max": 120,
+            "unit": "contacts/week",
+            "note": "Top of Youth 13-17 POST_SEASON band (60–120). Keep most contacts at E1–E2, brief E3 sprinkles only if needed and well-tolerated."
+          },
+          "sprint_meters_range": {
+            "min": 300,
+            "max": 600,
+            "unit": "m/week",
+            "note": "Full Youth 13-17 POST_SEASON band (300–600). Do not exceed, as next macro will handle volume ramp."
+          },
+          "cns_per_day": {
+            "day_A": "MODERATE",
+            "day_B": "LOW",
+            "day_A_description": "Short, sharp exposures (accel or light COD) plus strength.",
+            "day_B_description": "Mobility, stability, and low-CNS skill work."
+          },
+          "cns_weekly_intent": "Moderate at most, with built-in room for fatigue from other activities.",
+          "elastic_strategy": "Primarily E1–E2; optional small Tier 3 (E3) segments if athlete is fully recovered and no pain/swelling flags exist.",
+          "notes": "Acts as a soft on-ramp toward the next off-season or development block."
+        }
+      ],
+
+      "assessment_gates": {
+        "week_3": {
+          "gate_type": "MID_BLOCK_HEALTH_RESET_CHECK",
+          "assessments": ["pain_status", "joint_irritation", "movement_quality"],
+          "purpose": "Confirm post-season block is reducing pain and tightness rather than adding fatigue.",
+          "action_if_fail": "Lower plyo and sprint ranges (e.g., 60 contacts, 300m/week), remove any E3, and bias sessions toward Zone 8 and Band 1 strength.",
+          "action_if_pass": "Allow progression into gentle build-forward meso with moderate volumes inside POST_SEASON bands."
+        },
+        "week_6": {
+          "gate_type": "EXIT_BLOCK_CHECK",
+          "assessments": ["pain_status", "fatigue_status", "movement_quality", "asymmetry_checks"],
+          "purpose": "Determine readiness to enter an off-season development block or stay in low load if issues persist.",
+          "action_if_fail": "Route to a second restoration block or targeted corrective/rehab block rather than off-season high volume.",
+          "action_if_pass": "Advance to an OFF_SEASON development block (e.g., SP_OFFSEASON_MULTI_13-17_12WK_DEV_v1 when defined)."
+        }
+      },
+
+      "exit_state": {
+        "ready_for_block": "SP_OFFSEASON_MULTI_13-17_12WK_DEV_v1",
+        "exit_conditions": [
+          "pain_and_irritation_trending_down_or_stable_at_low_levels",
+          "no_significant_swelling_or_joint_reactivity",
+          "movement_quality_at_or_above_in-season_baseline",
+          "athlete_reports_feeling_fresh_not_drained"
+        ],
+        "exit_assessment": "End of Week 6. Athlete should feel better than at end of season and ready to tolerate a gradual off-season volume ramp.",
+        "handoff_intent": "Provide a clean transition into higher-load off-season work, with clear notes on any remaining guardrails."
+      },
+
+      "special_rules": {
+        "tier3_minimize_rule": "Tier 3 plyos (E3/E4) should be minimized or omitted in POST_SEASON unless explicitly justified.",
+        "no_peaking_rule": "No performance peaking. This phase is for restoration, not chasing new PBs.",
+        "no_makeup_rule": "Missed sessions are not made up by increasing contacts or sprint meters later.",
+        "calendar_shift_allowed": true,
+        "calendar_shift_rule": "Maintain low-CNS, restoration intent even if calendar weeks shift. Do not compress into fewer than 4 weeks.",
+        "max_sprint_sessions_per_week": 3,
+        "sprint_session_rule": "If any sessions include ≥90% Vmax work, keep total sprint exposures ≤3/week and within POST_SEASON volume band."
+      },
+
+      "governance_status": "PASS",
+      "governance_checklist": [
+        "✅ Youth 13-17 absolute ceilings respected (120 contacts/session, 240/week, 800m/session, 2000m/week).",
+        "✅ Post-season weekly operating ranges enforced (60–120 plyos, 300–600m sprint).",
+        "✅ Tier 3 use minimized and clearly de-emphasized.",
+        "✅ TRUE_SPRINT_METERS_ONLY rule used with conservative weekly ranges.",
+        "✅ CNS budget LOW–MODERATE, appropriate for restoration.",
+        "✅ Exit state routes toward off-season development, not directly to high-load blocks without checks."
+      ]
+    }
+  ],
+
+  "integration_notes": {
+    "enforcement_owner": {
+      "weekly_volume_ranges": "WEEKLY_ACCUMULATOR",
+      "sprint_intensity_validation": "EXERCISE_SELECTION_ALGORITHM",
+      "session_caps_and_zone_routing": "EXERCISE_SELECTION_ALGORITHM",
+      "gate_advance_logic": "GATE_ENGINE",
+      "block_selection": "BLOCK_SELECTOR",
+      "meso_progression": "GATE_ENGINE"
+    },
+    "block_selector_responsibility": "When season_type = POST_SEASON for Youth_13_17 SP_Performance and readiness_flag is GREEN or YELLOW (no critical red flags), select SP_POSTSEASON_MULTI_13-17_6WK_RESTORE_v1 as default post-season block.",
+    "weekly_accumulator_responsibility": "Track plyo_contacts and sprint_meters vs Youth_13_17 POST_SEASON band (60–120, 300–600). Flag but do not auto-block minor excursions.",
+    "exercise_selection_algorithm_responsibility": "Bias toward Z5/Z6/Z8 in meso 1 and only small Z3 exposures in meso 2. Keep Tier 3 usage minimal and enforce per-session contact caps.",
+    "gate_engine_responsibility": "Use Week 3 and Week 6 gates to ensure the block is actually restorative before allowing transition to off-season development.",
+    "ai_playbook_reference": "Coach & AI Playbook should describe this as a decompression block after heavy fixture load, where the goal is feeling and moving better, not accumulating volume.",
+    "integration_sequence": "Block Selector → WEEKLY_ACCUMULATOR → EXERCISE_SELECTION_ALGORITHM → GATE_ENGINE.",
+    "future_versioning": "Future variants may include sport-specific post-season blocks (e.g., FIELD_POST, COURT_POST) and shorter 3-week restoration options."
+  }
+}
+
+{
+  "schema_id": "EFL_MESOMACRO_MANIFEST",
+  "manifest_version": "1.0.2",
+  "manifest_created": "2025-12-16",
+  "manifest_description": "Off-season SP Performance development block for Youth 13-17, 12-week cycle. Highest-volume development window, focused on strength, speed, and elastic qualities within Load Standards v2.1.2 OFF_SEASON ranges.",
+  "blocks": [
+    {
+      "block_id": "SP_OFFSEASON_MULTI_13-17_12WK_DEV_v1",
+      "block_tags": ["SP", "OFF_SEASON", "YOUTH_13_17", "MULTI_SPORT", "2X_WEEK", "DEVELOPMENT"],
+      "service_line": "SP_Performance",
+      "population_icp": "Youth_13_17_SP_Default",
+      "season": "Off_Season",
+      "season_type": "OFF_SEASON",
+      "mdp_primary": "MULTI_FIELD_COURT_HYBRID",
+      "mdp_secondary_bias_required": true,
+      "mdp_secondary_bias_source_block": null,
+      "mdp_secondary_bias_effective_week": 1,
+      "mdp_secondary_bias_options": ["JUMP", "SPEED", "COD"],
+      "duration_weeks": 12,
+      "sessions_per_week": 2,
+      "total_sessions": 24,
+
+      "legality_check": {
+        "population_ceiling_band": "Band_3",
+        "population_ceiling_node": "C",
+        "max_e_node_allowed": "E3",
+        "plyo_contacts_cap_session": 120,
+        "plyo_contacts_cap_week": 240,
+        "cns_budget": "HIGH",
+        "sprint_counting_standard": "TRUE_SPRINT_METERS_ONLY",
+        "requires_intensity_percent_vmax": true,
+        "required_governance": [
+          "Tier3_E3_E4_<=40PCT_SESSION_CONTACTS",
+          "SESSION_CEILING_NOT_TARGET",
+          "OFF_SEASON_WEEKLY_RANGE_ENFORCED"
+        ],
+        "season_operating_ranges_ref": "Youth_13_17.OFF_SEASON"
+      },
+
+      "macro_structure": [
+        {
+          "meso_num": 1,
+          "meso_name": "FOUNDATION_STRENGTH_SPEED_BASE",
+          "weeks": [1, 2, 3, 4],
+          "primary_goal": "Build foundational strength and low-to-moderate elastic tolerance as a base for later off-season intensity.",
+          "fv_zones_allowed": ["Z5", "Z6", "Z3"],
+          "fv_zone_emphasis": {
+            "Z5": "Strength / robustness (Band 1–2)",
+            "Z6": "Hypertrophy / capacity where needed",
+            "Z3": "Introductory speed–strength and elastic work (E1–E2)"
+          },
+          "sprint_intent": ["ACCEL_FOUNDATION"],
+          "sprint_intent_description": "Short accelerations at ≥90% Vmax with clean mechanics. Distance: 800–900m/week (true sprint meters only).",
+          "plyo_contact_range": {
+            "min": 140,
+            "max": 160,
+            "unit": "contacts/week",
+            "note": "Low half of Youth 13-17 OFF_SEASON band (140–200). Emphasis on E1–E2; minimal E3."
+          },
+          "sprint_meters_range": {
+            "min": 800,
+            "max": 900,
+            "unit": "m/week",
+            "note": "Within Youth 13-17 OFF_SEASON band (800–1200). TRUE_SPRINT_METERS_ONLY ≥90% Vmax."
+          },
+          "cns_per_day": {
+            "day_A": "HIGH",
+            "day_B": "MODERATE",
+            "day_A_description": "Primary strength + accel work.",
+            "day_B_description": "Supportive strength, sub-max elastic, and COD skill."
+          },
+          "cns_weekly_intent": "High but manageable; build capacity without peaking.",
+          "elastic_strategy": "E1–E2 primary; E3 only for advanced athletes with perfect readiness and within ≤40% Tier 3 session rule.",
+          "notes": "Bias secondary MDP according to athlete profile (JUMP/SPEED/COD) from Week 1."
+        },
+        {
+          "meso_num": 2,
+          "meso_name": "POWER_SPEED_DEVELOPMENT",
+          "weeks": [5, 6, 7, 8],
+          "primary_goal": "Increase power, top-end speed, and elastic output while respecting Youth 13-17 Tier 3 limits.",
+          "fv_zones_allowed": ["Z3", "Z4", "Z1"],
+          "fv_zone_emphasis": {
+            "Z3": "Speed–Strength (jumps, bounds, resisted sprints)",
+            "Z4": "Elastic/reactive plyos (E2–E3 within caps)",
+            "Z1": "Max-V exposure"
+          },
+          "sprint_intent": ["MAX_V_UNRESTRICTED", "FLYING_SPRINTS"],
+          "sprint_intent_description": "Max-V and flying sprints at ≥90–100% Vmax. Distance: 900–1100m/week (true sprint meters only).",
+          "plyo_contact_range": {
+            "min": 160,
+            "max": 200,
+            "unit": "contacts/week",
+            "note": "Upper half of OFF_SEASON band (140–200). Tier 3 (E3/E4) ≤40% of session contacts."
+          },
+          "sprint_meters_range": {
+            "min": 900,
+            "max": 1100,
+            "unit": "m/week",
+            "note": "Near upper OFF_SEASON band (800–1200) but not exceeding weekly 2000m cap."
+          },
+          "cns_per_day": {
+            "day_A": "HIGH",
+            "day_B": "HIGH",
+            "day_A_description": "High-intensity sprint and plyo emphasis (respecting Tier 3 rule).",
+            "day_B_description": "Strength-power and COD at high but controlled CNS load."
+          },
+          "cns_weekly_intent": "High; this is the main output-building meso.",
+          "elastic_strategy": "E1–E3 allowed, E4 rarely and only for advanced athletes. Always enforce ≤40% Tier 3 fraction per session.",
+          "notes": "Monitor readiness_flag; downshift volume/intensity when YELLOW."
+        },
+        {
+          "meso_num": 3,
+          "meso_name": "CONSOLIDATE_AND_PREP_FOR_PRESEASON",
+          "weeks": [9, 10, 11, 12],
+          "primary_goal": "Consolidate gains, slightly back off volume, and prepare tissues for upcoming pre-season specificity block.",
+          "fv_zones_allowed": ["Z3", "Z4", "Z8"],
+          "fv_zone_emphasis": {
+            "Z3": "Speed–Strength maintenance",
+            "Z4": "Elastic quality maintenance",
+            "Z8": "Agility and COD in low-to-moderate volume"
+          },
+          "sprint_intent": ["MAX_V_TOUCHES", "ACCEL_MAINTENANCE"],
+          "sprint_intent_description": "Maintain max-V and acceleration qualities at slightly reduced volume: 800–1000m/week (true sprint meters only).",
+          "plyo_contact_range": {
+            "min": 140,
+            "max": 180,
+            "unit": "contacts/week",
+            "note": "Mid-band OFF_SEASON volume; slight taper from meso 2 while keeping quality high."
+          },
+          "sprint_meters_range": {
+            "min": 800,
+            "max": 1000,
+            "unit": "m/week",
+            "note": "Within OFF_SEASON band with slight reduction for freshness heading into pre-season."
+          },
+          "cns_per_day": {
+            "day_A": "HIGH",
+            "day_B": "MODERATE",
+            "day_A_description": "High-quality speed/power; no need to chase new PBs.",
+            "day_B_description": "Supportive strength and COD with moderate CNS cost."
+          },
+          "cns_weekly_intent": "High-to-moderate; begin protecting freshness for next phase.",
+          "elastic_strategy": "Keep Tier 3 presence but ensure athletes finish feeling powerful, not fried.",
+          "notes": "Ideal exit point into SP_PRESEASON_MULTI_13-17_6WK_v1."
+        }
+      ],
+
+      "assessment_gates": {
+        "week_4": {
+          "gate_type": "MESO1_EXIT_CHECK",
+          "assessments": ["movement_quality", "true_sprint_tolerance", "elastic_tolerance"],
+          "purpose": "Confirm athlete is tolerating foundational volume before advancing to highest-power meso.",
+          "action_if_fail": "Extend Meso 1 by 2–3 weeks at current or slightly reduced volume before attempting Meso 2.",
+          "action_if_pass": "Advance to Meso 2 with planned OFF_SEASON ranges."
+        },
+        "week_8": {
+          "gate_type": "MESO2_EXIT_CHECK",
+          "assessments": ["pain_status", "cns_response", "performance_trend"],
+          "purpose": "Ensure high-intensity block has not created problematic fatigue or pain.",
+          "action_if_fail": "Begin taper earlier by shifting to Meso 3 structure with reduced volumes.",
+          "action_if_pass": "Proceed to Meso 3 as written."
+        },
+        "week_12": {
+          "gate_type": "BLOCK_EXIT_CHECK",
+          "assessments": ["speed_quality", "power_output_trend", "fatigue_status"],
+          "purpose": "Decide readiness to enter pre-season block focused on sport-specific exposure.",
+          "action_if_fail": "Route to a lighter development or consolidation block instead of pre-season bridge.",
+          "action_if_pass": "Advance to SP_PRESEASON_MULTI_13-17_6WK_v1."
+        }
+      },
+
+      "exit_state": {
+        "ready_for_block": "SP_PRESEASON_MULTI_13-17_6WK_v1",
+        "exit_conditions": [
+          "true_sprint_volume_800_1200m_week_well_tolerated",
+          "plyo_contacts_140_200_week_without_persistent_pain",
+          "movement_quality_high_at_speed",
+          "fatigue_state_compatible_with_preseason_bridge"
+        ],
+        "exit_assessment": "End of Week 12. Athlete should be powerful, robust, and not overly fatigued.",
+        "handoff_intent": "Pass a well-prepared athlete into pre-season bridge block where sport-specific speed and COD become primary."
+      },
+
+      "special_rules": {
+        "tier3_fraction_rule": "E3/E4 contacts must remain ≤40% of total session plyo contacts in all weeks.",
+        "no_makeup_rule": "Missed sessions are not made up by exceeding weekly caps or increasing sprint meters later.",
+        "calendar_shift_allowed": true,
+        "calendar_shift_rule": "Maintain meso order even if calendar shifts. Do not compress total off-season duration below 8 weeks without explicit override.",
+        "max_sprint_sessions_per_week": 3,
+        "sprint_session_rule": "Maximum 3 sprint exposures per week. No single session exceeds 800m true sprint meters for Youth 13-17."
+      },
+
+      "governance_status": "PASS",
+      "governance_checklist": [
+        "✅ Youth 13-17 absolute ceilings respected (120 contacts/session, 240/week, 800m/session, 2000m/week).",
+        "✅ OFF_SEASON operating ranges enforced (140–200 plyos, 800–1200m sprint/week).",
+        "✅ Tier 3 contacts limited to ≤40% of session total.",
+        "✅ TRUE_SPRINT_METERS_ONLY with intensity_percent_vmax required for counting.",
+        "✅ Gates at weeks 4, 8, and 12 regulate progression and exit."
+      ]
+    }
+  ],
+
+  "integration_notes": {
+    "enforcement_owner": {
+      "weekly_volume_ranges": "WEEKLY_ACCUMULATOR",
+      "sprint_intensity_validation": "EXERCISE_SELECTION_ALGORITHM",
+      "session_caps_and_zone_routing": "EXERCISE_SELECTION_ALGORITHM",
+      "gate_advance_logic": "GATE_ENGINE",
+      "block_selection": "BLOCK_SELECTOR",
+      "meso_progression": "GATE_ENGINE"
+    },
+    "block_selector_responsibility": "When season_type = OFF_SEASON for Youth_13_17 SP_Performance and readiness_flag is GREEN, prefer SP_OFFSEASON_MULTI_13-17_12WK_DEV_v1 as default development block.",
+    "weekly_accumulator_responsibility": "Validate weekly plyo and sprint volumes against Youth_13_17 OFF_SEASON band (140–200, 800–1200). Flag over/under trends.",
+    "exercise_selection_algorithm_responsibility": "Enforce fv_zones, Tier 3 ≤40% rule, and sprint intensity ≥90% Vmax before counting volume.",
+    "gate_engine_responsibility": "Control meso transitions at weeks 4 and 8, and determine pre-season readiness at week 12.",
+    "ai_playbook_reference": "Playbook should present this as the main off-season engine that builds strength, speed, and elasticity for Youth 13–17 field/court athletes.",
+    "integration_sequence": "Block Selector → WEEKLY_ACCUMULATOR → EXERCISE_SELECTION_ALGORITHM → GATE_ENGINE."
+  }
+}
+{
+  "schema_id": "EFL_MESOMACRO_MANIFEST",
+  "manifest_version": "1.0.2",
+  "manifest_created": "2025-12-16",
+  "manifest_description": "Basketball-specific pre-season SP Performance block for Youth 13-17, 6 weeks. Bridges off-season development into court-speed, vertical jump, and COD demands while staying within Youth 13-17 PRE_SEASON bands.",
+  "blocks": [
+    {
+      "block_id": "SP_PRESEASON_BBALL_13-17_6WK_v1",
+      "block_tags": ["SP", "PRE_SEASON", "YOUTH_13_17", "BASKETBALL", "COURT", "2X_WEEK"],
+      "service_line": "SP_Performance",
+      "population_icp": "Youth_13_17_SP_Basketball",
+      "season": "Pre_Season",
+      "season_type": "PRE_SEASON",
+      "mdp_primary": "COURT_ONLY",
+      "mdp_secondary_bias_required": true,
+      "mdp_secondary_bias_source_block": "SP_OFFSEASON_MULTI_13-17_12WK_DEV_v1",
+      "mdp_secondary_bias_effective_week": 1,
+      "mdp_secondary_bias_options": ["VERT", "SPEED", "COD"],
+      "duration_weeks": 6,
+      "sessions_per_week": 2,
+      "total_sessions": 12,
+
+      "legality_check": {
+        "population_ceiling_band": "Band_3",
+        "population_ceiling_node": "C",
+        "max_e_node_allowed": "E3",
+        "plyo_contacts_cap_session": 120,
+        "plyo_contacts_cap_week": 240,
+        "cns_budget": "HIGH",
+        "sprint_counting_standard": "TRUE_SPRINT_METERS_ONLY",
+        "requires_intensity_percent_vmax": true,
+        "required_governance": [
+          "Tier3_E3_E4_<=40PCT_SESSION_CONTACTS",
+          "SESSION_CEILING_NOT_TARGET",
+          "PRE_SEASON_WEEKLY_RANGE_ENFORCED"
+        ],
+        "season_operating_ranges_ref": "Youth_13_17.PRE_SEASON"
+      },
+
+      "macro_structure": [
+        {
+          "meso_num": 1,
+          "meso_name": "COURT_SPEED_AND_VERTICAL_BASE",
+          "weeks": [1, 2, 3],
+          "primary_goal": "Convert off-season strength and speed into basketball-relevant vertical jumping, short-court speed, and COD while keeping fatigue controlled.",
+          "fv_zones_allowed": ["Z3", "Z4", "Z1", "Z8"],
+          "fv_zone_emphasis": {
+            "Z3": "Speed–Strength (short accelerations, low/mod box jumps)",
+            "Z4": "Elastic vertical jumps and low–moderate intensity E3, within caps",
+            "Z1": "Straight-line speed touches (baseline-to-baseline, 3/4 court)",
+            "Z8": "Basketball COD and shuttles (e.g., 5–10–5, closeout footwork)"
+          },
+          "sprint_intent": ["COURT_MAX_V_TOUCHES", "CURVED_SPRINTS"],
+          "sprint_intent_description": "10–20 m linear and curved sprints at ≥90% Vmax (e.g., 3/4-court sprints, arc runs). Distance: 600–800 m/week true sprint meters.[file:1][web:44][web:59]",
+          "plyo_contact_range": {
+            "min": 120,
+            "max": 160,
+            "unit": "contacts/week",
+            "note": "Within Youth 13-17 PRE_SEASON band (120–180). Mix of vertical jumps, lateral bounds, and COD landings; Tier 3 ≤40% of session contacts.[file:1][web:43][web:49]"
+          },
+          "sprint_meters_range": {
+            "min": 600,
+            "max": 800,
+            "unit": "m/week",
+            "note": "Lower half of PRE_SEASON band (600–1000). TRUE_SPRINT_METERS_ONLY at ≥90% Vmax.[file:1][web:44]"
+          },
+          "cns_per_day": {
+            "day_A": "HIGH",
+            "day_B": "MODERATE",
+            "day_A_description": "Vertical jump and court-speed focus (closeout sprints, 3/4-court runs).",
+            "day_B_description": "COD and decel patterns (shuffle shuttles, M-Drill) plus supportive strength.[web:48][web:53]"
+          },
+          "cns_weekly_intent": "High but ramped from off-season; respect court practice layering on top.",
+          "elastic_strategy": "Vertical and low-to-moderate intensity E3 plyos featured (e.g., counter-movement jumps, low-depth jumps 12–18 in) within Tier 3 ≤40% rule, reflecting high jump demands in basketball.[file:1][web:43][web:55]",
+          "assessment_gate_ref": "week_3",
+          "notes": "Bias VERT or COD based on secondary MDP: more vertical contacts for jumpers, more COD shuttles for guards/wings.[web:54]"
+        },
+        {
+          "meso_num": 2,
+          "meso_name": "GAME_LIKE_SPEED_AND_COD",
+          "weeks": [4, 5, 6],
+          "primary_goal": "Consolidate game-speed sprinting, COD, and vertical jump tolerance in patterns that mimic basketball demands, without overreaching.",
+          "fv_zones_allowed": ["Z4", "Z1", "Z8"],
+          "fv_zone_emphasis": {
+            "Z4": "Elastic/reactive court plyos (e.g., approach jumps, repeated jumps)",
+            "Z1": "Fast break and recovery sprints (full/3/4-court)",
+            "Z8": "Basketball-specific COD and agility (defensive slides, closeout-into-turn drills)"
+          },
+          "sprint_intent": ["FAST_BREAK_SPEED", "DEFENSIVE_RECOVERY"],
+          "sprint_intent_description": "Court-length or 3/4-court sprints and recovery runs at ≥90–100% Vmax, mimicking transition offense/defense. Distance: 800–1000 m/week true sprint meters.[file:1][web:44][web:57]",
+          "plyo_contact_range": {
+            "min": 140,
+            "max": 180,
+            "unit": "contacts/week",
+            "note": "Upper half of PRE_SEASON band. Emphasize vertical jumps (CMJ, approach jumps) and COD-related landings while keeping Tier 3 ≤40% per session.[file:1][web:43][web:49]"
+          },
+          "sprint_meters_range": {
+            "min": 800,
+            "max": 1000,
+            "unit": "m/week",
+            "note": "Top of PRE_SEASON band; appropriate given basketball’s high directional-change demands but still below weekly 2000 m cap.[file:1][web:59]"
+          },
+          "cns_per_day": {
+            "day_A": "HIGH",
+            "day_B": "MODERATE",
+            "day_A_description": "High-intensity court-speed and vertical plyo session (transition sprints + jumps).",
+            "day_B_description": "COD, decel and smaller volume vertical jumps, plus strength maintenance.[web:48][web:51]"
+          },
+          "cns_weekly_intent": "High but with built-in downshift options when team practice load spikes.",
+          "elastic_strategy": "E1–E3. Reactive vertical jumps (e.g., repeated jumps, short-contact hops) added cautiously, respecting Tier 3 ≤40%.[file:1][web:47][web:49]",
+          "secondary_mdp_bias_active": true,
+          "notes": "Integrate drills like lateral shuffle shuttles, quarter-arc runs, and single-leg broad to 90 for COD demands specific to basketball.[web:48][web:59]"
+        }
+      ],
+
+      "assessment_gates": {
+        "week_3": {
+          "gate_type": "MID_BLOCK_JUMP_AND_COD_TOLERANCE",
+          "assessments": ["vertical_jump_tolerance", "cod_quality", "cns_response"],
+          "purpose": "Ensure increase in vertical and COD work is tolerated before operating at upper PRE_SEASON volumes.",
+          "action_if_fail": "Hold weekly plyo at 120–140 and sprint meters at 600–800; limit E3 usage and rely more on E1–E2.",
+          "action_if_pass": "Allow ascent toward 140–180 plyos/week and 800–1000 m/week sprint in Meso 2."
+        },
+        "week_6": {
+          "gate_type": "EXIT_BLOCK_CHECK",
+          "assessments": ["sprint_tolerance", "vertical_jump_readiness", "cod_quality_under_fatigue", "fatigue_status"],
+          "purpose": "Decide readiness to enter in-season basketball block (Tier 1–3 depending on games/week).",
+          "action_if_fail": "Route to lower-load consolidation block or repeat Meso 2 at reduced volume.",
+          "action_if_pass": "Advance to SP_INSEASON_BBALL_13-17_6WK_TIER1_v1 or Tier2/3 variant based on fixture density."
+        }
+      },
+
+      "exit_state": {
+        "ready_for_block": "SP_INSEASON_BBALL_13-17_6WK_TIER1_v1",
+        "exit_conditions": [
+          "court_specific_sprint_volume_600_1000m_week_tolerated",
+          "vertical_jump_and_landing_quality_at_or_above_baseline",
+          "COD_mechanics_clean_in_basketball_patterns",
+          "no_problematic_pain_or_swelling_from_jump_and_COD_load"
+        ],
+        "exit_assessment": "End of Week 6. Athlete should feel bouncy, quick on the court, and not overly fatigued.",
+        "handoff_intent": "Provide a basketball-ready athlete to in-season maintenance block keyed to games/week."
+      },
+
+      "special_rules": {
+        "tier3_fraction_rule": "E3/E4 contacts ≤40% of plyo contacts per session. Vertical depth jumps and intense single-leg bounds must be counted carefully.[file:1]",
+        "no_makeup_rule": "No catch-up volume after missed sessions. Stay inside weekly bands.",
+        "calendar_shift_allowed": true,
+        "calendar_shift_rule": "Maintain 6-week structure but shift dates if needed; do not compress into <4 weeks without override.",
+        "max_sprint_sessions_per_week": 3,
+        "sprint_session_rule": "Maximum 3 true sprint exposures per week (≥90% Vmax), including any tracked team conditioning sessions."
+      },
+
+      "governance_status": "PASS",
+      "governance_checklist": [
+        "✅ Youth 13-17 ceilings respected (120 contacts/session, 240/week, 800m/session, 2000m/week).[file:1]",
+        "✅ PRE_SEASON operating ranges enforced (120–180 plyos, 600–1000m sprint/week).[file:1]",
+        "✅ Tier 3 contacts constrained to ≤40% per session, suitable for high-jump-demand basketball.[file:1][web:43][web:49]",
+        "✅ TRUE_SPRINT_METERS_ONLY enforced with intensity_percent_vmax for court sprints.[file:1][web:44]",
+        "✅ Meso and gates aligned to typical 6-week basketball pre-season structure.[web:44]"
+      ]
+    }
+  ],
+
+  "integration_notes": {
+    "enforcement_owner": {
+      "weekly_volume_ranges": "WEEKLY_ACCUMULATOR",
+      "sprint_intensity_validation": "EXERCISE_SELECTION_ALGORITHM",
+      "session_caps_and_zone_routing": "EXERCISE_SELECTION_ALGORITHM",
+      "gate_advance_logic": "GATE_ENGINE",
+      "block_selection": "BLOCK_SELECTOR",
+      "meso_progression": "GATE_ENGINE"
+    },
+    "block_selector_responsibility": "When service_line = SP_Performance, population = Youth_13_17, season_type = PRE_SEASON, and primary sport tag = BASKETBALL, prefer SP_PRESEASON_BBALL_13-17_6WK_v1 over generic multi-sport block.[file:1][file:2]",
+    "weekly_accumulator_responsibility": "Track plyo_contacts and sprint_meters vs Youth_13_17 PRE_SEASON band (120–180, 600–1000). Flag heavy jump weeks approaching upper band, given basketball’s already high in-game jump and COD counts.[file:1][web:59]",
+    "exercise_selection_algorithm_responsibility": "Favor basketball-relevant sprint and COD patterns (closeouts, shuffle shuttles, arc runs) and vertical plyos drawn from basketball literature.[web:43][web:48][web:55]",
+    "gate_engine_responsibility": "Use Week 3 and Week 6 gates to modulate vertical/COD load and decide readiness for in-season basketball blocks.",
+    "ai_playbook_reference": "Playbook should explain that this is the basketball-specific pre-season bridge: more jumps, more COD, and court-relevant sprinting within Youth 13-17 PRE_SEASON safety bands.",
+    "integration_sequence": "Block Selector → WEEKLY_ACCUMULATOR → EXERCISE_SELECTION_ALGORITHM → GATE_ENGINE."
+  }
+}
+{
+  "schema_id": "EFL_MESOMACRO_MANIFEST",
+  "manifest_version": "1.0.2",
+  "manifest_created": "2025-12-16",
+  "manifest_description": "In-season Tier 1 (high fixture) basketball-specific maintenance block for Youth 13-17, 6 weeks. Maintains strength, vertical jump, and COD with low extra load on top of games and practices, aligned to Youth 13-17 IN_SEASON_TIER_1 bands.",
+  "blocks": [
+    {
+      "block_id": "SP_INSEASON_BBALL_13-17_6WK_TIER1_v1",
+      "block_tags": ["SP", "IN_SEASON_TIER_1", "YOUTH_13_17", "BASKETBALL", "COURT", "2X_WEEK", "MAINTENANCE"],
+      "service_line": "SP_Performance",
+      "population_icp": "Youth_13_17_SP_Basketball",
+      "season": "In_Season",
+      "season_type": "IN_SEASON_TIER_1",
+      "mdp_primary": "COURT_ONLY",
+      "mdp_secondary_bias_required": true,
+      "mdp_secondary_bias_source_block": "SP_PRESEASON_BBALL_13-17_6WK_v1",
+      "mdp_secondary_bias_effective_week": 1,
+      "mdp_secondary_bias_options": ["VERT", "SPEED", "COD"],
+      "duration_weeks": 6,
+      "sessions_per_week": 2,
+      "total_sessions": 12,
+
+      "legality_check": {
+        "population_ceiling_band": "Band_2",
+        "population_ceiling_node": "C",
+        "max_e_node_allowed": "E3",
+        "plyo_contacts_cap_session": 120,
+        "plyo_contacts_cap_week": 240,
+        "cns_budget": "MODERATE",
+        "sprint_counting_standard": "TRUE_SPRINT_METERS_ONLY",
+        "requires_intensity_percent_vmax": true,
+        "required_governance": [
+          "Tier3_E3_E4_<=40PCT_SESSION_CONTACTS",
+          "SESSION_CEILING_NOT_TARGET",
+          "IN_SEASON_TIER_1_WEEKLY_RANGE_ENFORCED"
+        ],
+        "season_operating_ranges_ref": "Youth_13_17.IN_SEASON_TIER_1"
+      },
+
+      "macro_structure": [
+        {
+          "meso_num": 1,
+          "meso_name": "EARLY_SEASON_STABILIZE",
+          "weeks": [1, 2, 3],
+          "primary_goal": "Stabilize vertical jump, strength, and COD qualities built in pre-season while respecting heavy practice and game load.",
+          "fv_zones_allowed": ["Z3", "Z4", "Z5", "Z8"],
+          "fv_zone_emphasis": {
+            "Z3": "Low-volume speed–strength (short accelerations, light jumps)",
+            "Z4": "Minimal reactive plyos (sprinkles only)",
+            "Z5": "Strength maintenance (Band 1–2)",
+            "Z8": "Court agility (slides, closeouts) in low volume"
+          },
+          "sprint_intent": ["COURT_SPEED_TOUCHES"],
+          "sprint_intent_description": "Short court sprints (e.g., 3/4 court, closeout sprints) at ≥90% Vmax in low volume: 400–600 m/week true sprint meters, counting only high-intensity reps.[file:1][web:69]",
+          "plyo_contact_range": {
+            "min": 60,
+            "max": 80,
+            "unit": "contacts/week",
+            "note": "Lower half of IN_SEASON_TIER_1 band (60–100). Most jump/COD load comes from practices and games; training tops up qualities.[file:1][web:63]"
+          },
+          "sprint_meters_range": {
+            "min": 400,
+            "max": 600,
+            "unit": "m/week",
+            "note": "Lower-to-mid IN_SEASON_TIER_1 band (400–800). TRUE_SPRINT_METERS_ONLY ≥90% Vmax.[file:1][web:61]"
+          },
+          "cns_per_day": {
+            "day_A": "MODERATE",
+            "day_B": "LOW",
+            "day_A_description": "Brief speed/jump micro-dose + strength maintenance (full-body, 20–30 min style). [web:68][web:72]",
+            "day_B_description": "Tissue robustness, mobility, and light COD patterns."
+          },
+          "cns_weekly_intent": "Moderate; avoid competing with practice for CNS capacity.",
+          "elastic_strategy": "Primarily E1–E2 (low/moderate jumps). E3 only rarely and never near games, respecting ≤40% Tier 3 fraction.[file:1][web:63]",
+          "notes": "Place higher-CNS day furthest from games when possible; follow in-season best practice of 1–2 short strength sessions/week.[web:64][web:68]"
+        },
+        {
+          "meso_num": 2,
+          "meso_name": "MID_SEASON_REINFORCE",
+          "weeks": [4, 5, 6],
+          "primary_goal": "Reinforce key explosive and COD qualities mid-season without accumulating fatigue.",
+          "fv_zones_allowed": ["Z3", "Z4", "Z5", "Z8"],
+          "fv_zone_emphasis": {
+            "Z3": "Speed–strength and quick accelerations (short court bursts)",
+            "Z4": "Elastic/reactive jump sprinkles (CMJ, low-dose depth jumps)",
+            "Z5": "Strength/endurance maintenance in 4–8 rep ranges",
+            "Z8": "Defensive slides, closeouts, and small-sided COD patterns"
+          },
+          "sprint_intent": ["FAST_BREAK_SPEED_MAINTENANCE"],
+          "sprint_intent_description": "Occasional full or 3/4-court sprints at ≥90–100% Vmax in very controlled volume: 400–800 m/week true sprint meters, depending on fixture density.[file:1][web:69]",
+          "plyo_contact_range": {
+            "min": 60,
+            "max": 100,
+            "unit": "contacts/week",
+            "note": "Full IN_SEASON_TIER_1 band. Adjust toward 60 in heavy game weeks, toward 100 in lighter weeks.[file:1][web:61]"
+          },
+          "sprint_meters_range": {
+            "min": 400,
+            "max": 800,
+            "unit": "m/week",
+            "note": "Full IN_SEASON_TIER_1 band (400–800). Include tracked high-intensity sprint components from practice if available.[file:1][web:69]"
+          },
+          "cns_per_day": {
+            "day_A": "MODERATE",
+            "day_B": "LOW",
+            "day_A_description": "Short performance-focused session (jumps + strength) 20–30 min, 1–2x/week model.[web:66][web:68]",
+            "day_B_description": "Durability and coordination; can be dropped in very heavy weeks."
+          },
+          "cns_weekly_intent": "Moderate; may trend down if travel or fixture intensity increases.",
+          "elastic_strategy": "Maintain vertical and COD jump qualities with small, well-timed doses. Depth jumps or E3 reserved for very light weeks and never near back-to-back games.[file:1][web:63]",
+          "secondary_mdp_bias_active": true,
+          "notes": "VERT bias = slightly more jump maintenance; SPEED bias = slightly more court sprint touches; COD bias = slightly more slide/closeout work.[web:54]"
+        }
+      ],
+
+      "assessment_gates": {
+        "week_3": {
+          "gate_type": "MID_BLOCK_HEALTH_AND_PERFORMANCE_CHECK",
+          "assessments": ["pain_status", "fatigue_status", "jump_trend", "subjective_freshness"],
+          "purpose": "Ensure added training load is not driving in-season fatigue or pain.",
+          "action_if_fail": "Drop to bottom of bands (60 plyos, 400m sprint), remove E3, and prioritize strength maintenance + mobility.",
+          "action_if_pass": "Maintain or slightly adjust within bands based on practice/game load."
+        },
+        "week_6": {
+          "gate_type": "BLOCK_EXIT_CHECK",
+          "assessments": ["vertical_jump_maintenance", "speed_quality", "injury_status", "fatigue_status"],
+          "purpose": "Decide whether to repeat block, downshift load, or route toward post-season.",
+          "action_if_fail": "Shift to lower-load in-season or start post-season restore block early.",
+          "action_if_pass": "Repeat or progress to another 6-week in-season block depending on calendar; later route to SP_POSTSEASON_MULTI_13-17_6WK_RESTORE_v1."
+        }
+      },
+
+      "exit_state": {
+        "ready_for_block": "SP_POSTSEASON_MULTI_13-17_6WK_RESTORE_v1",
+        "exit_conditions": [
+          "key_qualities_speed_and_vertical_jump_maintained",
+          "no_accumulating_pain_or_overuse_flags",
+          "fatigue_state_compatible_with_end_of_season_demands"
+        ],
+        "exit_assessment": "End of Week 6 or at logical season checkpoint. Focus is on sustaining, not peaking.",
+        "handoff_intent": "Transition into restoration block or continue in-season maintenance depending on season length."
+      },
+
+      "special_rules": {
+        "fixture_dependency_rule": "If games_per_week ≥3, always use lower ends of plyo and sprint ranges and remove Tier 3 jumps.[file:1][web:69]",
+        "no_makeup_rule": "No extra jumps or sprints to make up missed sessions.",
+        "calendar_shift_allowed": true,
+        "calendar_shift_rule": "Block can be repeated or shortened to match season segments, but weekly bands must be respected.",
+        "max_sprint_sessions_per_week": 3,
+        "sprint_session_rule": "Maximum 3 true sprint exposures/week (practice + training), in line with Youth 13-17 sprint session caps.[file:1]"
+      },
+
+      "governance_status": "PASS",
+      "governance_checklist": [
+        "✅ Youth 13-17 ceilings respected (120 contacts/session, 240/week, 800m/session, 2000m/week).[file:1]",
+        "✅ IN_SEASON_TIER_1 bands enforced (60–100 plyos, 400–800m sprint/week).[file:1]",
+        "✅ Tier 3 (E3/E4) capped at ≤40% of session contacts and minimized in high-fixture weeks.[file:1][web:49]",
+        "✅ TRUE_SPRINT_METERS_ONLY used to integrate basketball speed work without overcounting.[file:1][web:61]",
+        "✅ Structure aligns with evidence supporting low-frequency, mixed-type plyos in-season for youth basketball.[web:49][web:63]"
+      ]
+    }
+  ],
+
+  "integration_notes": {
+    "enforcement_owner": {
+      "weekly_volume_ranges": "WEEKLY_ACCUMULATOR",
+      "sprint_intensity_validation": "EXERCISE_SELECTION_ALGORITHM",
+      "session_caps_and_zone_routing": "EXERCISE_SELECTION_ALGORITHM",
+      "gate_advance_logic": "GATE_ENGINE",
+      "block_selection": "BLOCK_SELECTOR",
+      "meso_progression": "GATE_ENGINE"
+    },
+    "block_selector_responsibility": "When service_line = SP_Performance, population = Youth_13_17, season_type = IN_SEASON_TIER_1, and sport = BASKETBALL, select SP_INSEASON_BBALL_13-17_6WK_TIER1_v1 as default in-season maintenance block.[file:1][file:2]",
+    "weekly_accumulator_responsibility": "Track plyo_contacts and sprint_meters vs IN_SEASON_TIER_1 band and flag any weeks trending toward upper band in heavy fixture periods.[file:1][web:69]",
+    "exercise_selection_algorithm_responsibility": "Favor basketball-relevant jumps, COD, and strength work in short, sustainable sessions, per in-season guidelines.[web:68][web:72]",
+    "gate_engine_responsibility": "Use Week 3 and Week 6 gates to modulate load and determine whether to maintain, repeat, or off-ramp into post-season.",
+    "ai_playbook_reference": "Playbook should frame this as the default in-season basketball maintenance plan: small, smart doses that protect freshness while maintaining explosiveness.",
+    "integration_sequence": "Block Selector → WEEKLY_ACCUMULATOR → EXERCISE_SELECTION_ALGORITHM → GATE_ENGINE."
+  }
+}
+{
+  "schema_id": "EFL_MESOMACRO_MANIFEST",
+  "manifest_version": "1.0.2",
+  "manifest_created": "2025-12-16",
+  "manifest_description": "Post-season basketball-specific restoration block for Youth 13-17, 4 weeks. Downshifts jump and COD load after the season, emphasizes recovery, movement quality, and low-CNS court work within Youth 13-17 POST_SEASON bands.",
+  "blocks": [
+    {
+      "block_id": "SP_POSTSEASON_BBALL_13-17_4WK_RESTORE_v1",
+      "block_tags": ["SP", "POST_SEASON", "YOUTH_13_17", "BASKETBALL", "COURT", "2X_WEEK", "RESTORATION"],
+      "service_line": "SP_Performance",
+      "population_icp": "Youth_13_17_SP_Basketball",
+      "season": "Post_Season",
+      "season_type": "POST_SEASON",
+      "mdp_primary": "COURT_ONLY",
+      "mdp_secondary_bias_required": false,
+      "duration_weeks": 4,
+      "sessions_per_week": 2,
+      "total_sessions": 8,
+
+      "legality_check": {
+        "population_ceiling_band": "Band_2",
+        "population_ceiling_node": "C",
+        "max_e_node_allowed": "E2",
+        "plyo_contacts_cap_session": 120,
+        "plyo_contacts_cap_week": 240,
+        "cns_budget": "LOW",
+        "sprint_counting_standard": "TRUE_SPRINT_METERS_ONLY",
+        "requires_intensity_percent_vmax": true,
+        "required_governance": [
+          "Tier3_E3_E4_MINIMIZED_POSTSEASON",
+          "SESSION_CEILING_NOT_TARGET",
+          "POST_SEASON_WEEKLY_RANGE_ENFORCED"
+        ],
+        "season_operating_ranges_ref": "Youth_13_17.POST_SEASON"
+      },
+
+      "macro_structure": [
+        {
+          "meso_num": 1,
+          "meso_name": "BASKETBALL_DELOAD_AND_RESET",
+          "weeks": [1, 2, 3, 4],
+          "primary_goal": "Reduce cumulative jump and COD stress from the season, restore tissues, and tidy movement quality with low-CNS work.",
+          "fv_zones_allowed": ["Z5", "Z6", "Z8"],
+          "fv_zone_emphasis": {
+            "Z5": "Strength-endurance/robustness (Band 1–2) with low joint stress",
+            "Z6": "Hypertrophy / capacity only for weak links where needed",
+            "Z8": "Mobility, coordination, and light court agility"
+          },
+          "sprint_intent": ["LIGHT_COURT_MOVEMENT"],
+          "sprint_intent_description": "Low-intensity on-court movement (sub-max shuttles, jogging) with very limited ≥90% Vmax sprints. Only a small number of high-effort reps count as sprint meters.[file:1][web:80][web:83]",
+          "plyo_contact_range": {
+            "min": 60,
+            "max": 100,
+            "unit": "contacts/week",
+            "note": "Within Youth 13-17 POST_SEASON band (60–120). Focus on low-intensity vertical and lateral jumps; Tier 3 work effectively removed.[file:1][web:84]"
+          },
+          "sprint_meters_range": {
+            "min": 300,
+            "max": 600,
+            "unit": "m/week",
+            "note": "Full POST_SEASON band (300–600). Keep high-intensity sprint work minimal; most movement is sub-max recovery work.[file:1][web:77][web:79]"
+          },
+          "cns_per_day": {
+            "day_A": "LOW",
+            "day_B": "LOW",
+            "day_A_description": "Strength robustness and light mobility + low-amplitude jumps.",
+            "day_B_description": "Active recovery on court (light ball handling, movement prep, mobility)."
+          },
+          "cns_weekly_intent": "Low CNS; recovery and reset are primary. No peaking or heavy loading.",
+          "elastic_strategy": "E1–E2 only; no planned E3/E4. Emphasize soft landings, controlled decel, and avoiding excessive vertical volume after a long season.[file:1][web:81]",
+          "notes": "Supports post-season priorities of rest, active recovery, and gradual transition into off-season strength work.[web:75][web:79][web:84]"
+        }
+      ],
+
+      "assessment_gates": {
+        "week_2": {
+          "gate_type": "MID_BLOCK_RECOVERY_CHECK",
+          "assessments": ["pain_status", "joint_irritation", "subjective_freshness"],
+          "purpose": "Verify that post-season block is reducing soreness and fatigue rather than adding stress.",
+          "action_if_fail": "Lower to minimum bands (60 plyos, 300m sprint), remove all E2, and bias sessions to mobility and very light strength."
+        },
+        "week_4": {
+          "gate_type": "BLOCK_EXIT_CHECK",
+          "assessments": ["pain_status", "fatigue_status", "motivation_status"],
+          "purpose": "Determine readiness to begin off-season development or whether additional restoration is needed.",
+          "action_if_fail": "Repeat or extend restoration block or direct to individualized rehab if pain or fatigue persist.",
+          "action_if_pass": "Advance to SP_OFFSEASON_MULTI_13-17_12WK_DEV_v1 or basketball-specific off-season block depending on calendar."
+        }
+      },
+
+      "exit_state": {
+        "ready_for_block": "SP_OFFSEASON_MULTI_13-17_12WK_DEV_v1",
+        "exit_conditions": [
+          "season_related_pain_and_soreness_reduced_vs_end_of_season",
+          "no_significant_swelling_or_joint_reactivity",
+          "athlete_reports_feeling_recovered_and_motivated",
+          "movement_quality_not_compromised_by_fatigue"
+        ],
+        "exit_assessment": "End of Week 4. Athlete should feel physically and mentally fresher than at season end.",
+        "handoff_intent": "Provide a clean, recovered starting point for off-season strength and power development."
+      },
+
+      "special_rules": {
+        "rest_priority_rule": "Ensure at least 2 true rest days per week from organized basketball activity during this block, aligning with youth recovery guidance.[web:79][web:88]",
+        "tier3_minimize_rule": "E3/E4 plyos should be absent; any accidental Tier 3 exposure (e.g., pick-up games) should reduce training load that week.[file:1]",
+        "no_testing_rule": "No max testing (e.g., 1RM, max vertical) in post-season. Save formal testing for later phases.[web:84][web:83]",
+        "no_makeup_rule": "Do not make up missed sessions with extra volume. Recovery intent takes precedence.",
+        "calendar_shift_allowed": true,
+        "calendar_shift_rule": "Post-season window 3–6 weeks; this block covers 4 weeks and can be repeated if season was long or athlete is very fatigued.[web:84]"
+      },
+
+      "governance_status": "PASS",
+      "governance_checklist": [
+        "✅ Youth 13-17 POST_SEASON bands respected (60–120 plyos, 300–600m sprint/week).[file:1]",
+        "✅ CNS budget LOW, consistent with post-season recovery goals.[web:84][web:81]",
+        "✅ Tier 3 effectively removed to offload jump/COD stress after a season.[file:1]",
+        "✅ Emphasis on rest, active recovery, and low-intensity work matches youth basketball recovery best practices.[web:75][web:79][web:88]"
+      ]
+    }
+  ],
+
+  "integration_notes": {
+    "enforcement_owner": {
+      "weekly_volume_ranges": "WEEKLY_ACCUMULATOR",
+      "sprint_intensity_validation": "EXERCISE_SELECTION_ALGORITHM",
+      "session_caps_and_zone_routing": "EXERCISE_SELECTION_ALGORITHM",
+      "gate_advance_logic": "GATE_ENGINE",
+      "block_selection": "BLOCK_SELECTOR",
+      "meso_progression": "GATE_ENGINE"
+    },
+    "block_selector_responsibility": "When service_line = SP_Performance, population = Youth_13_17, sport = BASKETBALL, and season_type = POST_SEASON, select SP_POSTSEASON_BBALL_13-17_4WK_RESTORE_v1 as default unless RED flags require medical/rehab blocks.[file:1][file:2]",
+    "weekly_accumulator_responsibility": "Ensure plyo_contacts and sprint_meters remain in POST_SEASON band and trend down relative to in-season loads.[file:1][web:84]",
+    "exercise_selection_algorithm_responsibility": "Favor low-intensity court movement, mobility, and light strength; automatically avoid high-intensity jumps and sprints in this phase.[web:75][web:81]",
+    "gate_engine_responsibility": "Use Week 2 and Week 4 gates to confirm that this block is actually restorative before allowing transition to higher loads.",
+    "ai_playbook_reference": "Playbook should present this as the decompression phase for youth basketball—less pounding, more recovery and movement quality before starting off-season work.[web:84][web:81]",
+    "integration_sequence": "Block Selector → WEEKLY_ACCUMULATOR → EXERCISE_SELECTION_ALGORITHM → GATE_ENGINE."
+  }
+}
+{
+  "schema_id": "EFL_MESOMACRO_MANIFEST",
+  "manifest_version": "1.0.2",
+  "manifest_created": "2025-12-16",
+  "manifest_description": "Off-season basketball-specific development block for Youth 13-17, 8 weeks. Emphasizes total-body strength, vertical power, and court speed within Youth 13-17 OFF_SEASON bands.",
+  "blocks": [
+    {
+      "block_id": "SP_OFFSEASON_BBALL_13-17_8WK_DEV_v1",
+      "block_tags": ["SP", "OFF_SEASON", "YOUTH_13_17", "BASKETBALL", "COURT", "2X_WEEK", "DEVELOPMENT"],
+      "service_line": "SP_Performance",
+      "population_icp": "Youth_13_17_SP_Basketball",
+      "season": "Off_Season",
+      "season_type": "OFF_SEASON",
+      "mdp_primary": "COURT_AND_WEIGHTROOM",
+      "mdp_secondary_bias_required": true,
+      "mdp_secondary_bias_source_block": "SP_POSTSEASON_BBALL_13-17_4WK_RESTORE_v1",
+      "mdp_secondary_bias_effective_week": 1,
+      "mdp_secondary_bias_options": ["VERT", "SPEED", "COD"],
+      "duration_weeks": 8,
+      "sessions_per_week": 2,
+      "total_sessions": 16,
+
+      "legality_check": {
+        "population_ceiling_band": "Band_3",
+        "population_ceiling_node": "C",
+        "max_e_node_allowed": "E3",
+        "plyo_contacts_cap_session": 120,
+        "plyo_contacts_cap_week": 240,
+        "cns_budget": "HIGH",
+        "sprint_counting_standard": "TRUE_SPRINT_METERS_ONLY",
+        "requires_intensity_percent_vmax": true,
+        "required_governance": [
+          "Tier3_E3_E4_<=40PCT_SESSION_CONTACTS",
+          "SESSION_CEILING_NOT_TARGET",
+          "OFF_SEASON_WEEKLY_RANGE_ENFORCED"
+        ],
+        "season_operating_ranges_ref": "Youth_13_17.OFF_SEASON"
+      },
+
+      "macro_structure": [
+        {
+          "meso_num": 1,
+          "meso_name": "STRENGTH_AND_VERT_FOUNDATION",
+          "weeks": [1, 2, 3, 4],
+          "primary_goal": "Rebuild and extend strength and vertical jump foundations specific to basketball after a restore phase.",
+          "fv_zones_allowed": ["Z5", "Z6", "Z3"],
+          "fv_zone_emphasis": {
+            "Z5": "Full-body strength (squat/hinge/push/pull) at Band 1–2",
+            "Z6": "Hypertrophy/accessory work for weak links",
+            "Z3": "Intro power (box jumps, countermovement jumps, short accelerations)"
+          },
+          "sprint_intent": ["COURT_ACCEL_FOUNDATION"],
+          "sprint_intent_description": "Short accelerations (5–20m) at ≥90% Vmax from basketball starts (half-court, 3/4-court). Distance: 800–900 m/week true sprint meters.[file:1][web:82][web:98]",
+          "plyo_contact_range": {
+            "min": 140,
+            "max": 160,
+            "unit": "contacts/week",
+            "note": "Lower half of OFF_SEASON band (140–200). Bias vertical and low–moderate intensity E2, with limited E3.[file:1][web:99]"
+          },
+          "sprint_meters_range": {
+            "min": 800,
+            "max": 900,
+            "unit": "m/week",
+            "note": "Inside OFF_SEASON band (800–1200). TRUE_SPRINT_METERS_ONLY ≥90% Vmax.[file:1][web:94]"
+          },
+          "cns_per_day": {
+            "day_A": "HIGH",
+            "day_B": "MODERATE",
+            "day_A_description": "Weightroom strength + low-dose plyos; main off-season strength day as per HS basketball guidelines.[web:82][web:104]",
+            "day_B_description": "Court-based speed/COD and lighter strength/accessory work."
+          },
+          "cns_weekly_intent": "High but controlled; build capacity without max peaking.",
+          "elastic_strategy": "E1–E2 primary (box jumps, CMJ, low-amplitude bounds); E3 (low depth jumps, single-leg bounds) only for advanced athletes within ≤40% Tier 3 rule.[file:1][web:99]",
+          "notes": "Aligns with advice to push strength/power in off-season but progress gradually and respect technique.[web:66][web:95]"
+        },
+        {
+          "meso_num": 2,
+          "meso_name": "POWER_AND_COURT_SPEED",
+          "weeks": [5, 6, 7, 8],
+          "primary_goal": "Increase power and court speed qualities (vertical, first step, transition speed) while staying in OFF_SEASON bands.",
+          "fv_zones_allowed": ["Z3", "Z4", "Z1"],
+          "fv_zone_emphasis": {
+            "Z3": "Speed–strength (med ball throws, jumps, resisted sprints)",
+            "Z4": "Elastic/reactive jumps (repeated CMJ, short depth jumps)",
+            "Z1": "Max-V court sprints (3/4 and full court)"
+          },
+          "sprint_intent": ["MAX_V_COURT_SPEED"],
+          "sprint_intent_description": "3/4 and full-court sprints, transition runs, and curved sprints at ≥90–100% Vmax. Distance: 900–1200 m/week true sprint meters.[file:1][web:82][web:94]",
+          "plyo_contact_range": {
+            "min": 160,
+            "max": 200,
+            "unit": "contacts/week",
+            "note": "Upper OFF_SEASON band; vertical and COD jumps. Tier 3 ≤40% of session contacts.[file:1][web:99]"
+          },
+          "sprint_meters_range": {
+            "min": 900,
+            "max": 1200,
+            "unit": "m/week",
+            "note": "Top of OFF_SEASON band; still below 2000 m weekly ceiling.[file:1][web:94]"
+          },
+          "cns_per_day": {
+            "day_A": "HIGH",
+            "day_B": "HIGH",
+            "day_A_description": "Strength + power emphasis (e.g., trap bar, split squats, CMJ, med ball).",
+            "day_B_description": "Court speed and COD emphasis (transition sprints, COD drills) + lighter strength.[web:82][web:96]"
+          },
+          "cns_weekly_intent": "High; main output-building meso for basketball off-season.",
+          "elastic_strategy": "More E2/E3 within Tier 3 ≤40% rule. Avoid E4 except in very advanced cases with excellent readiness.[file:1][web:99]",
+          "notes": "Reflects off-season suggestion to push volume and intensity more than in-season while allowing rest days between high-CNS sessions.[web:66][web:104]"
+        }
+      ],
+
+      "assessment_gates": {
+        "week_4": {
+          "gate_type": "MESO1_EXIT_CHECK",
+          "assessments": ["movement_quality", "strength_progress_trend", "jump_tolerance", "pain_status"],
+          "purpose": "Ensure foundational off-season volume is well tolerated before power-heavy meso.",
+          "action_if_fail": "Extend Meso 1 by 2–4 weeks at same or slightly reduced volume; delay high-power Meso 2."
+        },
+        "week_8": {
+          "gate_type": "BLOCK_EXIT_CHECK",
+          "assessments": ["vertical_jump_trend", "court_speed_feel", "fatigue_status"],
+          "purpose": "Decide readiness to shift into basketball pre-season bridge.",
+          "action_if_fail": "Route to consolidation or repeat part of Meso 2 with reduced volume before pre-season.",
+          "action_if_pass": "Advance to SP_PRESEASON_BBALL_13-17_6WK_v1."
+        }
+      },
+
+      "exit_state": {
+        "ready_for_block": "SP_PRESEASON_BBALL_13-17_6WK_v1",
+        "exit_conditions": [
+          "off_season_strength_and_power_progress_documented",
+          "vertical_jump_and_speed_markers_stable_or_improving",
+          "no_significant_overuse_pain_or_swelling",
+          "fatigue_state_compatible_with_preseason_bridge"
+        ],
+        "exit_assessment": "End of Week 8. Athlete should feel stronger, more explosive, and not overly fatigued.",
+        "handoff_intent": "Deliver a robust, powerful basketball athlete into the pre-season court-speed block."
+      },
+
+      "special_rules": {
+        "tier3_fraction_rule": "E3/E4 contacts ≤40% of plyo contacts per session; most weeks will sit under this.[file:1]",
+        "no_makeup_rule": "No extra jumps or sprints to compensate missed sessions.",
+        "calendar_shift_allowed": true,
+        "calendar_shift_rule": "Off-season window 8–12 weeks; this block can be repeated or extended to cover that range. Do not cram volume into fewer weeks.",
+        "max_sprint_sessions_per_week": 3,
+        "sprint_session_rule": "Maximum 3 true sprint exposures/week, including any extra team or open-gym speed work.[file:1]"
+      },
+
+      "governance_status": "PASS",
+      "governance_checklist": [
+        "✅ Youth 13-17 absolute ceilings respected (120 contacts/session, 240/week, 800m/session, 2000m/week).[file:1]",
+        "✅ OFF_SEASON bands enforced (140–200 plyos/week, 800–1200m sprint/week).[file:1]",
+        "✅ Tier 3 constrained to ≤40% of contacts; E4 effectively optional.[file:1][web:99]",
+        "✅ TRUE_SPRINT_METERS_ONLY with intensity_percent_vmax enforced.[file:1][web:94]",
+        "✅ Structure aligns with off-season basketball S&C principles: higher strength/power volume, full-body focus, 2–3 heavy days/week total.[web:82][web:104]"
+      ]
+    }
+  ],
+
+  "integration_notes": {
+    "enforcement_owner": {
+      "weekly_volume_ranges": "WEEKLY_ACCUMULATOR",
+      "sprint_intensity_validation": "EXERCISE_SELECTION_ALGORITHM",
+      "session_caps_and_zone_routing": "EXERCISE_SELECTION_ALGORITHM",
+      "gate_advance_logic": "GATE_ENGINE",
+      "block_selection": "BLOCK_SELECTOR",
+      "meso_progression": "GATE_ENGINE"
+    },
+    "block_selector_responsibility": "When service_line = SP_Performance, population = Youth_13_17, sport = BASKETBALL, and season_type = OFF_SEASON, select SP_OFFSEASON_BBALL_13-17_8WK_DEV_v1 as default off-season development block.[file:1][file:2]",
+    "weekly_accumulator_responsibility": "Track plyo_contacts and sprint_meters vs Youth_13_17 OFF_SEASON bands; flag if consistently near upper edge.[file:1]",
+    "exercise_selection_algorithm_responsibility": "Implement full-body strength + basketball-relevant jumps and sprints per off-season guidelines.[web:82][web:66]",
+    "gate_engine_responsibility": "Use Week 4 and Week 8 gates to prevent overreaching and ensure readiness for pre-season.",
+    "ai_playbook_reference": "Playbook should present this as the main off-season engine for 13–17 basketball players, coordinated with skill work and open-gym play.[web:11][web:82]",
+    "integration_sequence": "Block Selector → WEEKLY_ACCUMULATOR → EXERCISE_SELECTION_ALGORITHM → GATE_ENGINE."
+  }
+}
+{
+  "schema_id": "EFL_MESOMACRO_MANIFEST",
+  "manifest_version": "1.0.2",
+  "manifest_created": "2025-12-16",
+  "manifest_description": "In-season Tier 2 (moderate fixture) basketball-specific block for Youth 13-17, 6 weeks. Maintains and develops strength, vertical power, and COD with more training headroom than Tier 1, aligned to Youth 13-17 IN_SEASON_TIER_2 bands.",
+  "blocks": [
+    {
+      "block_id": "SP_INSEASON_BBALL_13-17_6WK_TIER2_v1",
+      "block_tags": ["SP", "IN_SEASON_TIER_2", "YOUTH_13_17", "BASKETBALL", "COURT", "2X_WEEK", "DEVELOPMENT_MAINT"],
+      "service_line": "SP_Performance",
+      "population_icp": "Youth_13_17_SP_Basketball",
+      "season": "In_Season",
+      "season_type": "IN_SEASON_TIER_2",
+      "mdp_primary": "COURT_AND_WEIGHTROOM",
+      "mdp_secondary_bias_required": true,
+      "mdp_secondary_bias_source_block": "SP_PRESEASON_BBALL_13-17_6WK_v1",
+      "mdp_secondary_bias_effective_week": 1,
+      "mdp_secondary_bias_options": ["VERT", "SPEED", "COD"],
+      "duration_weeks": 6,
+      "sessions_per_week": 2,
+      "total_sessions": 12,
+
+      "legality_check": {
+        "population_ceiling_band": "Band_3",
+        "population_ceiling_node": "C",
+        "max_e_node_allowed": "E3",
+        "plyo_contacts_cap_session": 120,
+        "plyo_contacts_cap_week": 240,
+        "cns_budget": "HIGH",
+        "sprint_counting_standard": "TRUE_SPRINT_METERS_ONLY",
+        "requires_intensity_percent_vmax": true,
+        "required_governance": [
+          "Tier3_E3_E4_<=40PCT_SESSION_CONTACTS",
+          "SESSION_CEILING_NOT_TARGET",
+          "IN_SEASON_TIER_2_WEEKLY_RANGE_ENFORCED"
+        ],
+        "season_operating_ranges_ref": "Youth_13_17.IN_SEASON_TIER_2"
+      },
+
+      "macro_structure": [
+        {
+          "meso_num": 1,
+          "meso_name": "INSEASON_BUILD_MAINTAIN",
+          "weeks": [1, 2, 3],
+          "primary_goal": "With 1–2 games/week, maintain and slightly build strength, vertical jump, and COD beyond Tier 1 levels while managing fatigue.",
+          "fv_zones_allowed": ["Z3", "Z4", "Z5", "Z8"],
+          "fv_zone_emphasis": {
+            "Z3": "Speed–strength (approach jumps, short accelerations)",
+            "Z4": "Elastic/reactive jumps in low–moderate volume",
+            "Z5": "Strength maintenance (Band 1–3 in low reps)",
+            "Z8": "Basketball-relevant COD and footwork"
+          },
+          "sprint_intent": ["COURT_SPEED_MAINT_BUILD"],
+          "sprint_intent_description": "3/4-court and half-court sprints at ≥90–100% Vmax, usually 600–800 m/week true sprint meters (practice + training combined).[file:1][web:69][web:119]",
+          "plyo_contact_range": {
+            "min": 120,
+            "max": 150,
+            "unit": "contacts/week",
+            "note": "Within lower-middle IN_SEASON_TIER_2 band (120–180). Balance between training and game jumps.[file:1][web:63]"
+          },
+          "sprint_meters_range": {
+            "min": 600,
+            "max": 800,
+            "unit": "m/week",
+            "note": "Lower portion of IN_SEASON_TIER_2 band (600–1000). TRUE_SPRINT_METERS_ONLY ≥90% Vmax.[file:1][web:111]"
+          },
+          "cns_per_day": {
+            "day_A": "HIGH",
+            "day_B": "MODERATE",
+            "day_A_description": "Short but intense strength + jump session (e.g., 3–5 sets of low-rep main lifts, low-volume jumps).[web:68][web:110]",
+            "day_B_description": "Court speed/COD emphasis with lighter strength/accessory work."
+          },
+          "cns_weekly_intent": "High but compatible with 1–2 games/week; follow low-volume, relatively high-intensity in-season strength principles.[web:68][web:110]",
+          "elastic_strategy": "E1–E3, with Tier 3 ≤40% of contacts. Emphasize CMJ, approach jumps, low-depth jumps; avoid very high shock loads close to games.[file:1][web:63][web:65]",
+          "notes": "Place Day A strength/jump session furthest from games; Day B closer to mid-week practice or lighter fixture days.[web:69][web:110]"
+        },
+        {
+          "meso_num": 2,
+          "meso_name": "INSEASON_REINFORCE_AND_PROTECT",
+          "weeks": [4, 5, 6],
+          "primary_goal": "Reinforce gains mid-season while protecting freshness as games accumulate.",
+          "fv_zones_allowed": ["Z3", "Z4", "Z5", "Z8"],
+          "fv_zone_emphasis": {
+            "Z3": "Quickness and low-volume speed–strength",
+            "Z4": "Reactive jumps in very targeted amounts",
+            "Z5": "Low-volume heavy sets to prevent strength loss",
+            "Z8": "Defensive slides, closeouts, and small-sided COD"
+          },
+          "sprint_intent": ["FAST_BREAK_AND_RECOVERY_MAINT"],
+          "sprint_intent_description": "Game-speed court sprints (transition, recovery) in 600–1000 m/week true sprint meters, scaled to games/week and practice intensity.[file:1][web:69]",
+          "plyo_contact_range": {
+            "min": 120,
+            "max": 180,
+            "unit": "contacts/week",
+            "note": "Full IN_SEASON_TIER_2 band. Use lower end in busy weeks and upper end when schedule allows.[file:1][web:61]"
+          },
+          "sprint_meters_range": {
+            "min": 600,
+            "max": 1000,
+            "unit": "m/week",
+            "note": "Full IN_SEASON_TIER_2 band (600–1000). Include tracked high-intensity sprint segments from practices when available.[file:1][web:113]"
+          },
+          "cns_per_day": {
+            "day_A": "HIGH",
+            "day_B": "LOW",
+            "day_A_description": "Heavier but low-volume strength + key jump patterns (e.g., 3–4x2–3 reps).",
+            "day_B_description": "Primarily movement quality, robustness, and light COD; can be dropped in heavy weeks.[web:68][web:110]"
+          },
+          "cns_weekly_intent": "Moderate-to-high early in meso; can be dialed back toward moderate if fatigue indicators rise.",
+          "elastic_strategy": "Maintain vertical/COD jump qualities with small, high-quality doses. Tier 3 reserved for weeks with clear readiness and lighter fixtures.[file:1][web:63][web:65]",
+          "secondary_mdp_bias_active": true,
+          "notes": "VERT bias = more vertical jump emphasis; SPEED bias = slightly more sprint touches; COD bias = more shuttles/slides.[web:70][web:96]"
+        }
+      ],
+
+      "assessment_gates": {
+        "week_3": {
+          "gate_type": "MID_BLOCK_LOAD_TOLERANCE",
+          "assessments": ["pain_status", "fatigue_status", "jump_trend", "practice_load"],
+          "purpose": "Verify that increased in-season training load (vs Tier 1) is tolerated alongside 1–2 games/week.",
+          "action_if_fail": "Drop to IN_SEASON_TIER_1 ranges (60–100 plyos, 400–800m sprint) and/or route to SP_INSEASON_BBALL_13-17_6WK_TIER1_v1.",
+          "action_if_pass": "Maintain or fine-tune within Tier 2 bands."
+        },
+        "week_6": {
+          "gate_type": "BLOCK_EXIT_CHECK",
+          "assessments": ["strength_maintenance", "vertical_jump_maintenance", "speed_quality", "fatigue_status"],
+          "purpose": "Decide whether to repeat Tier 2 block, downshift to Tier 1, or move toward post-season restore.",
+          "action_if_fail": "Downshift to Tier 1 or go early to SP_POSTSEASON_BBALL_13-17_4WK_RESTORE_v1.",
+          "action_if_pass": "Repeat Tier 2 phase if season continues or proceed to Tier 1/post-season according to calendar."
+        }
+      },
+
+      "exit_state": {
+        "ready_for_block": "SP_POSTSEASON_BBALL_13-17_4WK_RESTORE_v1",
+        "exit_conditions": [
+          "key_strength_and_power_qualities_maintained",
+          "no_progressive_increase_in_overuse_pain",
+          "fatigue_state_not_compromising_game_performance"
+        ],
+        "exit_assessment": "End of Week 6 or logical season turning point.",
+        "handoff_intent": "Transition to lower-load in-season, repeat Tier 2, or move to post-season based on schedule and athlete status."
+      },
+
+      "special_rules": {
+        "fixture_dependency_rule": "If games_per_week drops to 1 for multiple weeks, Tier 2 is appropriate; if it rises to 3+, route to Tier 1 logic.[file:1][web:108][web:112]",
+        "no_makeup_rule": "Do not add extra volume to make up missed sessions.",
+        "calendar_shift_allowed": true,
+        "calendar_shift_rule": "Block can be repeated back-to-back; weekly bands still apply.",
+        "max_sprint_sessions_per_week": 3,
+        "sprint_session_rule": "Maximum 3 true sprint exposures/week (practice + training), in line with Youth 13-17 sprint caps.[file:1]"
+      },
+
+      "governance_status": "PASS",
+      "governance_checklist": [
+        "✅ Youth 13-17 ceilings respected (120 contacts/session, 240/week, 800m/session, 2000m/week).[file:1]",
+        "✅ IN_SEASON_TIER_2 bands enforced (120–180 plyos, 600–1000m sprint/week).[file:1]",
+        "✅ Tier 3 contacts kept ≤40% of session contacts.[file:1][web:63]",
+        "✅ TRUE_SPRINT_METERS_ONLY with intensity_percent_vmax enforced for court sprints.[file:1][web:111]",
+        "✅ Structure consistent with moderate-fixture in-season guidelines (low volume, moderate–high intensity strength; careful monitoring of fatigue).[web:68][web:110]"
+      ]
+    }
+  ],
+
+  "integration_notes": {
+    "enforcement_owner": {
+      "weekly_volume_ranges": "WEEKLY_ACCUMULATOR",
+      "sprint_intensity_validation": "EXERCISE_SELECTION_ALGORITHM",
+      "session_caps_and_zone_routing": "EXERCISE_SELECTION_ALGORITHM",
+      "gate_advance_logic": "GATE_ENGINE",
+      "block_selection": "BLOCK_SELECTOR",
+      "meso_progression": "GATE_ENGINE"
+    },
+    "block_selector_responsibility": "When service_line = SP_Performance, population = Youth_13_17, sport = BASKETBALL, season_type = IN_SEASON_TIER_2 (1–2 games/week), select SP_INSEASON_BBALL_13-17_6WK_TIER2_v1 as default.[file:1][file:2]",
+    "weekly_accumulator_responsibility": "Track plyo_contacts and sprint_meters vs Tier 2 band and flag trends toward upper band if practice loads are also high.[file:1][web:113]",
+    "exercise_selection_algorithm_responsibility": "Implement low-volume, moderate–high intensity in-season loading for strength and jumps, consistent with basketball guidelines.[web:68][web:110]",
+    "gate_engine_responsibility": "Use Week 3 and Week 6 gates to adjust between Tier 1, Tier 2, and post-season paths.",
+    "ai_playbook_reference": "Playbook should clarify difference between Tier 1 (heavy fixtures, low extra load) and Tier 2 (moderate fixtures, more training headroom) in basketball.",
+    "integration_sequence": "Block Selector → WEEKLY_ACCUMULATOR → EXERCISE_SELECTION_ALGORITHM → GATE_ENGINE."
+  }
+}
+{
+  "schema_id": "EFL_MESOMACRO_MANIFEST",
+  "manifest_version": "1.0.2",
+  "manifest_created": "2025-12-16",
+  "manifest_description": "In-season Tier 3 (low/sparse fixture) basketball-specific block for Youth 13-17, 6 weeks. Allows high development volume (similar to off-season) while managing minimal game/practice load. Typical use: summer leagues, post-tournament phases, or injury rehab in-season windows.",
+  "blocks": [
+    {
+      "block_id": "SP_INSEASON_BBALL_13-17_6WK_TIER3_v1",
+      "block_tags": ["SP", "IN_SEASON_TIER_3", "YOUTH_13_17", "BASKETBALL", "COURT", "2-3X_WEEK", "DEVELOPMENT"],
+      "service_line": "SP_Performance",
+      "population_icp": "Youth_13_17_SP_Basketball",
+      "season": "In_Season",
+      "season_type": "IN_SEASON_TIER_3",
+      "mdp_primary": "COURT_AND_WEIGHTROOM",
+      "mdp_secondary_bias_required": true,
+      "mdp_secondary_bias_source_block": "SP_OFFSEASON_BBALL_13-17_8WK_DEV_v1",
+      "mdp_secondary_bias_effective_week": 1,
+      "mdp_secondary_bias_options": ["VERT", "SPEED", "COD"],
+      "duration_weeks": 6,
+      "sessions_per_week": 2,
+      "total_sessions": 12,
+      "fixture_context_description": "≤1 game/week or tournament/camp structure; minimal competitive load allows max development stimulus.",
+
+      "legality_check": {
+        "population_ceiling_band": "Band_3",
+        "population_ceiling_node": "C",
+        "max_e_node_allowed": "E3",
+        "plyo_contacts_cap_session": 120,
+        "plyo_contacts_cap_week": 240,
+        "cns_budget": "HIGH",
+        "sprint_counting_standard": "TRUE_SPRINT_METERS_ONLY",
+        "requires_intensity_percent_vmax": true,
+        "required_governance": [
+          "Tier3_E3_E4_<=40PCT_SESSION_CONTACTS",
+          "SESSION_CEILING_NOT_TARGET",
+          "IN_SEASON_TIER_3_WEEKLY_RANGE_ENFORCED"
+        ],
+        "season_operating_ranges_ref": "Youth_13_17.IN_SEASON_TIER_3"
+      },
+
+      "macro_structure": [
+        {
+          "meso_num": 1,
+          "meso_name": "DEVELOPMENT_WITH_LOW_GAME_LOAD",
+          "weeks": [1, 2, 3],
+          "primary_goal": "Seize the low-fixture window to build strength, vertical power, and COD capacity while games are sparse or light.",
+          "fv_zones_allowed": ["Z3", "Z4", "Z5", "Z1", "Z8"],
+          "fv_zone_emphasis": {
+            "Z3": "Speed–strength and low-duration power work (short accelerations, approach jumps)",
+            "Z4": "Elastic and reactive jumps in meaningful volume (low–moderate depth jumps, repeated CMJ)",
+            "Z5": "Full-body strength work (Band 1–3, multiple sets per pattern)",
+            "Z1": "Court-length and max-V sprints in higher volume",
+            "Z8": "Basketball COD and agility with high touch count"
+          },
+          "sprint_intent": ["COURT_MAX_V_DEVELOPMENT"],
+          "sprint_intent_description": "3/4-court and full-court sprints at ≥90–100% Vmax in higher volume than in-season Tier 1/2: 1000–1200 m/week true sprint meters.[file:1][web:127][web:128]",
+          "plyo_contact_range": {
+            "min": 160,
+            "max": 200,
+            "unit": "contacts/week",
+            "note": "Within IN_SEASON_TIER_3 band (160–240). Emphasis on vertical jumps, reactive plyos, and COD-related landings. Tier 3 ≤40% of session contacts.[file:1][web:129]"
+          },
+          "sprint_meters_range": {
+            "min": 1000,
+            "max": 1200,
+            "unit": "m/week",
+            "note": "Lower-middle IN_SEASON_TIER_3 band (1000–1600). TRUE_SPRINT_METERS_ONLY ≥90% Vmax.[file:1][web:131]"
+          },
+          "cns_per_day": {
+            "day_A": "HIGH",
+            "day_B": "HIGH",
+            "day_A_description": "Strength + plyometrics-focused session (e.g., heavy lifts + multiple jump patterns). Can be similar to off-season intensity.",
+            "day_B_description": "Court speed and max-V sprints, or full-body power + COD. Both days at HIGH CNS due to low game stress."
+          },
+          "cns_weekly_intent": "HIGH; this is quasi-off-season within competition context. Games/practices are light, so training CNS load is priority.",
+          "elastic_strategy": "E1–E3 featured prominently. Depth jumps, reactive jumps, and multiple-set jump work allowed and encouraged within Tier 3 ≤40% rule, consistent with development goals.[file:1][web:127]",
+          "notes": "Place sessions on non-game days; if a tournament or single game occurs, shift to Tier 1 logic for that week, then resume Tier 3."
+        },
+        {
+          "meso_num": 2,
+          "meso_name": "CONSOLIDATE_AND_PEAK_READINESS",
+          "weeks": [4, 5, 6],
+          "primary_goal": "Consolidate gains from Meso 1 and approach exit state ready to transition back to higher-fixture (Tier 1 or Tier 2) or post-season.",
+          "fv_zones_allowed": ["Z3", "Z4", "Z5", "Z1", "Z8"],
+          "fv_zone_emphasis": {
+            "Z3": "Quality speed–strength (fewer reps, slightly higher intensity/speed)",
+            "Z4": "Reactive jumps in targeted, high-quality doses",
+            "Z5": "Strength maintenance (lower volume, higher intensity)",
+            "Z1": "Fast-break sprints and transition sprints at max intensity",
+            "Z8": "Game-speed COD and footwork under fatigue"
+          },
+          "sprint_intent": ["MAX_V_TRANSITION_SPRINTS"],
+          "sprint_intent_description": "Emphasis on explosive court sprints, fast-break patterns, and recovery runs simulating game transitions. Distance: 1000–1600 m/week, scaled toward upper band if fixtures remain sparse.[file:1][web:127]",
+          "plyo_contact_range": {
+            "min": 160,
+            "max": 240,
+            "unit": "contacts/week",
+            "note": "Full IN_SEASON_TIER_3 band (160–240). Ramp toward upper end in Weeks 5–6 if pain-free and readiness high. Tier 3 ≤40%.[file:1][web:129]"
+          },
+          "sprint_meters_range": {
+            "min": 1000,
+            "max": 1600,
+            "unit": "m/week",
+            "note": "Full IN_SEASON_TIER_3 band (1000–1600). Approach upper band only if games/practice remain light and athlete shows no fatigue flags."
+          },
+          "cns_per_day": {
+            "day_A": "HIGH",
+            "day_B": "HIGH",
+            "day_A_description": "Heavy or explosive focus (e.g., Power Cleans + box jumps, or trap bar + vertical plyo).",
+            "day_B_description": "Court-based speed and COD under fatigue, simulating transition defense/offense."
+          },
+          "cns_weekly_intent": "HIGH, trending toward peaking readiness. Scale slightly down in final week if transitioning to a busier schedule.",
+          "elastic_strategy": "E1–E3; can include more challenging reactive work (single-leg bounds, depth jumps from moderate heights) as athletic system is fully warmed and adapted.[file:1][web:131]",
+          "secondary_mdp_bias_active": true,
+          "notes": "VERT bias = more vertical jump emphasis; SPEED bias = more sprint/acceleration work; COD bias = more defensive/shuttle patterns. Align to athlete's weak spots or position demands.[web:128][web:134]"
+        }
+      ],
+
+      "assessment_gates": {
+        "week_3": {
+          "gate_type": "MID_BLOCK_READINESS_CHECK",
+          "assessments": ["pain_status", "fatigue_status", "jump_quality", "sprint_times"],
+          "purpose": "Verify that high development volume (even with low game load) is tolerated and not causing CNS depletion or injury flags.",
+          "action_if_fail": "Downshift to IN_SEASON_TIER_2 or even Tier 1 bands; investigate pain or fatigue source."
+        },
+        "week_6": {
+          "gate_type": "BLOCK_EXIT_CHECK",
+          "assessments": ["vertical_jump_improvement", "speed_markers", "strength_progress", "pain_status"],
+          "purpose": "Assess development gains and decide next routing: return to higher-fixture Tier (1 or 2) when season resumes, or proceed to post-season restore if season ending.",
+          "action_if_fail": "Route to lower-load maintenance phase or extend low-fixture development if schedule allows."
+        }
+      },
+
+      "exit_state": {
+        "ready_for_block": "SP_INSEASON_BBALL_13-17_6WK_TIER1_v1",
+        "exit_conditions": [
+          "vertical_jump_and_strength_gains_documented_vs_block_entry",
+          "no_progressive_pain_or_overuse_flags",
+          "fatigue_state_compatible_with_elevated_schedule",
+          "speed_and_COD_quality_maintained_or_improved"
+        ],
+        "exit_assessment": "End of Week 6. Athlete should exit stronger, more explosive, and ready to handle higher game density.",
+        "handoff_intent": "Provide a developed, powerful athlete to transition back into maintenance-focused in-season (Tier 1/2) or directly to post-season restore if season ends.",
+        "alternative_exits": [
+          {
+            "exit_to": "SP_POSTSEASON_BBALL_13-17_4WK_RESTORE_v1",
+            "condition": "If season ends; athlete routes directly to restoration."
+          },
+          {
+            "exit_to": "SP_INSEASON_BBALL_13-17_6WK_TIER2_v1",
+            "condition": "If schedule normalizes to 1–2 games/week; maintain gains with moderate load."
+          },
+          {
+            "exit_to": "SP_INSEASON_BBALL_13-17_6WK_TIER1_v1",
+            "condition": "If schedule intensifies to 3+ games/week; shift to minimal extra load."
+          }
+        ]
+      },
+
+      "special_rules": {
+        "fixture_dependency_rule": "Tier 3 is ONLY valid when games_per_week ≤1 (or effectively 0 in single-tournament weeks). If games_per_week rises mid-block to 2+, immediately downshift to Tier 2 or Tier 1 logic and reduce plyo/sprint volume.[file:1][web:127][web:129]",
+        "single_game_exception_rule": "If a single game occurs during an otherwise light week, that week's load is capped at 160 plyos and 1000m sprint. Do NOT add to total; absorb within weekly band.",
+        "no_makeup_rule": "No extra volume if sessions missed.",
+        "calendar_shift_allowed": true,
+        "calendar_shift_rule": "Tier 3 blocks commonly occur during AAU, summer league, or post-tournament windows. Can be 4–8 weeks depending on schedule. Maintain 6-week minimum for meaningful development.",
+        "max_sprint_sessions_per_week": 3,
+        "sprint_session_rule": "Maximum 3 true sprint exposures/week at ≥90% Vmax. Can include tracked high-intensity from practice if available.[file:1]"
+      },
+
+      "governance_status": "PASS",
+      "governance_checklist": [
+        "✅ Youth 13-17 absolute ceilings respected (120 contacts/session, 240/week, 800m/session, 2000m/week).[file:1]",
+        "✅ IN_SEASON_TIER_3 bands enforced (160–240 plyos, 1000–1600m sprint/week).[file:1]",
+        "✅ Tier 3 (E3/E4) contacts limited to ≤40% per session but more generous than Tier 1/2 due to low game load.[file:1][web:129]",
+        "✅ TRUE_SPRINT_METERS_ONLY with intensity_percent_vmax enforced.[file:1]",
+        "✅ Fixture-dependent routing logic prevents misuse in high-game weeks.[web:127][web:128]",
+        "✅ Aligns with research supporting high-volume training in low-fixture windows (tapering, sparse schedules).[web:129][web:131]"
+      ]
+    }
+  ],
+
+  "integration_notes": {
+    "enforcement_owner": {
+      "weekly_volume_ranges": "WEEKLY_ACCUMULATOR",
+      "sprint_intensity_validation": "EXERCISE_SELECTION_ALGORITHM",
+      "session_caps_and_zone_routing": "EXERCISE_SELECTION_ALGORITHM",
+      "gate_advance_logic": "GATE_ENGINE",
+      "block_selection": "BLOCK_SELECTOR",
+      "meso_progression": "GATE_ENGINE"
+    },
+    "block_selector_responsibility": "When service_line = SP_Performance, population = Youth_13_17, sport = BASKETBALL, season_type = IN_SEASON_TIER_3 (games_per_week ≤1), select SP_INSEASON_BBALL_13-17_6WK_TIER3_v1 as default.[file:1][file:2]",
+    "fixture_guard_responsibility": "CRITICAL: Block Selector must verify games_per_week ≤1 before selecting Tier 3. If games spike mid-block, Weekly Accumulator or Gate Engine must trigger emergency downshift to Tier 1 or Tier 2 logic.",
+    "weekly_accumulator_responsibility": "Track plyo_contacts and sprint_meters vs Tier 3 band; allow ascent to 240 plyos and 1600m sprint only in truly light weeks. Flag any game/practice load that contradicts Tier 3 eligibility.[file:1][web:129]",
+    "exercise_selection_algorithm_responsibility": "Implement full development loading (similar to off-season) with basketball court-specific patterns: vertical jumps, max-V sprints, and COD drills.[web:127][web:128]",
+    "gate_engine_responsibility": "Use Week 3 and Week 6 gates to confirm load tolerance; route to Tier 1/2 if games resume or to Tier 3 repeat/extend if low-fixture window persists.",
+    "ai_playbook_reference": "Playbook should clarify Tier 3 as the 'development in sparse fixture windows' strategy—common in summer leagues, post-tournament phases, and injury rehab contexts. Emphasize fixture dependency: Tier 3 ONLY if games ≤1/week.",
+    "integration_sequence": "Block Selector (with fixture guard) → WEEKLY_ACCUMULATOR (with fixture monitor) → EXERCISE_SELECTION_ALGORITHM → GATE_ENGINE."
+  }
+}
+{
+  "schema_id": "EFL_MESOMACRO_MANIFEST",
+  "manifest_version": "1.0.2",
+  "manifest_created": "2025-12-16",
+  "manifest_description": "Multi-sport pre-season bridge block for Youth 13-17, 6 weeks. Converts off-season strength and power into sport-ready explosive movement and court/field speed while maintaining injury resilience. Agnostic to sport; routed via MDP bias (JUMP, SPEED, COD) for sport-specificity.",
+  "blocks": [
+    {
+      "block_id": "SP_PRESEASON_MULTI_13-17_6WK_v1",
+      "block_tags": ["SP", "PRE_SEASON", "YOUTH_13_17", "MULTI_SPORT", "COURT_OR_FIELD", "2X_WEEK"],
+      "service_line": "SP_Performance",
+      "population_icp": "Youth_13_17_SP_Default",
+      "season": "Pre_Season",
+      "season_type": "PRE_SEASON",
+      "mdp_primary": "MULTI_FIELD_COURT_HYBRID",
+      "mdp_secondary_bias_required": true,
+      "mdp_secondary_bias_decision_deadline_week": 3,
+      "mdp_secondary_bias_effective_week": 1,
+      "mdp_secondary_bias_options": ["JUMP", "SPEED", "COD"],
+      "duration_weeks": 6,
+      "sessions_per_week": 2,
+      "total_sessions": 12,
+
+      "legality_check": {
+        "population_ceiling_band": "Band_3",
+        "population_ceiling_node": "C",
+        "max_e_node_allowed": "E3",
+        "plyo_contacts_cap_session": 120,
+        "plyo_contacts_cap_week": 240,
+        "cns_budget": "HIGH",
+        "sprint_counting_standard": "TRUE_SPRINT_METERS_ONLY",
+        "requires_intensity_percent_vmax": true,
+        "required_governance": [
+          "Tier3_E3_E4_<=40PCT_SESSION_CONTACTS",
+          "SESSION_CEILING_NOT_TARGET",
+          "PRE_SEASON_WEEKLY_RANGE_ENFORCED"
+        ],
+        "season_operating_ranges_ref": "Youth_13_17.PRE_SEASON"
+      },
+
+      "macro_structure": [
+        {
+          "meso_num": 1,
+          "meso_name": "CONVERSION_TO_SPORT_SPEED",
+          "weeks": [1, 2, 3],
+          "primary_goal": "Bridge from off-season strength/power into sport-ready explosive movement, directional speed, and change-of-direction patterns.",
+          "fv_zones_allowed": ["Z3", "Z4", "Z1", "Z8"],
+          "fv_zone_emphasis": {
+            "Z3": "Speed–strength and low-volume power (approach jumps, short accelerations, med ball throws)",
+            "Z4": "Elastic vertical and lateral jumps (CMJ, low-amplitude bounds, lateral bounds)",
+            "Z1": "Max-velocity court/field sprints at varied angles (straight-line and curved runs)",
+            "Z8": "Sport-relevant COD and footwork (shuffles, cuts, transitions)"
+          },
+          "sprint_intent": ["COURT_FIELD_SPEED_TOUCHES"],
+          "sprint_intent_description": "Mixed-distance sprints (10m–60m) at ≥90% Vmax covering court/field patterns relevant to assigned sport. Distance: 600–800 m/week true sprint meters.[file:1][web:136][web:139]",
+          "plyo_contact_range": {
+            "min": 120,
+            "max": 160,
+            "unit": "contacts/week",
+            "note": "Lower-to-middle PRE_SEASON band (120–180). Mix vertical, lateral, and COD-related landings. Tier 3 ≤40%.[file:1][web:140]"
+          },
+          "sprint_meters_range": {
+            "min": 600,
+            "max": 800,
+            "unit": "m/week",
+            "note": "Inside PRE_SEASON band (600–1000). TRUE_SPRINT_METERS_ONLY ≥90% Vmax.[file:1][web:138][web:143]"
+          },
+          "cns_per_day": {
+            "day_A": "HIGH",
+            "day_B": "MODERATE",
+            "day_A_description": "Strength + power emphasis (e.g., trap bar + box jumps, or sled push + vertical plyo).",
+            "day_B_description": "Court/field speed and sport-specific COD + lighter strength."
+          },
+          "cns_weekly_intent": "High; converting strength into explosiveness. By Week 3, MDP bias is applied to fine-tune patterns.",
+          "elastic_strategy": "E1–E2 primary (box jumps, CMJ, lateral bounds); E3 (depth jumps) introduced cautiously late in Meso 1 for advanced athletes, within ≤40% Tier 3 rule.[file:1][web:142]",
+          "notes": "Bias application (JUMP vs SPEED vs COD) occurs by Week 3: guards/perimeter get SPEED bias (max-V court runs); post/interior get JUMP bias (vertical); midfielders/defenders get COD bias (cuts, shuttles).[web:137]"
+        },
+        {
+          "meso_num": 2,
+          "meso_name": "SPORT_SPECIFIC_READINESS",
+          "weeks": [4, 5, 6],
+          "primary_goal": "Finalize sport-specific explosive and movement qualities; approach season-ready state without peaking too early.",
+          "fv_zones_allowed": ["Z3", "Z4", "Z1", "Z8"],
+          "fv_zone_emphasis": {
+            "Z3": "Sport-specific power drills (e.g., approach jumps in basketball, directional accelerations in field sports)",
+            "Z4": "Reactive/elastic jumps mirroring game demands (repeated CMJ, lateral hops, direction-change landings)",
+            "Z1": "Max-V sport-specific sprints (fast breaks, transition, recovery runs)",
+            "Z8": "Game-speed COD and defensive footwork under fatigue"
+          },
+          "sprint_intent": ["GAME_SPEED_TRANSITION"],
+          "sprint_intent_description": "Court/field-length and direction-change sprints at ≥90–100% Vmax mimicking in-game transitions. Distance: 700–1000 m/week true sprint meters.[file:1][web:140][web:141]",
+          "plyo_contact_range": {
+            "min": 140,
+            "max": 180,
+            "unit": "contacts/week",
+            "note": "Upper-middle PRE_SEASON band (120–180). Maintain quality; Tier 3 ≤40%.[file:1][web:138]"
+          },
+          "sprint_meters_range": {
+            "min": 700,
+            "max": 1000,
+            "unit": "m/week",
+            "note": "Upper PRE_SEASON band (600–1000). Emphasis on high-velocity, directional complexity.[file:1][web:143]"
+          },
+          "cns_per_day": {
+            "day_A": "HIGH",
+            "day_B": "MODERATE",
+            "day_A_description": "Sport-biased power + strength maintenance (e.g., heavy trap bar + approach jumps for JUMP bias; short sprints + explosive core for SPEED bias).",
+            "day_B_description": "Sport-specific movement and COD patterns + accessory work."
+          },
+          "cns_weekly_intent": "High early in Meso 2; trend toward moderate by Week 6 to avoid overreaching into season.",
+          "elastic_strategy": "E1–E3. More E3 usage (depth jumps, single-leg bounds) allowed in Week 5 for advanced athletes; scale back Week 6 to preserve freshness.[file:1][web:139][web:142]",
+          "secondary_mdp_bias_active": true,
+          "notes": "Meso 2 is the 'sport translation' phase: all work is now sport-specific. By Week 6, athlete should feel bouncy, quick, and sport-ready but not fatigued."
+        }
+      ],
+
+      "assessment_gates": {
+        "week_3": {
+          "gate_type": "MDP_BIAS_DECISION_LOCK",
+          "assessments": ["position_role_clarity", "sport_demand_assessment", "movement_quality_baseline"],
+          "purpose": "Lock in the secondary MDP bias (JUMP vs SPEED vs COD) for Weeks 4–6 based on sport, position, and athlete testing.",
+          "action_if_fail": "Delay bias lock and reassess position/role; use generic multi-sport approach for Meso 2 if clarity lacking.",
+          "note": "This gate is operational/strategic, not a readiness gate."
+        },
+        "week_6": {
+          "gate_type": "EXIT_BLOCK_CHECK",
+          "assessments": ["vertical_jump_trend", "court_field_speed_feel", "movement_quality", "fatigue_status"],
+          "purpose": "Verify readiness to enter sport-specific in-season block (Tier 1, 2, or 3 depending on fixture schedule).",
+          "action_if_fail": "Route to 2–3 week mini-block to extend pre-season prep or identify injury/readiness issue before season.",
+          "action_if_pass": "Advance to sport-specific IN_SEASON block (basketball, soccer, etc.)."
+        }
+      },
+
+      "exit_state": {
+        "ready_for_block": "Sport-Specific In-Season (e.g., SP_INSEASON_BBALL_13-17_6WK_TIER1_v1)",
+        "exit_conditions": [
+          "vertical_jump_or_sport_power_markers_established",
+          "court_field_speed_quality_good",
+          "sport_specific_movement_patterns_consistent",
+          "no_significant_pain_or_overuse_flags",
+          "athlete_reports_readiness_for_competitive_load"
+        ],
+        "exit_assessment": "End of Week 6. Athlete should feel explosive, quick, confident, and physically ready.",
+        "handoff_intent": "Deliver a well-prepared, sport-ready athlete to in-season maintenance or development block."
+      },
+
+      "special_rules": {
+        "tier3_fraction_rule": "E3/E4 contacts ≤40% of plyo contacts per session; minimize in Weeks 4–6 to preserve freshness.[file:1]",
+        "no_makeup_rule": "No extra volume for missed sessions.",
+        "mdp_bias_lock_rule": "By end of Week 3, MDP bias (JUMP, SPEED, or COD) is locked; do not change during Meso 2.",
+        "calendar_shift_allowed": true,
+        "calendar_shift_rule": "Pre-season can be 4–8 weeks depending on sport calendar. This 6-week block can be repeated or shortened; maintain weekly band enforcement.",
+        "max_sprint_sessions_per_week": 3,
+        "sprint_session_rule": "Maximum 3 true sprint exposures/week (≥90% Vmax), in line with Youth 13-17 sprint caps.[file:1]"
+      },
+
+      "governance_status": "PASS",
+      "governance_checklist": [
+        "✅ Youth 13-17 ceilings respected (120 contacts/session, 240/week, 800m/session, 2000m/week).[file:1]",
+        "✅ PRE_SEASON bands enforced (120–180 plyos, 600–1000m sprint/week).[file:1]",
+        "✅ Tier 3 (E3/E4) capped at ≤40% of session contacts.[file:1]",
+        "✅ TRUE_SPRINT_METERS_ONLY with intensity_percent_vmax enforced.[file:1]",
+        "✅ MDP bias routing (JUMP, SPEED, COD) enables sport/position-specific application without creating separate blocks.[file:1][web:137]",
+        "✅ Structure aligns with pre-season periodization literature: high volume, mixed intensity, progressive sport-specificity.[web:136][web:140][web:142]"
+      ]
+    }
+  ],
+
+  "integration_notes": {
+    "enforcement_owner": {
+      "weekly_volume_ranges": "WEEKLY_ACCUMULATOR",
+      "sprint_intensity_validation": "EXERCISE_SELECTION_ALGORITHM",
+      "session_caps_and_zone_routing": "EXERCISE_SELECTION_ALGORITHM",
+      "gate_advance_logic": "GATE_ENGINE",
+      "mdp_bias_routing": "EXERCISE_SELECTION_ALGORITHM",
+      "block_selection": "BLOCK_SELECTOR",
+      "meso_progression": "GATE_ENGINE"
+    },
+    "block_selector_responsibility": "When service_line = SP_Performance, population = Youth_13_17, season_type = PRE_SEASON, and sport is NOT basketball (or before basketball PRE_SEASON block is available), select SP_PRESEASON_MULTI_13-17_6WK_v1 as default multi-sport pre-season block.[file:1][file:2]",
+    "mdp_bias_routing_responsibility": "At Week 3 gate, Exercise Selection Algorithm receives MDP bias (JUMP, SPEED, or COD) from coaching staff or auto-detect logic based on sport/position and locks it for Weeks 4–6. This drives exercise pool filtering and zone selection.",
+    "weekly_accumulator_responsibility": "Track plyo_contacts and sprint_meters vs PRE_SEASON band; apply MDP bias filters to exercise candidates (e.g., JUMP bias = more vertical/unilateral jumps; SPEED bias = more linear sprint work).[file:1][web:137]",
+    "exercise_selection_algorithm_responsibility": "Implement zone routing and exercise selection with MDP bias active. Ensure sport-relevant patterns (e.g., lateral bounds for COD, approach jumps for JUMP, extended sprints for SPEED).[web:138][web:140]",
+    "gate_engine_responsibility": "Week 3 gate locks MDP bias; Week 6 gate checks readiness for sport-specific in-season.",
+    "ai_playbook_reference": "Playbook should explain pre-season as the 'conversion phase': off-season strength becomes sport-ready explosiveness via MDP bias routing. Emphasize that one block covers all Youth 13-17 sports via bias mechanism, not separate blocks per sport.[web:136][web:142]",
+    "integration_sequence": "Block Selector → (Week 3 Decision: MDP Bias Lock) → WEEKLY_ACCUMULATOR (with bias filters) → EXERCISE_SELECTION_ALGORITHM (with MDP routing) → GATE_ENGINE."
+  }
+}
+{
+  "schema_id": "EFL_MESOMACRO_MANIFEST",
+  "manifest_version": "1.0.2",
+  "manifest_created": "2025-12-16",
+  "manifest_description": "Pre-season fundamentals block for Youth 8-12, 6 weeks. Bridges off-season play/general athleticism into first competitive season with emphasis on movement literacy, coordination, balance, and FUN. Zero plyometric contacts; low-intensity, high-variety play-based structure.",
+  "blocks": [
+    {
+      "block_id": "SP_PRESEASON_MULTI_8-12_6WK_FUN_v1",
+      "block_tags": ["SP", "PRE_SEASON", "YOUTH_8_12", "MULTI_SPORT", "FUNDAMENTALS", "PLAY_BASED", "2X_WEEK"],
+      "service_line": "SP_Performance",
+      "population_icp": "Youth_8_12_SP_Default",
+      "season": "Pre_Season",
+      "season_type": "PRE_SEASON",
+      "mdp_primary": "GENERAL_ATHLETICISM",
+      "mdp_secondary_bias_required": false,
+      "duration_weeks": 6,
+      "sessions_per_week": 2,
+      "total_sessions": 12,
+      "fixture_context_description": "Introductory competitive season; first or early organized sport; emphasis on enjoying movement and sport participation.",
+
+      "legality_check": {
+        "population_ceiling_band": "Band_1",
+        "population_ceiling_node": "A",
+        "max_e_node_allowed": "NONE",
+        "plyo_contacts_cap_session": 0,
+        "plyo_contacts_cap_week": 0,
+        "cns_budget": "LOW",
+        "sprint_counting_standard": "NONE_INTENSE_SPRINTS_NOT_PRESCRIBED",
+        "requires_intensity_percent_vmax": false,
+        "required_governance": [
+          "ZERO_PLYOMETRICS",
+          "PLAY_BASED_STRUCTURE_REQUIRED",
+          "FUN_PRIMARY_INTENT",
+          "MOVEMENT_LITERACY_FOCUS",
+          "PRE_SEASON_YOUTH_8_12_WEEKLY_RANGE_ENFORCED"
+        ],
+        "season_operating_ranges_ref": "Youth_8_12.PRE_SEASON"
+      },
+
+      "macro_structure": [
+        {
+          "meso_num": 1,
+          "meso_name": "MOVEMENT_DISCOVERY_AND_PLAY",
+          "weeks": [1, 2, 3],
+          "primary_goal": "Introduce fundamental movement patterns (running, jumping, catching, balance) through games and play. Build coordination, body awareness, and excitement for sports.",
+          "fv_zones_allowed": ["Z8", "Z6"],
+          "fv_zone_emphasis": {
+            "Z8": "Balance, coordination, and footwork via games (tag, hopscotch, ladder drills, movement games)",
+            "Z6": "Light bodyweight movement exploration (crawling, animal walks, simple stretches, balance activities)"
+          },
+          "sprint_intent": "NONE",
+          "sprint_intent_description": "No prescribed high-velocity sprints. Movement is playful and self-paced. Any running is game-based (tag, relay races) at child's natural speed, not timed or measured.[file:1][web:145][web:146]",
+          "plyo_contact_range": {
+            "min": 0,
+            "max": 0,
+            "unit": "contacts/week",
+            "note": "ZERO plyometric contacts. Jumping is natural/play-based only (e.g., jump rope, hopscotch), not structured or counted.[file:1][web:147]"
+          },
+          "sprint_meters_range": {
+            "min": 0,
+            "max": 0,
+            "unit": "m/week",
+            "note": "No sprint meter counting. Movement is unstructured and play-driven.[file:1][web:148]"
+          },
+          "cns_per_day": {
+            "day_A": "LOW",
+            "day_B": "LOW",
+            "day_A_description": "Movement discovery games + dynamic play (tag, Simon Says, movement relays, balance games).",
+            "day_B_description": "Variety games: different sports/movement types each week (soccer footwork, basketball basics, tennis swings, baseball throwing)."
+          },
+          "cns_weekly_intent": "LOW; focus is on fun, engagement, and variety. No fatigue accumulation intended.",
+          "elastic_strategy": "NONE. No plyometric training. Natural jumping/hopping via play only.[file:1][web:149]",
+          "notes": "Sessions should feel like recess, not training. Coach as a facilitator/game leader, not an instructor. 50+ minutes of play/movement with minimal standing around.[web:145][web:151]"
+        },
+        {
+          "meso_num": 2,
+          "meso_name": "SKILL_INTRODUCTION_AND_EXCITEMENT_BUILD",
+          "weeks": [4, 5, 6],
+          "primary_goal": "Introduce sport-specific foundational skills (shooting, throwing, kicking, catching) in game context. Build confidence, team identity, and anticipation for first competitive season.",
+          "fv_zones_allowed": ["Z8", "Z6"],
+          "fv_zone_emphasis": {
+            "Z8": "Sport-specific footwork and coordination (dribbling drills, cutting practice, base running, ground balls)",
+            "Z6": "Light, game-based movement with equipment (ball handling, throwing form, balance work)"
+          },
+          "sprint_intent": "NONE",
+          "sprint_intent_description": "No prescribed intense sprints. Movement remains play-based and natural. Scrimmage-style games may include casual running, but no timing/measurement.[file:1][web:150]",
+          "plyo_contact_range": {
+            "min": 0,
+            "max": 0,
+            "unit": "contacts/week",
+            "note": "ZERO plyometric contacts. All jumping is incidental to play, never structured.[file:1]"
+          },
+          "sprint_meters_range": {
+            "min": 0,
+            "max": 0,
+            "unit": "m/week",
+            "note": "No sprint meter tracking. Movement remains unstructured.[file:1]"
+          },
+          "cns_per_day": {
+            "day_A": "LOW",
+            "day_B": "LOW",
+            "day_A_description": "Sport-specific intro game (e.g., basketball shooting basics, soccer small-sided match, baseball hitting practice).",
+            "day_B_description": "Different sport intro or fun movement variety (e.g., relay races, obstacle courses, multi-sport games)."
+          },
+          "cns_weekly_intent": "LOW; building excitement and competence without pressure or intensity.",
+          "elastic_strategy": "NONE. No plyometric training.[file:1]",
+          "secondary_mdp_bias_active": false,
+          "notes": "Transition from pure movement discovery into sport-specific excitement. Session structure should remain playful; no repetitive drills without game context. Coach emphasizes enjoyment, teamwork, and trying new things over perfection."
+        }
+      ],
+
+      "assessment_gates": {
+        "week_3": {
+          "gate_type": "ENGAGEMENT_AND_CONFIDENCE_CHECK",
+          "assessments": ["child_enjoyment", "coach_observation_of_confidence", "basic_movement_competency"],
+          "purpose": "Verify that child is having fun, comfortable with coach/environment, and developing basic movement literacy without injury or anxiety.",
+          "action_if_fail": "Shift to even more play-based, less structured approach; check for external stressors (pressure from parents, etc.); adjust session style.",
+          "note": "This is a qualitative gate, not a performance gate."
+        },
+        "week_6": {
+          "gate_type": "READINESS_FOR_FIRST_SEASON",
+          "assessments": ["child_enthusiasm_for_sport", "basic_movement_patterns_present", "team_belonging_sense"],
+          "purpose": "Confirm child is ready and excited to begin competitive play. Check that foundational patterns (run, catch, throw, kick) are at 'good enough' level.",
+          "action_if_fail": "Consider extending pre-season by 2–3 weeks; investigate barriers (anxiety, overprotective coaching, skill gap); do NOT rush into competition.",
+          "action_if_pass": "Advance to SP_INSEASON_MULTI_8-12_6WK_MAINT_v1."
+        }
+      },
+
+      "exit_state": {
+        "ready_for_block": "SP_INSEASON_MULTI_8-12_6WK_MAINT_v1",
+        "exit_conditions": [
+          "child_reports_enjoying_movement_and_sport",
+          "basic_movement_patterns_evident_at_age_appropriate_level",
+          "child_comfortable_with_coach_and_teammates",
+          "no_significant_pain_injuries_or_anxiety"
+        ],
+        "exit_assessment": "End of Week 6. Child should feel excited, confident, and ready for their first competitive matches/games.",
+        "handoff_intent": "Provide a joyful, movement-literate young athlete ready to participate in first competitive season with confidence and enthusiasm."
+      },
+
+      "special_rules": {
+        "zero_plyometrics_rule": "NO structured plyometric exercises, period. Jumping is only incidental to play and games. Enforce this strictly.[file:1]",
+        "no_intensity_measurement_rule": "No timing, no max-effort tests, no 'fastest' rankings. All movement is self-paced and play-based.",
+        "play_based_requirement": "Minimum 80% of each session must be games or play; no more than 20% 'drills.' Coach as facilitator, not instructor.[web:145][web:151]",
+        "variety_requirement": "Expose child to 3+ different sports/movement types across the 6-week block. Prevent early specialization and burnout.",
+        "parental_communication_rule": "Communicate to parents that this block is about FUN and movement literacy, NOT performance outcomes. Actively discourage pressure or intensity from home.",
+        "no_makeup_rule": "Do not make up missed sessions. Consistency is nice, but forcing attendance goes against the 'fun-first' philosophy.",
+        "calendar_shift_allowed": true,
+        "calendar_shift_rule": "Pre-season can be 4–8 weeks; this 6-week block can be shortened to 4 weeks or extended to 8 depending on season start date."
+      },
+
+      "governance_status": "PASS",
+      "governance_checklist": [
+        "✅ Youth 8-12 pre-season population ceiling respected (ZERO plyos, LOW CNS, PLAY-BASED).[file:1]",
+        "✅ Zero plyometric contacts enforced (no structured jumps).[file:1]",
+        "✅ No intense sprint work or max-velocity training.[file:1]",
+        "✅ Play-based, child-centered structure (80%+ games/play).[web:145][web:151]",
+        "✅ Movement literacy and coordination emphasis (no strength/power).[web:146][web:147]",
+        "✅ Engagement and enjoyment as primary success metrics, not performance.[web:148][web:150]"
+      ]
+    }
+  ],
+
+  "integration_notes": {
+    "enforcement_owner": {
+      "play_based_structure": "COACHING_STAFF",
+      "zero_plyometric_enforcement": "COACHING_STAFF",
+      "engagement_monitoring": "COACHING_STAFF",
+      "gate_advance_logic": "GATE_ENGINE",
+      "block_selection": "BLOCK_SELECTOR",
+      "parental_communication": "SERVICE_COORDINATOR"
+    },
+    "block_selector_responsibility": "When service_line = SP_Performance, population = Youth_8_12, season_type = PRE_SEASON, and this is child's first or early organized season, select SP_PRESEASON_MULTI_8-12_6WK_FUN_v1 as default.[file:1][file:2]",
+    "coaching_staff_responsibility": "Structure sessions as games and play, NOT drills or intense training. Emphasize coach as facilitator/game leader role. Monitor child enjoyment and confidence actively; report concerns to service coordinator.",
+    "zero_plyometric_enforcement": "CRITICAL: No structured jumping exercises, depth jumps, or plyometric drills. Jumping is only incidental to natural play.[file:1][web:145]",
+    "engagement_monitoring": "Track child's session attendance, reported enjoyment, and comfort level. Use qualitative feedback, not performance metrics.",
+    "gate_engine_responsibility": "Use Week 3 and Week 6 gates to confirm engagement and readiness for competitive season; route to in-season or extend pre-season based on qualitative assessment.",
+    "parental_communication_responsibility": "Educate parents that this phase is about movement discovery and sport enjoyment, NOT performance or competition. Discourage pressure or intensity from home.",
+    "ai_playbook_reference": "Playbook should emphasize Youth 8-12 pre-season as a PLAY-BASED DISCOVERY phase. Contrast sharply with Youth 13-17 periodized training. Key message: 'First season = fun. Development comes naturally through play.'[web:145][web:147][web:151]",
+    "integration_sequence": "Block Selector → COACHING_STAFF (with play-based mandate) → GATE_ENGINE (qualitative gates only)."
+  }
+}
+
+
+
+
+
+
+
+
+{
+  "schema_id": "EFL_MESOMACRO_MANIFEST",
+  "manifest_version": "1.0.0",
+  "manifest_created": "2025-12-16",
+  "manifest_description": "Return-to-Performance ACL Stage 1 meso-macro manifest. Early Recovery / Tissue Protection block. No plyometrics, no sprinting. Pain and tissue tolerance gates drive progression.",
+  "blocks": [
+    {
+      "block_id": "R2P_ACL_STAGE1_EARLY_RECOVERY_4WK_v1",
+      "block_tags": ["R2P", "ACL", "STAGE1", "EARLY_RECOVERY", "TISSUE_PROTECTION", "NO_PLYO"],
+      "service_line": "R2P",
+      "population_icp": "R2P_ACL_Default",
+      "season": "Off_Calendar",
+      "r2p_stage": "R2P_Stage_1",
+      "duration_weeks": 4,
+      "sessions_per_week": 2,
+      "total_sessions": 8,
+
+      "legality_check": {
+        "population_ceiling_band": "Band_0",
+        "population_ceiling_node": "C",
+        "max_e_node_allowed": "E0",
+        "plyo_contacts_cap_session": 0,
+        "plyo_contacts_cap_week": 0,
+        "sprint_meters_cap_session": 0,
+        "sprint_meters_cap_week": 0,
+        "cns_budget": "LOW",
+        "sprint_counting_standard": "TRUESPRINT_METERS_ONLY_DISABLED",
+        "requires_intensity_percent_vmax": false,
+        "required_governance": [
+          "R2P_STAGE1_TISSUE_PROTECTION",
+          "NO_PLYOMETRICS_ALLOWED",
+          "NO_DYNAMIC_SPRINT_OR_COD",
+          "PRIME_PREP_WORK_CLEAR_REQUIRED",
+          "SESSION_CEILING_NOT_TARGET"
+        ],
+        "r2p_load_standards_ref": "R2P.Stage1",
+        "stage1_contact_cap_session": 0,
+        "stage1_allowed_exercise_types": [
+          "NON_IMPACT_LANDING",
+          "ISOMETRIC_HOLDS",
+          "CONTROLLED_ROM"
+        ]
+      },
+
+      "macro_structure": [
+        {
+          "meso_num": 1,
+          "meso_name": "EARLY_RECOVERY_TISSUE_PROTECTION",
+          "weeks": [1, 2, 3, 4],
+          "primary_goal": "Protect graft and surrounding tissues, restore basic ROM, and build positional strength without plyometric or ballistic load.",
+          "fv_zones_allowed": ["Z5", "Z6", "Z8"],
+          "fv_zone_emphasis": {
+            "Z5": "Strength-endurance at Band 0 (tempo/isometric control)",
+            "Z6": "Hypertrophy-like time-under-tension at very low load",
+            "Z8": "Skill/mobility for gait and joint positioning"
+          },
+          "sprint_intent": [],
+          "sprint_intent_description": "No sprinting. Walking and basic gait drills may occur but do not count as sprint work.",
+          "plyo_contact_range": {
+            "min": 0,
+            "max": 0,
+            "unit": "contacts/week",
+            "note": "Stage 1 forbids plyometrics. Any elastic landing work is a protocol violation."
+          },
+          "sprint_meters_range": {
+            "min": 0,
+            "max": 0,
+            "unit": "m/week",
+            "note": "No sprint or running volume is tracked in Stage 1."
+          },
+          "cns_per_day": {
+            "day_A": "LOW",
+            "day_B": "LOW",
+            "day_A_description": "Controlled ROM, isometric holds, basic bilateral strength under strict pain and swelling rules.",
+            "day_B_description": "Similar profile with emphasis on movement quality, swelling check, and confidence under low load."
+          },
+          "cns_weekly_intent": "Low CNS demand across all weeks; priority is tissue status, pain, and swelling, not progression of load.",
+          "elastic_strategy": "E0 only. No E1–E4. Any exercise flagged as plyometric in the library is forbidden in this stage.",
+          "notes": "All progression decisions depend on pain 0–2/10 during and 24h post, and swelling behavior."
+        }
+      ],
+
+      "assessment_gates": {
+        "week_2": {
+          "gate_type": "MID_STAGE_CHECK",
+          "assessments": ["pain_status", "24h_swelling", "basic_rom"],
+          "purpose": "Confirm that early loading and ROM work are tolerated without pain >2/10 or swelling increase.",
+          "action_if_fail": "Hold progression, maintain or regress exercise difficulty, and extend Stage 1 by 1–2 weeks. Consider medical consult.",
+          "action_if_pass": "Allow gradual progression of Band 0 load (more time under tension, small ROM increases) while staying within Stage 1 boundaries."
+        },
+        "week_4": {
+          "gate_type": "STAGE_ADVANCE_CHECK",
+          "assessments": ["pain_status", "24h_swelling", "rom_quality", "basic_strength_control"],
+          "purpose": "Decide if athlete is ready to transition to Stage 2 Initial Loading Bilateral Foundation.",
+          "action_if_fail": "Extend Stage 1 by 1–2 weeks and/or adjust exercise selection. Do not introduce plyometric or unilateral dynamic loading.",
+          "action_if_pass": "Advance to Stage 2 block (R2P_ACL_STAGE2_INITIAL_LOADING_4WK_v1)."
+        }
+      },
+
+      "exit_state": {
+        "ready_for_block": "R2P_ACL_STAGE2_INITIAL_LOADING_4WK_v1",
+        "exit_conditions": [
+          "pain_during_and_24h_post_sessions_<=2_10",
+          "no_persistent_or_increasing_joint_swelling",
+          "functional_rom_targets_met_per_protocol",
+          "basic_positional_strength_and_control_in_sagittal_plane"
+        ],
+        "exit_assessment": "Conducted at or after Week 4. Athlete must demonstrate consistent tolerance to Stage 1 exercises without adverse response.",
+        "handoff_intent": "Athlete leaves Stage 1 with tissue calm, ROM restored to protocol targets, and confidence in basic positions, ready for bilateral loading in Stage 2."
+      },
+
+      "special_rules": {
+        "no_plyo_rule": "All plyometric exercises (any E1–E4, is_plyometric = true) are forbidden in Stage 1. Violation is a hard stop.",
+        "no_sprint_rule": "No true sprint work. Gait drills and walking drills are allowed but are not tracked as sprint meters.",
+        "pain_gate_rule": "If pain >2/10 during or 24h after session, regress exercise pattern or intensity and do not progress stage.",
+        "swelling_rule": "Any increase in joint swelling triggers regression and/or medical review before further loading.",
+        "no_makeup_rule": "Missed session = skipped stimulus. Do not compress or add extra volume on later days.",
+        "calendar_shift_allowed": true,
+        "calendar_shift_rule": "Maintain stage intent and progression criteria even if calendar weeks shift. Do not shorten Stage 1 below minimum duration without medical directive."
+      },
+
+      "governance_status": "PASS",
+      "governance_checklist": [
+        "✅ Stage 1 contact cap per session = 0; no plyometrics allowed.",
+        "✅ E-node limited to E0 only; E1–E4 forbidden.",
+        "✅ No sprint meters or COD work; TRUESPRINT_METERS standard disabled for this stage.",
+        "✅ Band 0 only; no higher strength bands used.",
+        "✅ Pain and swelling gates aligned with R2P Stage 1 in Load Standards.",
+        "✅ Exit explicitly routes to Stage 2 block and does not skip stages."
+      ]
+    }
+  ],
+
+  "integration_notes": {
+    "enforcement_owner": {
+      "weekly_volume_ranges": "WEEKLY_ACCUMULATOR",
+      "sprint_intensity_validation": "EXERCISE_SELECTION_ALGORITHM",
+      "session_caps_and_zone_routing": "EXERCISE_SELECTION_ALGORITHM",
+      "gate_advance_logic": "GATE_ENGINE",
+      "block_selection": "BLOCK_SELECTOR",
+      "meso_progression": "GATE_ENGINE"
+    },
+    "block_selector_responsibility": "When r2p_stage = R2P_Stage_1 and ACL injury flag is active, select R2P_ACL_STAGE1_EARLY_RECOVERY_4WK_v1 unless medical notes specify otherwise.",
+    "weekly_accumulator_responsibility": "Confirm that plyo_contacts and sprint_meters remain at 0. Any non-zero detected is flagged as a violation.",
+    "exercise_selection_algorithm_responsibility": "Filter exercise pools to NON_IMPACT_LANDING, ISOMETRIC_HOLDS, CONTROLLED_ROM only. Reject any candidate tagged as plyometric or sprint.",
+    "gate_engine_responsibility": "Evaluate mid-stage and stage-advance gates based on pain, swelling, ROM, and control. Do not advance to Stage 2 without explicit pass.",
+    "ai_playbook_reference": "Coach & AI Playbook should explain that Stage 1 is about calm tissue, ROM, and positional control. No plyos, no sprinting, and no chasing numbers.",
+    "future_versioning": "Subsequent blocks: R2P_ACL_STAGE2_INITIAL_LOADING_4WK_v1, R2P_ACL_STAGE3_UNILATERAL_LOADING_4WK_v1, R2P_ACL_STAGE4_RETURN_TO_SPORT_4WK_v1."
+  }
+}
+{
+  "schema_id": "EFL_MESOMACRO_MANIFEST",
+  "manifest_version": "1.0.0",
+  "manifest_created": "2025-12-16",
+  "manifest_description": "Return-to-Performance ACL Stage 2 meso-macro manifest. Initial Loading / Bilateral Foundation. Introduces low-level bilateral plyometric exposure within strict contact, pain, and swelling limits.",
+  "blocks": [
+    {
+      "block_id": "R2P_ACL_STAGE2_INITIAL_LOADING_4WK_v1",
+      "block_tags": ["R2P", "ACL", "STAGE2", "INITIAL_LOADING", "BILATERAL_FOUNDATION", "LOW_PLYO"],
+      "service_line": "R2P",
+      "population_icp": "R2P_ACL_Default",
+      "season": "Off_Calendar",
+      "r2p_stage": "R2P_Stage_2",
+      "duration_weeks": 4,
+      "sessions_per_week": 2,
+      "total_sessions": 8,
+
+      "legality_check": {
+        "population_ceiling_band": "Band_1",
+        "population_ceiling_node": "C",
+        "max_e_node_allowed": "E1",
+        "plyo_contacts_cap_session": 40,
+        "plyo_contacts_cap_week": 80,
+        "sprint_meters_cap_session": 0,
+        "sprint_meters_cap_week": 0,
+        "cns_budget": "LOW",
+        "sprint_counting_standard": "TRUESPRINT_METERS_ONLY_DISABLED",
+        "requires_intensity_percent_vmax": false,
+        "required_governance": [
+          "R2P_STAGE2_INITIAL_LOADING",
+          "BILATERAL_ONLY_PLYO",
+          "NO_UNILATERAL_OR_REACTIVE_PLYO",
+          "NO_SPRINT_OR_COD",
+          "PRIME_PREP_WORK_CLEAR_REQUIRED",
+          "SESSION_CEILING_NOT_TARGET"
+        ],
+        "r2p_load_standards_ref": "R2P.Stage2",
+        "stage2_contact_cap_session": 40,
+        "stage2_allowed_exercise_types": [
+          "BILATERAL_LOW_AMPLITUDE",
+          "CONTROLLED_LANDINGS",
+          "LIGHT_HOPS"
+        ],
+        "stage2_forbidden_exercise_types": [
+          "UNILATERAL_PLYOS",
+          "HIGH_AMPLITUDE_JUMPS",
+          "REACTIVE_WORK",
+          "CUTTING_DRILLS"
+        ]
+      },
+
+      "macro_structure": [
+        {
+          "meso_num": 1,
+          "meso_name": "INITIAL_LOADING_BILATERAL_FOUNDATION",
+          "weeks": [1, 2, 3, 4],
+          "primary_goal": "Introduce low-level bilateral plyometric exposure and controlled loading while protecting the graft. Build confidence in landing and basic deceleration.",
+          "fv_zones_allowed": ["Z5", "Z6", "Z3"],
+          "fv_zone_emphasis": {
+            "Z5": "Strength-endurance (tempo squats, split-stance hinges at Band 0–1)",
+            "Z6": "Hypertrophy / time-under-tension for tissue capacity (Band 0–1)",
+            "Z3": "Intro elastic (E1-only low-amplitude bilateral hops and landings)"
+          },
+          "sprint_intent": [],
+          "sprint_intent_description": "No sprinting or COD. Forward/backward movement is limited to controlled step and gait drills, not tracked as sprint meters.",
+          "plyo_contact_range": {
+            "min": 20,
+            "max": 40,
+            "unit": "contacts/session",
+            "note": "Contacts/session, not per week. Total must not exceed 40. All contacts are bilateral, low amplitude, E1 only."
+          },
+          "sprint_meters_range": {
+            "min": 0,
+            "max": 0,
+            "unit": "m/week",
+            "note": "No running or sprint volume tracked in Stage 2."
+          },
+          "cns_per_day": {
+            "day_A": "LOW",
+            "day_B": "LOW",
+            "day_A_description": "Bilateral strength (Band 0–1), basic bilateral landings, positional decel.",
+            "day_B_description": "Similar structure with emphasis on pattern repetition and pain/symmetry monitoring."
+          },
+          "cns_weekly_intent": "Low CNS; emphasis on quality, symmetry, and tissue response.",
+          "elastic_strategy": "E0 for strength and ROM, E1 for low-intensity bilateral hops and controlled landings. No E2–E4. Plyo is always low-amplitude, with full control on take-off and landing.",
+          "notes": "Contact target should often sit near 20–30 for quality; 40 is a ceiling, not a goal."
+        }
+      ],
+
+      "assessment_gates": {
+        "week_2": {
+          "gate_type": "MID_STAGE_LOAD_TOLERANCE",
+          "assessments": ["pain_status", "24h_swelling", "bilateral_control"],
+          "purpose": "Confirm that bilateral loading and low-level plyometrics are tolerated without pain >2/10 or swelling.",
+          "action_if_fail": "Reduce contact target to 10–20 per session and lower strength load (Band 0 focus). Extend Stage 2 by 1–2 weeks and consider medical consult.",
+          "action_if_pass": "Allow staying near 20–30 contacts/session with Band 1 strength work while maintaining pain/swelling discipline."
+        },
+        "week_4": {
+          "gate_type": "STAGE_ADVANCE_CHECK",
+          "assessments": ["pain_status", "24h_swelling", "bilateral_strength_control", "landing_quality"],
+          "purpose": "Decide if athlete can progress to Stage 3 (unilateral integration and higher-intensity decel).",
+          "action_if_fail": "Extend Stage 2 and refine bilateral patterns. Do not introduce unilateral plyometrics or cutting.",
+          "action_if_pass": "Advance to Stage 3 block (R2P_ACL_STAGE3_PROGRESSIVE_LOADING_4WK_v1)."
+        }
+      },
+
+      "exit_state": {
+        "ready_for_block": "R2P_ACL_STAGE3_PROGRESSIVE_LOADING_4WK_v1",
+        "exit_conditions": [
+          "pain_during_and_24h_post_sessions_<=2_10_consistently",
+          "no_increase_in_joint_swelling_with_20_40_contacts_bilateral",
+          "bilateral_squat_and_hinge_patterns_show_good_control",
+          "bilateral_hop_and_landing_quality_meets_technique_criteria"
+        ],
+        "exit_assessment": "End of Week 4 or later. Athlete must handle bilateral loading and 20–40 low-level contacts without adverse tissue response.",
+        "handoff_intent": "Athlete leaves Stage 2 with proven tolerance to bilateral loading and basic landing mechanics, ready to add unilateral work and more demanding decel in Stage 3."
+      },
+
+      "special_rules": {
+        "plyo_scope_rule": "All plyometric work must be bilateral, low amplitude, E1 only. Any unilateral or reactive jumps are forbidden in Stage 2.",
+        "no_sprint_rule": "No sprinting or high-speed COD. Only controlled walking/jogging drills if cleared, but not counted as sprint volume.",
+        "pain_gate_rule": "If pain exceeds 2/10 during or 24h after, reduce load and contacts, and hold progression.",
+        "swelling_rule": "Any increase in swelling halts plyometric exposure until resolved and may trigger regression to Stage 1.",
+        "no_makeup_rule": "Missed sessions are not made up by increasing contacts later. Maintain caps to protect tissue.",
+        "calendar_shift_allowed": true,
+        "calendar_shift_rule": "Stage 2 minimum duration is 3–4 weeks. Do not shorten below 3 weeks without medical sign-off, even if calendar shifts."
+      },
+
+      "governance_status": "PASS",
+      "governance_checklist": [
+        "✅ Stage 2 contact cap per session = 40, aligned with R2P Stage 2 spec.",
+        "✅ E-node limited to E0–E1 only; no E2–E4.",
+        "✅ No sprint meters or COD; TRUESPRINT_METERS standard disabled.",
+        "✅ Band 1 maximum; no higher strength bands.",
+        "✅ Pain and swelling gates explicit, with mid-stage and exit checks.",
+        "✅ Exit routes cleanly into Stage 3 (progressive unilateral loading)."
+      ]
+    }
+  ],
+
+  "integration_notes": {
+    "enforcement_owner": {
+      "weekly_volume_ranges": "WEEKLY_ACCUMULATOR",
+      "sprint_intensity_validation": "EXERCISE_SELECTION_ALGORITHM",
+      "session_caps_and_zone_routing": "EXERCISE_SELECTION_ALGORITHM",
+      "gate_advance_logic": "GATE_ENGINE",
+      "block_selection": "BLOCK_SELECTOR",
+      "meso_progression": "GATE_ENGINE"
+    },
+    "block_selector_responsibility": "When r2p_stage = R2P_Stage_2 and prior block exit_state.ready_for_block = 'R2P_ACL_STAGE2_INITIAL_LOADING_4WK_v1', select this block. Do not skip Stage 2.",
+    "weekly_accumulator_responsibility": "Confirm plyo_contacts/session ≤40 and plyo_contacts/week ≤80. Any positive sprint_meters flagged as violation.",
+    "exercise_selection_algorithm_responsibility": "Filter for BILATERAL_LOW_AMPLITUDE, CONTROLLED_LANDINGS, LIGHT_HOPS only. Reject unilateral plyos, high-amplitude jumps, and any sprint-tagged exercises.",
+    "gate_engine_responsibility": "At Week 2 and Week 4, check pain, swelling, bilateral control, and landing quality to decide whether to progress, hold, or regress.",
+    "ai_playbook_reference": "Coach & AI Playbook should explain Stage 2 as the first step into controlled plyometrics: all bilateral, low-amplitude, with contacts treated as ceilings, not goals.",
+    "future_versioning": "Next blocks in chain: R2P_ACL_STAGE3_PROGRESSIVE_LOADING_4WK_v1 (unilateral integration) and R2P_ACL_STAGE4_RETURN_TO_SPORT_4WK_v1."
+  }
+}
+{
+  "schema_id": "EFL_MESOMACRO_MANIFEST",
+  "manifest_version": "1.0.0",
+  "manifest_created": "2025-12-16",
+  "manifest_description": "Return-to-Performance ACL Stage 3 meso-macro manifest. Progressive Loading / Unilateral Integration. Introduces unilateral plyometrics, directional bounds, and sport-movement prep under strict pain and swelling control.",
+  "blocks": [
+    {
+      "block_id": "R2P_ACL_STAGE3_PROGRESSIVE_LOADING_4WK_v1",
+      "block_tags": ["R2P", "ACL", "STAGE3", "PROGRESSIVE_LOADING", "UNILATERAL_INTEGRATION"],
+      "service_line": "R2P",
+      "population_icp": "R2P_ACL_Default",
+      "season": "Off_Calendar",
+      "r2p_stage": "R2P_Stage_3",
+      "duration_weeks": 4,
+      "sessions_per_week": 2,
+      "total_sessions": 8,
+
+      "legality_check": {
+        "population_ceiling_band": "Band_2",
+        "population_ceiling_node": "C",
+        "max_e_node_allowed": "E2",
+        "plyo_contacts_cap_session": 80,
+        "plyo_contacts_cap_week": 160,
+        "sprint_meters_cap_session": 0,
+        "sprint_meters_cap_week": 0,
+        "cns_budget": "MODERATE",
+        "sprint_counting_standard": "TRUESPRINT_METERS_ONLY_DISABLED",
+        "requires_intensity_percent_vmax": false,
+        "required_governance": [
+          "R2P_STAGE3_PROGRESSIVE_LOADING",
+          "UNILATERAL_PLYO_ALLOWED_E1_E2_ONLY",
+          "NO_MAX_EFFORT_PLYO_OR_CUTTING",
+          "NO_FULL_SPRINT_OR_REACTIVE_COD",
+          "PRIME_PREP_WORK_CLEAR_REQUIRED",
+          "SESSION_CEILING_NOT_TARGET"
+        ],
+        "r2p_load_standards_ref": "R2P.Stage3",
+        "stage3_contact_cap_session": 80,
+        "stage3_allowed_exercise_types": [
+          "UNILATERAL_MODERATE",
+          "DIRECTIONAL_BOUNDS",
+          "SPORT_MOVEMENT_PREP"
+        ],
+        "stage3_forbidden_exercise_types": [
+          "MAX_EFFORT_PLYOS",
+          "DEPTH_JUMPS",
+          "CUTTING_DRILLS",
+          "REACTIVE_CHANGE_OF_DIRECTION"
+        ],
+        "e_node_permissions": {
+          "E0": "ALLOWED",
+          "E1": "ALLOWED",
+          "E2": "ALLOWED",
+          "E3": "CONDITIONAL_DIRECTOR_APPROVAL",
+          "E4": "FORBIDDEN"
+        }
+      },
+
+      "macro_structure": [
+        {
+          "meso_num": 1,
+          "meso_name": "UNILATERAL_INTEGRATION_PROGRESSIVE_LOADING",
+          "weeks": [1, 2, 3, 4],
+          "primary_goal": "Integrate unilateral loading and moderate-intensity plyometrics to prepare for sport-specific demands while maintaining pain and swelling control.",
+          "fv_zones_allowed": ["Z5", "Z3", "Z4"],
+          "fv_zone_emphasis": {
+            "Z5": "Strength / strength-endurance (bilateral and unilateral Band 1–2)",
+            "Z3": "Speed–Strength / elastic (E1–E2 unilateral hops, bounds, decel drills)",
+            "Z4": "Higher-velocity elastic elements without max shock (no depth-jump style E3 unless approved)"
+          },
+          "sprint_intent": [],
+          "sprint_intent_description": "No true sprint or high-speed COD volume tracked. Accel-to-stick and linear decel drills are treated as plyometric/decel work, not sprint meters.",
+          "plyo_contact_range": {
+            "min": 30,
+            "max": 60,
+            "unit": "contacts/session",
+            "note": "Operate mostly in the 30–50 contact range; 60–80 is reserved for later in the stage if tolerated. Unilateral work counted with ONE_FOOT_CONTACT standard."
+          },
+          "sprint_meters_range": {
+            "min": 0,
+            "max": 0,
+            "unit": "m/week",
+            "note": "Linear accel-to-stick drills are counted as contacts, not sprint meters, in Stage 3."
+          },
+          "cns_per_day": {
+            "day_A": "MODERATE",
+            "day_B": "LOW",
+            "day_A_description": "Primary strength + unilateral integration (SL RDL, split squat ISO, unilateral decel).",
+            "day_B_description": "Supportive strength and lower-contact decel/plyo work with emphasis on quality."
+          },
+          "cns_weekly_intent": "Moderate CNS load overall, with increasing unilateral and multi-planar demands.",
+          "elastic_strategy": "E1–E2 allowed. Begin with mostly E1 and add E2 (directional bounds, higher step-downs) as tolerance proves. E3 only via explicit director override and not required by this block.",
+          "notes": "Progression is driven by movement quality, pain 0–2/10, and 24h swelling. Contacts remain well below 80 unless tissue response is excellent."
+        }
+      ],
+
+      "assessment_gates": {
+        "week_2": {
+          "gate_type": "MID_STAGE_UNILATERAL_TOLERANCE",
+          "assessments": ["pain_status", "24h_swelling", "unilateral_control", "valgus_behavior"],
+          "purpose": "Confirm that unilateral loading and directional bounds are tolerated without pain >2/10, swelling increase, or valgus deterioration.",
+          "action_if_fail": "Reduce unilateral plyo volume (e.g., 20–30 contacts/session), bias back toward bilateral loading, and extend Stage 3 by 1–2 weeks.",
+          "action_if_pass": "Allow progression toward 40–50 contacts/session, with more E2-style bounds and decel drills as long as form and tissue response hold."
+        },
+        "week_4": {
+          "gate_type": "STAGE_ADVANCE_CHECK",
+          "assessments": ["pain_status", "24h_swelling", "unilateral_strength_control", "multi_planar_landing_quality", "confidence_status"],
+          "purpose": "Decide if athlete is ready to enter Stage 4 Return-to-Sport integration with higher decel and sport-specific loading.",
+          "action_if_fail": "Extend Stage 3 to continue unilateral control development. Do not introduce cutting or high-speed reactive COD.",
+          "action_if_pass": "Advance to Stage 4 block (R2P_ACL_STAGE4_RETURN_TO_SPORT_4WK_v1)."
+        }
+      },
+
+      "exit_state": {
+        "ready_for_block": "R2P_ACL_STAGE4_RETURN_TO_SPORT_4WK_v1",
+        "exit_conditions": [
+          "pain_during_and_24h_post_sessions_<=2_10_with_unilateral_and_directional_bounds",
+          "no_recurrent_swelling_despite_30_60_contacts_session",
+          "unilateral_strength_and_control_meet_stage3_targets",
+          "multi_planar_landing_and_deceleration_quality_meet_technique_criteria",
+          "athlete_confidence_scores_stable_or_improving"
+        ],
+        "exit_assessment": "Performed at or after Week 4. Athlete must show stable tolerance to unilateral and directional loading without adverse response.",
+        "handoff_intent": "Athlete exits Stage 3 with robust unilateral control and decel readiness, prepared for more advanced sport-specific and reactive tasks in Stage 4."
+      },
+
+      "special_rules": {
+        "plyo_scope_rule": "Unilateral plyometrics and directional bounds allowed at E1–E2 intensity only. No depth jumps, no max-effort single-leg bounds, no reactive contacts.",
+        "no_sprint_rule": "No full-speed sprinting or high-speed COD yet. Linear accel-to-stick and controlled decel drills are allowed within plyo contact caps.",
+        "pain_gate_rule": "If pain exceeds 2/10 during or 24h post-session, reduce load and contacts and halt progression.",
+        "swelling_rule": "Any recurrent or increasing swelling triggers regression in plyo intensity/volume and may require partial return to Stage 2 patterns.",
+        "valgus_monitoring_rule": "Frontal-plane knee alignment monitored on all unilateral and lateral decel tasks. Significant valgus drift triggers regression and technique focus.",
+        "no_makeup_rule": "Missed sessions are not compensated with higher-contact days. Respect per-session and per-week caps.",
+        "calendar_shift_allowed": true,
+        "calendar_shift_rule": "Minimum Stage 3 duration is 4 weeks unless medical team approves earlier transition based on objective tests."
+      },
+
+      "governance_status": "PASS",
+      "governance_checklist": [
+        "✅ Stage 3 contact cap per session = 80, consistent with R2P Stage 3 spec.",
+        "✅ E-node limited to E0–E2; E3 conditional only with director override, E4 forbidden.",
+        "✅ No sprint meters tracked; decel/accel drills treated as plyometric contacts.",
+        "✅ Band 2 maximum; no heavier strength bands used.",
+        "✅ Pain, swelling, unilateral control, and valgus behavior embedded in gates.",
+        "✅ Exit routes cleanly into Stage 4 Return-to-Sport block."
+      ]
+    }
+  ],
+
+  "integration_notes": {
+    "enforcement_owner": {
+      "weekly_volume_ranges": "WEEKLY_ACCUMULATOR",
+      "sprint_intensity_validation": "EXERCISE_SELECTION_ALGORITHM",
+      "session_caps_and_zone_routing": "EXERCISE_SELECTION_ALGORITHM",
+      "gate_advance_logic": "GATE_ENGINE",
+      "block_selection": "BLOCK_SELECTOR",
+      "meso_progression": "GATE_ENGINE"
+    },
+    "block_selector_responsibility": "When r2p_stage = R2P_Stage_3 and prior block exit_state.ready_for_block = 'R2P_ACL_STAGE3_PROGRESSIVE_LOADING_4WK_v1', select this block. Do not skip from Stage 2 directly to Stage 4.",
+    "weekly_accumulator_responsibility": "Track plyo_contacts per session and per week, ensuring they remain ≤80/session and ≤160/week. Confirm sprint_meters remains 0.",
+    "exercise_selection_algorithm_responsibility": "Select from UNILATERAL_MODERATE, DIRECTIONAL_BOUNDS, SPORT_MOVEMENT_PREP categories with E1–E2 intensity. Reject depth jumps, max-effort plyos, cutting, or any sprint-tagged work.",
+    "gate_engine_responsibility": "Use Week 2 and Week 4 gates to regulate progression and decide when athlete is ready to move to Stage 4.",
+    "ai_playbook_reference": "Coach & AI Playbook should clarify that Stage 3 is where unilateral and directional plyos become main characters, but sprinting and cutting are still out of scope.",
+    "future_versioning": "Next block: R2P_ACL_STAGE4_RETURN_TO_SPORT_4WK_v1, which introduces more advanced decel, tri-planar work, and early return-to-sport testing."
+  }
+}
+{
+  "schema_id": "EFL_MESOMACRO_MANIFEST",
+  "manifest_version": "1.0.0",
+  "manifest_created": "2025-12-16",
+  "manifest_description": "Return-to-Performance ACL Stage 4 meso-macro manifest. Return to Sport / Full Integration. High-level deceleration, tri-planar plyometrics, and on-court/field preparation leading into full sport return.",
+  "blocks": [
+    {
+      "block_id": "R2P_ACL_STAGE4_RETURN_TO_SPORT_4WK_v1",
+      "block_tags": [
+        "R2P",
+        "ACL",
+        "STAGE4",
+        "RETURN_TO_SPORT",
+        "FULL_INTEGRATION"
+      ],
+      "service_line": "R2P",
+      "population_icp": "R2P_ACL_Default",
+      "season": "Off_Calendar",
+      "r2p_stage": "R2P_Stage_4",
+      "duration_weeks": 4,
+      "sessions_per_week": 2,
+      "total_sessions": 8,
+
+      "legality_check": {
+        "population_ceiling_band": "Band_3",
+        "population_ceiling_node": "C",
+        "max_e_node_allowed": "E4",
+        "plyo_contacts_cap_session": 120,
+        "plyo_contacts_cap_week": 240,
+        "sprint_meters_cap_session": 0,
+        "sprint_meters_cap_week": 0,
+        "cns_budget": "HIGH",
+        "sprint_counting_standard": "TRUESPRINT_METERS_ONLY_DISABLED",
+        "requires_intensity_percent_vmax": false,
+        "required_governance": [
+          "R2P_STAGE4_RETURN_TO_SPORT",
+          "ALL_EXERCISE_TYPES_ALLOWED_WITHIN_POPULATION_LIMITS",
+          "DEPTH_JUMPS_AND_E4_ALLOWED_WITH_MONITORING",
+          "NO_UNSUPERVISED_MAX_EFFORT_CUTTING_ON_DAY1",
+          "PRIME_PREP_WORK_CLEAR_REQUIRED",
+          "SESSION_CEILING_NOT_TARGET"
+        ],
+        "r2p_load_standards_ref": "R2P.Stage4",
+        "stage4_contact_cap_session": 120,
+        "stage4_allowed_exercise_types": [
+          "ALL"
+        ],
+        "stage4_forbidden_exercise_types": [],
+        "e_node_permissions": {
+          "E0": "ALLOWED",
+          "E1": "ALLOWED",
+          "E2": "ALLOWED",
+          "E3": "ALLOWED",
+          "E4": "ALLOWED_WITH_MONITORING"
+        }
+      },
+
+      "macro_structure": [
+        {
+          "meso_num": 1,
+          "meso_name": "RETURN_TO_SPORT_INTEGRATION",
+          "weeks": [1, 2, 3, 4],
+          "primary_goal": "Blend high-level strength, tri-planar plyometrics, and sport-specific footwork to bridge from rehab to full training and non-restricted practice.",
+          "fv_zones_allowed": ["Z3", "Z4", "Z5", "Z8"],
+          "fv_zone_emphasis": {
+            "Z3": "Speed–Strength for powerful decel and re-accel",
+            "Z4": "High-intensity elastic and advanced plyos (E3–E4 with monitoring)",
+            "Z5": "Strength / robustness work at Band 1–3",
+            "Z8": "Sport-specific COD, agility, and reactive drills"
+          },
+          "sprint_intent": [],
+          "sprint_intent_description": "Short, high-quality accelerations and COD are embedded as sport movement drills and counted as plyometric/skill work, not sprint meters, inside R2P. True sprint budgeting resumes after graduation into SP Performance or team programs.",
+          "plyo_contact_range": {
+            "min": 60,
+            "max": 100,
+            "unit": "contacts/session",
+            "note": "Operate mostly in the 60–100 contact range; 120 is an absolute ceiling for this population and stage, not a target. ONE_FOOT_CONTACT standard applies."
+          },
+          "sprint_meters_range": {
+            "min": 0,
+            "max": 0,
+            "unit": "m/week",
+            "note": "R2P Stage 4 still tracks decel/COD work as contacts, not weekly sprint meters."
+          },
+          "cns_per_day": {
+            "day_A": "HIGH",
+            "day_B": "MODERATE",
+            "day_A_description": "Heavier strength (up to Band 3) plus higher-intensity plyos and COD work.",
+            "day_B_description": "Supportive strength, lower-contact elastic work, and technical sport-pattern practice."
+          },
+          "cns_weekly_intent": "High but controlled; designed as a bridge into full sport, not an endless peak.",
+          "elastic_strategy": "Full spectrum E1–E3, with selective E4 under close monitoring. Depth jumps, reactive single-leg work, and high-demand COD are introduced gradually, not all at once.",
+          "notes": "Progress volume and intensity only when pain and swelling remain stable and movement quality stays high, especially under fatigue and reaction."
+        }
+      ],
+
+      "assessment_gates": {
+        "week_2": {
+          "gate_type": "MID_STAGE_RTS_READINESS_SCREEN",
+          "assessments": [
+            "pain_status",
+            "24h_swelling",
+            "hop_tests_submax",
+            "valgus_behavior",
+            "confidence_status"
+          ],
+          "purpose": "Check early response to higher-intensity plyos and sport patterns before progressing complexity and reactive demands.",
+          "action_if_fail": "Hold or reduce complexity (less E3/E4, fewer reactive drills), lower contacts toward 40–60/session, and extend Stage 4 timeline.",
+          "action_if_pass": "Progress toward more complex COD, reactive drills, and modest increases in E3/E4 volume while maintaining technique and tissue response."
+        },
+        "week_4": {
+          "gate_type": "RETURN_TO_SPORT_TEST_GATE",
+          "assessments": [
+            "RTS_test_battery",
+            "medical_clearance_status",
+            "hop_symmetry_indices",
+            "movement_quality_under_fatigue",
+            "athlete_confidence_status"
+          ],
+          "purpose": "Decide if athlete meets Return-to-Sport criteria and can graduate from R2P into full training and competitive preparation environments.",
+          "action_if_fail": "Maintain or slightly regress Stage 4 loading while addressing specific deficits (strength asymmetry, hop symmetry, confidence). Re-test after an additional 2–4 weeks.",
+          "action_if_pass": "Graduate to SP Performance or relevant sport performance programming, with clear communication of any ongoing guardrails."
+        }
+      },
+
+      "exit_state": {
+        "ready_for_block": "GRADUATE_TO_SP_PERFORMANCE_OR_SPORT_PROGRAM",
+        "exit_conditions": [
+          "RTS_test_passed_per_protocol",
+          "formal_medical_clearance_received",
+          "hop_symmetry_and_strength_meet_defined_thresholds",
+          "no_recurrent_swelling_or_pain_spikes_with_high_intensity_work",
+          "athlete_reports_high_confidence_in_sport_movements"
+        ],
+        "exit_assessment": "Performed at or after Week 4, often aligned with formal RTS test day. All key metrics (clinical and performance) must meet the agreed thresholds.",
+        "handoff_intent": "Athlete exits R2P and enters regular SP Performance or team training where standard Load Standards population and season rules apply."
+      },
+
+      "special_rules": {
+        "e4_monitoring_rule": "E4 (maximum-intensity) plyos are allowed but must be tightly monitored and used sparingly, especially early in Stage 4.",
+        "cutting_progression_rule": "Cutting and reactive COD start with controlled angles and build toward more chaotic and game-like demands only after mid-stage gate is passed.",
+        "pain_gate_rule": "Pain >2/10 during or 24h after high-intensity work triggers regression in intensity/volume and may delay RTS testing.",
+        "swelling_rule": "Any meaningful swelling response pauses E3/E4 and cutting work until resolved and re-cleared.",
+        "no_makeup_rule": "Do not compensate missed sessions by exceeding per-session caps or by stacking high-CNS days.",
+        "calendar_shift_allowed": true,
+        "calendar_shift_rule": "Stage 4 typical duration is 2–4 weeks before full return. Extending for more time is allowed; compressing below 2 weeks requires explicit medical and coaching sign-off."
+      },
+
+      "governance_status": "PASS",
+      "governance_checklist": [
+        "✅ Stage 4 contact cap per session = 120, matching R2P Stage 4 spec.",
+        "✅ E-node permissions allow E0–E4, with E4 allowed only with monitoring.",
+        "✅ Band 3 maximum, consistent with Stage 4 R2P rules.",
+        "✅ Pain, swelling, hop symmetry, and confidence built into mid-stage and RTS gates.",
+        "✅ Exit requires formal RTS test pass and medical clearance before graduation."
+      ]
+    }
+  ],
+
+  "integration_notes": {
+    "enforcement_owner": {
+      "weekly_volume_ranges": "WEEKLY_ACCUMULATOR",
+      "sprint_intensity_validation": "EXERCISE_SELECTION_ALGORITHM",
+      "session_caps_and_zone_routing": "EXERCISE_SELECTION_ALGORITHM",
+      "gate_advance_logic": "GATE_ENGINE",
+      "block_selection": "BLOCK_SELECTOR",
+      "meso_progression": "GATE_ENGINE"
+    },
+    "block_selector_responsibility": "When r2p_stage = R2P_Stage_4 and prior block exit_state.ready_for_block = 'R2P_ACL_STAGE4_RETURN_TO_SPORT_4WK_v1', select this block as the terminal R2P block. No R2P stage beyond 4.",
+    "weekly_accumulator_responsibility": "Ensure plyo_contacts/session ≤120 and plyo_contacts/week ≤240. Sprint meters remain 0 inside R2P; true sprint budgeting resumes post-graduation.",
+    "exercise_selection_algorithm_responsibility": "Open full catalog but enforce population-specific ceilings and supervision requirements for E4 and Band 3 work.",
+    "gate_engine_responsibility": "Use Week 2 and Week 4 gates to modulate intensity and determine RTS readiness. Do not mark RTS passed without both test battery and medical clearance fields true.",
+    "ai_playbook_reference": "Coach & AI Playbook should describe Stage 4 as the final bridge from rehab to normal sport training, emphasizing that passing RTS tests and medical clearance—not just feeling good—govern graduation.",
+    "future_versioning": "After Stage 4, athlete transitions to standard SP Performance or sport-specific blocks governed by population (Youth_13_17 or Adult) and season_type, not by R2P stage."
+  }
+}

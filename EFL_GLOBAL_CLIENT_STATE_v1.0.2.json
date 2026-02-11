@@ -1,0 +1,1131 @@
+{
+  "$id": "EFL_GLOBAL_CLIENT_STATE_v1.0.2",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EFL Global Client State Schema",
+  "description": "Canonical client state schema for all EFL service lines. Production-locked with strict JSON Schema validation, zero runtime contradictions, drift-locked with additionalProperties:false. v1.0.2 surgical patches: ACL-only R2P conditional, projecthistory required fields, uniqueItems enforcement, minLength on IDs.",
+  "metadata": {
+    "specid": "EFLGLOBALCLIENTSTATE",
+    "version": "1.0.2",
+    "effectivedate": "2026-01-15",
+    "owner": "Elite Fitness Lab \u2014 Director of Performance Systems",
+    "status": "PRODUCTION-LOCKED",
+    "purpose": "Single source of truth for Router to select legal projects and enforce cross-project containment.",
+    "schemaconvention": "JSON Schema 2020-12 (strict, drift-locked)",
+    "validator": "Ajv v8+ with strict mode, allErrors, formats",
+    "authoritydependencies": [
+      "EFLGovernancev4.1.md",
+      "EFLLoadStandardsv2.2.0.json",
+      "sportdemandsgridv2.2.2.json",
+      "EFLICPDefinitionsv2.2.json",
+      "EFLSPPROJECTWRAPPERR2PACLv1.1.md",
+      "EFLSPPROJECTWRAPPERCOURTSPORTFOUNDATIONSv1.0.md",
+      "EFL-ELASTIC-RELOAD-BLOCK-WRAPPER-v1.0.md",
+      "EFLR2PACLSYSTEM1LEGALITYENGINEv1.0.6.json"
+    ],
+    "notes": [
+      "v1.0.2 PRODUCTION-LOCKED: ACL-only R2P conditional, projecthistory required fields, uniqueItems enforcement, minLength on IDs. Closes gap between schema-valid and Router-legal.",
+      "Client State partitioned: inputs (coach ground truth, immutable by Router), derived (computed by Router/System-1 only), decisions (Router-only outputs).",
+      "Router precedence: medical lock > hardstop > R2P enrollment > age/population > season > entry gates > macro caps > default-deny.",
+      "Validation phases: (1) Schema validation, (2) Coherence validation, (3) Invariant validation."
+    ],
+    "ajv_config": {
+      "description": "Recommended Ajv validator configuration for strict validation",
+      "code_example": "const Ajv = require('ajv'); const addFormats = require('ajv-formats'); const ajv = new Ajv({ strict: true, allErrors: true, validateFormats: true }); addFormats(ajv); const validate = ajv.compile(schema);"
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "clientid",
+    "lastupdated",
+    "stateheader",
+    "inputs",
+    "derived",
+    "decisions"
+  ],
+  "definitions": {
+    "ReasonCode": {
+      "type": "string",
+      "enum": [
+        "DEFAULTDENY_MISSING_CRITICAL_INPUTS",
+        "DEFAULTDENY_VERSION_MISMATCH",
+        "DEFAULTDENY_STATEHEADER_MISMATCH",
+        "DEFAULTDENY_MEDICAL_LOCK",
+        "DEFAULTDENY_HARDSTOP_NO_ROUTE",
+        "DEFAULT_READINESS_YELLOW",
+        "DEFAULT_ASSUME_GAME_PROXIMITY",
+        "DEFAULT_ASSUME_PRACTICE_VOLUME",
+        "DEFAULT_BAN_ELASTIC_UNKNOWN_EXPOSURE",
+        "INSUFFICIENTDATA",
+        "MISSING_DOWNSTREAM_AUTHORITY",
+        "ROUTERLEGALITYOVERRIDDEN",
+        "VERSIONMISMATCH",
+        "ROUTEROUTPUTINCOMPLETE",
+        "R2P_ENROLLMENT_LOCKS_SP",
+        "AGE_POPULATION_DENY",
+        "SEASON_DENY",
+        "EXIT_GATE_NOT_MET",
+        "MACRO_CAP_EXCEEDED",
+        "YOUTH_HARDSTOP_NONR2P_DENY_AND_REFER"
+      ]
+    },
+    "ProjectID": {
+      "type": "string",
+      "enum": [
+        "R2P_ACL",
+        "COURT_SPORT_FOUNDATIONS",
+        "ELASTIC_RELOAD",
+        "ELASTIC_SPECIALIZATION",
+        "DECEL_SPECIALIZATION",
+        "FORCE_SPECIALIZATION",
+        "ICP_BASKETBALL_INSEASON",
+        "ICP_VOLLEYBALL_INSEASON",
+        "ICP_BASKETBALL_POSTSEASON",
+        "ICP_VOLLEYBALL_POSTSEASON",
+        "OFF_SEASON_BASELINE_COURT_VERTICAL",
+        "ADULT_STRENGTH",
+        "ADULT_MOBILITY",
+        "ADULT_ERL"
+      ]
+    }
+  },
+  "properties": {
+    "clientid": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique athlete identifier."
+    },
+    "lastupdated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO8601 timestamp of last mutation. Must match stateheader.lastupdated."
+    },
+    "stateheader": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Minimal guaranteed header for audit. Router enforces atomic coherence.",
+      "required": [
+        "clientid",
+        "lastupdated",
+        "activeproject",
+        "seasontype",
+        "readinessflag",
+        "routerversion",
+        "eligible_for_training_today"
+      ],
+      "properties": {
+        "clientid": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lastupdated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "activeproject": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "R2P_ACL",
+            "COURT_SPORT_FOUNDATIONS",
+            "ELASTIC_RELOAD",
+            "ELASTIC_SPECIALIZATION",
+            "DECEL_SPECIALIZATION",
+            "FORCE_SPECIALIZATION",
+            "ICP_BASKETBALL_INSEASON",
+            "ICP_VOLLEYBALL_INSEASON",
+            "ICP_BASKETBALL_POSTSEASON",
+            "ICP_VOLLEYBALL_POSTSEASON",
+            "OFF_SEASON_BASELINE_COURT_VERTICAL",
+            "ADULT_STRENGTH",
+            "ADULT_MOBILITY",
+            "ADULT_ERL"
+          ]
+        },
+        "seasontype": {
+          "type": "string",
+          "enum": [
+            "OFFSEASON",
+            "PRESEASON",
+            "INSEASON",
+            "POSTSEASON"
+          ]
+        },
+        "readinessflag": {
+          "type": "string",
+          "enum": [
+            "GREEN",
+            "YELLOW",
+            "RED"
+          ]
+        },
+        "routerversion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "eligible_for_training_today": {
+          "type": "boolean"
+        }
+      }
+    },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Ground truth facts. Only intake/update flows may mutate. Router may NOT mutate inputs.",
+      "required": [
+        "athleteprofile",
+        "medicalstatus",
+        "trainingcontext_global"
+      ],
+      "properties": {
+        "athleteprofile": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "age",
+            "sport",
+            "athletetrack"
+          ],
+          "properties": {
+            "age": {
+              "type": "integer",
+              "minimum": 8,
+              "maximum": 99
+            },
+            "sport": {
+              "type": "string",
+              "enum": [
+                "BASKETBALL",
+                "VOLLEYBALL",
+                "SOCCER",
+                "LACROSSE",
+                "FIELDHOCKEY",
+                "TENNIS",
+                "TRACKANDFIELDSPRINTS",
+                "TRACKANDFIELDTHROWS",
+                "WRESTLING",
+                "GENERAL",
+                "OTHER_SPORT"
+              ]
+            },
+            "athletetrack": {
+              "type": "string",
+              "enum": [
+                "GENERAL",
+                "ATHLETE"
+              ]
+            },
+            "population": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "Youth812",
+                "Youth1316",
+                "Youth17Advanced",
+                "Adult_GENERAL",
+                "Adult_ATHLETE",
+                null
+              ]
+            },
+            "gender": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "MALE",
+                "FEMALE",
+                "OTHER",
+                "UNKNOWN",
+                null
+              ]
+            },
+            "level": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "YOUTH",
+                "HS",
+                "COLLEGE",
+                "PRO",
+                "REC",
+                "MASTERS",
+                null
+              ]
+            },
+            "sport_detail": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "medicalstatus": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "isinr2pservice",
+            "injurytype",
+            "hardstopstatus"
+          ],
+          "properties": {
+            "isinr2pservice": {
+              "type": "boolean"
+            },
+            "injurytype": {
+              "type": "string",
+              "enum": [
+                "NONE",
+                "ACLRECONSTRUCTION",
+                "ACLHIGHGRADESPRAIN",
+                "SHOULDERLABRAL",
+                "ANKLELOWGRADE",
+                "PATELLARTENDINOPATHY",
+                "LOWERBACKNONSPECIFIC",
+                "OTHER"
+              ]
+            },
+            "weekspostop": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "grafttype": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "HAMSTRING",
+                "PATELLARTENDON",
+                "QUADTENDON",
+                "ALLOGRAFT",
+                "UNKNOWN",
+                "NA",
+                null
+              ]
+            },
+            "providerclearance": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "additionalProperties": false,
+              "required": [
+                "resistancetrainingcleared",
+                "runningcleared",
+                "codcleared",
+                "fullsportcleared"
+              ],
+              "properties": {
+                "resistancetrainingcleared": {
+                  "type": "boolean"
+                },
+                "runningcleared": {
+                  "type": "boolean"
+                },
+                "codcleared": {
+                  "type": "boolean"
+                },
+                "fullsportcleared": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "hardstopstatus": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "hardstoptriggered",
+                "hardstopreasons",
+                "hardstopeventlog",
+                "medicallocktriggered"
+              ],
+              "properties": {
+                "hardstoptriggered": {
+                  "type": "boolean"
+                },
+                "hardstopreasons": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "hardstopeventlog": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "eventid",
+                      "triggerdate",
+                      "hardstopreasons",
+                      "resolutiondate"
+                    ],
+                    "properties": {
+                      "eventid": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "triggerdate": {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      "hardstopreasons": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "resolutiondate": {
+                        "type": [
+                          "string",
+                          "null"
+                        ],
+                        "format": "date"
+                      }
+                    }
+                  }
+                },
+                "medicallocktriggered": {
+                  "type": "boolean"
+                },
+                "medicallockreason": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "enum": [
+                    "REPEATEDHARDSTOP",
+                    "PROVIDERDIRECTIVE",
+                    "OTHER",
+                    null
+                  ]
+                }
+              },
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "hardstoptriggered": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "hardstoptriggered"
+                    ]
+                  },
+                  "then": {
+                    "properties": {
+                      "hardstopreasons": {
+                        "minItems": 1
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "medicallocktriggered": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "medicallocktriggered"
+                    ]
+                  },
+                  "then": {
+                    "required": [
+                      "medicallockreason"
+                    ],
+                    "properties": {
+                      "medicallockreason": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "isinr2pservice": {
+                    "const": true
+                  },
+                  "injurytype": {
+                    "enum": [
+                      "ACLRECONSTRUCTION",
+                      "ACLHIGHGRADESPRAIN"
+                    ]
+                  }
+                },
+                "required": [
+                  "isinr2pservice",
+                  "injurytype"
+                ]
+              },
+              "then": {
+                "required": [
+                  "weekspostop",
+                  "grafttype",
+                  "providerclearance"
+                ],
+                "properties": {
+                  "weekspostop": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "grafttype": {
+                    "type": "string"
+                  },
+                  "providerclearance": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "performancegates": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "strength": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "quadlsipct": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 150
+                },
+                "hamstringlsipct": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 150
+                },
+                "hqratio": {
+                  "type": "number",
+                  "minimum": 0.0,
+                  "maximum": 1.5
+                }
+              }
+            },
+            "hoppower": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "singleleghoplsipct": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 150
+                },
+                "triplehoplsipct": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 150
+                },
+                "crossoverhoplsipct": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 150
+                },
+                "timedhop6mlsipct": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 150
+                }
+              }
+            },
+            "control": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "ybalanceasymmetrypct": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "landingqualityrating": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 10
+                },
+                "runningqualityrating": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "maximum": 10
+                },
+                "cuttingqualityrating": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "maximum": 10
+                }
+              }
+            },
+            "psychological": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "aclrsiscore": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "tsk11score": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 11,
+                  "maximum": 44
+                }
+              }
+            },
+            "exitflagssp": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "offseasonbaselineexitpassed": {
+                  "type": "boolean"
+                },
+                "foundationsexitpassed": {
+                  "type": "boolean"
+                },
+                "elasticreloadexitpassed": {
+                  "type": "boolean"
+                },
+                "maxstrengthblockcompleted": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "trainingcontext_global": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "seasontype",
+            "sessionsperweek_planned"
+          ],
+          "properties": {
+            "seasontype": {
+              "type": "string",
+              "enum": [
+                "OFFSEASON",
+                "PRESEASON",
+                "INSEASON",
+                "POSTSEASON"
+              ],
+              "description": "CRITICAL INPUT: never defaulted."
+            },
+            "readinessflag": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "GREEN",
+                "YELLOW",
+                "RED",
+                null
+              ]
+            },
+            "redsessioncount": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0
+            },
+            "sessionsperweek_planned": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 6
+            },
+            "practicegamesperweek": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 10
+            },
+            "daysuntilnextgame": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0,
+              "maximum": 21
+            },
+            "weeksavailable": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 1,
+              "maximum": 52
+            },
+            "fvbiascurrent": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "BALANCED",
+                "FORCE",
+                "VELOCITY",
+                null
+              ]
+            }
+          }
+        }
+      }
+    },
+    "derived": {
+      "description": "Computed flags. MUST exist when eligible_for_training_today=true. Null only in default-deny collapse.",
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "populationoverrides",
+            "readinessmultipliers"
+          ],
+          "properties": {
+            "populationoverrides": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "population_enforced",
+                "maxbandallowed_population",
+                "maxenodeallowed_population",
+                "enode_accent_cap_pct",
+                "fvbiaslock",
+                "weeklycontactscap_population",
+                "sessioncontactscap_population"
+              ],
+              "properties": {
+                "population_enforced": {
+                  "type": "string",
+                  "enum": [
+                    "Youth812",
+                    "Youth1316",
+                    "Youth17Advanced",
+                    "Adult_GENERAL",
+                    "Adult_ATHLETE"
+                  ]
+                },
+                "maxbandallowed_population": {
+                  "type": "string",
+                  "enum": [
+                    "Band0",
+                    "Band1",
+                    "Band2",
+                    "Band3",
+                    "Band4"
+                  ]
+                },
+                "maxenodeallowed_population": {
+                  "type": "string",
+                  "enum": [
+                    "E0",
+                    "E1",
+                    "E2",
+                    "E3",
+                    "E4"
+                  ]
+                },
+                "enode_accent_cap_pct": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0.0,
+                  "maximum": 1.0
+                },
+                "fvbiaslock": {
+                  "type": "string",
+                  "enum": [
+                    "BALANCED_ONLY",
+                    "BALANCED_OR_FORCE",
+                    "ALL"
+                  ]
+                },
+                "weeklycontactscap_population": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "sessioncontactscap_population": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            },
+            "readinessmultipliers": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "weeklymultiplier",
+                "sessionmultiplier"
+              ],
+              "properties": {
+                "weeklymultiplier": {
+                  "type": "number",
+                  "minimum": 0.0,
+                  "maximum": 1.0
+                },
+                "sessionmultiplier": {
+                  "type": "number",
+                  "minimum": 0.0,
+                  "maximum": 1.0
+                }
+              }
+            },
+            "macrocounters": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "elasticspecialization_blocks_used": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "forcebias_specialization_blocks_used": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "decel_specialization_blocks_used": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "consecutive_highcns_blocks": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "weekssincelastunload": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            },
+            "icp_bridge_allowed": {
+              "type": "boolean",
+              "default": false
+            },
+            "r2p_systemone_output": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "stage": {
+                  "type": "string",
+                  "enum": [
+                    "S1",
+                    "S2",
+                    "S25",
+                    "S3",
+                    "S4",
+                    "S5"
+                  ]
+                },
+                "r2pstagestatus": {
+                  "type": "string",
+                  "enum": [
+                    "LEGAL",
+                    "REGRESSRECOMMENDED",
+                    "HARDSTOP",
+                    "DEFAULTDENY"
+                  ]
+                },
+                "stagesource": {
+                  "type": "string",
+                  "enum": [
+                    "COACH",
+                    "COMPUTED"
+                  ]
+                },
+                "stageconflictflag": {
+                  "type": "boolean"
+                },
+                "historicalstage": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "enum": [
+                    "S1",
+                    "S2",
+                    "S25",
+                    "S3",
+                    "S4",
+                    "S5",
+                    null
+                  ]
+                },
+                "youthrtsadvisoryrequired": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "projecthistory": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "projectid",
+                  "startdate",
+                  "exitreason"
+                ],
+                "properties": {
+                  "projectid": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "blockid": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "minLength": 1
+                  },
+                  "startdate": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "enddate": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "date"
+                  },
+                  "exitreason": {
+                    "type": "string",
+                    "enum": [
+                      "COMPLETE",
+                      "INJURY",
+                      "SEASONCHANGE",
+                      "QUALITYDEGRADED",
+                      "COACHOVERRIDE",
+                      "OTHER"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "decisions": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Router output only. Fully owned by Router.",
+      "required": [
+        "activeproject",
+        "legal_projects",
+        "illegal_projects_with_reasons",
+        "eligible_for_training_today",
+        "router_reasoncodes",
+        "routerversion",
+        "rationale_stack"
+      ],
+      "properties": {
+        "activeproject": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "R2P_ACL",
+            "COURT_SPORT_FOUNDATIONS",
+            "ELASTIC_RELOAD",
+            "ELASTIC_SPECIALIZATION",
+            "DECEL_SPECIALIZATION",
+            "FORCE_SPECIALIZATION",
+            "ICP_BASKETBALL_INSEASON",
+            "ICP_VOLLEYBALL_INSEASON",
+            "ICP_BASKETBALL_POSTSEASON",
+            "ICP_VOLLEYBALL_POSTSEASON",
+            "OFF_SEASON_BASELINE_COURT_VERTICAL",
+            "ADULT_STRENGTH",
+            "ADULT_MOBILITY",
+            "ADULT_ERL"
+          ]
+        },
+        "legal_projects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProjectID"
+          },
+          "uniqueItems": true
+        },
+        "illegal_projects_with_reasons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "projectid",
+              "reasoncode"
+            ],
+            "properties": {
+              "projectid": {
+                "$ref": "#/definitions/ProjectID"
+              },
+              "reasoncode": {
+                "$ref": "#/definitions/ReasonCode"
+              }
+            }
+          }
+        },
+        "eligible_for_training_today": {
+          "type": "boolean"
+        },
+        "router_reasoncodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReasonCode"
+          },
+          "uniqueItems": true
+        },
+        "rationale_stack": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "priority",
+              "rule",
+              "fired",
+              "effect"
+            ],
+            "properties": {
+              "priority": {
+                "type": "integer"
+              },
+              "rule": {
+                "type": "string"
+              },
+              "fired": {
+                "type": "boolean"
+              },
+              "effect": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "routerversion": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "versioncoherence": {
+    "allowedrouter_versions": [
+      "EFL_GLOBAL_ROUTER_WRAPPER_v1.0"
+    ],
+    "coherencerules": [
+      "stateheader.lastupdated MUST equal lastupdated",
+      "stateheader.activeproject MUST equal decisions.activeproject",
+      "stateheader.routerversion MUST equal decisions.routerversion",
+      "stateheader.seasontype MUST equal inputs.trainingcontext_global.seasontype",
+      "stateheader.readinessflag MUST equal (inputs.trainingcontext_global.readinessflag ?? 'YELLOW')",
+      "If mismatch detected, emit DEFAULTDENY_STATEHEADER_MISMATCH and stop"
+    ]
+  },
+  "router_invariants": [
+    {
+      "id": "INV-001",
+      "rule": "If population_enforced \u2208 {Youth812, Youth1316} \u2192 enode_accent_cap_pct = 0.40, else \u2192 null"
+    },
+    {
+      "id": "INV-002",
+      "rule": "Inputs partition is immutable by Router. Only intake/update flows may write to inputs.*"
+    },
+    {
+      "id": "INV-003",
+      "rule": "derived MUST exist (not null) when eligible_for_training_today=true. May be null only when eligible=false."
+    },
+    {
+      "id": "INV-004",
+      "rule": "Router writes stateheader + decisions atomically; partial writes are invalid"
+    },
+    {
+      "id": "INV-005",
+      "rule": "If readinessflag defaults to YELLOW, Router must log DEFAULT_READINESS_YELLOW in rationale_stack"
+    },
+    {
+      "id": "INV-006",
+      "rule": "All emitted reason codes must be from ReasonCode enum (schema-enforced via $ref)"
+    }
+  ],
+  "validation_phases": [
+    {
+      "phase": 1,
+      "name": "Schema Validation",
+      "description": "Validate structure against JSON Schema. Check types, required fields, enums.",
+      "on_failure": "ROUTEROUTPUTINCOMPLETE"
+    },
+    {
+      "phase": 2,
+      "name": "Coherence Validation",
+      "description": "Validate header \u2194 inputs \u2194 decisions coherence rules.",
+      "on_failure": "DEFAULTDENY_STATEHEADER_MISMATCH"
+    },
+    {
+      "phase": 3,
+      "name": "Invariant Validation",
+      "description": "Validate Router invariants INV-001 through INV-006.",
+      "on_failure": "ROUTEROUTPUTINCOMPLETE"
+    }
+  ],
+  "changelog": {
+    "v1.0.2": "2026-01-15 \u2014 Surgical patches: (1) ACL-only R2P conditional (only require weekspostop/grafttype/providerclearance for ACL injuries), (2) projecthistory required fields (projectid, startdate, exitreason), (3) uniqueItems on legal_projects/router_reasoncodes, (4) minLength=1 on clientid/routerversion/eventid. Closes gap between schema-valid and Router-legal.",
+    "v1.0.1": "2026-01-15 \u2014 Initial production-locked release with drift lock, strict nullability, reason code enforcement.",
+    "v1.0.0": "2026-01-15 \u2014 Initial release."
+  }
+}

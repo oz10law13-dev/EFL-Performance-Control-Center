@@ -1,0 +1,870 @@
+{
+  "meta": {
+    "documentId": "EFL-LOAD-STANDARDS",
+    "version": "2.2.0",
+    "status": "PRODUCTION-READY",
+    "effectiveDate": "2026-09-01",
+    "canonicalTitle": "EFL Load Prescription Standards v2.2.0 - Complete Force-Velocity Curve Targeting Edition",
+    "authority": "NSCA Guidelines 2019, Chen et al. 2023, Samozino et al. 2016, Morin & Samozino 2016",
+    "previousVersion": "2.1.4",
+    "majorEnhancement": "LAYER 3 COMPLETE - Explicit F-V curve targeting with bias profiles",
+    "changeLog": {
+      "v2.2.0": [
+        "\u2728 MAJOR: Added Layer 3 force-velocity curve targeting framework",
+        "\u2728 NEW: fvBiasProfile system (FORCE_BIASED | VELOCITY_BIASED | BALANCED)",
+        "\u2728 NEW: CMJ profiling integration with RSI, peak force, RFD metrics",
+        "\u2728 NEW: F-V slope testing integration (Samozino methodology)",
+        "\u2728 NEW: Practical assessments (no equipment required)",
+        "\u2728 NEW: Band:Tier ratio targets by bias type",
+        "\u2728 NEW: Gate 7 validation - F-V bias compliance checking",
+        "\u2728 NEW: Coaching decision tree for bias selection",
+        "\u2728 NEW: Seasonal and population-specific bias guidelines",
+        "\u26a0\ufe0f SAFETY: All v2.1.4 safety gates maintained (MEV/MAV/MRV, caps, windows)",
+        "\u26a0\ufe0f YOUTH: Youth 16 and under enforced BALANCED (no bias targeting)",
+        "\ud83d\udcca SCOPE: Primarily adult elite athletes (2yr+ training age)",
+        "\ud83d\udd27 ARCHITECTURE: Sits ABOVE Load Standards, never violates safety gates"
+      ],
+      "v2.1.4": [
+        "Complete strength volume framework (MEV/MAV/MRV)",
+        "Recovery windows, R2P variants",
+        "System 3 6-Gate validation"
+      ]
+    },
+    "integrationPoints": [
+      "EFL_Governance_System_v4_0.md \u2192 System 1 validation",
+      "EFL_Force_Velocity_Zone_Dictionary_v1_1_PROD.md \u2192 System 2 FV Engine",
+      "EFL_Exercise_Library_v2_5.csv \u2192 Exercise selection",
+      "System 3 Program Architect \u2192 7-Gate validation (new Gate 7)"
+    ]
+  },
+  "philosophyStatement": {
+    "corePrinciple": "Complete force-velocity framework with three operational layers",
+    "layer1": "Spectrum Coverage - Band0-4, E0-E4, Zone 1-8 (COMPLETE v2.0+)",
+    "layer2": "Dose Control - MEV/MAV/MRV, caps, budgets, recovery (COMPLETE v2.1.4)",
+    "layer3": "Curve Shaping - Explicit force vs velocity targeting (NEW v2.2.0)",
+    "safetyFirst": "Layer 3 sits ABOVE Load Standards - never violates MEV/MAV/MRV, band ceilings, tier caps, or recovery windows",
+    "populationProtection": "Youth 16 and under enforced BALANCED - no optimization targeting until structural maturity"
+  },
+  "fvBiasProfile": {
+    "systemOverview": {
+      "description": "Layer 3 force-velocity curve targeting system enabling explicit force-deficit or velocity-deficit bias",
+      "architecture": "Sits ABOVE Load Standards - flavors distribution within safety limits",
+      "scope": {
+        "primary": "Adult elite athletes (18+, 2yr+ training age)",
+        "conditional": "Youth 17 advanced athletes (documented testing required)",
+        "excluded": "Youth 8-16 (enforced BALANCED for general development)"
+      },
+      "optional": "System functions without F-V bias - BALANCED is always safe default",
+      "diagnostics": "CMJ profiling, F-V slope testing, or practical assessments inform bias selection",
+      "validation": "New Gate 7 checks F-V bias compliance before program approval"
+    },
+    "biasTypes": {
+      "FORCE_BIASED": {
+        "displayName": "Force-Biased Development",
+        "targetAdaptation": "Shift athlete rightward on F-V curve \u2192 increase force production capacity",
+        "targetAthlete": {
+          "profile": "Force-deficit athlete",
+          "indicators": [
+            "Low relative strength (squat <1.5x BW)",
+            "High RSI:JumpHeight ratio (>1.5)",
+            "Fast reactive movements but low force output",
+            "Good acceleration, poor max velocity maintenance"
+          ],
+          "sportExamples": [
+            "Guards with speed but lacking finishing power",
+            "Forwards who can't elevate after contact"
+          ]
+        },
+        "prescription": {
+          "bandDistribution": {
+            "Band0_primer": "5-10%",
+            "Band1_endurance": "10-20%",
+            "Band2_power": "25-35%",
+            "Band3_strength": "25-35%",
+            "Band4_maxStrength": "5-15%",
+            "targetRatio": "70% Band2-4 (force work), 30% Band0-1 (support)"
+          },
+          "plyoDistribution": {
+            "E0_nonPlyometric": "Unlimited (strength emphasis)",
+            "E1_Tier1": "20-30% of contacts",
+            "E2_Tier2": "15-25% of contacts",
+            "E3_E4_Tier3": "5-10% of contacts",
+            "targetRatio": "70% strength, 30% elastic work"
+          },
+          "sprintVolume": "Lower end of season range (minimal velocity emphasis)",
+          "fvZoneEmphasis": [
+            "Zone1 (Max Strength)",
+            "Zone2 (Strength-Speed)",
+            "Zone6 (Hypertrophy)"
+          ],
+          "sessionFrequency": {
+            "strength": "4-5x/week",
+            "elastic": "2x/week",
+            "sprint": "1x/week"
+          }
+        },
+        "validationRules": {
+          "mustObey": [
+            "MEV/MAV/MRV limits (no MRV violation ever)",
+            "Band4 frequency cap (max 2x/week OFFSEASON, 0x INSEASON T1)",
+            "Band4 sets per session cap (population-specific)",
+            "Recovery windows (72-96h Band4, 48-72h Band3)",
+            "Movement pattern balance (push/pull deviation \u226420%)"
+          ],
+          "cannotOverride": "Any safety gate from Load Standards v2.1.4"
+        },
+        "expectedOutcomes": {
+          "4_8weeks": [
+            "Squat 1RM +5-10%",
+            "Peak force production +8-15%",
+            "CMJ height +3-5cm (from improved force capacity)"
+          ],
+          "monitoringMetrics": [
+            "1RM progression",
+            "CMJ peak force",
+            "Relative strength (BW ratio)"
+          ]
+        }
+      },
+      "VELOCITY_BIASED": {
+        "displayName": "Velocity-Biased Development",
+        "targetAdaptation": "Shift athlete leftward on F-V curve \u2192 increase velocity/rate coding capacity",
+        "targetAthlete": {
+          "profile": "Velocity-deficit athlete",
+          "indicators": [
+            "High relative strength (squat >2.0x BW)",
+            "Low RSI (<1.5)",
+            "Slow SSC, long ground contact times",
+            "Good max force but slow rate of force development"
+          ],
+          "sportExamples": [
+            "Strength-dominant posts lacking vertical explosion",
+            "Linemen with force but slow first step"
+          ]
+        },
+        "prescription": {
+          "bandDistribution": {
+            "Band0_primer": "15-25%",
+            "Band1_velocity": "30-40%",
+            "Band2_power": "25-35%",
+            "Band3_strength": "5-15%",
+            "Band4_maxStrength": "0-5%",
+            "targetRatio": "70% Band0-2 (velocity work), 30% Band3-4 (maintain strength)"
+          },
+          "plyoDistribution": {
+            "E0_nonPlyometric": "Minimal (support only)",
+            "E1_Tier1": "20-30% of contacts",
+            "E2_Tier2": "30-40% of contacts",
+            "E3_E4_Tier3": "20-30% of contacts",
+            "targetRatio": "70% elastic work (E1-E4), 30% strength support"
+          },
+          "sprintVolume": "Upper end of season range (maximize velocity emphasis)",
+          "fvZoneEmphasis": [
+            "Zone3 (Speed-Strength)",
+            "Zone4 (Speed)",
+            "Zone2 (Strength-Speed)"
+          ],
+          "sessionFrequency": {
+            "strength": "2-3x/week",
+            "elastic": "3-4x/week",
+            "sprint": "2-3x/week"
+          }
+        },
+        "validationRules": {
+          "mustObey": [
+            "Plyometric session/weekly caps (population-specific)",
+            "Tier 3 percentage limits (40% Youth 17, 50% Adult)",
+            "Sprint session/weekly caps (meters and frequency)",
+            "Recovery windows (48-72h for Tier 3 work)",
+            "CNS load budget (max 3 HIGH sessions/week)",
+            "Landing mechanics quality gate (7+/10 score required)"
+          ],
+          "specialCaution": "High elastic volume requires excellent tissue tolerance and movement quality",
+          "injuryRisk": "Elevated if tissue health or landing quality compromised"
+        },
+        "expectedOutcomes": {
+          "4_8weeks": [
+            "RSI +10-20%",
+            "CMJ height +5-8cm (from improved RFD)",
+            "10-yard sprint time -0.05-0.10s",
+            "Ground contact time reduction"
+          ],
+          "monitoringMetrics": [
+            "RSI",
+            "Ground contact time",
+            "Sprint splits",
+            "Repeat jump decrement"
+          ]
+        }
+      },
+      "BALANCED": {
+        "displayName": "Balanced Development (Default)",
+        "targetAdaptation": "General athletic development, maintain F-V profile",
+        "targetAthlete": {
+          "profile": "No clear force or velocity deficit, or diagnostics unavailable",
+          "indicators": [
+            "Moderate relative strength (1.5-2.0x BW squat)",
+            "RSI within normal range (1.5-1.8)",
+            "Proportional acceleration and max velocity",
+            "Foundational development needed"
+          ],
+          "sportExamples": [
+            "Most HS athletes",
+            "Novice athletes (<2yr training age)",
+            "General population"
+          ]
+        },
+        "prescription": {
+          "bandDistribution": {
+            "Band0_primer": "10-15%",
+            "Band1_endurance": "20-30%",
+            "Band2_power": "30-40%",
+            "Band3_strength": "15-25%",
+            "Band4_maxStrength": "5-10%",
+            "targetRatio": "50/50 across force-velocity spectrum"
+          },
+          "plyoDistribution": {
+            "E0_nonPlyometric": "Support work",
+            "E1_Tier1": "30-40% of contacts",
+            "E2_Tier2": "30-40% of contacts",
+            "E3_E4_Tier3": "10-20% of contacts",
+            "targetRatio": "50% strength, 50% elastic"
+          },
+          "sprintVolume": "Mid-range of season targets",
+          "fvZoneEmphasis": [
+            "Zone2",
+            "Zone3",
+            "Zone5",
+            "Zone6"
+          ],
+          "sessionFrequency": {
+            "strength": "3-4x/week",
+            "elastic": "2-3x/week",
+            "sprint": "2x/week"
+          }
+        },
+        "validationRules": {
+          "mustObey": "All Load Standards limits (same as v2.1.4)",
+          "philosophy": "Safe default for all populations and training ages",
+          "override": "Coach can select FORCE or VELOCITY bias with clear rationale and testing"
+        },
+        "expectedOutcomes": {
+          "4_8weeks": [
+            "Gradual improvements across all metrics",
+            "Squat 1RM +3-7%",
+            "CMJ height +2-4cm",
+            "Balanced force-velocity development"
+          ],
+          "monitoringMetrics": [
+            "General performance battery",
+            "Movement quality",
+            "Tissue tolerance"
+          ]
+        },
+        "enforcedFor": [
+          "Youth 8-16 (always)",
+          "Novice adults (<1yr)",
+          "In-season maintenance",
+          "No testing available"
+        ]
+      }
+    },
+    "diagnosticInputs": {
+      "philosophy": "OPTIONAL testing to inform bias selection. System defaults to BALANCED if unavailable.",
+      "status": "NOT REQUIRED - coaches can select bias based on observation",
+      "cmj_Profiling": {
+        "method": "Countermovement jump with force plate or jump mat",
+        "minimumData": "Jump height (cm), RSI if available",
+        "optimalData": "Peak force (N), RFD (N/s), Impulse (N\u00b7s), Ground contact time (ms)",
+        "interpretation": {
+          "forceDeficit": {
+            "indicators": [
+              "Peak force < 2.0x body weight",
+              "RSI > 1.8 (high reactivity, low force)",
+              "Jump height moderate but takeoff velocity high",
+              "Short ground contact time but low impulse"
+            ],
+            "recommendation": "FORCE_BIASED"
+          },
+          "velocityDeficit": {
+            "indicators": [
+              "Peak force > 2.5x body weight",
+              "RSI < 1.5 (low reactivity, high force)",
+              "High force production but slow RFD",
+              "Long ground contact time, high impulse but low velocity"
+            ],
+            "recommendation": "VELOCITY_BIASED"
+          },
+          "balanced": {
+            "indicators": "Metrics within expected ranges for sport/position",
+            "recommendation": "BALANCED"
+          }
+        }
+      },
+      "fv_Slope_Testing": {
+        "method": "Multiple loaded jumps (Samozino protocol) or sprint profiling",
+        "equipment": "Barbell + jump mat OR sprint timing gates + video",
+        "protocol": {
+          "loadedJumps": "CMJ with 0kg, 20kg, 40kg, 60kg",
+          "sprintProfile": "30m sprint with 5m splits (force-velocity from acceleration curve)"
+        },
+        "metrics": {
+          "F0": "Theoretical max force (y-intercept of F-V line)",
+          "V0": "Theoretical max velocity (x-intercept of F-V line)",
+          "Pmax": "Peak power (F0 \u00d7 V0 / 4)",
+          "FV_imbalance": "% deviation from optimal F-V relationship for sport"
+        },
+        "interpretation": {
+          "forceDeficit": "F0 < sport optimal \u2192 FORCE_BIASED",
+          "velocityDeficit": "V0 < sport optimal \u2192 VELOCITY_BIASED",
+          "balanced": "Within \u00b15% of sport optimal \u2192 BALANCED"
+        },
+        "reference": "Samozino et al. 2016, Morin & Samozino 2016, Jim\u00e9nez-Reyes et al. 2017"
+      },
+      "practicalAssessments": {
+        "description": "No-equipment assessments for bias selection when force plates unavailable",
+        "rsi_JumpHeight_Ratio": {
+          "test": "10-second repeat CMJ test + single max CMJ",
+          "measurement": "RSI (jump height / contact time) and max jump height",
+          "calculation": "Ratio = RSI / (Jump Height / 10)",
+          "interpretation": {
+            ">1.5": "Velocity-biased (force deficit) \u2192 FORCE_BIASED",
+            "1.0-1.5": "Balanced \u2192 BALANCED",
+            "<1.0": "Force-biased (velocity deficit) \u2192 VELOCITY_BIASED"
+          }
+        },
+        "strengthToBodyweight": {
+          "test": "Back squat 1RM / body weight ratio",
+          "interpretation": {
+            "<1.5x BW": "Force deficit \u2192 FORCE_BIASED",
+            "1.5-2.0x BW": "Balanced \u2192 BALANCED",
+            ">2.0x BW": "Potential velocity deficit (verify with speed tests) \u2192 VELOCITY_BIASED"
+          },
+          "note": "Must have 6+ months squatting experience for valid test"
+        },
+        "sprintSplitAnalysis": {
+          "test": "10-yard and 40-yard sprint times",
+          "interpretation": {
+            "fast10y_slow40y": "Velocity deficit (can't sustain speed) \u2192 VELOCITY_BIASED",
+            "slow10y_fast40y": "Force deficit (acceleration issue) \u2192 FORCE_BIASED",
+            "proportional": "Balanced \u2192 BALANCED"
+          },
+          "calculation": "(40y time - 10y time) compared to normative data"
+        }
+      },
+      "defaultBehavior": {
+        "noDiagnostics": "Default to BALANCED (safe, effective for general development)",
+        "coachOverride": "Coach can manually select bias based on: sport position demands, observation of movement quality, athlete training history, season and phase context",
+        "requiresDocumentation": "If overriding BALANCED without testing, document rationale in athlete profile"
+      }
+    },
+    "implementationGuidelines": {
+      "blockLevelApplication": {
+        "duration": "F-V bias applied for 2-8 week blocks",
+        "workflow": [
+          "1. ASSESS: Test athlete F-V profile (diagnostics or practical)",
+          "2. SELECT: Choose bias (FORCE/VELOCITY/BALANCED) with rationale",
+          "3. GENERATE: System 3 creates program within bias targets",
+          "4. VALIDATE: Check Gate 7 (F-V bias compliance) + all v2.1.4 gates",
+          "5. MONITOR: Weekly check-ins (readiness, performance, tissue health)",
+          "6. ADJUST: Mid-block adjustment only with Coach approval + re-validation"
+        ],
+        "transitionRules": {
+          "betweenBlocks": "2-week baseline (BALANCED) recommended between extreme bias blocks",
+          "biasProgression": "Can run FORCE \u2192 BALANCED \u2192 VELOCITY across off-season",
+          "forbidden": "FORCE \u2192 VELOCITY direct transition without baseline buffer"
+        }
+      },
+      "seasonalGuidelines": {
+        "OFFSEASON": {
+          "recommended": [
+            "FORCE_BIASED",
+            "BALANCED"
+          ],
+          "rationale": "Highest capacity for strength development, low sport load enables heavy training",
+          "avoid": "VELOCITY_BIASED unless clear deficit (save for closer to competition)",
+          "duration": "4-8 week blocks"
+        },
+        "PRESEASON": {
+          "recommended": [
+            "VELOCITY_BIASED",
+            "BALANCED"
+          ],
+          "rationale": "Transition to sport-specific power, reduce CNS fatigue before season",
+          "avoid": "FORCE_BIASED (too heavy close to competition)",
+          "duration": "3-4 week blocks"
+        },
+        "INSEASON_all_tiers": {
+          "enforced": "BALANCED (maintenance only)",
+          "rationale": "Competition load high, avoid extreme bias that increases injury risk or fatigue",
+          "exception": "INSEASON Tier 3 (low fixture density) can use moderate bias if readiness GREEN",
+          "override": "Director approval required"
+        },
+        "POSTSEASON": {
+          "enforced": "BALANCED (recovery)",
+          "rationale": "Restoration phase, general development, avoid CNS stacking",
+          "duration": "2-4 weeks"
+        }
+      },
+      "populationRules": {
+        "Adult_Elite": {
+          "fvBiasAllowed": true,
+          "allBiasTypes": [
+            "FORCE_BIASED",
+            "VELOCITY_BIASED",
+            "BALANCED"
+          ],
+          "diagnosticsRecommended": true,
+          "minTrainingAge": "2 years structured S&C",
+          "requirements": [
+            "Documented testing or clear performance limiter",
+            "Stable technique",
+            "Tissue health screening passed"
+          ]
+        },
+        "Adult_Intermediate": {
+          "fvBiasAllowed": true,
+          "recommendedDefault": "BALANCED",
+          "conditionalBias": "FORCE or VELOCITY only with clear deficit + coach approval",
+          "diagnosticsOptional": true,
+          "caution": "Monitor closely for overload - may lack adaptation capacity for extreme bias"
+        },
+        "Youth_17_Advanced": {
+          "fvBiasAllowed": "CONDITIONAL",
+          "allowedBiases": [
+            "BALANCED (default)",
+            "FORCE_BIASED (moderate only)"
+          ],
+          "forbiddenBiases": [
+            "VELOCITY_BIASED (high CNS/injury risk)"
+          ],
+          "requirements": [
+            "2+ years training age",
+            "Documented CMJ or strength testing",
+            "Tissue health screening (growth plate check)",
+            "Tanner Stage 4-5 (post-PHV)",
+            "Director approval required"
+          ],
+          "maxDeviation": "60/40 split maximum (never 70/30 like adults)",
+          "rationale": "Late-stage adolescents can tolerate moderate bias but not extreme targeting"
+        },
+        "Youth_16_and_under": {
+          "fvBiasAllowed": false,
+          "enforcedBias": "BALANCED (always)",
+          "rationale": "Developmental priorities override optimization. General athletic development required. Structural maturity incomplete.",
+          "override": "Director-level only with medical clearance (rare - injury rehab context only)",
+          "prohibitedBiases": [
+            "FORCE_BIASED",
+            "VELOCITY_BIASED"
+          ]
+        }
+      }
+    }
+  },
+  "gate7_FVBiasValidation": {
+    "gateNumber": 7,
+    "name": "Force-Velocity Bias Compliance Check",
+    "purpose": "Validate weekly program distribution matches selected F-V bias targets",
+    "when": "After Gates 1-6 pass, before program approval",
+    "appliesTo": "Programs with fvBiasProfile set (not BALANCED)",
+    "validationLogic": {
+      "step1_calculateActualDistribution": {
+        "inputs": [
+          "weeklyProgram (all sessions)",
+          "exerciseLibrary (band assignments)"
+        ],
+        "calculations": {
+          "bandDistribution": "Count total sets per band (Band0-4), calculate percentages",
+          "plyoDistribution": "Count total contacts per E-node (E0-E4), calculate percentages",
+          "sprintVolume": "Sum TRUE_SPRINT_METERS across week"
+        },
+        "outputs": {
+          "actualBandPct": {
+            "Band0": "X%",
+            "Band1": "Y%",
+            "Band2": "Z%",
+            "Band3": "W%",
+            "Band4": "V%"
+          },
+          "actualPlyoPct": {
+            "E1": "A%",
+            "E2": "B%",
+            "E3_E4": "C%"
+          },
+          "actualSprintMeters": "N meters"
+        }
+      },
+      "step2_compareToTargets": {
+        "inputs": [
+          "actualDistribution",
+          "fvBiasProfile.prescription"
+        ],
+        "logic": "For each band/tier, check if actual within target range \u00b110%",
+        "example": {
+          "target": "Band3: 25-35%",
+          "actual": "Band3: 28%",
+          "result": "\u2713 PASS (within range)"
+        }
+      },
+      "step3_checkCriticalRatios": {
+        "FORCE_BIASED": {
+          "criticalRatio": "Band2-4 / Band0-1 \u2265 2.0 (70/30 target)",
+          "tolerance": "\u00b115% (min 1.7 ratio acceptable)",
+          "failCondition": "Ratio < 1.7 (insufficient force emphasis)"
+        },
+        "VELOCITY_BIASED": {
+          "criticalRatio": "Band0-2 / Band3-4 \u2265 2.0 (70/30 target)",
+          "tolerance": "\u00b115% (min 1.7 ratio acceptable)",
+          "failCondition": "Ratio < 1.7 (insufficient velocity emphasis)"
+        }
+      },
+      "step4_validateSafetyGates": {
+        "description": "Ensure F-V bias did NOT violate any v2.1.4 safety gates",
+        "checks": [
+          "MEV/MAV/MRV limits respected",
+          "Band4 frequency \u2264 2x/week (OFFSEASON)",
+          "Band4 sets per session \u2264 population cap",
+          "Recovery windows maintained (72h+ Band4)",
+          "Movement pattern balance (push/pull within 20%)",
+          "Tier 3 contacts \u2264 40-50% (population-specific)"
+        ],
+        "criticalRule": "If ANY safety gate violated, Gate 7 = RED regardless of bias compliance"
+      }
+    },
+    "outputs": {
+      "PASS_GREEN": {
+        "condition": "Actual distribution within bias targets \u00b110% AND all safety gates passed",
+        "action": "Approve program for athlete assignment",
+        "logging": "Log actual distribution vs targets for monitoring"
+      },
+      "CAUTION_YELLOW": {
+        "condition": "Distribution outside targets 10-20% BUT safety gates still passed",
+        "action": "Flag for coach review - program functional but off-target",
+        "recommendations": [
+          "Adjust next week to correct drift",
+          "Consider if bias selection appropriate for phase",
+          "Document reason for deviation"
+        ]
+      },
+      "FAIL_RED": {
+        "condition": "Distribution >20% off-target OR any safety gate violated",
+        "action": "QUARANTINE program - do not assign to athlete",
+        "recommendations": {
+          "ifBiasOffTarget": "Regenerate program with stricter bias constraints",
+          "ifSafetyViolated": "Reduce volume/intensity to meet safety gates first",
+          "ifBothIssues": "Consider switching to BALANCED bias or adjusting block parameters"
+        }
+      }
+    },
+    "specialCases": {
+      "BALANCED_bypass": "If bias = BALANCED, Gate 7 automatically passes (no distribution targets)",
+      "Youth_16_under_enforcement": "If population = Youth 16 and under, system enforces BALANCED and Gate 7 validates no bias targeting occurred",
+      "INSEASON_enforcement": "If season = INSEASON (any tier except Tier 3), enforce BALANCED and reject FORCE/VELOCITY bias"
+    },
+    "coachInterface": {
+      "displayFormat": {
+        "targetVsActual": "Side-by-side comparison table",
+        "deviations": "Highlight out-of-range values in YELLOW/RED",
+        "safetyStatus": "Show all Gate 1-6 results with pass/fail",
+        "recommendation": "If YELLOW/RED, display specific adjustment needed"
+      },
+      "actions": {
+        "approve": "If GREEN, one-click approve",
+        "adjust": "If YELLOW, coach can manually adjust or regenerate",
+        "reject": "If RED, must fix before assignment"
+      }
+    }
+  },
+  "coachingDecisionSupport": {
+    "description": "Practical guidance for coaches selecting and monitoring F-V bias",
+    "decisionTree": {
+      "step1": {
+        "question": "Is athlete Youth 16 or under?",
+        "ifYes": "\u2192 USE BALANCED (enforced by system, no override)",
+        "ifNo": "\u2192 Proceed to step 2"
+      },
+      "step2": {
+        "question": "Is athlete Adult with 2+ years training age?",
+        "ifNo": "\u2192 USE BALANCED (recommended for novices)",
+        "ifYes": "\u2192 Proceed to step 3"
+      },
+      "step3": {
+        "question": "Is current season OFFSEASON or PRESEASON?",
+        "ifNo": "\u2192 USE BALANCED (in-season maintenance only)",
+        "ifYes": "\u2192 Proceed to step 4"
+      },
+      "step4": {
+        "question": "Do you have testing data (CMJ, force plate, RSI, or squat 1RM)?",
+        "ifNo": "\u2192 USE BALANCED (safe default without data)",
+        "ifYes": "\u2192 Proceed to step 5"
+      },
+      "step5": {
+        "question": "What does testing indicate?",
+        "forceDeficit": "\u2192 USE FORCE_BIASED (squat <1.5x BW, high RSI, low peak force)",
+        "velocityDeficit": "\u2192 USE VELOCITY_BIASED (squat >2.0x BW, low RSI, slow RFD)",
+        "noDeficit": "\u2192 USE BALANCED (general development)",
+        "unclear": "\u2192 USE BALANCED (default when uncertain)"
+      }
+    },
+    "monitoringProtocol": {
+      "weeklyCheckIn": {
+        "frequency": "Every 7 days during F-V bias block",
+        "assessments": [
+          "Readiness status (GREEN/YELLOW/RED)",
+          "Tissue tolerance (soreness 0-10 scale, pain 0-10)",
+          "Performance trends (jump height, sprint times if tracked)",
+          "Adherence quality (hitting prescribed intensities)",
+          "Subjective: How athlete feels (energy, motivation)"
+        ]
+      },
+      "adjustmentTriggers": {
+        "switchToBALANCED": {
+          "triggers": [
+            "Readiness RED for 2+ consecutive weeks",
+            "Pain >2/10 in any movement",
+            "Tissue health issues (tendon soreness, joint pain)",
+            "Performance regression >10%",
+            "Athlete reports excessive fatigue or motivation loss"
+          ],
+          "action": "Immediately switch to BALANCED, regenerate program",
+          "documentation": "Log reason for switch and athlete response"
+        },
+        "continueCurrentBias": {
+          "indicators": [
+            "Readiness GREEN or YELLOW (stable)",
+            "Performance improving or stable",
+            "No tissue health concerns",
+            "Athlete adapting well to training stress"
+          ],
+          "action": "Continue block as planned"
+        },
+        "increaseBiasIntensity": {
+          "indicators": [
+            "Readiness consistently GREEN",
+            "Performance improving ahead of targets",
+            "Athlete tolerating current load easily"
+          ],
+          "action": "Consider progressing to upper end of bias ranges (coach approval)",
+          "caution": "Only in adult elite athletes, never Youth 17"
+        }
+      }
+    },
+    "sportPositionGuidance": {
+      "Basketball": {
+        "Guards": {
+          "commonProfile": "High velocity, lower force production",
+          "typicalDeficit": "Force-deficit (need finishing power)",
+          "recommendedBias": "FORCE_BIASED (off-season)",
+          "focusAreas": [
+            "Vertical jump",
+            "Contact finishing",
+            "Deceleration strength"
+          ]
+        },
+        "Wings": {
+          "commonProfile": "Balanced athleticism",
+          "typicalDeficit": "Varies by player",
+          "recommendedBias": "BALANCED or position-specific assessment",
+          "focusAreas": [
+            "Explosive first step",
+            "Lateral quickness",
+            "Vertical jump"
+          ]
+        },
+        "Bigs": {
+          "commonProfile": "High force, lower velocity",
+          "typicalDeficit": "Velocity-deficit (need vertical explosion)",
+          "recommendedBias": "VELOCITY_BIASED (off-season)",
+          "focusAreas": [
+            "Vertical jump",
+            "Repeat jump ability",
+            "Quick second jump"
+          ]
+        }
+      },
+      "Football": {
+        "Linemen": {
+          "commonProfile": "Very high force, low velocity",
+          "typicalDeficit": "Velocity-deficit",
+          "recommendedBias": "VELOCITY_BIASED (first step quickness)",
+          "focusAreas": [
+            "Get-off speed",
+            "Short-area quickness",
+            "Change of direction"
+          ]
+        },
+        "SkillPosition": {
+          "commonProfile": "High velocity, variable force",
+          "typicalDeficit": "Varies - often force-deficit",
+          "recommendedBias": "Position-specific assessment",
+          "focusAreas": [
+            "Acceleration",
+            "Top-end speed",
+            "Force absorption (contact)"
+          ]
+        }
+      }
+    }
+  },
+  "exampleApplications": {
+    "scenario1_adultForceDeficit": {
+      "athleteProfile": {
+        "age": 22,
+        "trainingAge": "3 years",
+        "sport": "Basketball (guard)",
+        "testing": {
+          "squatBW_ratio": 1.4,
+          "cmj_height_cm": 68,
+          "rsi": 2.1,
+          "peakForce_N": 1680,
+          "bodyWeight_kg": 85
+        },
+        "assessment": "Force deficit - high RSI but low absolute force and strength"
+      },
+      "fvBiasSelection": "FORCE_BIASED",
+      "rationale": "Squat <1.5x BW, RSI >2.0 indicates velocity-dominant profile needing force development",
+      "blockDuration": "6 weeks (off-season)",
+      "prescriptionExample": {
+        "week1_sample": {
+          "Monday_strength": "Band3 Squat 4x5, Band3 RDL 3x6, Band2 Bench 3x8",
+          "Tuesday_elastic": "E1-E2 Box Jumps 4x5, Bounds 3x6",
+          "Wednesday_recovery": "Band0 Mobility",
+          "Thursday_strength": "Band4 Deadlift 5x3, Band3 Press 4x6",
+          "Friday_elastic": "E2 Depth Landings 3x4, Sprint 200m total",
+          "Saturday_strength": "Band2 Squat 4x8, Band3 Pull-ups 4x6"
+        },
+        "bandDistribution_actual": {
+          "Band0": "8%",
+          "Band1": "18%",
+          "Band2": "32%",
+          "Band3": "30%",
+          "Band4": "12%"
+        },
+        "gate7_result": "\u2713 PASS GREEN - 72% Band2-4 (target 70%), all safety gates passed"
+      },
+      "expectedOutcomes": {
+        "6weeks": [
+          "Squat 1.4x \u2192 1.6x BW (+15%)",
+          "Peak force 1680N \u2192 1850N (+10%)",
+          "CMJ 68cm \u2192 71cm (+3cm from force gains)"
+        ]
+      }
+    },
+    "scenario2_adultVelocityDeficit": {
+      "athleteProfile": {
+        "age": 20,
+        "trainingAge": "4 years",
+        "sport": "Basketball (center)",
+        "testing": {
+          "squatBW_ratio": 2.2,
+          "cmj_height_cm": 58,
+          "rsi": 1.3,
+          "peakForce_N": 2450,
+          "bodyWeight_kg": 100
+        },
+        "assessment": "Velocity deficit - high force but poor RSI and slow takeoff"
+      },
+      "fvBiasSelection": "VELOCITY_BIASED",
+      "rationale": "Squat >2.0x BW, RSI <1.5 indicates force-dominant profile needing velocity/RFD work",
+      "blockDuration": "4 weeks (late off-season \u2192 pre-season)",
+      "prescriptionExample": {
+        "week1_sample": {
+          "Monday_elastic": "E2-E3 Depth Jumps 3x4, Hurdle Hops 4x6, Bounds 3x8",
+          "Tuesday_sprint": "Sprint 8x20m, Flying 10s 4x",
+          "Wednesday_strength": "Band2 Squat 3x8, Band1 Bench 3x10 (maintenance)",
+          "Thursday_elastic": "E2 Box Jumps 4x8, Pogo Hops 3x12, Med Ball Throws 3x8",
+          "Friday_sprint": "Sprint 6x30m, Acceleration work",
+          "Saturday_recovery": "Band0 Mobility + E1 Jump Rope 3x30s"
+        },
+        "plyoDistribution_actual": {
+          "E1": "25%",
+          "E2": "38%",
+          "E3_E4": "22%",
+          "E0_support": "15%"
+        },
+        "gate7_result": "\u2713 PASS GREEN - 85% elastic work E1-E4 (target 70%+), Tier 3 = 22% (under 50% cap)"
+      },
+      "expectedOutcomes": {
+        "4weeks": [
+          "RSI 1.3 \u2192 1.6 (+23%)",
+          "CMJ 58cm \u2192 64cm (+6cm from velocity gains)",
+          "Ground contact time -18ms"
+        ]
+      }
+    },
+    "scenario3_youth17_conditional": {
+      "athleteProfile": {
+        "age": 17,
+        "trainingAge": "2.5 years",
+        "sport": "Basketball (forward)",
+        "testing": {
+          "squatBW_ratio": 1.3,
+          "cmj_height_cm": 65,
+          "tannerStage": 5,
+          "growthPlateStatus": "Closed (verified)"
+        },
+        "assessment": "Moderate force deficit, approved for conditional bias"
+      },
+      "fvBiasSelection": "FORCE_BIASED (MODERATE - 60/40 split, not 70/30)",
+      "rationale": "Youth 17 advanced, post-PHV, documented deficit. Approved with reduced bias intensity.",
+      "blockDuration": "4 weeks (off-season only)",
+      "prescriptionExample": {
+        "week1_sample": {
+          "Monday_strength": "Band2 Squat 4x6, Band2 RDL 3x8, Band1 Bench 3x10",
+          "Tuesday_elastic": "E1-E2 Box Jumps 3x5, Bounds 3x6",
+          "Thursday_strength": "Band3 Deadlift 4x5 (upper limit for Youth 17), Band2 Press 3x8",
+          "Friday_elastic": "E2 Hurdle Hops 3x6, Sprint 300m total"
+        },
+        "bandDistribution_actual": {
+          "Band0": "12%",
+          "Band1": "28%",
+          "Band2": "35%",
+          "Band3": "20%",
+          "Band4": "0%"
+        },
+        "gate7_result": "\u2713 PASS GREEN - 60% Band2-3 (target 60% for Youth 17), Band4 = 0 (forbidden)",
+        "note": "Modified FORCE_BIASED - more conservative than adult version"
+      },
+      "expectedOutcomes": {
+        "4weeks": [
+          "Squat 1.3x \u2192 1.5x BW (+15%)",
+          "CMJ 65cm \u2192 68cm (+3cm)",
+          "No tissue health issues"
+        ]
+      }
+    },
+    "scenario4_youth15_enforceBalanced": {
+      "athleteProfile": {
+        "age": 15,
+        "trainingAge": "1 year",
+        "sport": "Basketball",
+        "testing": "Not performed (not age-appropriate)"
+      },
+      "fvBiasSelection": "BALANCED (ENFORCED - no override)",
+      "rationale": "Youth 16 and under must use BALANCED for general athletic development",
+      "blockDuration": "8 weeks (off-season)",
+      "prescriptionExample": {
+        "week1_sample": {
+          "Monday": "Band1 Goblet Squat 3x10, Band1 Push-ups 3x12, E1 Jump Rope 3x30s",
+          "Wednesday": "Band1 RDL 3x10, Band0 Core Work, E1-E2 Box Jumps 3x5",
+          "Friday": "Band2 Squat 3x8 (upper end for Youth), E2 Bounds 3x6, Sprint 200m"
+        },
+        "bandDistribution_actual": {
+          "Band0": "15%",
+          "Band1": "45%",
+          "Band2": "35%",
+          "Band3": "0%",
+          "Band4": "0%"
+        },
+        "gate7_result": "\u2713 PASS GREEN - BALANCED enforced, 50/50 distribution across spectrum"
+      },
+      "expectedOutcomes": {
+        "8weeks": [
+          "General strength gains",
+          "Movement quality improvement",
+          "Foundational athleticism"
+        ]
+      }
+    }
+  }
+}

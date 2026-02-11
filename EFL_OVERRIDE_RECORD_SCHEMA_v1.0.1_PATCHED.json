@@ -1,0 +1,419 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://elitefitness.lab/schemas/override_record_v1.0.1.json",
+  "title": "EFL Override Record Schema v1.0.1 (PATCHED)",
+  "description": "Schema for override requests and approvals in EFL training governance system. v1.0.1: Added conditional required fields, standardized override_id, enforced audit completeness.",
+  "type": "object",
+  "required": ["schema_version", "override_id", "override_type", "request", "approval_status", "override_details", "audit_metadata"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.1"
+    },
+    "override_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique override identifier (standardized in v1.0.1)"
+    },
+    "override_type": {
+      "type": "string",
+      "enum": ["STAGE_PROGRESSION", "CAP_INCREASE", "HARDSTOP_BYPASS", "GATE_WAIVER", "RULE_EXCEPTION"],
+      "description": "Type of override being requested"
+    },
+    "request": {
+      "type": "object",
+      "required": ["requested_at", "requestor_uid", "clientid", "rule_id", "justification"],
+      "properties": {
+        "requested_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "requestor_uid": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "requestor_role": {
+          "type": "string",
+          "enum": ["Coach", "SeniorCoach", "MedicalProvider", "Admin"]
+        },
+        "clientid": {
+          "type": "string",
+          "description": "Client affected by override"
+        },
+        "rule_id": {
+          "type": "string",
+          "description": "Identifier of rule being overridden (e.g., 'R2P-ACL-S2-EXIT-GATE-01')"
+        },
+        "justification": {
+          "type": "string",
+          "minLength": 50,
+          "description": "Required justification for override (minimum 50 characters)"
+        },
+        "supporting_documents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "document_type": {
+                "type": "string",
+                "enum": ["MEDICAL_CLEARANCE", "TEST_RESULTS", "PROVIDER_NOTE", "VIDEO_ANALYSIS", "OTHER"]
+              },
+              "document_url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "uploaded_at": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        }
+      }
+    },
+    "override_details": {
+      "type": "object",
+      "description": "Type-specific override details (ALWAYS REQUIRED in v1.0.1)",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/StageProgressionOverride"
+        },
+        {
+          "$ref": "#/$defs/CapIncreaseOverride"
+        },
+        {
+          "$ref": "#/$defs/HardstopBypassOverride"
+        },
+        {
+          "$ref": "#/$defs/GateWaiverOverride"
+        },
+        {
+          "$ref": "#/$defs/RuleExceptionOverride"
+        }
+      ]
+    },
+    "approval_status": {
+      "type": "string",
+      "enum": ["PENDING", "APPROVED", "DENIED", "EXPIRED"],
+      "description": "Current status of override request"
+    },
+    "approval_chain": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["approver_uid", "decision", "decided_at"],
+        "properties": {
+          "approver_uid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "approver_role": {
+            "type": "string",
+            "enum": ["SeniorCoach", "MedicalProvider", "Admin"]
+          },
+          "decision": {
+            "type": "string",
+            "enum": ["APPROVE", "DENY", "ABSTAIN"]
+          },
+          "decided_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "approval_notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "quorum_requirements": {
+      "type": "object",
+      "required": ["required_approvers", "quorum_met"],
+      "properties": {
+        "required_approvers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["SeniorCoach", "MedicalProvider", "Admin"]
+          },
+          "description": "Roles required to approve this override type"
+        },
+        "quorum_met": {
+          "type": "boolean"
+        },
+        "approval_deadline": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timeout for approval decision"
+        }
+      }
+    },
+    "final_decision": {
+      "type": "object",
+      "properties": {
+        "decision": {
+          "type": "string",
+          "enum": ["APPROVED", "DENIED", "EXPIRED"]
+        },
+        "decided_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "decision_summary": {
+          "type": "string",
+          "description": "Summary of approval decision and rationale"
+        }
+      }
+    },
+    "application": {
+      "type": "object",
+      "description": "How override was applied to system state (REQUIRED when approval_status=APPROVED)",
+      "properties": {
+        "applied_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "applied_by_uid": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "clientstate_before": {
+          "type": "object",
+          "description": "Relevant ClientState fields before override"
+        },
+        "clientstate_after": {
+          "type": "object",
+          "description": "Relevant ClientState fields after override"
+        },
+        "affected_artifacts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": "Artifact IDs generated under this override"
+        },
+        "expiration": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When override expires (for temporary overrides)"
+        }
+      }
+    },
+    "audit_metadata": {
+      "type": "object",
+      "required": ["created_at", "record_hash"],
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "last_modified": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "record_hash": {
+          "type": "string",
+          "description": "Cryptographic hash of override record for integrity"
+        },
+        "previous_hash": {
+          "type": "string",
+          "description": "Hash of previous override in chain (for hash chain integrity)"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "approval_status": {
+            "enum": ["APPROVED", "DENIED", "EXPIRED"]
+          }
+        }
+      },
+      "then": {
+        "required": ["approval_chain", "quorum_requirements", "final_decision"],
+        "properties": {
+          "approval_chain": {
+            "minItems": 1,
+            "description": "At least one approver decision required when status is not PENDING"
+          },
+          "final_decision": {
+            "required": ["decision", "decided_at"]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "approval_status": {
+            "const": "APPROVED"
+          }
+        }
+      },
+      "then": {
+        "required": ["application"],
+        "properties": {
+          "application": {
+            "required": ["applied_at", "applied_by_uid", "clientstate_before", "clientstate_after"]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "StageProgressionOverride": {
+      "type": "object",
+      "required": ["current_stage", "requested_stage", "gate_criteria_status"],
+      "properties": {
+        "current_stage": {
+          "type": "string",
+          "description": "Current project stage (e.g., 'R2P-ACL-S2')"
+        },
+        "requested_stage": {
+          "type": "string",
+          "description": "Requested next stage"
+        },
+        "gate_criteria_status": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["criterion_id", "criterion_name", "required", "met"],
+            "properties": {
+              "criterion_id": {
+                "type": "string"
+              },
+              "criterion_name": {
+                "type": "string"
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "met": {
+                "type": "boolean"
+              },
+              "current_value": {
+                "type": "string"
+              },
+              "target_value": {
+                "type": "string"
+              }
+            }
+          },
+          "description": "Status of all gate criteria for stage progression"
+        }
+      }
+    },
+    "CapIncreaseOverride": {
+      "type": "object",
+      "required": ["cap_type", "current_cap", "requested_cap", "duration", "hard_limit_check"],
+      "properties": {
+        "cap_type": {
+          "type": "string",
+          "enum": ["SESSION", "WEEKLY"]
+        },
+        "current_cap": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "requested_cap": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "increase_percentage": {
+          "type": "number",
+          "description": "Percentage increase over current cap"
+        },
+        "duration": {
+          "type": "object",
+          "required": ["duration_type", "duration_value"],
+          "properties": {
+            "duration_type": {
+              "type": "string",
+              "enum": ["SESSIONS", "DAYS", "WEEKS"]
+            },
+            "duration_value": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "hard_limit_check": {
+          "type": "object",
+          "required": ["population", "absolute_ceiling", "within_ceiling"],
+          "properties": {
+            "population": {
+              "type": "string",
+              "enum": ["Youth812", "Youth1316", "Youth17Advanced", "Adult18", "Adult", "Returning", "Elite"]
+            },
+            "absolute_ceiling": {
+              "type": "integer",
+              "description": "Population absolute ceiling (e.g., 180 for Youth812, 200 for Youth1316)"
+            },
+            "within_ceiling": {
+              "type": "boolean",
+              "description": "MUST be true for override to be considered; false = auto-reject at SIGIL"
+            }
+          }
+        }
+      }
+    },
+    "HardstopBypassOverride": {
+      "type": "object",
+      "required": ["hardstop_id", "hardstop_type", "trigger_condition"],
+      "properties": {
+        "hardstop_id": {
+          "type": "string"
+        },
+        "hardstop_type": {
+          "type": "string",
+          "enum": ["PAIN", "SYMMETRY", "READINESS", "COMPLIANCE", "MEDICAL"]
+        },
+        "trigger_condition": {
+          "type": "string",
+          "description": "What triggered the hardstop"
+        },
+        "bypass_duration": {
+          "type": "object",
+          "properties": {
+            "temporary": {
+              "type": "boolean"
+            },
+            "sessions": {
+              "type": "integer",
+              "description": "Number of sessions bypass is valid for"
+            }
+          }
+        }
+      }
+    },
+    "GateWaiverOverride": {
+      "type": "object",
+      "required": ["gate_id", "waiver_reason"],
+      "properties": {
+        "gate_id": {
+          "type": "string",
+          "description": "Identifier of gate being waived"
+        },
+        "waiver_reason": {
+          "type": "string",
+          "minLength": 50
+        }
+      }
+    },
+    "RuleExceptionOverride": {
+      "type": "object",
+      "required": ["rule_description", "exception_justification"],
+      "properties": {
+        "rule_description": {
+          "type": "string"
+        },
+        "exception_justification": {
+          "type": "string",
+          "minLength": 100
+        }
+      }
+    }
+  }
+}

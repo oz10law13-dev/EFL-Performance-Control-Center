@@ -1,0 +1,1840 @@
+{
+  "meta": {
+    "name": "EFL Sport Demands Grid",
+    "version": "2.2.2",
+    "generated": "2026-01-06",
+    "codexReference": "\u00a74.4 Population Architecture, \u00a78 Seasonal Overlays, STRATA Weekly Engine v2.1, Library v2.2, MDPCOURT_VERTICAL v1.4.1, ICP_DEFINITIONS v2.3.1, LOAD_STANDARDS v2.2.0",
+    "owner": "Austin Lawrence, Director of Performance Systems",
+    "status": "ACTIVE \u00b7 PRODUCTION READY",
+    "integrationPoints": {
+      "movementDemandProfiles": [
+        "MDP_COURT_VERTICAL_v1.4"
+      ],
+      "icpDefinitions": [
+        "EFL_ICP_DEFINITIONS_v2.2.json"
+      ],
+      "loadStandards": [
+        "EFL_LOAD_STANDARDS_v2_2_0_COMPLETE_FV_TARGETING.json"
+      ],
+      "fvSchema": [
+        "EFL_Periodization_FV_Schema_v2_1.md"
+      ]
+    },
+    "seasonEnums": [
+      "OFF_SEASON",
+      "PRE_SEASON",
+      "IN_SEASON_TIER_1",
+      "IN_SEASON_TIER_2",
+      "IN_SEASON_TIER_3",
+      "POST_SEASON"
+    ]
+  },
+  "sports": {
+    "Basketball": {
+      "meta": {
+        "mappedMovementDemandProfiles": [
+          "MDP_COURT_VERTICAL"
+        ],
+        "supportsSpecializationBlocks": true,
+        "specializationTypes": [
+          "ELASTIC",
+          "DECELERATION"
+        ],
+        "specializationLegalSeasons": {
+          "ELASTIC": [
+            "OFF_SEASON"
+          ],
+          "DECELERATION": [
+            "OFF_SEASON",
+            "PRE_SEASON"
+          ]
+        },
+        "specializationCnsCategory": {
+          "ELASTIC": "HIGH",
+          "DECELERATION": "MODERATE"
+        }
+      },
+      "movementProfile": {
+        "dominantPlanes": [
+          "Sagittal",
+          "Frontal",
+          "Transverse"
+        ],
+        "keyMovementPatterns": {
+          "hinge": "High",
+          "squat": "High",
+          "lunge": "High",
+          "push": "Moderate",
+          "pull": "Moderate",
+          "rotation": "High",
+          "gait": "Very High",
+          "decel": "Very High"
+        }
+      },
+      "nodeProfile": {
+        "primaryNodes": [
+          "C",
+          "D",
+          "E1",
+          "E2"
+        ],
+        "secondaryNodes": [
+          "B",
+          "E3"
+        ],
+        "forbiddenNodes": [
+          "E4"
+        ],
+        "weeklyNodeEmphasis": {
+          "C": 3,
+          "D": 2,
+          "E1": 2,
+          "E2": 2,
+          "E3": 1
+        },
+        "fvZones": {
+          "primaryZones": [
+            "Z3",
+            "Z4"
+          ],
+          "secondaryZones": [
+            "Z2",
+            "Z6"
+          ],
+          "recoveryZones": [
+            "Z8",
+            "Z5"
+          ]
+        }
+      },
+      "seasonOverlays": {
+        "OFF_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "High",
+            "sessionMaxContacts": 120,
+            "targetWeeklyContacts": 220,
+            "maxDepthDropExposure": "High",
+            "rotationPlyosRequired": true
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Glycolytic + Alactic",
+            "changeOfDirectionFrequency": "Very High",
+            "maxVelocityRequirement": "Moderate",
+            "aerobicBaseImportance": "Moderate"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 3,
+            "intensityDistribution": {
+              "Low": 0.2,
+              "Moderate": 0.5,
+              "High": 0.2,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "HIGH"
+        },
+        "PRE_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "High",
+            "sessionMaxContacts": 100,
+            "targetWeeklyContacts": 180,
+            "maxDepthDropExposure": "Moderate",
+            "rotationPlyosRequired": true
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Glycolytic + Alactic",
+            "changeOfDirectionFrequency": "Very High",
+            "maxVelocityRequirement": "Moderate",
+            "aerobicBaseImportance": "Moderate"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 4,
+            "intensityDistribution": {
+              "Low": 0.1,
+              "Moderate": 0.4,
+              "High": 0.4,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "MODERATE_HIGH"
+        },
+        "IN_SEASON_TIER_1": {
+          "plyometricProfile": {
+            "contactCategory": "Moderate",
+            "sessionMaxContacts": 80,
+            "targetWeeklyContacts": 140,
+            "maxDepthDropExposure": "Low",
+            "rotationPlyosRequired": true
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Glycolytic + Aerobic",
+            "changeOfDirectionFrequency": "Very High",
+            "maxVelocityRequirement": "Moderate",
+            "aerobicBaseImportance": "Moderate"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 5,
+            "intensityDistribution": {
+              "Low": 0.1,
+              "Moderate": 0.4,
+              "High": 0.4,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "LOW"
+        },
+        "IN_SEASON_TIER_2": {
+          "plyometricProfile": {
+            "contactCategory": "Moderate",
+            "sessionMaxContacts": 90,
+            "targetWeeklyContacts": 160,
+            "maxDepthDropExposure": "Low",
+            "rotationPlyosRequired": true
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Glycolytic + Aerobic",
+            "changeOfDirectionFrequency": "High",
+            "maxVelocityRequirement": "Moderate",
+            "aerobicBaseImportance": "Moderate"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 4,
+            "intensityDistribution": {
+              "Low": 0.15,
+              "Moderate": 0.45,
+              "High": 0.3,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "MODERATE"
+        },
+        "IN_SEASON_TIER_3": {
+          "plyometricProfile": {
+            "contactCategory": "High",
+            "sessionMaxContacts": 100,
+            "targetWeeklyContacts": 180,
+            "maxDepthDropExposure": "Moderate",
+            "rotationPlyosRequired": true
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Glycolytic + Alactic",
+            "changeOfDirectionFrequency": "High",
+            "maxVelocityRequirement": "Moderate",
+            "aerobicBaseImportance": "Moderate"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 3,
+            "intensityDistribution": {
+              "Low": 0.2,
+              "Moderate": 0.5,
+              "High": 0.2,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "MODERATE_HIGH"
+        },
+        "POST_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "Low",
+            "sessionMaxContacts": 60,
+            "targetWeeklyContacts": 100,
+            "maxDepthDropExposure": "Low",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Aerobic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Low",
+            "aerobicBaseImportance": "High"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 1,
+            "intensityDistribution": {
+              "Low": 0.5,
+              "Moderate": 0.4,
+              "High": 0.1,
+              "Competition": 0.0
+            }
+          },
+          "cnsBudget": "VERY_LOW"
+        }
+      },
+      "injuryRiskProfile": {
+        "commonRegions": [
+          "ankle",
+          "knee",
+          "hip",
+          "lumbar"
+        ],
+        "redFlagModifiers": [
+          "no-depth-jump-week-after-high-impact",
+          "decel-priority"
+        ]
+      }
+    },
+    "Soccer": {
+      "meta": {
+        "mappedMovementDemandProfiles": [],
+        "supportsSpecializationBlocks": false
+      },
+      "movementProfile": {
+        "dominantPlanes": [
+          "Sagittal",
+          "Frontal"
+        ],
+        "keyMovementPatterns": {
+          "hinge": "High",
+          "squat": "High",
+          "lunge": "Very High",
+          "push": "Low",
+          "pull": "Low",
+          "rotation": "Moderate",
+          "gait": "Very High",
+          "decel": "Very High"
+        }
+      },
+      "nodeProfile": {
+        "primaryNodes": [
+          "C",
+          "D",
+          "E1",
+          "E2"
+        ],
+        "secondaryNodes": [
+          "B"
+        ],
+        "forbiddenNodes": [
+          "E3",
+          "E4"
+        ],
+        "weeklyNodeEmphasis": {
+          "C": 3,
+          "D": 3,
+          "E1": 2,
+          "E2": 1
+        },
+        "fvZones": {
+          "primaryZones": [
+            "Z7",
+            "Z8"
+          ],
+          "secondaryZones": [
+            "Z3",
+            "Z5"
+          ],
+          "recoveryZones": [
+            "Z5",
+            "Z8"
+          ]
+        }
+      },
+      "seasonOverlays": {
+        "OFF_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "High",
+            "sessionMaxContacts": 90,
+            "targetWeeklyContacts": 180,
+            "maxDepthDropExposure": "Very Low",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Glycolytic + Aerobic",
+            "changeOfDirectionFrequency": "High",
+            "maxVelocityRequirement": "High",
+            "aerobicBaseImportance": "High"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 3,
+            "intensityDistribution": {
+              "Low": 0.25,
+              "Moderate": 0.5,
+              "High": 0.15,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "HIGH"
+        },
+        "PRE_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "High",
+            "sessionMaxContacts": 80,
+            "targetWeeklyContacts": 160,
+            "maxDepthDropExposure": "Very Low",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Glycolytic + Aerobic",
+            "changeOfDirectionFrequency": "High",
+            "maxVelocityRequirement": "High",
+            "aerobicBaseImportance": "High"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 4,
+            "intensityDistribution": {
+              "Low": 0.15,
+              "Moderate": 0.5,
+              "High": 0.25,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "MODERATE_HIGH"
+        },
+        "IN_SEASON_TIER_1": {
+          "plyometricProfile": {
+            "contactCategory": "Moderate",
+            "sessionMaxContacts": 60,
+            "targetWeeklyContacts": 120,
+            "maxDepthDropExposure": "Very Low",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Glycolytic + Aerobic",
+            "changeOfDirectionFrequency": "High",
+            "maxVelocityRequirement": "High",
+            "aerobicBaseImportance": "High"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 5,
+            "intensityDistribution": {
+              "Low": 0.15,
+              "Moderate": 0.45,
+              "High": 0.3,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "LOW"
+        },
+        "IN_SEASON_TIER_2": {
+          "plyometricProfile": {
+            "contactCategory": "Moderate",
+            "sessionMaxContacts": 70,
+            "targetWeeklyContacts": 140,
+            "maxDepthDropExposure": "Very Low",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Glycolytic + Aerobic",
+            "changeOfDirectionFrequency": "High",
+            "maxVelocityRequirement": "High",
+            "aerobicBaseImportance": "High"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 4,
+            "intensityDistribution": {
+              "Low": 0.2,
+              "Moderate": 0.5,
+              "High": 0.2,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "MODERATE"
+        },
+        "IN_SEASON_TIER_3": {
+          "plyometricProfile": {
+            "contactCategory": "High",
+            "sessionMaxContacts": 80,
+            "targetWeeklyContacts": 160,
+            "maxDepthDropExposure": "Very Low",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Glycolytic + Aerobic",
+            "changeOfDirectionFrequency": "High",
+            "maxVelocityRequirement": "High",
+            "aerobicBaseImportance": "High"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 3,
+            "intensityDistribution": {
+              "Low": 0.25,
+              "Moderate": 0.5,
+              "High": 0.15,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "MODERATE_HIGH"
+        },
+        "POST_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "Low",
+            "sessionMaxContacts": 40,
+            "targetWeeklyContacts": 80,
+            "maxDepthDropExposure": "Very Low",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Aerobic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Moderate",
+            "aerobicBaseImportance": "High"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 1,
+            "intensityDistribution": {
+              "Low": 0.5,
+              "Moderate": 0.4,
+              "High": 0.1,
+              "Competition": 0.0
+            }
+          },
+          "cnsBudget": "VERY_LOW"
+        }
+      },
+      "injuryRiskProfile": {
+        "commonRegions": [
+          "ankle",
+          "knee",
+          "groin",
+          "hamstring"
+        ],
+        "redFlagModifiers": [
+          "no-unilateral-high-load-48h-pre-game",
+          "decel-priority"
+        ]
+      }
+    },
+    "Volleyball": {
+      "meta": {
+        "mappedMovementDemandProfiles": [
+          "MDP_COURT_VERTICAL"
+        ],
+        "supportsSpecializationBlocks": true,
+        "specializationTypes": [
+          "ELASTIC"
+        ],
+        "specializationLegalSeasons": {
+          "ELASTIC": [
+            "OFF_SEASON"
+          ]
+        },
+        "specializationCnsCategory": {
+          "ELASTIC": "HIGH"
+        }
+      },
+      "movementProfile": {
+        "dominantPlanes": [
+          "Sagittal",
+          "Frontal"
+        ],
+        "keyMovementPatterns": {
+          "hinge": "Moderate",
+          "squat": "Very High",
+          "lunge": "High",
+          "push": "High",
+          "pull": "Moderate",
+          "rotation": "Moderate",
+          "gait": "Moderate",
+          "decel": "High"
+        }
+      },
+      "nodeProfile": {
+        "primaryNodes": [
+          "C",
+          "E2",
+          "E3"
+        ],
+        "secondaryNodes": [
+          "B",
+          "E1"
+        ],
+        "forbiddenNodes": [
+          "E4"
+        ],
+        "weeklyNodeEmphasis": {
+          "C": 2,
+          "E2": 3,
+          "E3": 2,
+          "B": 1
+        },
+        "fvZones": {
+          "primaryZones": [
+            "Z3",
+            "Z4"
+          ],
+          "secondaryZones": [
+            "Z2"
+          ],
+          "recoveryZones": [
+            "Z8",
+            "Z5"
+          ]
+        }
+      },
+      "seasonOverlays": {
+        "OFF_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "Very High",
+            "sessionMaxContacts": 130,
+            "targetWeeklyContacts": 220,
+            "maxDepthDropExposure": "High",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic + Glycolytic",
+            "changeOfDirectionFrequency": "Moderate",
+            "maxVelocityRequirement": "Low",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 3,
+            "intensityDistribution": {
+              "Low": 0.2,
+              "Moderate": 0.5,
+              "High": 0.2,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "HIGH"
+        },
+        "PRE_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "Very High",
+            "sessionMaxContacts": 120,
+            "targetWeeklyContacts": 200,
+            "maxDepthDropExposure": "High",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic + Glycolytic",
+            "changeOfDirectionFrequency": "Moderate",
+            "maxVelocityRequirement": "Low",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 4,
+            "intensityDistribution": {
+              "Low": 0.1,
+              "Moderate": 0.3,
+              "High": 0.5,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "MODERATE_HIGH"
+        },
+        "IN_SEASON_TIER_1": {
+          "plyometricProfile": {
+            "contactCategory": "High",
+            "sessionMaxContacts": 80,
+            "targetWeeklyContacts": 140,
+            "maxDepthDropExposure": "Moderate",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic + Glycolytic",
+            "changeOfDirectionFrequency": "Moderate",
+            "maxVelocityRequirement": "Low",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 5,
+            "intensityDistribution": {
+              "Low": 0.1,
+              "Moderate": 0.4,
+              "High": 0.4,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "LOW"
+        },
+        "IN_SEASON_TIER_2": {
+          "plyometricProfile": {
+            "contactCategory": "High",
+            "sessionMaxContacts": 90,
+            "targetWeeklyContacts": 160,
+            "maxDepthDropExposure": "Moderate",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic + Glycolytic",
+            "changeOfDirectionFrequency": "Moderate",
+            "maxVelocityRequirement": "Low",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 4,
+            "intensityDistribution": {
+              "Low": 0.15,
+              "Moderate": 0.45,
+              "High": 0.3,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "MODERATE"
+        },
+        "IN_SEASON_TIER_3": {
+          "plyometricProfile": {
+            "contactCategory": "Very High",
+            "sessionMaxContacts": 100,
+            "targetWeeklyContacts": 180,
+            "maxDepthDropExposure": "Moderate",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic + Glycolytic",
+            "changeOfDirectionFrequency": "Moderate",
+            "maxVelocityRequirement": "Low",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 3,
+            "intensityDistribution": {
+              "Low": 0.2,
+              "Moderate": 0.5,
+              "High": 0.2,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "MODERATE_HIGH"
+        },
+        "POST_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "Low",
+            "sessionMaxContacts": 40,
+            "targetWeeklyContacts": 80,
+            "maxDepthDropExposure": "Low",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Aerobic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Low",
+            "aerobicBaseImportance": "High"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 1,
+            "intensityDistribution": {
+              "Low": 0.5,
+              "Moderate": 0.4,
+              "High": 0.1,
+              "Competition": 0.0
+            }
+          },
+          "cnsBudget": "VERY_LOW"
+        }
+      },
+      "injuryRiskProfile": {
+        "commonRegions": [
+          "shoulder",
+          "knee",
+          "ankle",
+          "lumbar"
+        ],
+        "redFlagModifiers": [
+          "no-overhead-48h-post-match",
+          "vertical-jump-priority"
+        ]
+      }
+    },
+    "Baseball": {
+      "meta": {
+        "mappedMovementDemandProfiles": [],
+        "supportsSpecializationBlocks": false,
+        "rotationalPrimary": true,
+        "throwingArmCare": true
+      },
+      "movementProfile": {
+        "dominantPlanes": [
+          "Transverse",
+          "Sagittal"
+        ],
+        "keyMovementPatterns": {
+          "hinge": "High",
+          "squat": "Moderate",
+          "lunge": "Moderate",
+          "push": "Moderate",
+          "pull": "High",
+          "rotation": "Very High",
+          "gait": "Moderate",
+          "decel": "High"
+        }
+      },
+      "nodeProfile": {
+        "primaryNodes": [
+          "C",
+          "D",
+          "B"
+        ],
+        "secondaryNodes": [
+          "E1",
+          "E2"
+        ],
+        "forbiddenNodes": [
+          "E3",
+          "E4"
+        ],
+        "weeklyNodeEmphasis": {
+          "C": 3,
+          "D": 2,
+          "B": 2,
+          "E1": 1,
+          "E2": 1
+        },
+        "fvZones": {
+          "primaryZones": [
+            "Z1",
+            "Z2"
+          ],
+          "secondaryZones": [
+            "Z5"
+          ],
+          "recoveryZones": [
+            "Z8"
+          ]
+        }
+      },
+      "seasonOverlays": {
+        "OFF_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "Low",
+            "sessionMaxContacts": 70,
+            "targetWeeklyContacts": 120,
+            "maxDepthDropExposure": "None",
+            "rotationPlyosRequired": true
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "High",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 3,
+            "intensityDistribution": {
+              "Low": 0.25,
+              "Moderate": 0.5,
+              "High": 0.15,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "MODERATE"
+        },
+        "PRE_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "Low",
+            "sessionMaxContacts": 60,
+            "targetWeeklyContacts": 100,
+            "maxDepthDropExposure": "None",
+            "rotationPlyosRequired": true
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "High",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 4,
+            "intensityDistribution": {
+              "Low": 0.2,
+              "Moderate": 0.5,
+              "High": 0.2,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "MODERATE"
+        },
+        "IN_SEASON_TIER_1": {
+          "plyometricProfile": {
+            "contactCategory": "Low",
+            "sessionMaxContacts": 50,
+            "targetWeeklyContacts": 80,
+            "maxDepthDropExposure": "None",
+            "rotationPlyosRequired": true
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "High",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 6,
+            "intensityDistribution": {
+              "Low": 0.2,
+              "Moderate": 0.5,
+              "High": 0.2,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "LOW"
+        },
+        "IN_SEASON_TIER_2": {
+          "plyometricProfile": {
+            "contactCategory": "Low",
+            "sessionMaxContacts": 50,
+            "targetWeeklyContacts": 90,
+            "maxDepthDropExposure": "None",
+            "rotationPlyosRequired": true
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "High",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 5,
+            "intensityDistribution": {
+              "Low": 0.25,
+              "Moderate": 0.5,
+              "High": 0.15,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "LOW"
+        },
+        "IN_SEASON_TIER_3": {
+          "plyometricProfile": {
+            "contactCategory": "Low",
+            "sessionMaxContacts": 60,
+            "targetWeeklyContacts": 100,
+            "maxDepthDropExposure": "None",
+            "rotationPlyosRequired": true
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "High",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 4,
+            "intensityDistribution": {
+              "Low": 0.3,
+              "Moderate": 0.5,
+              "High": 0.1,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "LOW"
+        },
+        "POST_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "Very Low",
+            "sessionMaxContacts": 30,
+            "targetWeeklyContacts": 60,
+            "maxDepthDropExposure": "None",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Aerobic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Moderate",
+            "aerobicBaseImportance": "Moderate"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 1,
+            "intensityDistribution": {
+              "Low": 0.5,
+              "Moderate": 0.4,
+              "High": 0.1,
+              "Competition": 0.0
+            }
+          },
+          "cnsBudget": "VERY_LOW"
+        }
+      },
+      "injuryRiskProfile": {
+        "commonRegions": [
+          "shoulder",
+          "elbow",
+          "lumbar"
+        ],
+        "redFlagModifiers": [
+          "no-heavy-pressing-48h-post-throwing",
+          "rotation-priority"
+        ]
+      }
+    },
+    "Softball": {
+      "meta": {
+        "mappedMovementDemandProfiles": [],
+        "supportsSpecializationBlocks": false,
+        "rotationalPrimary": true,
+        "throwingArmCare": true
+      },
+      "movementProfile": {
+        "dominantPlanes": [
+          "Transverse",
+          "Sagittal"
+        ],
+        "keyMovementPatterns": {
+          "hinge": "High",
+          "squat": "Moderate",
+          "lunge": "Moderate",
+          "push": "Moderate",
+          "pull": "High",
+          "rotation": "Very High",
+          "gait": "Moderate",
+          "decel": "Moderate"
+        }
+      },
+      "nodeProfile": {
+        "primaryNodes": [
+          "C",
+          "D",
+          "B"
+        ],
+        "secondaryNodes": [
+          "E1",
+          "E2"
+        ],
+        "forbiddenNodes": [
+          "E3",
+          "E4"
+        ],
+        "weeklyNodeEmphasis": {
+          "C": 3,
+          "D": 2,
+          "B": 2,
+          "E1": 1,
+          "E2": 1
+        },
+        "fvZones": {
+          "primaryZones": [
+            "Z1",
+            "Z2"
+          ],
+          "secondaryZones": [
+            "Z5"
+          ],
+          "recoveryZones": [
+            "Z8"
+          ]
+        }
+      },
+      "seasonOverlays": {
+        "OFF_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "Low",
+            "sessionMaxContacts": 70,
+            "targetWeeklyContacts": 120,
+            "maxDepthDropExposure": "None",
+            "rotationPlyosRequired": true
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Moderate",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 3,
+            "intensityDistribution": {
+              "Low": 0.25,
+              "Moderate": 0.5,
+              "High": 0.15,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "MODERATE"
+        },
+        "PRE_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "Low",
+            "sessionMaxContacts": 60,
+            "targetWeeklyContacts": 100,
+            "maxDepthDropExposure": "None",
+            "rotationPlyosRequired": true
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Moderate",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 4,
+            "intensityDistribution": {
+              "Low": 0.2,
+              "Moderate": 0.5,
+              "High": 0.2,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "MODERATE"
+        },
+        "IN_SEASON_TIER_1": {
+          "plyometricProfile": {
+            "contactCategory": "Low",
+            "sessionMaxContacts": 50,
+            "targetWeeklyContacts": 80,
+            "maxDepthDropExposure": "None",
+            "rotationPlyosRequired": true
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Moderate",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 6,
+            "intensityDistribution": {
+              "Low": 0.2,
+              "Moderate": 0.5,
+              "High": 0.2,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "LOW"
+        },
+        "IN_SEASON_TIER_2": {
+          "plyometricProfile": {
+            "contactCategory": "Low",
+            "sessionMaxContacts": 50,
+            "targetWeeklyContacts": 90,
+            "maxDepthDropExposure": "None",
+            "rotationPlyosRequired": true
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Moderate",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 5,
+            "intensityDistribution": {
+              "Low": 0.25,
+              "Moderate": 0.5,
+              "High": 0.15,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "LOW"
+        },
+        "IN_SEASON_TIER_3": {
+          "plyometricProfile": {
+            "contactCategory": "Low",
+            "sessionMaxContacts": 60,
+            "targetWeeklyContacts": 100,
+            "maxDepthDropExposure": "None",
+            "rotationPlyosRequired": true
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Moderate",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 4,
+            "intensityDistribution": {
+              "Low": 0.3,
+              "Moderate": 0.5,
+              "High": 0.1,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "LOW"
+        },
+        "POST_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "Very Low",
+            "sessionMaxContacts": 30,
+            "targetWeeklyContacts": 60,
+            "maxDepthDropExposure": "None",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Aerobic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Low",
+            "aerobicBaseImportance": "Moderate"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 1,
+            "intensityDistribution": {
+              "Low": 0.5,
+              "Moderate": 0.4,
+              "High": 0.1,
+              "Competition": 0.0
+            }
+          },
+          "cnsBudget": "VERY_LOW"
+        }
+      },
+      "injuryRiskProfile": {
+        "commonRegions": [
+          "shoulder",
+          "elbow",
+          "lumbar"
+        ],
+        "redFlagModifiers": [
+          "no-heavy-pressing-48h-post-throwing"
+        ]
+      }
+    },
+    "American_Football": {
+      "meta": {
+        "mappedMovementDemandProfiles": [],
+        "supportsSpecializationBlocks": false,
+        "contactSport": true,
+        "primaryLowerBodyForce": true
+      },
+      "movementProfile": {
+        "dominantPlanes": [
+          "Sagittal",
+          "Frontal",
+          "Transverse"
+        ],
+        "keyMovementPatterns": {
+          "hinge": "Very High",
+          "squat": "High",
+          "lunge": "High",
+          "push": "High",
+          "pull": "High",
+          "rotation": "Moderate",
+          "gait": "High",
+          "decel": "High"
+        }
+      },
+      "nodeProfile": {
+        "primaryNodes": [
+          "E2",
+          "E3",
+          "C"
+        ],
+        "secondaryNodes": [
+          "D",
+          "E1",
+          "E4"
+        ],
+        "forbiddenNodes": [],
+        "weeklyNodeEmphasis": {
+          "E2": 3,
+          "E3": 2,
+          "C": 2,
+          "E1": 1
+        },
+        "fvZones": {
+          "primaryZones": [
+            "Z1",
+            "Z2"
+          ],
+          "secondaryZones": [
+            "Z4",
+            "Z7"
+          ],
+          "recoveryZones": [
+            "Z8"
+          ]
+        }
+      },
+      "seasonOverlays": {
+        "OFF_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "High",
+            "sessionMaxContacts": 120,
+            "targetWeeklyContacts": 200,
+            "maxDepthDropExposure": "High",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic + Glycolytic",
+            "changeOfDirectionFrequency": "Very High",
+            "maxVelocityRequirement": "High",
+            "aerobicBaseImportance": "Moderate"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 3,
+            "intensityDistribution": {
+              "Low": 0.2,
+              "Moderate": 0.5,
+              "High": 0.2,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "HIGH"
+        },
+        "PRE_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "High",
+            "sessionMaxContacts": 100,
+            "targetWeeklyContacts": 160,
+            "maxDepthDropExposure": "High",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic + Glycolytic",
+            "changeOfDirectionFrequency": "Very High",
+            "maxVelocityRequirement": "High",
+            "aerobicBaseImportance": "Moderate"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 4,
+            "intensityDistribution": {
+              "Low": 0.1,
+              "Moderate": 0.4,
+              "High": 0.4,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "MODERATE_HIGH"
+        },
+        "IN_SEASON_TIER_1": {
+          "plyometricProfile": {
+            "contactCategory": "Moderate",
+            "sessionMaxContacts": 80,
+            "targetWeeklyContacts": 140,
+            "maxDepthDropExposure": "Moderate",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic + Glycolytic",
+            "changeOfDirectionFrequency": "Very High",
+            "maxVelocityRequirement": "High",
+            "aerobicBaseImportance": "Moderate"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 5,
+            "intensityDistribution": {
+              "Low": 0.1,
+              "Moderate": 0.4,
+              "High": 0.4,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "LOW"
+        },
+        "IN_SEASON_TIER_2": {
+          "plyometricProfile": {
+            "contactCategory": "Moderate",
+            "sessionMaxContacts": 90,
+            "targetWeeklyContacts": 160,
+            "maxDepthDropExposure": "Moderate",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic + Glycolytic",
+            "changeOfDirectionFrequency": "Very High",
+            "maxVelocityRequirement": "High",
+            "aerobicBaseImportance": "Moderate"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 4,
+            "intensityDistribution": {
+              "Low": 0.15,
+              "Moderate": 0.45,
+              "High": 0.3,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "MODERATE"
+        },
+        "IN_SEASON_TIER_3": {
+          "plyometricProfile": {
+            "contactCategory": "High",
+            "sessionMaxContacts": 100,
+            "targetWeeklyContacts": 160,
+            "maxDepthDropExposure": "High",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic + Glycolytic",
+            "changeOfDirectionFrequency": "Very High",
+            "maxVelocityRequirement": "High",
+            "aerobicBaseImportance": "Moderate"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 3,
+            "intensityDistribution": {
+              "Low": 0.2,
+              "Moderate": 0.5,
+              "High": 0.2,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "MODERATE_HIGH"
+        },
+        "POST_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "Low",
+            "sessionMaxContacts": 40,
+            "targetWeeklyContacts": 80,
+            "maxDepthDropExposure": "Low",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Aerobic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Moderate",
+            "aerobicBaseImportance": "Moderate"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 1,
+            "intensityDistribution": {
+              "Low": 0.5,
+              "Moderate": 0.4,
+              "High": 0.1,
+              "Competition": 0.0
+            }
+          },
+          "cnsBudget": "VERY_LOW"
+        }
+      },
+      "injuryRiskProfile": {
+        "commonRegions": [
+          "knee",
+          "shoulder",
+          "cervical",
+          "ankle"
+        ],
+        "redFlagModifiers": [
+          "contact-load-monitoring",
+          "neck-strength-priority"
+        ]
+      }
+    },
+    "General_Pop": {
+      "meta": {
+        "mappedMovementDemandProfiles": [],
+        "supportsSpecializationBlocks": false
+      },
+      "movementProfile": {
+        "dominantPlanes": [
+          "Sagittal"
+        ],
+        "keyMovementPatterns": {
+          "hinge": "High",
+          "squat": "High",
+          "lunge": "Moderate",
+          "push": "Moderate",
+          "pull": "Moderate",
+          "rotation": "Low",
+          "gait": "Low",
+          "decel": "Low"
+        }
+      },
+      "nodeProfile": {
+        "primaryNodes": [
+          "A",
+          "B",
+          "C"
+        ],
+        "secondaryNodes": [
+          "D",
+          "E1"
+        ],
+        "forbiddenNodes": [
+          "E2",
+          "E3",
+          "E4"
+        ],
+        "weeklyNodeEmphasis": {
+          "A": 3,
+          "B": 3,
+          "C": 2,
+          "D": 1
+        },
+        "fvZones": {
+          "primaryZones": [
+            "Z5",
+            "Z6"
+          ],
+          "secondaryZones": [],
+          "recoveryZones": [
+            "Z8"
+          ]
+        }
+      },
+      "seasonOverlays": {
+        "OFF_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "Very Low",
+            "sessionMaxContacts": 40,
+            "targetWeeklyContacts": 60,
+            "maxDepthDropExposure": "None",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Aerobic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Low",
+            "aerobicBaseImportance": "Very High"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 0,
+            "intensityDistribution": {
+              "Low": 0.4,
+              "Moderate": 0.5,
+              "High": 0.1,
+              "Competition": 0.0
+            }
+          },
+          "cnsBudget": "LOW"
+        },
+        "PRE_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "Very Low",
+            "sessionMaxContacts": 40,
+            "targetWeeklyContacts": 60,
+            "maxDepthDropExposure": "None",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Aerobic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Low",
+            "aerobicBaseImportance": "Very High"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 0,
+            "intensityDistribution": {
+              "Low": 0.4,
+              "Moderate": 0.5,
+              "High": 0.1,
+              "Competition": 0.0
+            }
+          },
+          "cnsBudget": "LOW"
+        },
+        "IN_SEASON_TIER_1": {
+          "plyometricProfile": {
+            "contactCategory": "Very Low",
+            "sessionMaxContacts": 30,
+            "targetWeeklyContacts": 50,
+            "maxDepthDropExposure": "None",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Aerobic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Low",
+            "aerobicBaseImportance": "Very High"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 0,
+            "intensityDistribution": {
+              "Low": 0.4,
+              "Moderate": 0.5,
+              "High": 0.1,
+              "Competition": 0.0
+            }
+          },
+          "cnsBudget": "LOW"
+        },
+        "IN_SEASON_TIER_2": {
+          "plyometricProfile": {
+            "contactCategory": "Very Low",
+            "sessionMaxContacts": 30,
+            "targetWeeklyContacts": 50,
+            "maxDepthDropExposure": "None",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Aerobic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Low",
+            "aerobicBaseImportance": "Very High"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 0,
+            "intensityDistribution": {
+              "Low": 0.4,
+              "Moderate": 0.5,
+              "High": 0.1,
+              "Competition": 0.0
+            }
+          },
+          "cnsBudget": "LOW"
+        },
+        "IN_SEASON_TIER_3": {
+          "plyometricProfile": {
+            "contactCategory": "Very Low",
+            "sessionMaxContacts": 40,
+            "targetWeeklyContacts": 60,
+            "maxDepthDropExposure": "None",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Aerobic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Low",
+            "aerobicBaseImportance": "Very High"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 0,
+            "intensityDistribution": {
+              "Low": 0.4,
+              "Moderate": 0.5,
+              "High": 0.1,
+              "Competition": 0.0
+            }
+          },
+          "cnsBudget": "LOW"
+        },
+        "POST_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "Very Low",
+            "sessionMaxContacts": 30,
+            "targetWeeklyContacts": 50,
+            "maxDepthDropExposure": "None",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Aerobic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Low",
+            "aerobicBaseImportance": "Very High"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 0,
+            "intensityDistribution": {
+              "Low": 0.4,
+              "Moderate": 0.5,
+              "High": 0.1,
+              "Competition": 0.0
+            }
+          },
+          "cnsBudget": "VERY_LOW"
+        }
+      },
+      "injuryRiskProfile": {
+        "commonRegions": [
+          "lumbar",
+          "knee",
+          "shoulder"
+        ],
+        "redFlagModifiers": [
+          "posture-priority",
+          "load-management"
+        ]
+      }
+    },
+    "Track_Sprints": {
+      "meta": {
+        "mappedMovementDemandProfiles": [],
+        "supportsSpecializationBlocks": false,
+        "maxVelocitySport": true
+      },
+      "movementProfile": {
+        "dominantPlanes": [
+          "Sagittal"
+        ],
+        "keyMovementPatterns": {
+          "hinge": "Very High",
+          "squat": "High",
+          "lunge": "High",
+          "push": "Low",
+          "pull": "Low",
+          "rotation": "Low",
+          "gait": "Very High",
+          "decel": "Moderate"
+        }
+      },
+      "nodeProfile": {
+        "primaryNodes": [
+          "E2",
+          "E3",
+          "C"
+        ],
+        "secondaryNodes": [
+          "E1",
+          "E4"
+        ],
+        "forbiddenNodes": [],
+        "weeklyNodeEmphasis": {
+          "E2": 3,
+          "E3": 3,
+          "C": 1
+        },
+        "fvZones": {
+          "primaryZones": [
+            "Z7",
+            "Z4"
+          ],
+          "secondaryZones": [
+            "Z2"
+          ],
+          "recoveryZones": [
+            "Z8"
+          ]
+        }
+      },
+      "seasonOverlays": {
+        "OFF_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "High",
+            "sessionMaxContacts": 130,
+            "targetWeeklyContacts": 230,
+            "maxDepthDropExposure": "High",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Very High",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 4,
+            "intensityDistribution": {
+              "Low": 0.2,
+              "Moderate": 0.4,
+              "High": 0.3,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "HIGH"
+        },
+        "PRE_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "High",
+            "sessionMaxContacts": 120,
+            "targetWeeklyContacts": 220,
+            "maxDepthDropExposure": "High",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Very High",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 5,
+            "intensityDistribution": {
+              "Low": 0.2,
+              "Moderate": 0.3,
+              "High": 0.4,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "MODERATE_HIGH"
+        },
+        "IN_SEASON_TIER_1": {
+          "plyometricProfile": {
+            "contactCategory": "Moderate",
+            "sessionMaxContacts": 80,
+            "targetWeeklyContacts": 160,
+            "maxDepthDropExposure": "Moderate",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Very High",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 6,
+            "intensityDistribution": {
+              "Low": 0.1,
+              "Moderate": 0.4,
+              "High": 0.4,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "LOW"
+        },
+        "IN_SEASON_TIER_2": {
+          "plyometricProfile": {
+            "contactCategory": "Moderate",
+            "sessionMaxContacts": 90,
+            "targetWeeklyContacts": 180,
+            "maxDepthDropExposure": "Moderate",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Very High",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 5,
+            "intensityDistribution": {
+              "Low": 0.15,
+              "Moderate": 0.45,
+              "High": 0.3,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "MODERATE"
+        },
+        "IN_SEASON_TIER_3": {
+          "plyometricProfile": {
+            "contactCategory": "High",
+            "sessionMaxContacts": 100,
+            "targetWeeklyContacts": 200,
+            "maxDepthDropExposure": "High",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Alactic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Very High",
+            "aerobicBaseImportance": "Low"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 4,
+            "intensityDistribution": {
+              "Low": 0.2,
+              "Moderate": 0.5,
+              "High": 0.2,
+              "Competition": 0.1
+            }
+          },
+          "cnsBudget": "MODERATE_HIGH"
+        },
+        "POST_SEASON": {
+          "plyometricProfile": {
+            "contactCategory": "Low",
+            "sessionMaxContacts": 40,
+            "targetWeeklyContacts": 80,
+            "maxDepthDropExposure": "Low",
+            "rotationPlyosRequired": false
+          },
+          "conditioningProfile": {
+            "dominantEnergySystem": "Aerobic",
+            "changeOfDirectionFrequency": "Low",
+            "maxVelocityRequirement": "Moderate",
+            "aerobicBaseImportance": "Moderate"
+          },
+          "practiceLoadProfile": {
+            "avgWeeklyPractices": 1,
+            "intensityDistribution": {
+              "Low": 0.5,
+              "Moderate": 0.4,
+              "High": 0.1,
+              "Competition": 0.0
+            }
+          },
+          "cnsBudget": "VERY_LOW"
+        }
+      },
+      "injuryRiskProfile": {
+        "commonRegions": [
+          "hamstring",
+          "hip-flexor",
+          "achilles"
+        ],
+        "redFlagModifiers": [
+          "max-velocity-monitoring",
+          "hamstring-health-priority"
+        ]
+      }
+    }
+  },
+  "version_history": {
+    "v2.2.2": {
+      "date": "2026-01-06",
+      "status": "ACTIVE \u00b7 PRODUCTION READY",
+      "changes": [
+        "Normalized F-V zone identifiers to canonical Z-style format (Z1-Z8) per ICP Definitions v2.3.1 schema_hints",
+        "Updated MDP reference to v1.4.1 and ICP Definitions to v2.3.1",
+        "No functional changes; schema alignment only for cross-document validation compatibility"
+      ],
+      "parent_version": "v2.2.0"
+    },
+    "v2.2.0": {
+      "date": "2025-12-24",
+      "status": "SUPERSEDED",
+      "changes": [
+        "Original version with Zone_# format"
+      ]
+    }
+  }
+}

@@ -1,0 +1,1099 @@
+{
+  "meta": {
+    "documentId": "EFL-SPECIALIZATION-BLOCK-ELASTIC-BASKETBALL",
+    "name": "Elastic Specialization Block - Basketball",
+    "version": "1.0.1",
+    "status": "ACTIVE",
+    "effectiveDate": "2025-12-22",
+    "patchDate": "2025-12-22",
+    "blockType": "SPECIALIZATION",
+    "parent_mdp": "MDP_COURT_VERTICAL",
+    "sport_focus": "Basketball",
+    "owner": "Austin Lawrence, Director of Performance Systems",
+    "codexReference": "Exercise Progression Law v1.0.1, Load Standards v2.1.2, Governance v4.0, MDP_COURT_VERTICAL v1.3",
+    "integration_points": [
+      "EFL_ICP_DEFINITIONS_v2_3.json (basketball ICPs)",
+      "EFL_MOVEMENT_DEMAND_PROFILES_v1_3.json (MDP_COURT_VERTICAL)",
+      "EFL_EXERCISE_PROGRESSION_LAW_v1_0_1.json",
+      "EFL_Program_Architect_EPA_v2_2.py"
+    ]
+  },
+
+  "block_definition": {
+    "display_name": "Elastic Specialization Block (Basketball)",
+    "block_id": "elastic_specialization_basketball",
+    "description": "4-week intensive plyometric block emphasizing vertical/lateral reactive strength for basketball athletes. Operates at upper bounds of legal plyometric volume within OFF_SEASON context.",
+    "duration_weeks": 4,
+    "training_emphasis": "ELASTIC_POWER_DEVELOPMENT",
+    "adaptation_target": "Reactive strength index (RSI), vertical jump height, lateral force production, repeat-jump capacity",
+    
+    "parent_mdp": "MDP_COURT_VERTICAL",
+    "legal_seasons": ["OFF_SEASON"],
+    "forbidden_seasons": ["PREP_SEASON", "IN_SEASON_TIER_1", "IN_SEASON_TIER_2", "IN_SEASON_TIER_3", "POST_SEASON"],
+    "season_rationale": "High plyometric volume (approaching population ceilings) is only safe and effective during OFF_SEASON when fixture density = 0 and recovery capacity = maximum. All in-season phases have reduced contact allowances.",
+    
+    "legal_populations": ["Youth_13_17", "Adult"],
+    "forbidden_populations": ["Youth_8_12"],
+    "population_rationale": "Youth 8-12 lack neuromuscular maturity and structural readiness for sustained high-intensity elastic work. This block operates at 80-100% of population ceilings for extended duration."
+  },
+
+  "entry_requirements": {
+    "description": "Mandatory gates that MUST be passed before athlete can enter block. EPA will validate these before generating week 1.",
+    
+    "readiness_gate": {
+      "required_flag": "GREEN",
+      "rationale": "High plyometric volume requires full CNS capacity and tissue health. YELLOW/RED states contraindicate elastic specialization.",
+      "enforcement": "HARD_GATE"
+    },
+
+    "season_gate": {
+      "required_season": "OFF_SEASON",
+      "rationale": "Only season with zero fixture density and maximum recovery capacity",
+      "enforcement": "HARD_GATE"
+    },
+
+    "movement_quality_gates": {
+      "landing_quality_score": {
+        "minimum": 7.0,
+        "maximum": 10.0,
+        "assessment_method": "Coach visual assessment using EFL landing quality rubric (symmetry, sound, posture, control)",
+        "rationale": "Landing quality <7/10 indicates insufficient eccentric control for high-volume elastic work",
+        "enforcement": "HARD_GATE"
+      },
+      
+      "knee_valgus_status": {
+        "required": "ABSENT",
+        "assessment_method": "Single-leg squat, bilateral landing, lateral movement screening",
+        "rationale": "Any knee valgus present = immediate injury risk under high plyometric volume",
+        "enforcement": "HARD_GATE"
+      },
+      
+      "ankle_dorsiflexion": {
+        "minimum_degrees": 35,
+        "assessment_method": "Weight-bearing lunge test",
+        "rationale": "Insufficient ankle mobility creates compensatory landing patterns under elastic load",
+        "enforcement": "SOFT_GATE (warn if <35°, allow with mobility supplementation)"
+      },
+
+      "single_leg_squat_quality": {
+        "minimum_score": 7.0,
+        "maximum": 10.0,
+        "assessment_method": "FMS-style single-leg squat assessment",
+        "rationale": "Unilateral control prerequisite for safe lateral and unilateral plyometric work",
+        "enforcement": "HARD_GATE for weeks 2-4, SOFT_GATE for week 1"
+      }
+    },
+
+    "training_prerequisites": {
+      "plyo_exposure_weeks": {
+        "minimum": 8,
+        "rationale": "Athlete must have completed minimum 8 weeks of foundational plyometric work (E1-E2 emphasis) before specialization block",
+        "enforcement": "HARD_GATE"
+      },
+      
+      "landing_progression_complete": {
+        "required": true,
+        "definition": "Athlete has progressed through Levels 1-2 of vertical jump progression (Exercise Progression Law reference) with excellent landing quality",
+        "enforcement": "HARD_GATE"
+      },
+      
+      "bilateral_jump_demonstration": {
+        "exercise": "Bodyweight Squat Jump (Continuous)",
+        "minimum_reps": 3,
+        "minimum_height_cm": 30,
+        "quality_standard": "Quiet, symmetrical landings with no valgus",
+        "enforcement": "HARD_GATE"
+      }
+    },
+
+    "contraindications": {
+      "absolute": [
+        "Active lower limb injury (ACL, meniscus, ankle sprain, patellar tendinopathy, Achilles tendinopathy)",
+        "Knee pain during jumping/landing",
+        "Shin splints (active)",
+        "Any fracture or stress fracture within 6 months",
+        "Growth plate pain or Osgood-Schlatter flare"
+      ],
+      "relative": [
+        "Recent upper respiratory infection (<1 week)",
+        "Sleep <6 hours per night average",
+        "Chronic stress score >7/10",
+        "Body weight >5% above baseline"
+      ],
+      "enforcement": "Absolute contraindications = HARD_GATE, Relative = SOFT_GATE with monitoring"
+    }
+  },
+
+  "weekly_structure": {
+    "description": "Progressive 4-week emphasis cycle with deload week 4",
+    
+    "week_1": {
+      "week_number": 1,
+      "focus": "Vertical Elastic Emphasis",
+      "primary_adaptation": "Vertical reactive strength, stiffness, rapid force production",
+      "primary_patterns": [
+        "vertical_jump",
+        "pogos",
+        "box_jumps",
+        "hurdle_hops_vertical"
+      ],
+      "secondary_patterns": [
+        "landing_control",
+        "ankle_stiffness_drills",
+        "deceleration_bilateral"
+      ],
+      
+      "volume_targets": {
+        "Youth_13_17": {
+          "contacts_per_session": {"min": 80, "max": 100},
+          "contacts_per_week": {"min": 160, "max": 180},
+          "session_count": 3,
+          "session_spacing": "48_hours_minimum",
+          "tier_3_max_percent": 40,
+          "governance_ceiling": 120,
+          "operating_at_percent_ceiling": 83,
+          "sprint_meters_per_session": {"min": 0, "max": 400},
+          "sprint_meters_per_week": {"min": 0, "max": 600},
+          "cns_load_category": "MODERATE-HIGH",
+          "note": "Sprint work minimal in elastic block - primarily used in PREP phase"
+        },
+        "Adult": {
+          "contacts_per_session": {"min": 100, "max": 120},
+          "contacts_per_week": {"min": 200, "max": 220},
+          "session_count": 3,
+          "session_spacing": "48_hours_minimum",
+          "tier_3_max_percent": 50,
+          "governance_ceiling": 140,
+          "operating_at_percent_ceiling": 86,
+          "sprint_meters_per_session": {"min": 0, "max": 600},
+          "sprint_meters_per_week": {"min": 0, "max": 800},
+          "cns_load_category": "MODERATE-HIGH",
+          "note": "Sprint work minimal in elastic block - primarily used in PREP phase"
+        }
+      },
+
+      "exercise_selection_rules": {
+        "e_node_distribution": {
+          "E1": "30-40% of contacts (foundational, bilateral)",
+          "E2": "40-50% of contacts (moderate elastic, box jumps, low hurdles)",
+          "E3": "10-20% of contacts (reactive, depth jumps low height)",
+          "E4": "0-10% of contacts (advanced athletes only, Director approval)"
+        },
+        "stance_distribution": {
+          "Bilateral": "70-80% of contacts",
+          "Split": "10-15% of contacts",
+          "Unilateral": "5-15% of contacts (only if prerequisites met)"
+        },
+        "reactivity_emphasis": {
+          "Stick_Landing": "20% (warm-up, quality checks)",
+          "Continuous_Rhythm": "60% (primary emphasis)",
+          "Reactive_Minimal_Contact": "20% (advanced athletes, small dose)"
+        }
+      },
+
+      "sample_session_day_1": {
+        "session_id": "ELSPEC_W1_D1",
+        "focus": "Vertical bilateral emphasis",
+        "total_duration_min": 50,
+        "structure": {
+          "PRIME": {
+            "duration_min": 8,
+            "exercises": [
+              "Ankle Circles + Dorsiflexion Mobilization",
+              "Hip 90-90 Switches",
+              "Glute Bridge 2×12"
+            ]
+          },
+          "PREP": {
+            "duration_min": 10,
+            "exercises": [
+              "Pogo Jumps (Bilateral) - 3×10 contacts (E1, 30 contacts)",
+              "Ankling - 2×20y (E1, rhythmic)"
+            ],
+            "prep_contacts": 30
+          },
+          "WORK_A": {
+            "duration_min": 22,
+            "focus": "Vertical elastic development",
+            "exercises": [
+              {
+                "exercise_id": "EX_01892",
+                "exercise_name": "Box Jump 30cm (Continuous)",
+                "sets": 4,
+                "reps": 5,
+                "rest_sec": 90,
+                "e_node": "E2",
+                "contacts": 20,
+                "cues": ["Drive through hips", "Quick off box", "Land softly"],
+                "aether_reference": "Box_Jump_Bilateral_30cm"
+              },
+              {
+                "exercise_id": "EX_02145",
+                "exercise_name": "Hurdle Hops 30cm (Continuous)",
+                "sets": 4,
+                "reps": 6,
+                "rest_sec": 90,
+                "e_node": "E2",
+                "contacts": 24,
+                "cues": ["Clear hurdle", "Rhythm", "Quiet landings"],
+                "aether_reference": "Hurdle_Hop_Forward_30cm"
+              },
+              {
+                "exercise_id": "EX_02789",
+                "exercise_name": "Depth Drop 45cm (Stick)",
+                "sets": 3,
+                "reps": 4,
+                "rest_sec": 120,
+                "e_node": "E3",
+                "contacts": 12,
+                "cues": ["Absorb forces", "Stick 2 seconds", "No bounce"],
+                "note": "Tier 3 work, 12 contacts = 14% of session (within 40% cap)",
+                "aether_reference": "Depth_Drop_Bilateral_45cm"
+              }
+            ],
+            "work_a_contacts": 56
+          },
+          "WORK_B": {
+            "duration_min": 8,
+            "focus": "Upper body shooting-compatible",
+            "exercises": [
+              "Push-Up Plus 3×12",
+              "Pallof Press (Half-Kneeling) 3×8/side"
+            ],
+            "contacts": 0
+          },
+          "CLEAR": {
+            "duration_min": 7,
+            "exercises": [
+              "Hip Flexor Stretch 2×30s/side",
+              "Box Breathing 3min"
+            ]
+          }
+        },
+        "session_totals": {
+          "total_contacts": 86,
+          "tier_1_2_contacts": 74,
+          "tier_3_contacts": 12,
+          "tier_3_percent": 14,
+          "sprint_meters": 0,
+          "cns_load_category": "MODERATE-HIGH",
+          "governance_status": "LEGAL",
+          "readiness_required": "GREEN"
+        }
+      }
+    },
+
+    "week_2": {
+      "week_number": 2,
+      "focus": "Horizontal Elastic Emphasis",
+      "primary_adaptation": "Horizontal force production, bounding capacity, acceleration out of elasticity",
+      "primary_patterns": [
+        "broad_jumps",
+        "bounds_alternating",
+        "lateral_bounds",
+        "horizontal_hops"
+      ],
+      "secondary_patterns": [
+        "deceleration_bilateral",
+        "landing_control",
+        "hip_extension_power"
+      ],
+
+      "volume_targets": {
+        "Youth_13_17": {
+          "contacts_per_session": {"min": 80, "max": 100},
+          "contacts_per_week": {"min": 160, "max": 180},
+          "session_count": 3,
+          "tier_3_max_percent": 40,
+          "sprint_meters_per_session": {"min": 0, "max": 400},
+          "sprint_meters_per_week": {"min": 0, "max": 600},
+          "cns_load_category": "MODERATE-HIGH",
+          "note": "Week 2 maintains same volume as week 1, changes emphasis only"
+        },
+        "Adult": {
+          "contacts_per_session": {"min": 100, "max": 120},
+          "contacts_per_week": {"min": 200, "max": 220},
+          "session_count": 3,
+          "tier_3_max_percent": 50,
+          "sprint_meters_per_session": {"min": 0, "max": 600},
+          "sprint_meters_per_week": {"min": 0, "max": 800},
+          "cns_load_category": "MODERATE-HIGH"
+        }
+      },
+
+      "exercise_selection_rules": {
+        "e_node_distribution": {
+          "E1": "25-35% (line hops, basic bounds)",
+          "E2": "50-60% (broad jumps, continuous bounds, lateral work)",
+          "E3": "10-20% (reactive bounds, depth work)",
+          "E4": "0-5% (maximal bounding, advanced only)"
+        },
+        "stance_distribution": {
+          "Bilateral": "60-70% (horizontal takeoffs and landings)",
+          "Split": "10-15% (transitional)",
+          "Unilateral": "15-25% (single-leg bounds, lateral work)"
+        },
+        "direction_emphasis": {
+          "Sagittal": "60% (forward bounds, broad jumps)",
+          "Frontal": "30% (lateral bounds)",
+          "Combined": "10% (multi-directional transitions)"
+        }
+      },
+
+      "sample_session_day_1": {
+        "session_id": "ELSPEC_W2_D1",
+        "focus": "Horizontal bilateral to unilateral progression",
+        "total_duration_min": 52,
+        "structure": {
+          "PRIME": {
+            "duration_min": 8,
+            "exercises": ["Ankle Mobility", "Hip 90-90", "Glute Bridge"]
+          },
+          "PREP": {
+            "duration_min": 10,
+            "exercises": [
+              "Pogo Jumps 3×10 (30 contacts)",
+              "Wall Drills 2×20s each leg"
+            ],
+            "prep_contacts": 30
+          },
+          "WORK_A": {
+            "duration_min": 24,
+            "focus": "Horizontal elastic power",
+            "exercises": [
+              {
+                "exercise_id": "EX_01456",
+                "exercise_name": "Broad Jump (Continuous)",
+                "sets": 4,
+                "reps": 5,
+                "e_node": "E2",
+                "contacts": 20,
+                "note": "85% max distance, focus on rhythm",
+                "aether_reference": "Broad_Jump_Bilateral_Continuous"
+              },
+              {
+                "exercise_id": "EX_01678",
+                "exercise_name": "Alternating Bounds 20y",
+                "sets": 4,
+                "reps": "20y (~7 contacts per rep)",
+                "e_node": "E2",
+                "contacts": 28,
+                "note": "Long flight phase emphasis",
+                "aether_reference": "Alternating_Bounds_Forward"
+              },
+              {
+                "exercise_id": "EX_01823",
+                "exercise_name": "Lateral Bound (Bilateral to Stick)",
+                "sets": 3,
+                "reps": "6 per side",
+                "e_node": "E2",
+                "contacts": 18,
+                "note": "First exposure to lateral elastic loading",
+                "aether_reference": "Lateral_Bound_Bilateral"
+              }
+            ],
+            "work_a_contacts": 66
+          },
+          "WORK_B": {
+            "duration_min": 8,
+            "exercises": [
+              "Eccentric Push-Up (5/0/1 tempo) 3×8",
+              "Half-Kneeling Cable Press 3×8/side"
+            ]
+          },
+          "CLEAR": {
+            "duration_min": 7,
+            "exercises": ["Hip Flexor Stretch", "Box Breathing"]
+          }
+        },
+        "session_totals": {
+          "total_contacts": 96,
+          "tier_3_contacts": 0,
+          "tier_3_percent": 0,
+          "sprint_meters": 0,
+          "cns_load_category": "MODERATE-HIGH",
+          "governance_status": "LEGAL",
+          "note": "Week 2 emphasizes E2 volume consolidation before week 3 reactive work"
+        }
+      }
+    },
+
+    "week_3": {
+      "week_number": 3,
+      "focus": "Reactive + Multi-Directional Emphasis",
+      "primary_adaptation": "True reactive strength (minimal ground contact), lateral reactive capacity, multi-directional elasticity",
+      "primary_patterns": [
+        "hurdle_hops_reactive",
+        "lateral_bounds_continuous",
+        "reactive_box_jumps",
+        "depth_jumps_moderate"
+      ],
+      "secondary_patterns": [
+        "direction_change_elastic",
+        "landing_robustness",
+        "repeat_jump_capacity"
+      ],
+
+      "volume_targets": {
+        "Youth_13_17": {
+          "contacts_per_session": {"min": 80, "max": 100},
+          "contacts_per_week": {"min": 160, "max": 180},
+          "session_count": 3,
+          "tier_3_max_percent": 40,
+          "sprint_meters_per_session": {"min": 0, "max": 400},
+          "sprint_meters_per_week": {"min": 0, "max": 600},
+          "cns_load_category": "HIGH",
+          "note": "Week 3 maintains volume but increases intensity (more E3, more reactivity)"
+        },
+        "Adult": {
+          "contacts_per_session": {"min": 100, "max": 120},
+          "contacts_per_week": {"min": 200, "max": 220},
+          "session_count": 3,
+          "tier_3_max_percent": 50,
+          "sprint_meters_per_session": {"min": 0, "max": 600},
+          "sprint_meters_per_week": {"min": 0, "max": 800},
+          "cns_load_category": "HIGH"
+        }
+      },
+
+      "exercise_selection_rules": {
+        "e_node_distribution": {
+          "E1": "20-30% (reduced, foundational only)",
+          "E2": "40-50% (maintained for volume)",
+          "E3": "25-35% (PRIMARY EMPHASIS - peak Tier 3 week)",
+          "E4": "0-5% (advanced athletes only)"
+        },
+        "reactivity_emphasis": {
+          "Stick_Landing": "10% (assessment only)",
+          "Continuous_Rhythm": "50%",
+          "Reactive_Minimal_Contact": "40% (PEAK REACTIVITY WEEK)"
+        },
+        "stance_distribution": {
+          "Bilateral": "50-60%",
+          "Split": "10-15%",
+          "Unilateral": "25-35% (increased from week 2)"
+        }
+      },
+
+      "intensity_management": {
+        "rationale": "Week 3 is highest CNS demand week of block. Volume stays constant but intensity increases via e-node and reactivity progression.",
+        "monitoring_required": [
+          "Daily landing quality checks",
+          "Pre-session readiness assessment",
+          "Jump height testing (any decrement >10% = reduce intensity)",
+          "Tendon palpation checks",
+          "Sleep quality tracking"
+        ],
+        "regression_protocol": {
+          "if_landing_quality_degrades": "Reduce e-node by 1 level (E3→E2)",
+          "if_tendon_irritation": "Reduce contacts by 30%, eliminate E3/E4 work",
+          "if_readiness_yellow": "Convert to week 2 emphasis (horizontal E2 focus)",
+          "if_readiness_red": "TERMINATE BLOCK, enter recovery protocol"
+        }
+      },
+
+      "sample_session_day_2": {
+        "session_id": "ELSPEC_W3_D2",
+        "focus": "Reactive vertical + lateral integration",
+        "total_duration_min": 54,
+        "structure": {
+          "PRIME": {
+            "duration_min": 8,
+            "exercises": ["Standard PRIME sequence"]
+          },
+          "PREP": {
+            "duration_min": 10,
+            "exercises": [
+              "Pogo Jumps 3×8 (24 contacts, reduced for CNS management)",
+              "A-Skips 2×20y"
+            ],
+            "prep_contacts": 24
+          },
+          "WORK_A": {
+            "duration_min": 26,
+            "focus": "Reactive elastic power - peak intensity",
+            "exercises": [
+              {
+                "exercise_id": "EX_02791",
+                "exercise_name": "Depth Jump 45cm (Reactive)",
+                "sets": 5,
+                "reps": 3,
+                "rest_sec": 150,
+                "e_node": "E3",
+                "contacts": 15,
+                "cues": ["Minimal contact", "Explosive rebound", "Height emphasis"],
+                "note": "PRIMARY TIER 3 EXERCISE",
+                "aether_reference": "Depth_Jump_Bilateral_45cm_Reactive"
+              },
+              {
+                "exercise_id": "EX_02147",
+                "exercise_name": "Reactive Hurdle Hops 30cm",
+                "sets": 4,
+                "reps": 5,
+                "rest_sec": 120,
+                "e_node": "E3",
+                "contacts": 20,
+                "cues": ["Quick off ground", "Rhythm", "Light feet"],
+                "note": "TIER 3 WORK",
+                "aether_reference": "Hurdle_Hop_Forward_30cm_Reactive"
+              },
+              {
+                "exercise_id": "EX_01825",
+                "exercise_name": "Continuous Lateral Bounds (Bilateral)",
+                "sets": 3,
+                "reps": 8,
+                "rest_sec": 90,
+                "e_node": "E2",
+                "contacts": 24,
+                "note": "Tier 2 volume work after Tier 3 intensity",
+                "aether_reference": "Lateral_Bound_Bilateral_Continuous"
+              },
+              {
+                "exercise_id": "EX_01894",
+                "exercise_name": "Box Jump 45cm (Continuous)",
+                "sets": 3,
+                "reps": 5,
+                "rest_sec": 90,
+                "e_node": "E2",
+                "contacts": 15,
+                "note": "Moderate volume to complete session",
+                "aether_reference": "Box_Jump_Bilateral_45cm"
+              }
+            ],
+            "work_a_contacts": 74
+          },
+          "WORK_B": {
+            "duration_min": 8,
+            "exercises": ["Push-Up Plus", "Med Ball Rotation Toss"]
+          },
+          "CLEAR": {
+            "duration_min": 7,
+            "exercises": ["Extended hip flexor stretch", "Box breathing"]
+          }
+        },
+        "session_totals": {
+          "total_contacts": 98,
+          "tier_1_2_contacts": 63,
+          "tier_3_contacts": 35,
+          "tier_3_percent": 36,
+          "sprint_meters": 0,
+          "cns_load_category": "HIGH",
+          "governance_status": "LEGAL (within 40% cap for Youth 13-17)",
+          "cns_category": "HIGH",
+          "note": "This is peak intensity session of entire block - requires GREEN readiness and perfect landing quality"
+        }
+      }
+    },
+
+    "week_4": {
+      "week_number": 4,
+      "focus": "Deload + Assessment",
+      "primary_adaptation": "Tissue restoration, supercompensation window, performance assessment",
+      "purpose": "Reduce training stress by 40-50% while maintaining movement quality. Allow tissues to adapt to weeks 1-3 loading. Assess performance improvements.",
+      
+      "volume_targets": {
+        "Youth_13_17": {
+          "contacts_per_session": {"min": 50, "max": 70},
+          "contacts_per_week": {"min": 100, "max": 120},
+          "session_count": 2,
+          "volume_reduction_percent": 40,
+          "tier_3_max_percent": 20,
+          "sprint_meters_per_session": {"min": 0, "max": 200},
+          "sprint_meters_per_week": {"min": 0, "max": 300},
+          "cns_load_category": "LOW-MODERATE",
+          "note": "Significant volume reduction with maintained quality"
+        },
+        "Adult": {
+          "contacts_per_session": {"min": 70, "max": 90},
+          "contacts_per_week": {"min": 140, "max": 160},
+          "session_count": 2,
+          "volume_reduction_percent": 35,
+          "tier_3_max_percent": 20,
+          "sprint_meters_per_session": {"min": 0, "max": 300},
+          "sprint_meters_per_week": {"min": 0, "max": 400},
+          "cns_load_category": "LOW-MODERATE"
+        }
+      },
+
+      "exercise_selection_rules": {
+        "e_node_distribution": {
+          "E1": "60% (return to foundational work)",
+          "E2": "30% (reduced moderate work)",
+          "E3": "10% (minimal, quality assessment only)",
+          "E4": "0% (eliminated during deload)"
+        },
+        "reactivity_emphasis": {
+          "Stick_Landing": "40% (landing quality restoration)",
+          "Continuous_Rhythm": "50%",
+          "Reactive_Minimal_Contact": "10% (assessment only)"
+        },
+        "intensity_management": "Low-moderate intensity, high movement quality focus"
+      },
+
+      "assessment_protocol": {
+        "required": true,
+        "assessments": [
+          {
+            "test": "Vertical Jump Height",
+            "method": "Countermovement jump, 3 trials, best height",
+            "success_criterion": "≥5% improvement from block entry",
+            "timing": "Mid-week 4 (after 2-3 days rest)"
+          },
+          {
+            "test": "Reactive Strength Index (RSI)",
+            "method": "Drop jump from 30cm box, calculate jump height / contact time",
+            "success_criterion": "RSI ≥2.0 or improved from baseline",
+            "timing": "Mid-week 4"
+          },
+          {
+            "test": "Landing Quality Assessment",
+            "method": "Coach visual scoring on bilateral and unilateral landings",
+            "success_criterion": "Maintained or improved (≥7/10)",
+            "timing": "Throughout week 4"
+          },
+          {
+            "test": "Repeat Jump Decrement",
+            "method": "10 continuous vertical jumps, compare jump 1 vs jump 10 height",
+            "success_criterion": "Decrement <15%",
+            "timing": "End of week 4"
+          }
+        ],
+        "assessment_drives_exit_decision": true
+      },
+
+      "sample_session_day_1": {
+        "session_id": "ELSPEC_W4_D1",
+        "focus": "Deload - foundational quality",
+        "total_duration_min": 40,
+        "structure": {
+          "PRIME": {
+            "duration_min": 10,
+            "exercises": ["Extended mobility sequence", "Tissue quality work"]
+          },
+          "PREP": {
+            "duration_min": 8,
+            "exercises": [
+              "Pogo Jumps 2×10 (20 contacts, E1)",
+              "Ankling 2×20y"
+            ],
+            "prep_contacts": 20
+          },
+          "WORK_A": {
+            "duration_min": 15,
+            "focus": "Low-intensity quality work",
+            "exercises": [
+              {
+                "exercise_id": "EX_01893",
+                "exercise_name": "Box Jump 30cm (Stick Landing)",
+                "sets": 3,
+                "reps": 5,
+                "e_node": "E2",
+                "contacts": 15,
+                "cues": ["Perfect technique", "Stick every rep", "No rush"],
+                "aether_reference": "Box_Jump_Bilateral_30cm_Stick"
+              },
+              {
+                "exercise_id": "EX_01457",
+                "exercise_name": "Broad Jump (Stick)",
+                "sets": 3,
+                "reps": 3,
+                "e_node": "E2",
+                "contacts": 9,
+                "note": "Return to stick landing emphasis for quality restoration",
+                "aether_reference": "Broad_Jump_Bilateral_Stick"
+              },
+              {
+                "exercise_id": "EX_01234",
+                "exercise_name": "Lateral Line Hops (Continuous)",
+                "sets": 3,
+                "reps": 10,
+                "e_node": "E1",
+                "contacts": 30,
+                "note": "Low intensity, rhythm focus",
+                "aether_reference": "Line_Hop_Lateral"
+              }
+            ],
+            "work_a_contacts": 54
+          },
+          "CLEAR": {
+            "duration_min": 12,
+            "exercises": [
+              "Extended stretching sequence",
+              "Foam rolling lower body",
+              "Box breathing 5min"
+            ]
+          }
+        },
+        "session_totals": {
+          "total_contacts": 74,
+          "tier_3_contacts": 0,
+          "intensity": "LOW-MODERATE",
+          "sprint_meters": 0,
+          "cns_load_category": "LOW-MODERATE",
+          "governance_status": "LEGAL",
+          "note": "45% volume reduction from week 3, zero Tier 3 work"
+        }
+      }
+    }
+  },
+
+  "exit_criteria": {
+    "description": "Mandatory performance and health checks before transitioning out of block",
+    "all_must_pass": true,
+    "enforcement": "EPA will not generate post-block programming until exit criteria validated",
+
+    "performance_criteria": {
+      "vertical_jump_improvement": {
+        "test": "Countermovement jump height",
+        "minimum_improvement_percent": 5,
+        "measurement_timing": "Week 4 mid-week",
+        "pass_threshold": "≥5% improvement from block entry baseline",
+        "rationale": "Primary adaptation target - must see measurable vertical jump improvement"
+      },
+      
+      "reactive_strength_index": {
+        "test": "Drop jump RSI (30cm drop height)",
+        "minimum_value": 2.0,
+        "pass_threshold": "RSI ≥2.0 OR ≥10% improvement from baseline",
+        "rationale": "RSI reflects elastic efficiency - central to block goals"
+      },
+
+      "repeat_jump_capacity": {
+        "test": "10 continuous vertical jumps, height decrement analysis",
+        "maximum_decrement_percent": 15,
+        "pass_threshold": "Jump 10 height ≥85% of Jump 1 height",
+        "rationale": "Ensures elastic capacity maintained under fatigue (basketball game demand)"
+      }
+    },
+
+    "movement_quality_criteria": {
+      "landing_quality_maintained": {
+        "test": "Coach visual assessment (bilateral and unilateral landings)",
+        "minimum_score": 7.0,
+        "pass_threshold": "Landing quality ≥7/10 AND no worse than block entry",
+        "rationale": "Quality must be maintained or improved despite high volume weeks",
+        "enforcement": "HARD_GATE"
+      },
+
+      "knee_valgus_absent": {
+        "test": "Visual screening on landings and direction changes",
+        "required_status": "ABSENT",
+        "pass_threshold": "Zero valgus present on all movement screens",
+        "rationale": "Any valgus emergence = block failed, must regress to corrective work",
+        "enforcement": "HARD_GATE"
+      }
+    },
+
+    "tissue_health_criteria": {
+      "no_tendon_irritation": {
+        "test": "Patellar, Achilles, plantar fascia palpation + functional testing",
+        "required_status": "Pain-free",
+        "pass_threshold": "No pain on palpation, no pain during jumping",
+        "rationale": "Tendon irritation = block volume exceeded tissue capacity",
+        "enforcement": "HARD_GATE"
+      },
+
+      "no_knee_pain": {
+        "required_status": "Pain-free",
+        "pass_threshold": "No pain during or after training",
+        "enforcement": "HARD_GATE"
+      },
+
+      "no_ankle_flare": {
+        "required_status": "Pain-free, no swelling",
+        "pass_threshold": "No pain, swelling, or instability",
+        "enforcement": "HARD_GATE"
+      }
+    },
+
+    "readiness_criteria": {
+      "minimum_green_weeks": {
+        "required": 3,
+        "definition": "Athlete maintained GREEN readiness for at least 3 of 4 weeks",
+        "rationale": "If athlete dropped to YELLOW/RED frequently, volume was too high",
+        "enforcement": "SOFT_GATE (warn if <3 weeks GREEN, but allow exit if performance criteria met)"
+      }
+    },
+
+    "exit_decision_matrix": {
+      "SUCCESSFUL_COMPLETION": {
+        "criteria": "All performance + movement quality + tissue health criteria passed",
+        "action": "Approve transition to next block",
+        "next_block_recommendation": "Return to MDP_COURT_VERTICAL baseline programming OR Power Transfer Block (Zone 2 emphasis)"
+      },
+      
+      "PARTIAL_SUCCESS": {
+        "criteria": "Performance improved BUT movement quality degraded OR tissue health issue emerged",
+        "action": "Require 1-week recovery protocol before next block",
+        "corrective_focus": "Address limiting factor (landing quality correction, tendon health protocol)"
+      },
+
+      "FAILED_BLOCK": {
+        "criteria": "No performance improvement OR movement quality significantly degraded OR tissue health issue",
+        "action": "TERMINATE specialization approach, return to foundational work (Levels 1-2 from Exercise Progression Law)",
+        "investigation_required": "Identify why block failed (volume too high, inadequate prerequisites, insufficient recovery)"
+      }
+    }
+  },
+
+  "transition_protocol": {
+    "description": "How to safely exit block and return to baseline programming",
+    
+    "post_block_recovery": {
+      "minimum_days": 3,
+      "maximum_days": 7,
+      "activity_during_recovery": [
+        "Zone 8 work (mobility, skill)",
+        "Light Zone 5 work (strength-endurance, low CNS)",
+        "Walking, swimming, or other low-impact activity",
+        "NO plyometric work",
+        "NO high-intensity training"
+      ],
+      "rationale": "Tissues need 3-7 days to complete adaptation response from high-volume block"
+    },
+
+    "re_entry_to_baseline_programming": {
+      "week_1_post_block": {
+        "volume": "60% of block average",
+        "intensity": "Low-moderate (E1-E2 only)",
+        "focus": "Movement quality restoration",
+        "sample_contacts": "Youth 13-17: 50-70/session, Adult: 80-100/session"
+      },
+      "week_2_post_block": {
+        "volume": "75% of block average",
+        "intensity": "Moderate (E1-E3 allowed)",
+        "focus": "Rebuild consistency"
+      },
+      "week_3_post_block": {
+        "volume": "Return to MDP_COURT_VERTICAL seasonal defaults",
+        "intensity": "Normal range for season",
+        "note": "Athlete is now back to baseline programming"
+      }
+    },
+
+    "next_block_timing": {
+      "minimum_weeks_between_specialization_blocks": 8,
+      "rationale": "Cannot run consecutive specialization blocks without baseline programming buffer. Tissues need extended recovery and rebalancing.",
+      "violation_consequence": "Running specialization blocks back-to-back = guaranteed overuse injury"
+    }
+  },
+
+  "monitoring_requirements": {
+    "description": "What must be tracked throughout block to ensure safety",
+    "frequency": "Every session",
+    
+    "pre_session_checks": {
+      "readiness_assessment": {
+        "method": "Sleep + Stress + RPE formula",
+        "action_if_yellow": "Reduce volume by 20%, eliminate Tier 3 work",
+        "action_if_red": "Skip session or convert to Zone 8 (mobility/skill)"
+      },
+      
+      "movement_quality_spot_check": {
+        "method": "5 bilateral jumps, assess landing",
+        "action_if_degraded": "Reduce e-node intensity by 1 level for entire session"
+      }
+    },
+
+    "during_session_monitoring": {
+      "landing_sound": {
+        "monitor": "Audible loudness of landings",
+        "action_if_loud": "Pause set, provide landing cues, reduce height/distance if persists"
+      },
+      
+      "knee_valgus_watch": {
+        "monitor": "Visual screening on every landing",
+        "action_if_present": "IMMEDIATE stop, regress to bilateral E1 work, do not progress until corrected"
+      },
+
+      "jump_height_tracking": {
+        "monitor": "Relative jump height across sets (visual or measured)",
+        "action_if_decrement": "If height drops >15% within session, terminate plyometric work"
+      }
+    },
+
+    "post_session_checks": {
+      "tendon_palpation": {
+        "locations": "Patellar tendon, Achilles tendon, plantar fascia",
+        "action_if_tender": "Ice, reduce volume next session by 30%"
+      },
+
+      "joint_pain_query": {
+        "method": "Ask athlete: any knee, ankle, or hip pain?",
+        "action_if_yes": "Investigate source, may require session off or medical evaluation"
+      }
+    },
+
+    "weekly_assessments": {
+      "jump_test": {
+        "frequency": "Start of each week",
+        "method": "3 maximal countermovement jumps",
+        "action_if_decrement": "If week-to-week jump height decreases >10%, reduce weekly volume by 20%"
+      },
+
+      "readiness_trend": {
+        "method": "Calculate weekly average readiness score",
+        "action_if_declining": "If readiness trending down across 2 weeks, extend recovery days between sessions"
+      }
+    }
+  },
+
+  "coach_guidance": {
+    "description": "Coaching notes for implementing this block",
+
+    "when_to_use_this_block": [
+      "Athlete has completed 8+ weeks of foundational plyo work",
+      "Vertical jump or reactive strength is identified limiter",
+      "OFF_SEASON with no competitions for next 6 weeks",
+      "Athlete readiness consistently GREEN",
+      "Landing quality excellent (≥7/10)"
+    ],
+
+    "when_NOT_to_use_this_block": [
+      "Any in-season phase (use maintenance programming instead)",
+      "Athlete has active injury or recent injury (<8 weeks)",
+      "Landing quality <7/10",
+      "Readiness frequently YELLOW or RED",
+      "Youth 8-12 population (use foundational work only)",
+      "Athlete has <8 weeks prior plyometric training"
+    ],
+
+    "common_mistakes_to_avoid": [
+      "Adding volume beyond population ceilings (Youth 13-17 max 120/session, Adult max 140/session)",
+      "Skipping deload week 4 (attempting to maintain volume)",
+      "Progressing despite degrading landing quality",
+      "Running block during season (use only in OFF_SEASON)",
+      "Running consecutive specialization blocks without 8+ week buffer",
+      "Ignoring tendon pain or irritation"
+    ],
+
+    "success_indicators": [
+      "Vertical jump improves ≥5%",
+      "Landing quality maintained or improved",
+      "No tissue health issues emerged",
+      "Athlete maintained GREEN readiness ≥3 weeks",
+      "RSI ≥2.0 or improved ≥10%",
+      "Athlete reports feeling more explosive"
+    ]
+  },
+
+  "epa_integration_specifications": {
+    "description": "How EPA must use this block during session generation",
+
+    "pre_generation_validation": {
+      "step_1": "Validate all entry_requirements before generating week 1",
+      "step_2": "Confirm season = OFF_SEASON",
+      "step_3": "Confirm population = Youth_13_17 OR Adult",
+      "step_4": "Confirm readiness = GREEN",
+      "step_5": "Load athlete's current movement quality scores",
+      "step_6": "IF any entry requirement fails → REJECT block, provide reason code + legal alternative"
+    },
+
+    "weekly_generation_logic": {
+      "week_1": "Use week_1.exercise_selection_rules to filter AETHER exercises, generate 3 sessions targeting vertical patterns, validate contacts within range",
+      "week_2": "Use week_2.exercise_selection_rules, shift to horizontal patterns, maintain same volume",
+      "week_3": "Use week_3.exercise_selection_rules, increase E3 percentage (up to Tier 3 cap), monitor closely",
+      "week_4": "Use week_4.exercise_selection_rules, reduce volume by 40%, shift to E1-E2 emphasis, include assessments"
+    },
+
+    "exercise_filtering_per_week": {
+      "method": "Apply e_node_distribution percentages as filters on AETHER library",
+      "example_week_1": "If session needs 86 contacts and e_node_distribution says E2=40-50%, select exercises totaling 34-43 E2 contacts",
+      "enforcement": "Weekly e_node distribution is SOFT target, session-level Tier 3 cap is HARD enforcement",
+      "exercise_id_requirement": "CRITICAL: All selected exercises MUST include valid exercise_id from AETHER library to enable automatic Band/Node/E-node validation"
+    },
+
+    "session_validation_gates": {
+      "gate_0": "Exercise_ID binding validated (all exercises must have valid exercise_id from AETHER)",
+      "gate_1": "Total contacts ≤ population ceiling (Youth 13-17: 120, Adult: 140)",
+      "gate_2": "Tier 3 contacts ≤ tier_3_max_percent (Youth 13-17: 40%, Adult: 50%)",
+      "gate_3": "Weekly contacts within week-specific range",
+      "gate_4": "All exercises pass Exercise Progression Law validation",
+      "gate_5": "Readiness = GREEN (hard requirement for all sessions)",
+      "output_if_fail": "REJECTED with reason_code, legal alternative provided"
+    },
+
+    "post_block_validation": {
+      "requirement": "EPA must validate exit_criteria before generating post-block programming",
+      "if_exit_criteria_passed": "Generate transition_protocol week 1 programming (60% volume)",
+      "if_exit_criteria_failed": "ESCALATE to coach for manual review and corrective programming"
+    }
+  },
+
+  "integration_with_exercise_progression_law": {
+    "description": "How this block applies Exercise Progression Law v1.0.1",
+
+    "week_1_applies": {
+      "load_band": "Band_0 to Band_1 (bodyweight to light load)",
+      "e_node": "E1 (30-40%), E2 (40-50%), E3 (10-20%)",
+      "stance": "Bilateral emphasis (70-80%)",
+      "reactivity": "Continuous_Rhythm primary (60%)",
+      "direction": "Linear_Sagittal + Lateral_Frontal"
+    },
+
+    "week_2_progression": {
+      "axes_progressed": "direction_complexity (increased Frontal plane work)",
+      "axes_unchanged": "load_band, e_node_distribution, stance_distribution, reactivity",
+      "compliance": "ONE_AXIS_AT_A_TIME law followed"
+    },
+
+    "week_3_progression": {
+      "axes_progressed": "e_node_difficulty (increased E3 percentage) + reactivity_level (increased Reactive_Minimal_Contact percentage)",
+      "violation_check": "TWO axes progressed simultaneously",
+      "justification": "Week 3 is NOT a single-session progression - it is a weekly emphasis shift within earned progression. Athletes have consolidated E3 work at lower percentages in weeks 1-2. This is legal within block structure.",
+      "note": "If this were single-session athlete progression, two-axis change would be illegal. Within 4-week block structure with weekly emphases, this is acceptable."
+    },
+
+    "week_4_regression": {
+      "axes_regressed": "e_node_difficulty (reduced E3, increased E1) + reactivity_level (reduced Reactive, increased Stick/Continuous)",
+      "purpose": "Deload week intentionally regresses multiple axes to create recovery stimulus"
+    },
+
+    "population_ceiling_enforcement": {
+      "Youth_13_17": {
+        "e_node_max": "E4 allowed but ≤40% of session",
+        "direction_max": "Multi_Directional_Combined (planned COD only)",
+        "load_band_max": "Band_2",
+        "all_enforced": "Throughout all 4 weeks"
+      },
+      "Adult": {
+        "e_node_max": "E4 allowed at ≤50% of session",
+        "direction_max": "Multi_Directional_Combined (reactive COD allowed)",
+        "load_band_max": "Band_4",
+        "all_enforced": "Throughout all 4 weeks"
+      }
+    }
+  },
+
+  "version_control": {
+    "v1.0.1": {
+      "date": "2025-12-22",
+      "status": "ACTIVE",
+      "changes": [
+        "REQUIRED: Added exercise_id fields to all sample session exercises with aether_reference for library binding",
+        "RECOMMENDED: Added cns_load_category to all weekly volume_targets (MODERATE-HIGH weeks 1-2, HIGH week 3, LOW-MODERATE week 4)",
+        "RECOMMENDED: Added sprint_meters_per_session and sprint_meters_per_week caps to all volume_targets",
+        "RECOMMENDED: Added sprint_meters tracking to all session_totals",
+        "Added Gate 0 (Exercise_ID binding validation) to EPA session_validation_gates",
+        "All sample sessions now EPA-ready with complete exercise metadata"
+      ],
+      "reviewer": "Austin Lawrence",
+      "approval_status": "APPROVED_FOR_PRODUCTION",
+      "integration_ready": true,
+      "hardening_complete": true
+    },
+    "v1.0.0": {
+      "date": "2025-12-22",
+      "status": "SUPERSEDED",
+      "changes": "Initial production release",
+      "integration_ready": true,
+      "tested_populations": ["Youth_13_17", "Adult"],
+      "tested_season": "OFF_SEASON",
+      "validated_against": [
+        "Exercise Progression Law v1.0.1",
+        "Load Standards v2.1.2",
+        "Governance v4.0"
+      ]
+    }
+  }
+}

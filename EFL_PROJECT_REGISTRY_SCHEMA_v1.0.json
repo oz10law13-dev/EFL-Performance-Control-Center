@@ -1,0 +1,356 @@
+{
+  "$id": "EFL_PROJECT_REGISTRY_v1.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EFL Project / Wrapper Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "metadata",
+    "projects"
+  ],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "specid",
+        "version",
+        "effectivedate",
+        "status",
+        "owner",
+        "purpose"
+      ],
+      "properties": {
+        "specid": {
+          "type": "string",
+          "const": "EFL_PROJECT_REGISTRY"
+        },
+        "version": {
+          "type": "string",
+          "const": "1.0"
+        },
+        "effectivedate": {
+          "type": "string",
+          "format": "date"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "DRAFT",
+            "PRODUCTION-LOCKED"
+          ]
+        },
+        "owner": {
+          "type": "string"
+        },
+        "purpose": {
+          "type": "string"
+        }
+      }
+    },
+    "projects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "R2P_ACL",
+        "COURT_SPORT_FOUNDATIONS",
+        "ELASTIC_RELOAD",
+        "ELASTIC_SPECIALIZATION",
+        "DECEL_SPECIALIZATION",
+        "FORCE_SPECIALIZATION",
+        "ICP_BASKETBALL_INSEASON",
+        "ICP_VOLLEYBALL_INSEASON",
+        "ICP_BASKETBALL_POSTSEASON",
+        "ICP_VOLLEYBALL_POSTSEASON",
+        "OFF_SEASON_BASELINE_COURT_VERTICAL",
+        "ADULT_STRENGTH",
+        "ADULT_MOBILITY",
+        "ADULT_ERL"
+      ],
+      "properties": {
+        "R2P_ACL": {
+          "$ref": "#/$defs/ProjectEntry"
+        },
+        "COURT_SPORT_FOUNDATIONS": {
+          "$ref": "#/$defs/ProjectEntry"
+        },
+        "ELASTIC_RELOAD": {
+          "$ref": "#/$defs/ProjectEntry"
+        },
+        "ELASTIC_SPECIALIZATION": {
+          "$ref": "#/$defs/ProjectEntry"
+        },
+        "DECEL_SPECIALIZATION": {
+          "$ref": "#/$defs/ProjectEntry"
+        },
+        "FORCE_SPECIALIZATION": {
+          "$ref": "#/$defs/ProjectEntry"
+        },
+        "ICP_BASKETBALL_INSEASON": {
+          "$ref": "#/$defs/ProjectEntry"
+        },
+        "ICP_VOLLEYBALL_INSEASON": {
+          "$ref": "#/$defs/ProjectEntry"
+        },
+        "ICP_BASKETBALL_POSTSEASON": {
+          "$ref": "#/$defs/ProjectEntry"
+        },
+        "ICP_VOLLEYBALL_POSTSEASON": {
+          "$ref": "#/$defs/ProjectEntry"
+        },
+        "OFF_SEASON_BASELINE_COURT_VERTICAL": {
+          "$ref": "#/$defs/ProjectEntry"
+        },
+        "ADULT_STRENGTH": {
+          "$ref": "#/$defs/ProjectEntry"
+        },
+        "ADULT_MOBILITY": {
+          "$ref": "#/$defs/ProjectEntry"
+        },
+        "ADULT_ERL": {
+          "$ref": "#/$defs/ProjectEntry"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "Population": {
+      "type": "string",
+      "enum": [
+        "Youth812",
+        "Youth1316",
+        "Youth17Advanced",
+        "Adult_GENERAL",
+        "Adult_ATHLETE"
+      ]
+    },
+    "Season": {
+      "type": "string",
+      "enum": [
+        "OFFSEASON",
+        "PRESEASON",
+        "INSEASON",
+        "POSTSEASON"
+      ]
+    },
+    "Target": {
+      "type": "string",
+      "enum": [
+        "BRIDGEATHLETIC",
+        "COACHSHEET",
+        "MICROSESSION",
+        "MESOCYCLE"
+      ]
+    },
+    "ProjectType": {
+      "type": "string",
+      "enum": [
+        "R2P",
+        "SP_FOUNDATIONS",
+        "SP_RELOAD",
+        "SP_SPECIALIZATION",
+        "ICP",
+        "BASELINE",
+        "ADULT"
+      ]
+    },
+    "ProjectEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "projectid",
+        "projecttype",
+        "wrapper",
+        "outputspec",
+        "router_binding",
+        "required_inputs",
+        "exit_gates",
+        "macro_caps",
+        "system1"
+      ],
+      "properties": {
+        "projectid": {
+          "type": "string",
+          "enum": [
+            "R2P_ACL",
+            "COURT_SPORT_FOUNDATIONS",
+            "ELASTIC_RELOAD",
+            "ELASTIC_SPECIALIZATION",
+            "DECEL_SPECIALIZATION",
+            "FORCE_SPECIALIZATION",
+            "ICP_BASKETBALL_INSEASON",
+            "ICP_VOLLEYBALL_INSEASON",
+            "ICP_BASKETBALL_POSTSEASON",
+            "ICP_VOLLEYBALL_POSTSEASON",
+            "OFF_SEASON_BASELINE_COURT_VERTICAL",
+            "ADULT_STRENGTH",
+            "ADULT_MOBILITY",
+            "ADULT_ERL"
+          ]
+        },
+        "projecttype": {
+          "$ref": "#/$defs/ProjectType"
+        },
+        "wrapper": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "file",
+            "version"
+          ],
+          "properties": {
+            "file": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            }
+          }
+        },
+        "outputspec": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "file",
+            "version",
+            "targets"
+          ],
+          "properties": {
+            "file": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            },
+            "targets": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Target"
+              },
+              "uniqueItems": true,
+              "minItems": 1
+            }
+          }
+        },
+        "system1": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "engine_id",
+                "schema_file",
+                "required"
+              ],
+              "properties": {
+                "engine_id": {
+                  "type": "string"
+                },
+                "schema_file": {
+                  "type": "string"
+                },
+                "required": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "uniqueItems": true
+                }
+              }
+            }
+          ]
+        },
+        "router_binding": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "allowed_populations",
+            "allowed_seasons",
+            "requires_r2p_enrollment"
+          ],
+          "properties": {
+            "allowed_populations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Population"
+              },
+              "uniqueItems": true,
+              "minItems": 1
+            },
+            "allowed_seasons": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Season"
+              },
+              "uniqueItems": true,
+              "minItems": 1
+            },
+            "requires_r2p_enrollment": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        },
+        "required_inputs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "critical",
+            "optional"
+          ],
+          "properties": {
+            "critical": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            },
+            "optional": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            }
+          }
+        },
+        "exit_gates": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "required_flags"
+          ],
+          "properties": {
+            "required_flags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            }
+          }
+        },
+        "macro_caps": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "counters"
+          ],
+          "properties": {
+            "counters": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

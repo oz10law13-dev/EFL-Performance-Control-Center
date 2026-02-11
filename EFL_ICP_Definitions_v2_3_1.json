@@ -1,0 +1,207 @@
+{
+  "meta": {
+    "name": "EFL Individual Client Profile Definitions",
+    "version": "2.3.1",
+    "generated": "2025-12-23",
+    "codexReference": "§4.4 Population Architecture; Sport Demands Grid v2.0; Load Standards v2.2.0; EFL_Periodization_FV_Schema_v2_1; EFL_Governance_v4_1; EFL_Coach_AI_Playbook_v0_5_0",
+    "owner": "Austin Lawrence, Director of Performance Systems",
+    "status": "ACTIVE · LOCKED",
+    "notes": [
+      "Z-style FV zone identifiers are canonical (e.g., Z3 not Zone_3).",
+      "Sprint ceilings reference TRUE sprints only (≥90% Vmax) unless explicitly overridden by a higher authority document.",
+      "Load ceilings in this file are aligned to Load Standards v2.2.0 Table 3.2 (Youth 13-17 Hard Caps) and Governance v4.1.",
+      "All ICPs include reference to detailed individual ICP documents for full specifications.",
+      "F-V bias assessment protocols vary by population maturity and season per Governance v4.1 Gates 1-2."
+    ]
+  },
+  "schema_hints": {
+    "fv_zone_id_format": "Z1-Z8",
+    "sprint_ceiling_definition": "TRUE sprints only (≥90% Vmax)",
+    "default_fv_zone_focus_role": "ADVISORY_ONLY",
+    "load_ceiling_source": "Load Standards v2.2.0 Table 3.2"
+  },
+  "icps": {
+    "ICP_HS_BASKETBALL_OFFSEASON": {
+      "description": "High school basketball athlete (ages 14-18) in off-season development phase. Eligible for specialization blocks with proper prerequisites. F-V bias aware with legal bias determination per population/season.",
+      "governance_profile": "Youth_13_17_Performance",
+      "default_readiness": "GREEN",
+      "reference_detailed_icp": "EFL_ICP_HS_BASKETBALL_OFFSEASON_v2_3_1.json",
+      "load_standard_profile": {
+        "plyo_ceiling_per_session": 120,
+        "plyo_contacts_per_week": 240,
+        "sprint_ceiling_per_week_m": 600,
+        "sprint_ceiling_definition": "TRUE sprints only (≥90% Vmax)",
+        "load_band_profile": "Band_2",
+        "e_node_ceiling": "E4",
+        "tier_3_max_percent": 40,
+        "rationale": "Load Standards v2.2.0 Youth 13-17 hard ceilings enforced across ALL programming. Ceilings apply regardless of F-V bias selection."
+      },
+      "node_access": ["A", "B", "C", "D"],
+      "default_fv_zone_focus_role": "ADVISORY_ONLY",
+      "default_fv_zone_focus": ["Z3", "Z4", "Z7", "Z8"],
+      "fv_bias_profile": {
+        "default_fv_bias": "VELOCITY_BIASED",
+        "legal_biases_offseason": ["BALANCED", "VELOCITY_BIASED"],
+        "legal_biases_prep_season": ["BALANCED", "VELOCITY_BIASED"],
+        "legal_biases_inseason": ["BALANCED"],
+        "legal_biases_postseason": ["BALANCED"],
+        "bias_assessment_protocol": "CMJ height + RSI (30cm drop), Squat 1RM vs BW ratio per Load Standards v2.2.0 Section 4.1 Diagnostics. Assessment date required in EPA input.",
+        "bias_assessment_required": true,
+        "bias_assessment_frequency_weeks": 4,
+        "bias_override_rules": {
+          "rule_1": "If IN_SEASON or POST_SEASON detected, EPA automatically overrides to BALANCED per Governance v4.1 Gate 2, regardless of athlete history",
+          "rule_2": "Youth 16 & under: BALANCED only (all seasons) per Load Standards v2.2.0 Table 5.2 Population Rules",
+          "rule_3": "Youth 17 advanced: VELOCITY_BIASED/FORCE_BIASED allowed OFF/PRE seasons only; BALANCED forced IN/POST per Governance v4.1 Gate 1"
+        },
+        "notes": "HS basketball off-season; FORCE_BIASED only allowed for documented advanced Youth 17 per Governance v4.1 and must be BALANCED in-season. This ICP applies exclusively to OFF_SEASON athletes."
+      },
+      "goals": ["increase_vertical_jump", "improve_reactive_strength_index", "enhance_cod_speed", "develop_deceleration_mechanics", "build_explosive_strength"]
+    },
+    "ICP_YOUTH_FOUNDATION": {
+      "description": "Youth athlete (ages 8-12) in foundational development phase. Focus on movement patterns, coordination, and fun-based learning.",
+      "governance_profile": "Youth_8_12_Foundation",
+      "default_readiness": "GREEN",
+      "reference_detailed_icp": null,
+      "load_standard_profile": {
+        "plyo_ceiling_per_session": 50,
+        "sprint_ceiling_per_week_m": 150,
+        "sprint_ceiling_definition": "TRUE sprints only (≥90% Vmax)",
+        "load_band_profile": "Band_1_Standard",
+        "e_node_ceiling": "E2",
+        "tier_3_max_percent": 10,
+        "rationale": "Load Standards v2.2.0 Youth 8-12 hard ceilings. Young tissue requires conservative plyometric and sprint exposure."
+      },
+      "node_access": ["A", "B", "C", "D"],
+      "default_fv_zone_focus_role": "ADVISORY_ONLY",
+      "default_fv_zone_focus": ["Z5", "Z8"],
+      "fv_bias_profile": {
+        "default_fv_bias": "BALANCED",
+        "legal_biases_all_seasons": ["BALANCED"],
+        "bias_assessment_protocol": "Movement screen + basic unloaded jump test (no load diagnostics). Per Load Standards v2.2.0.",
+        "bias_assessment_required": false,
+        "notes": "Youth 8–12 must remain BALANCED; FORCE_BIASED and VELOCITY_BIASED profiles are forbidden per Governance v4.1 Gate 1 and Load Standards v2.2.0 Table 5.2."
+      },
+      "goals": ["learn_movement_patterns", "improve_coordination", "develop_love_of_movement"]
+    },
+    "ICP_R2P_STAGE_2_ACL": {
+      "description": "Athlete in Stage 2 of ACL Return to Play protocol. Focus on strength restoration, pain-free movement, and controlled progression to Stage 3.",
+      "governance_profile": "R2P_S2_Conservative",
+      "default_readiness": "YELLOW",
+      "reference_detailed_icp": null,
+      "load_standard_profile": {
+        "plyo_ceiling_per_session": 40,
+        "sprint_ceiling_per_week_m": 0,
+        "sprint_ceiling_definition": "TRUE sprints only (≥90% Vmax)",
+        "load_band_profile": "Band_1_R2P",
+        "e_node_ceiling": "E1",
+        "tier_3_max_percent": 0,
+        "rationale": "R2P athletes operate under strict conservative ceilings per Governance v4.1. No reactive shock work (E3) allowed in any R2P stage."
+      },
+      "node_access": ["A", "B", "C", "D"],
+      "default_fv_zone_focus_role": "ADVISORY_ONLY",
+      "default_fv_zone_focus": ["Z5", "Z3"],
+      "fv_bias_profile": {
+        "default_fv_bias": "BALANCED",
+        "legal_biases_all_seasons": ["BALANCED"],
+        "bias_assessment_protocol": "Clinical testing, joint status review, and controlled strength symmetry checks per R2P protocol.",
+        "bias_assessment_required": false,
+        "notes": "All R2P stages must remain BALANCED; performance F-V biases (FORCE/VELOCITY) are not legal until full discharge per Governance v4.1 Gate 1."
+      },
+      "goals": ["restore_strength", "pain_free_movement", "progress_to_stage_3", "achieve_symmetry"]
+    },
+    "ICP_ADULT_GENPOP": {
+      "description": "General population adult focused on durability, health, and functional strength. May include performance adaptations if not in-season.",
+      "governance_profile": "Adult_GenPop_Durability",
+      "default_readiness": "GREEN",
+      "reference_detailed_icp": null,
+      "load_standard_profile": {
+        "plyo_ceiling_per_session": 40,
+        "sprint_ceiling_per_week_m": 50,
+        "sprint_ceiling_definition": "TRUE sprints only (≥90% Vmax)",
+        "load_band_profile": "Band_1_Standard",
+        "e_node_ceiling": "E1",
+        "tier_3_max_percent": 5,
+        "rationale": "Adult GenPop operates at lower intensity and volume than performance athletes. Conservative plyometric exposure with emphasis on durability."
+      },
+      "node_access": ["A", "B", "C", "D"],
+      "default_fv_zone_focus_role": "ADVISORY_ONLY",
+      "default_fv_zone_focus": ["Z5", "Z6"],
+      "fv_bias_profile": {
+        "default_fv_bias": "BALANCED",
+        "legal_biases_offseason": ["BALANCED", "FORCE_BIASED", "VELOCITY_BIASED"],
+        "legal_biases_inseason": ["BALANCED"],
+        "bias_assessment_protocol": "CMJ profile + submax strength test or movement assessment per Coach & AI Playbook v0.5.0.",
+        "bias_assessment_required": false,
+        "notes": "Adults may hold any legal bias in off-season, but in-season/post-season contexts must enforce BALANCED per Governance v4.1 Gate 2."
+      },
+      "goals": ["feel_better", "increase_energy", "build_strength_safely", "maintain_health"]
+    },
+    "ICP_VOLLEYBALL_INSEASON": {
+      "description": "In-season volleyball athlete (any age). Focus on maintenance and performance optimization during competition season.",
+      "governance_profile": "Sport_InSeason_Performance",
+      "default_readiness": "YELLOW",
+      "reference_detailed_icp": null,
+      "load_standard_profile": {
+        "plyo_ceiling_per_session": 80,
+        "sprint_ceiling_per_week_m": 100,
+        "sprint_ceiling_definition": "TRUE sprints only (≥90% Vmax)",
+        "load_band_profile": "Band_2_InSeason",
+        "e_node_ceiling": "E2",
+        "tier_3_max_percent": 15,
+        "rationale": "In-season athletes operate at lower intensity than off-season to avoid overtraining with competition load. Sprint exposure limited to match demands only."
+      },
+      "node_access": ["A", "B", "C", "D"],
+      "default_fv_zone_focus_role": "ADVISORY_ONLY",
+      "default_fv_zone_focus": ["Z3", "Z4", "Z2"],
+      "fv_bias_profile": {
+        "default_fv_bias": "BALANCED",
+        "legal_biases_inseason": ["BALANCED"],
+        "bias_assessment_protocol": "CMJ profile + match and practice jump count review per Playbook v0.5.0.",
+        "bias_assessment_required": false,
+        "notes": "In-season athletes must remain BALANCED per Governance v4.1 Gate 2; FORCE_BIASED and VELOCITY_BIASED profiles are forbidden in-season per Load Standards v2.2.0."
+      },
+      "goals": ["maintain_power", "stay_healthy", "peak_for_games", "prevent_injury"]
+    }
+  },
+  "version_control": {
+    "v2_3_1": {
+      "date": "2025-12-23",
+      "status": "ACTIVE · LOCKED · PRODUCTION READY",
+      "changes_from_v2_3_0": [
+        "Fixed HS Basketball load ceilings to match Load Standards v2.2.0 Table 3.2 (120/240/600)",
+        "Added reference_detailed_icp field to all ICPs for traceability to full specification documents",
+        "Clarified node_access (current legal nodes) vs e_node_ceiling (highest expressible E-tier)",
+        "Added tier_3_max_percent to all load_standard_profile blocks for explicit safety specification",
+        "Expanded fv_bias_profile.notes with specific governance rules and season restrictions",
+        "Updated codexReference to include Load Standards v2.2.0, Periodization v2.1, Governance v4.1, Playbook v0.5.0",
+        "Added load_ceiling_source hint pointing to Load Standards v2.2.0 Table 3.2",
+        "Aligned all bias rules to Governance v4.1 Gates 1-2 with explicit season overrides"
+      ],
+      "validated_against": [
+        "EFL_ICP_HS_BASKETBALL_OFFSEASON_v2_3_1.json",
+        "Load Standards v2.2.0 Table 3.2",
+        "Governance v4.1 Gates 1-2",
+        "Coach & AI Playbook v0.5.0"
+      ],
+      "parent_version": "v2.3.0"
+    },
+    "v2_3_0": {
+      "date": "2025-12-22",
+      "status": "SUPERSEDED",
+      "rationale": "Initial F-V bias integration without HS Basketball specialization block alignment"
+    },
+    "v2_2_0": {
+      "date": "2025-12-01",
+      "status": "ARCHIVED",
+      "rationale": "Pre-F-V bias awareness version"
+    }
+  },
+  "integration_notes": {
+    "usage": "This definitions file serves as the canonical reference for all ICP selections in EFL systems. Each ICP entry references a detailed document for full specifications, load profiles, specialization block eligibility, assessments, and EPA integration rules.",
+    "for_coaches": "Use the reference_detailed_icp field to access the full ICP specification document. Example: ICP_HS_BASKETBALL_OFFSEASON selects EFL_ICP_HS_BASKETBALL_OFFSEASON_v2_3_1.json for complete load standards, block eligibility, assessment battery, and periodization templates.",
+    "for_epa": "EPA v2.2.1 and later validate load ceilings and F-V bias legality against these definitions. All athlete load and bias inputs must conform to the selected ICP's constraints.",
+    "for_system": "This file is LOCKED to prevent accidental modifications. New ICPs or versions require formal review process per Governance v4.1.",
+    "effective_date": "2025-12-23",
+    "next_review": "2026-03-23 or upon Load Standards v2.2.1 release"
+  }
+}

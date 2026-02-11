@@ -1,0 +1,1046 @@
+{
+  "meta": {
+    "documentId": "EFL-EXERCISE-PROGRESSION-LAW",
+    "name": "EFL Exercise Progression Law",
+    "version": "1.0.1",
+    "status": "ACTIVE",
+    "effectiveDate": "2025-12-22",
+    "patchDate": "2025-12-22",
+    "canonicalTitle": "Exercise Progression Law — ONE_AXIS_AT_A_TIME Enforcement",
+    "authority": "Austin Lawrence, Director of Performance Systems",
+    "owner": "EFL System Architecture",
+    "purpose": "Deterministic enforcement of safe exercise progression across all populations, sports, and training phases",
+    "codexReference": "§5.2 Exercise Selection & Progression, Governance v4.0, Load Standards v2.1.2",
+    "integration_points": [
+      "EFL_SPECIALIZATION_BLOCKS_v1_0.json",
+      "EFL_ICP_DEFINITIONS (all versions)",
+      "EFL_Program_Architect_EPA (validation layer)",
+      "EFL_Coach_AI_Playbook_v0_5_0.md"
+    ]
+  },
+
+  "core_principle": {
+    "rule": "ONE_AXIS_AT_A_TIME",
+    "definition": "Only one exercise attribute may increase in complexity during any single progression step. All other attributes must remain constant or regress.",
+    "rationale": "Simultaneous progression on multiple axes exponentially increases injury risk, overwhelms motor learning capacity, and prevents accurate identification of limiting factors.",
+    "enforcement": "DETERMINISTIC",
+    "violation_consequence": "PROGRESSION_REJECTED — Must revert to legal single-axis change",
+    "override_authority": "Director approval required with documented rationale"
+  },
+
+  "progression_validation_algorithm": {
+    "description": "EPA and Coach AI must execute this logic before approving any exercise progression",
+    "steps": [
+      {
+        "step": 1,
+        "action": "Compare current_exercise attributes to proposed_exercise attributes",
+        "attributes_to_compare": [
+          "load_band",
+          "e_node_classification",
+          "stance_complexity",
+          "reactivity_level",
+          "direction_complexity"
+        ]
+      },
+      {
+        "step": 2,
+        "action": "Count number of axes where proposed > current",
+        "threshold": 1,
+        "logic": "IF axes_changed > 1 THEN progression = ILLEGAL"
+      },
+      {
+        "step": 3,
+        "action": "Validate population ceiling on progressed axis",
+        "logic": "IF proposed_value > population_ceiling THEN progression = ILLEGAL"
+      },
+      {
+        "step": 4,
+        "action": "Check regression triggers for current exercise",
+        "logic": "IF any_regression_trigger_present THEN progression = FORBIDDEN (must regress instead)"
+      },
+      {
+        "step": 5,
+        "action": "Validate consolidation duration at current level",
+        "minimum_weeks": 2,
+        "logic": "IF weeks_at_current_level < 2 THEN progression = PREMATURE"
+      }
+    ],
+    "output": {
+      "if_legal": "PROGRESSION_APPROVED",
+      "if_illegal": "PROGRESSION_REJECTED with reason_code and legal_alternative"
+    }
+  },
+
+  "progression_axes": {
+
+    "load_band": {
+      "axis_id": "load_band",
+      "display_name": "External Load Magnitude",
+      "description": "Progressive increase in external resistance (bodyweight → bands → dumbbells → barbells → heavy barbell)",
+      "aether_field": "load_band_primary",
+      "progression_sequence": [
+        {
+          "level": 0,
+          "band": "Band_0",
+          "description": "Bodyweight only, no external load",
+          "example_implements": ["bodyweight", "unloaded"]
+        },
+        {
+          "level": 1,
+          "band": "Band_1",
+          "description": "Light external load (bands, light DBs, bodyweight variations)",
+          "example_implements": ["resistance_bands", "light_dumbbells_5_15lb", "light_medicine_balls"]
+        },
+        {
+          "level": 2,
+          "band": "Band_2",
+          "description": "Moderate external load (moderate DBs, KBs, landmine)",
+          "example_implements": ["moderate_dumbbells_20_40lb", "kettlebells", "landmine", "trap_bar_light"]
+        },
+        {
+          "level": 3,
+          "band": "Band_3",
+          "description": "Heavy external load (barbell 70-85% 1RM, heavy DBs)",
+          "example_implements": ["barbell_submaximal", "heavy_dumbbells_45_65lb", "trap_bar_moderate"]
+        },
+        {
+          "level": 4,
+          "band": "Band_4",
+          "description": "Maximal external load (barbell 85-100% 1RM)",
+          "example_implements": ["barbell_near_maximal", "barbell_maximal"]
+        }
+      ],
+
+      "population_ceilings": {
+        "Youth_8_12": {
+          "max_band": "Band_1",
+          "max_band_with_supervision": "Band_2",
+          "rationale": "Structural immaturity forbids maximal loading. Band_2 requires direct coaching supervision and proven technique.",
+          "band_4_forbidden": true
+        },
+        "Youth_13_17": {
+          "max_band": "Band_2",
+          "max_band_advanced_athletes": "Band_3",
+          "rationale": "Most youth operate Band_1-2. Band_3 reserved for advanced athletes with 2+ years training age and documented technique.",
+          "band_4_forbidden": true
+        },
+        "Adult": {
+          "max_band": "Band_4",
+          "rationale": "Full access to load spectrum with proper technique and readiness."
+        }
+      },
+
+      "typical_progression_duration": {
+        "Band_0_to_Band_1": "4-6 weeks",
+        "Band_1_to_Band_2": "6-8 weeks",
+        "Band_2_to_Band_3": "8-12 weeks",
+        "Band_3_to_Band_4": "12+ weeks (advanced athletes only)"
+      },
+
+      "regression_triggers": [
+        {
+          "trigger": "technique_breakdown",
+          "definition": "Loss of postural control, compensatory movement patterns, or inability to maintain prescribed tempo",
+          "action": "Regress 1 band immediately"
+        },
+        {
+          "trigger": "readiness_yellow_or_red",
+          "definition": "Readiness score <8.0 indicating insufficient recovery or elevated stress",
+          "action": "Reduce load band by 1 (YELLOW) or 2 (RED)"
+        },
+        {
+          "trigger": "joint_pain_during_movement",
+          "definition": "Sharp, localized pain during exercise execution (not delayed soreness)",
+          "action": "Regress to pain-free load band or substitute exercise"
+        },
+        {
+          "trigger": "velocity_decrement_excessive",
+          "definition": "Bar speed or movement velocity drops >20% within set",
+          "action": "Reduce load or terminate set"
+        }
+      ],
+
+      "notes": [
+        "Load band progression is ALWAYS slower than other axes",
+        "Tissue adaptation lags motor learning by 4-6 weeks",
+        "Youth populations require conservative load progression regardless of perceived strength"
+      ]
+    },
+
+    "e_node_difficulty": {
+      "axis_id": "e_node_classification",
+      "display_name": "Elastic/Plyometric Demand",
+      "description": "Progressive increase in stretch-shortening cycle intensity, reactive demands, and elastic loading",
+      "aether_field": "e_node_classification",
+      "progression_sequence": [
+        {
+          "level": 0,
+          "e_node": "E0",
+          "tier": "Non-Plyometric",
+          "description": "No elastic component, no impact loading, pure concentric or isometric",
+          "example_patterns": ["bilateral_squat", "isometric_holds", "slow_tempo_lifts"],
+          "ground_reaction_force": "≤1.5x bodyweight"
+        },
+        {
+          "level": 1,
+          "e_node": "E1",
+          "tier": "Tier_1_Low_Plyometric",
+          "description": "Low-amplitude elastic work, bilateral landing, stick emphasis",
+          "example_patterns": ["pogo_jumps", "line_hops", "box_step_ups_with_hop", "snap_downs"],
+          "ground_reaction_force": "1.5-2.5x bodyweight",
+          "amortization_phase": "Long (>300ms)"
+        },
+        {
+          "level": 2,
+          "e_node": "E2",
+          "tier": "Tier_2_Moderate_Plyometric",
+          "description": "Moderate-amplitude elastic work, continuous rhythm allowed, bilateral emphasis",
+          "example_patterns": ["box_jumps_30_45cm", "broad_jumps", "hurdle_hops_low", "continuous_bounds"],
+          "ground_reaction_force": "2.5-4.0x bodyweight",
+          "amortization_phase": "Moderate (200-300ms)"
+        },
+        {
+          "level": 3,
+          "e_node": "E3",
+          "tier": "Tier_3_High_Plyometric",
+          "description": "High-amplitude or high-velocity elastic work, reactive emphasis, unilateral allowed",
+          "example_patterns": ["depth_jumps_45_60cm", "single_leg_bounds", "reactive_hurdle_hops", "altitude_landings"],
+          "ground_reaction_force": "4.0-6.0x bodyweight",
+          "amortization_phase": "Short (100-200ms)"
+        },
+        {
+          "level": 4,
+          "e_node": "E4",
+          "tier": "Tier_3_Maximal_Plyometric",
+          "description": "Maximal elastic loading, shock method, unilateral reactive emphasis",
+          "example_patterns": ["depth_jumps_60_75cm", "single_leg_depth_jumps", "bounding_series_maximal", "true_shock_drops"],
+          "ground_reaction_force": ">6.0x bodyweight",
+          "amortization_phase": "Minimal (<100ms)"
+        }
+      ],
+
+      "population_ceilings": {
+        "Youth_8_12": {
+          "max_e_node": "E2",
+          "tier_3_forbidden": true,
+          "rationale": "Growth plate vulnerability and neuromuscular immaturity forbid high-shock loading. E3/E4 requires Director override with documented readiness.",
+          "max_drop_height_cm": 30,
+          "plyo_contact_ceiling_per_session": 80
+        },
+        "Youth_13_17": {
+          "max_e_node": "E4",
+          "tier_3_allowed_with_limit": true,
+          "tier_3_max_percent_session": 40,
+          "rationale": "Tier 3 (E3/E4) allowed but must not exceed 40% of session contacts. Majority must be Tier 1-2.",
+          "tier_3_calculation": "IF session has 120 contacts, max 48 can be E3/E4. Remaining 72+ must be E0-E2.",
+          "max_drop_height_cm": 60,
+          "plyo_contact_ceiling_per_session": 120
+        },
+        "Adult": {
+          "max_e_node": "E4",
+          "tier_3_max_percent_session": 50,
+          "rationale": "Full access to elastic spectrum with proper progression and landing quality.",
+          "max_drop_height_cm": 75,
+          "plyo_contact_ceiling_per_session": 140
+        }
+      },
+
+      "typical_progression_duration": {
+        "E0_to_E1": "2-4 weeks",
+        "E1_to_E2": "4-6 weeks",
+        "E2_to_E3": "6-8 weeks (requires excellent landing quality)",
+        "E3_to_E4": "8-12 weeks (advanced athletes only)"
+      },
+
+      "regression_triggers": [
+        {
+          "trigger": "landing_quality_degraded",
+          "definition": "Loud landings, asymmetric force absorption, or loss of postural control on landing",
+          "action": "Regress to lower e-node level (E3→E2, E2→E1)"
+        },
+        {
+          "trigger": "knee_valgus_present",
+          "definition": "Medial knee collapse during landing or takeoff phase",
+          "action": "IMMEDIATE regression to bilateral E1 work. Do not progress until corrected."
+        },
+        {
+          "trigger": "tendon_irritation",
+          "definition": "Patellar, Achilles, or plantar fascia irritation lasting >24 hours post-session",
+          "action": "Reduce e-node by 1-2 levels and/or reduce contact volume by 30%"
+        },
+        {
+          "trigger": "ground_contact_time_lengthened",
+          "definition": "Contact time increases >50ms from baseline on reactive movements",
+          "action": "Reduce reactivity demand (E3→E2) or reduce volume"
+        },
+        {
+          "trigger": "repeat_jump_decrement_excessive",
+          "definition": "Jump height decreases >15% from rep 1 to rep 10 in continuous work",
+          "action": "Terminate set, reduce e-node next session"
+        }
+      ],
+
+      "tier_3_enforcement_rules": {
+        "calculation_method": "SUM(contacts_from_E3_exercises + contacts_from_E4_exercises) / total_session_contacts",
+        "enforcement_point": "Session planning (EPA validation)",
+        "example_legal": {
+          "total_contacts": 120,
+          "tier_1_2_contacts": 80,
+          "tier_3_contacts": 40,
+          "tier_3_percent": 33.3,
+          "status": "LEGAL (≤40%)"
+        },
+        "example_illegal": {
+          "total_contacts": 120,
+          "tier_1_2_contacts": 60,
+          "tier_3_contacts": 60,
+          "tier_3_percent": 50,
+          "status": "ILLEGAL (>40% for Youth 13-17)",
+          "correction": "Reduce tier_3_contacts to ≤48 or increase tier_1_2_contacts"
+        }
+      },
+
+      "notes": [
+        "E-node progression requires landing quality maintenance as absolute prerequisite",
+        "Tier 3 work (E3/E4) is earned, not prescribed by calendar",
+        "Youth populations prioritize landing robustness over elastic output"
+      ]
+    },
+
+    "stance_complexity": {
+      "axis_id": "stance",
+      "display_name": "Base of Support Stability",
+      "description": "Progressive reduction in base of support from bilateral → split → unilateral",
+      "aether_field": "stance",
+      "progression_sequence": [
+        {
+          "level": 1,
+          "stance": "Bilateral",
+          "description": "Two feet in contact simultaneously, symmetrical loading",
+          "stability": "Highest",
+          "example_patterns": ["squat", "deadlift", "bilateral_jump", "bilateral_landing"]
+        },
+        {
+          "level": 2,
+          "stance": "Split_Stance",
+          "description": "Asymmetrical stance (lunge position, staggered), both feet in contact",
+          "stability": "Moderate",
+          "example_patterns": ["lunge", "split_squat", "staggered_stance_press"]
+        },
+        {
+          "level": 3,
+          "stance": "Unilateral",
+          "description": "Single leg support, contralateral leg non-weight-bearing",
+          "stability": "Lowest",
+          "example_patterns": ["single_leg_squat", "single_leg_rdl", "single_leg_hop", "single_leg_bound"]
+        }
+      ],
+
+      "prerequisites_per_level": {
+        "Split_Stance": {
+          "prerequisite": "Bilateral movements must be pain-free, controlled, and demonstrate no compensatory patterns for minimum 4 weeks",
+          "screening_criteria": [
+            "Bilateral squat depth to parallel without compensation",
+            "Bilateral landing with quiet, symmetrical force absorption",
+            "No knee valgus on bilateral patterns"
+          ]
+        },
+        "Unilateral": {
+          "prerequisite": "Split stance movements must show no valgus, excessive hip drop, or trunk lateral shift for minimum 4 weeks",
+          "screening_criteria": [
+            "Split squat to depth without knee valgus",
+            "Lunge pattern without excessive forward lean or trunk shift",
+            "Single-leg balance >20 seconds without compensation",
+            "Single-leg squat assessment score ≥7/10"
+          ]
+        }
+      },
+
+      "typical_progression_duration": {
+        "Bilateral_to_Split": "4-8 weeks",
+        "Split_to_Unilateral": "6-12 weeks"
+      },
+
+      "regression_triggers": [
+        {
+          "trigger": "knee_valgus_present",
+          "definition": "Medial knee collapse on split or unilateral movements",
+          "action": "IMMEDIATE regression to bilateral. Do not progress until valgus eliminated."
+        },
+        {
+          "trigger": "hip_drop_excessive",
+          "definition": "Contralateral hip drops >10 degrees below parallel on unilateral work",
+          "action": "Regress to split stance, emphasize hip stability drills"
+        },
+        {
+          "trigger": "trunk_lateral_shift",
+          "definition": "Excessive lateral trunk flexion to maintain balance",
+          "action": "Regress stance complexity, add anti-lateral-flexion work"
+        },
+        {
+          "trigger": "balance_loss_frequent",
+          "definition": "Unable to complete 80% of prescribed reps without touching down or losing position",
+          "action": "Regress to previous stance level"
+        }
+      ],
+
+      "notes": [
+        "Stance progression is independent of load band (can use light load on unilateral before heavy load on bilateral)",
+        "Basketball/court athletes may progress stance faster than load due to sport demands",
+        "Unilateral work reveals asymmetries masked by bilateral patterns"
+      ]
+    },
+
+    "reactivity_level": {
+      "axis_id": "reactivity",
+      "display_name": "Amortization Phase Duration & Intent",
+      "description": "Progressive reduction in ground contact time and increase in elastic recoil intent",
+      "aether_field": "Derived from e_node + exercise_name",
+      "progression_sequence": [
+        {
+          "level": 1,
+          "reactivity": "Stick_Landing",
+          "description": "Land and hold position 2-3 seconds with no bounce, emphasize control",
+          "amortization_phase": ">500ms",
+          "intent": "Eccentric control, isometric hold",
+          "example_cues": ["Stick the landing", "Freeze on contact", "No bounce"],
+          "example_exercises": ["Box_Jump_Stick", "Broad_Jump_Stick", "Drop_to_Stick"]
+        },
+        {
+          "level": 2,
+          "reactivity": "Continuous_Rhythm",
+          "description": "Land and immediately transition to next rep with controlled, rhythmic cadence",
+          "amortization_phase": "200-400ms",
+          "intent": "Continuous movement, rhythm emphasis",
+          "example_cues": ["Flow through reps", "Find your rhythm", "Controlled tempo"],
+          "example_exercises": ["Continuous_Pogos", "Hurdle_Hops_Rhythm", "Repeated_Broad_Jumps"]
+        },
+        {
+          "level": 3,
+          "reactivity": "Reactive_Minimal_Contact",
+          "description": "Minimize ground contact time (<250ms), maximize elastic recoil, true reactive emphasis",
+          "amortization_phase": "<200ms",
+          "intent": "Explosive recoil, minimal contact",
+          "example_cues": ["Hot ground", "Spring off", "Minimal contact"],
+          "example_exercises": ["Depth_Jumps", "Reactive_Hurdle_Hops", "Fast_SSC_Bounds"]
+        }
+      ],
+
+      "typical_progression_duration": {
+        "Stick_to_Continuous": "4-6 weeks",
+        "Continuous_to_Reactive": "6-10 weeks"
+      },
+
+      "regression_triggers": [
+        {
+          "trigger": "landing_sound_increased",
+          "definition": "Audibly loud or heavy landings indicating poor force absorption",
+          "action": "Regress to Stick_Landing emphasis"
+        },
+        {
+          "trigger": "ground_contact_time_lengthened",
+          "definition": "Contact time increases beyond target range",
+          "action": "Reduce reactivity demand or terminate reactive work"
+        },
+        {
+          "trigger": "posture_collapse",
+          "definition": "Loss of trunk control, forward lean, or hip collapse during landing",
+          "action": "Regress to Continuous_Rhythm or Stick_Landing"
+        },
+        {
+          "trigger": "elastic_output_decreased",
+          "definition": "Jump height or distance decreases >10% during reactive sets",
+          "action": "Reduce reactivity demand or extend rest periods"
+        }
+      ],
+
+      "notes": [
+        "Reactivity is the last axis to progress - it assumes mastery of landing mechanics",
+        "True reactive work (Level 3) is performance output, not foundational training",
+        "Most youth athletes benefit from extended time at Continuous_Rhythm before reactive work"
+      ]
+    },
+
+    "direction_complexity": {
+      "axis_id": "direction",
+      "display_name": "Movement Plane & Direction Change Demands",
+      "description": "Progressive addition of movement planes and directional complexity",
+      "aether_field": "Derived from aether_pattern + exercise_name",
+      "progression_sequence": [
+        {
+          "level": 1,
+          "direction": "Linear_Sagittal",
+          "description": "Forward-backward movement only, single plane, predictable",
+          "planes": ["Sagittal"],
+          "example_patterns": ["Forward_Jump", "Vertical_Jump", "Sprint_Straight", "Squat"]
+        },
+        {
+          "level": 2,
+          "direction": "Lateral_Frontal",
+          "description": "Side-to-side movement, frontal plane emphasis",
+          "planes": ["Frontal"],
+          "example_patterns": ["Lateral_Hop", "Lateral_Bound", "Defensive_Slide", "Lateral_Lunge"]
+        },
+        {
+          "level": 3,
+          "direction": "Rotational_Transverse",
+          "description": "Rotational movement, transverse plane emphasis",
+          "planes": ["Transverse"],
+          "example_patterns": ["Med_Ball_Rotation", "Rotational_Jump", "Pivot_Sprint"]
+        },
+        {
+          "level": 4,
+          "direction": "Multi_Directional_Combined",
+          "description": "Combination of planes, direction changes, sport-specific chaos",
+          "planes": ["Sagittal", "Frontal", "Transverse"],
+          "example_patterns": ["45_Degree_Cut", "90_Degree_Cut", "Reactive_COD", "Multidirectional_Hop_Series"]
+        }
+      ],
+
+      "population_ceilings": {
+        "Youth_8_12": {
+          "max_direction": "Lateral_Frontal",
+          "rationale": "Multi-directional and reactive COD require decision-making capacity and neuromuscular control beyond developmental readiness of 8-12 population",
+          "forbidden_patterns": ["Reactive_COD", "Multi_Directional_Combined"]
+        },
+        "Youth_13_17": {
+          "max_direction": "Multi_Directional_Combined",
+          "reactive_cod_allowed": "planned_only",
+          "rationale": "Full direction access allowed, but reactive (unplanned) COD requires coach supervision and movement quality prerequisites",
+          "reactive_cod_prerequisites": [
+            "Planned COD at all angles performed cleanly for 6+ weeks",
+            "No knee valgus on direction changes",
+            "Single-leg squat quality ≥7/10"
+          ]
+        },
+        "Adult": {
+          "max_direction": "Multi_Directional_Combined",
+          "reactive_cod_allowed": "yes",
+          "rationale": "Full access to all direction complexity levels with proper progression"
+        }
+      },
+
+      "typical_progression_duration": {
+        "Linear_to_Lateral": "3-4 weeks",
+        "Lateral_to_Rotational": "4-6 weeks",
+        "Rotational_to_Multi": "4-8 weeks"
+      },
+
+      "regression_triggers": [
+        {
+          "trigger": "direction_change_hesitation",
+          "definition": "Athlete hesitates, stutters, or shows uncertainty during direction changes",
+          "action": "Simplify direction complexity (multi → single plane)"
+        },
+        {
+          "trigger": "loss_of_posture",
+          "definition": "Trunk control degrades when planes are added",
+          "action": "Regress to simpler direction pattern, add anti-rotation work"
+        },
+        {
+          "trigger": "excessive_braking_distance",
+          "definition": "Unable to decelerate efficiently when direction complexity increases",
+          "action": "Regress to Linear or Lateral only, emphasize deceleration drills"
+        }
+      ],
+
+      "notes": [
+        "Basketball/court sports require faster progression through direction complexity than linear sports",
+        "Multi-directional work is game-specific, not foundational",
+        "Direction complexity often correlates with cognitive load - account for decision fatigue"
+      ]
+    }
+  },
+
+  "non_axis_variables": {
+    "description": "Training variables that can be modified WITHOUT counting as axis progression",
+    "clarification": "The following variables may change independently and do NOT trigger ONE_AXIS_AT_A_TIME restrictions. However, they still affect training load and must be managed appropriately.",
+    
+    "tempo": {
+      "definition": "Cadence of exercise execution (e.g., 2/0/2, 3/1/1, 5/0/1)",
+      "axis_status": "NOT_AN_AXIS",
+      "rationale": "Tempo modifies internal load and time under tension but does not fundamentally change movement complexity or external demand class",
+      "can_be_modified_independently": true,
+      "examples": {
+        "legal_modifications": [
+          "Push-Up 2/0/2 → Push-Up 3/0/2 (slower tempo, same exercise)",
+          "Squat 2/0/2 → Squat 5/0/1 (eccentric emphasis, same exercise)"
+        ]
+      },
+      "governance_note": "While tempo is not an axis, excessive tempo manipulation can increase injury risk. Use sparingly and with clear intent."
+    },
+
+    "rest_period": {
+      "definition": "Recovery time between sets",
+      "axis_status": "NOT_AN_AXIS",
+      "can_be_modified_independently": true,
+      "governance_note": "Rest periods affect CNS load category but do not constitute exercise progression"
+    },
+
+    "set_count": {
+      "definition": "Number of sets per exercise",
+      "axis_status": "NOT_AN_AXIS",
+      "can_be_modified_independently": true,
+      "governance_note": "Volume increases must respect weekly contact and CNS budget caps"
+    },
+
+    "rep_count_within_band": {
+      "definition": "Repetitions per set when load band remains constant",
+      "axis_status": "NOT_AN_AXIS",
+      "can_be_modified_independently": true,
+      "example": "Band_1 Goblet Squat 3×8 → 3×12 does NOT count as axis change",
+      "governance_note": "Rep increases that necessitate load reduction DO constitute axis change (regression)"
+    },
+
+    "movement_pattern_refinement": {
+      "definition": "Subtle pattern variations that do not change fundamental movement class",
+      "axis_status": "NOT_AN_AXIS",
+      "examples": {
+        "legal_refinements": [
+          "Push-Up → Push-Up Plus (scapular emphasis added)",
+          "Squat → Pause Squat (isometric hold added)",
+          "Row → Eccentric-Emphasis Row"
+        ],
+        "note": "These refine quality/intent but do not change load_band, stance, direction, or reactivity"
+      },
+      "governance_note": "Pattern refinements are coaching tools, not progression steps"
+    }
+  },
+
+  "consolidation_duration_hierarchy": {
+    "description": "Clarification of minimum legal consolidation vs recommended adaptation windows",
+    "hierarchy": [
+      {
+        "level": "MINIMUM_LEGAL",
+        "duration_weeks": 2,
+        "definition": "Shortest duration athlete must remain at current exercise level before ANY progression is legal",
+        "enforcement": "HARD_GATE - EPA will reject progressions attempted <2 weeks",
+        "applies_to": "All axes, all populations, all seasons"
+      },
+      {
+        "level": "RECOMMENDED_ADAPTATION",
+        "duration_weeks": "axis_specific",
+        "definition": "Typical duration for tissue/neural adaptation to consolidate at current level",
+        "enforcement": "SOFT_GUIDANCE - Coaches should follow but may adjust based on athlete response",
+        "applies_to": "Varies by axis (see axis-specific typical_progression_duration)",
+        "examples": {
+          "load_band": "4-12 weeks depending on band transition",
+          "e_node_difficulty": "2-8 weeks depending on e-node transition",
+          "stance_complexity": "4-12 weeks",
+          "reactivity_level": "4-10 weeks",
+          "direction_complexity": "3-8 weeks"
+        }
+      }
+    ],
+    "clarification": "2 weeks is NEVER sufficient adaptation time - it is only the minimum legal gate. Coaches and EPA should default to axis-specific recommended durations unless athlete demonstrates exceptional mastery and has Director approval for accelerated progression.",
+    "override_protocol": "Progression between 2 weeks and axis-specific recommended duration requires documented rationale and movement quality verification"
+  },
+
+  "basketball_reference_progressions": {
+    "description": "Validated basketball-specific progressions following ONE_AXIS_AT_A_TIME law",
+
+    "vertical_jump_progression": [
+      {
+        "level": 1,
+        "exercise_name": "Bodyweight Vertical Jump (Stick Landing)",
+        "exercise_id": "BBALL_VERT_01",
+        "load_band": "Band_0",
+        "e_node": "E1",
+        "stance": "Bilateral",
+        "reactivity": "Stick_Landing",
+        "direction": "Linear_Sagittal",
+        "duration_weeks": 4,
+        "population": "Youth_13_17, Adult",
+        "cues": ["Stick the landing 2-3 seconds", "Quiet, symmetrical", "Control trunk"]
+      },
+      {
+        "level": 2,
+        "exercise_name": "Bodyweight Vertical Jump (Continuous)",
+        "exercise_id": "BBALL_VERT_02",
+        "load_band": "Band_0",
+        "e_node": "E1",
+        "stance": "Bilateral",
+        "reactivity": "Continuous_Rhythm",
+        "direction": "Linear_Sagittal",
+        "axis_progressed": "reactivity_level",
+        "duration_weeks": 4,
+        "prerequisite": "Level 1 completed with excellent landing quality",
+        "population": "Youth_13_17, Adult"
+      },
+      {
+        "level": 3,
+        "exercise_name": "Box Jump 30cm (Continuous)",
+        "exercise_id": "BBALL_VERT_03",
+        "load_band": "Band_0",
+        "e_node": "E2",
+        "stance": "Bilateral",
+        "reactivity": "Continuous_Rhythm",
+        "direction": "Linear_Sagittal",
+        "axis_progressed": "e_node_difficulty",
+        "duration_weeks": 6,
+        "prerequisite": "Level 2 completed, landing quality maintained at Continuous rhythm",
+        "population": "Youth_13_17, Adult"
+      },
+      {
+        "level": 4,
+        "exercise_name": "Single-Leg Box Jump 30cm (Continuous)",
+        "exercise_id": "BBALL_VERT_04",
+        "load_band": "Band_0",
+        "e_node": "E2",
+        "stance": "Unilateral",
+        "reactivity": "Continuous_Rhythm",
+        "direction": "Linear_Sagittal",
+        "axis_progressed": "stance_complexity",
+        "duration_weeks": 6,
+        "prerequisite": "Level 3 completed, single-leg squat quality ≥7/10, no knee valgus",
+        "population": "Youth_13_17 (advanced), Adult"
+      },
+      {
+        "level": 5,
+        "exercise_name": "Depth Jump 45cm (Reactive)",
+        "exercise_id": "BBALL_VERT_05",
+        "load_band": "Band_0",
+        "e_node": "E3",
+        "stance": "Bilateral",
+        "reactivity": "Reactive_Minimal_Contact",
+        "direction": "Linear_Sagittal",
+        "axes_progressed": "e_node_difficulty + reactivity_level",
+        "violation": "TWO AXES CHANGED",
+        "status": "ILLEGAL_PROGRESSION",
+        "correct_approach": "Split into two steps: (A) Depth Jump 45cm Continuous for 4 weeks, THEN (B) Depth Jump 45cm Reactive"
+      }
+    ],
+
+    "deceleration_progression": [
+      {
+        "level": 1,
+        "exercise_name": "Bilateral Jump Stop from Jog",
+        "exercise_id": "BBALL_DECEL_01",
+        "load_band": "Band_0",
+        "e_node": "E0",
+        "stance": "Bilateral",
+        "reactivity": "Stick_Landing",
+        "direction": "Linear_Sagittal",
+        "duration_weeks": 3,
+        "population": "Youth_8_12, Youth_13_17, Adult"
+      },
+      {
+        "level": 2,
+        "exercise_name": "Bilateral Jump Stop from Sprint",
+        "exercise_id": "BBALL_DECEL_02",
+        "load_band": "Band_0",
+        "e_node": "E1",
+        "stance": "Bilateral",
+        "reactivity": "Stick_Landing",
+        "direction": "Linear_Sagittal",
+        "axis_progressed": "e_node_difficulty",
+        "note": "Increased velocity = increased eccentric demand = E1",
+        "duration_weeks": 4,
+        "population": "Youth_13_17, Adult"
+      },
+      {
+        "level": 3,
+        "exercise_name": "Lateral Shuffle to Jump Stop",
+        "exercise_id": "BBALL_DECEL_03",
+        "load_band": "Band_0",
+        "e_node": "E1",
+        "stance": "Bilateral",
+        "reactivity": "Stick_Landing",
+        "direction": "Lateral_Frontal",
+        "axis_progressed": "direction_complexity",
+        "duration_weeks": 4,
+        "population": "Youth_13_17, Adult"
+      },
+      {
+        "level": 4,
+        "exercise_name": "Single-Leg Deceleration Step-Down",
+        "exercise_id": "BBALL_DECEL_04",
+        "load_band": "Band_0",
+        "e_node": "E1",
+        "stance": "Unilateral",
+        "reactivity": "Stick_Landing",
+        "direction": "Linear_Sagittal",
+        "axis_progressed": "stance_complexity",
+        "duration_weeks": 6,
+        "prerequisite": "No knee valgus on bilateral work, single-leg squat quality ≥7/10",
+        "population": "Youth_13_17, Adult"
+      },
+      {
+        "level": 5,
+        "exercise_name": "Sprint to 45-Degree Cut (Unilateral)",
+        "exercise_id": "BBALL_DECEL_05",
+        "load_band": "Band_0",
+        "e_node": "E2",
+        "stance": "Unilateral",
+        "reactivity": "Continuous_Rhythm",
+        "direction": "Multi_Directional_Combined",
+        "axes_progressed": "THREE (e_node + reactivity + direction)",
+        "violation": "MULTIPLE AXES CHANGED",
+        "status": "ILLEGAL_PROGRESSION",
+        "correct_approach": "Must split into separate steps: (A) Level 4 → Add direction complexity first (45-degree cut, bilateral, stick), (B) Then add e_node difficulty (45-degree cut, bilateral, continuous), (C) Then maintain at unilateral"
+      }
+    ],
+
+    "lateral_bound_progression": [
+      {
+        "level": 1,
+        "exercise_name": "Lateral Line Hops (Stick)",
+        "exercise_id": "BBALL_LAT_01",
+        "load_band": "Band_0",
+        "e_node": "E1",
+        "stance": "Bilateral",
+        "reactivity": "Stick_Landing",
+        "direction": "Lateral_Frontal",
+        "duration_weeks": 3,
+        "population": "Youth_8_12, Youth_13_17, Adult"
+      },
+      {
+        "level": 2,
+        "exercise_name": "Lateral Line Hops (Continuous)",
+        "exercise_id": "BBALL_LAT_02",
+        "load_band": "Band_0",
+        "e_node": "E1",
+        "stance": "Bilateral",
+        "reactivity": "Continuous_Rhythm",
+        "direction": "Lateral_Frontal",
+        "axis_progressed": "reactivity_level",
+        "duration_weeks": 4,
+        "population": "Youth_13_17, Adult"
+      },
+      {
+        "level": 3,
+        "exercise_name": "Lateral Bound (Bilateral to Stick)",
+        "exercise_id": "BBALL_LAT_03",
+        "load_band": "Band_0",
+        "e_node": "E2",
+        "stance": "Bilateral",
+        "reactivity": "Stick_Landing",
+        "direction": "Lateral_Frontal",
+        "axis_progressed": "e_node_difficulty",
+        "note": "Greater lateral distance = higher force demand = E2",
+        "duration_weeks": 4,
+        "population": "Youth_13_17, Adult"
+      },
+      {
+        "level": 4,
+        "exercise_name": "Lateral Bound (Unilateral to Stick)",
+        "exercise_id": "BBALL_LAT_04",
+        "load_band": "Band_0",
+        "e_node": "E2",
+        "stance": "Unilateral",
+        "reactivity": "Stick_Landing",
+        "direction": "Lateral_Frontal",
+        "axis_progressed": "stance_complexity",
+        "duration_weeks": 6,
+        "prerequisite": "Single-leg squat quality ≥7/10, no knee valgus",
+        "population": "Youth_13_17 (advanced), Adult"
+      },
+      {
+        "level": 5,
+        "exercise_name": "Continuous Lateral Bounds (Unilateral, Reactive)",
+        "exercise_id": "BBALL_LAT_05",
+        "load_band": "Band_0",
+        "e_node": "E3",
+        "stance": "Unilateral",
+        "reactivity": "Reactive_Minimal_Contact",
+        "direction": "Lateral_Frontal",
+        "axes_progressed": "e_node_difficulty + reactivity_level",
+        "violation": "TWO AXES CHANGED",
+        "status": "ILLEGAL_PROGRESSION",
+        "correct_approach": "Split into: (A) Lateral Bound Unilateral Continuous (E2, Continuous), THEN (B) Add reactivity after 4-6 weeks"
+      }
+    ],
+
+    "upper_body_shooting_compatible_progression": [
+      {
+        "level": 1,
+        "exercise_name": "Push-Up (Bodyweight)",
+        "exercise_id": "BBALL_UPPER_01",
+        "load_band": "Band_0",
+        "e_node": "E0",
+        "stance": "Bilateral",
+        "reactivity": "N/A",
+        "direction": "Linear_Sagittal",
+        "tempo": "2/0/2",
+        "duration_weeks": 4,
+        "population": "Youth_8_12, Youth_13_17, Adult"
+      },
+      {
+        "level": 2,
+        "exercise_name": "Push-Up Plus (Scapular Emphasis)",
+        "exercise_id": "BBALL_UPPER_02",
+        "load_band": "Band_0",
+        "e_node": "E0",
+        "stance": "Bilateral",
+        "reactivity": "N/A",
+        "direction": "Linear_Sagittal",
+        "tempo": "2/0/2",
+        "axis_progressed": "NONE (pattern refinement, not axis change)",
+        "note": "Added scapular protraction at top = pattern refinement (see non_axis_variables). No formal axis changed.",
+        "duration_weeks": 4,
+        "population": "Youth_13_17, Adult"
+      },
+      {
+        "level": 3,
+        "exercise_name": "Eccentric Push-Up (Slow Lower)",
+        "exercise_id": "BBALL_UPPER_03",
+        "load_band": "Band_0",
+        "e_node": "E0",
+        "stance": "Bilateral",
+        "reactivity": "N/A",
+        "direction": "Linear_Sagittal",
+        "tempo": "5/0/1",
+        "axis_progressed": "NONE (tempo modification, not axis change)",
+        "note": "Eccentric emphasis via tempo change (see non_axis_variables). Arm deceleration strength emphasis.",
+        "duration_weeks": 4,
+        "population": "Youth_13_17, Adult"
+      },
+      {
+        "level": 4,
+        "exercise_name": "Dumbbell Bench Press (Light)",
+        "exercise_id": "BBALL_UPPER_04",
+        "load_band": "Band_1",
+        "e_node": "E0",
+        "stance": "Bilateral",
+        "reactivity": "N/A",
+        "direction": "Linear_Sagittal",
+        "tempo": "2/0/2",
+        "axis_progressed": "load_band",
+        "note": "External load added, submaximal only for shooting compatibility",
+        "duration_weeks": 6,
+        "population": "Youth_13_17, Adult",
+        "shooting_compatibility_rule": "Never exceed 80% 1RM, avoid soreness before shooting practice"
+      }
+    ]
+  },
+
+  "epa_integration_rules": {
+    "description": "How EPA must use this law during session generation",
+    "validation_checkpoint": "BEFORE exercise is added to session plan",
+    "validation_steps": [
+      {
+        "step": 1,
+        "action": "Retrieve athlete's current_exercise_level for given pattern",
+        "data_source": "Athlete training history or ICP defaults"
+      },
+      {
+        "step": 2,
+        "action": "Compare current_exercise to proposed_exercise across all 5 axes",
+        "axes": ["load_band", "e_node", "stance", "reactivity", "direction"]
+      },
+      {
+        "step": 3,
+        "action": "Count axes where proposed > current",
+        "threshold": 1
+      },
+      {
+        "step": 4,
+        "action": "IF axes_changed > 1 THEN reject_progression AND provide_legal_alternative"
+      },
+      {
+        "step": 5,
+        "action": "IF axes_changed = 1 THEN validate_population_ceiling on progressed axis"
+      },
+      {
+        "step": 6,
+        "action": "IF population_ceiling violated THEN reject AND suggest legal exercise at ceiling"
+      },
+      {
+        "step": 7,
+        "action": "Check regression_triggers for current exercise",
+        "logic": "IF any trigger present (readiness, movement quality) THEN forbid progression, require regression"
+      }
+    ],
+
+    "output_on_rejection": {
+      "status": "PROGRESSION_REJECTED",
+      "reason_code": "ILLEGAL_MULTI_AXIS_PROGRESSION | POPULATION_CEILING_EXCEEDED | REGRESSION_TRIGGER_ACTIVE",
+      "legal_alternative": "Exercise that changes only 1 axis within population ceiling",
+      "example": {
+        "proposed": "Single-Leg Box Jump 45cm Reactive (E3, Unilateral, Reactive)",
+        "rejected_because": "THREE axes changed from current level (E2, Bilateral, Continuous)",
+        "legal_alternative_step_1": "Single-Leg Box Jump 30cm Continuous (E2, Unilateral, Continuous) - Only stance changed",
+        "legal_alternative_step_2": "After 6 weeks at Step 1, progress to Box Jump 45cm Continuous (E3, Unilateral, Continuous) - Only e-node changed",
+        "legal_alternative_step_3": "After 4 weeks at Step 2, progress to Box Jump 45cm Reactive (E3, Unilateral, Reactive) - Only reactivity changed"
+      }
+    }
+  },
+
+  "coach_playbook_integration": {
+    "section_reference": "Coach AI Playbook v0.5.0, Section 3.4: Exercise Progression Law",
+    "coach_decision_tree": {
+      "question_1": "Is athlete performing current exercise with excellent technique for 2+ weeks consistently?",
+      "if_no": "DO NOT PROGRESS. Focus on quality at current level. Consider regression if technique degrading.",
+      "if_yes": "Proceed to question 2"
+    },
+    "coach_decision_tree_2": {
+      "question_2": "Select ONE axis to progress. Which is the most appropriate next step for this athlete?",
+      "options": [
+        "load_band (increase external load)",
+        "e_node_difficulty (increase elastic demand)",
+        "stance_complexity (reduce base of support)",
+        "reactivity_level (reduce amortization phase)",
+        "direction_complexity (add planes of motion)"
+      ],
+      "guidance": "Choose based on sport demands and athlete limiters. Basketball typically prioritizes: e_node → stance → direction → reactivity → load."
+    },
+    "coach_decision_tree_3": {
+      "question_3": "After 2-4 weeks at new level, has technique quality remained excellent?",
+      "if_no": "REGRESSION required. Return to previous level on progressed axis. Investigate limiter.",
+      "if_yes": "Consolidate for 2 more weeks before considering next progression step."
+    }
+  },
+
+  "reason_codes": {
+    "PROGRESSION_APPROVED": "Athlete met all criteria for single-axis progression within population ceiling",
+    "PROGRESSION_REJECTED_MULTI_AXIS": "Proposed exercise changes >1 axis simultaneously (illegal)",
+    "PROGRESSION_REJECTED_POPULATION_CEILING": "Proposed exercise exceeds population ceiling on progressed axis",
+    "PROGRESSION_REJECTED_TECHNIQUE": "Current exercise technique quality insufficient (<2 weeks excellent performance)",
+    "PROGRESSION_REJECTED_REGRESSION_TRIGGER": "Active regression trigger present (readiness, movement quality, pain)",
+    "PROGRESSION_REJECTED_PREMATURE": "Insufficient consolidation time at current level (<2 weeks)",
+    "PROGRESSION_FORBIDDEN_INJURY": "Active injury contraindication for proposed progression",
+    "PROGRESSION_FORBIDDEN_READINESS": "Readiness state (YELLOW/RED) forbids progression at this time"
+  },
+
+  "override_protocol": {
+    "authority": "Director (Austin Lawrence) only",
+    "documentation_required": [
+      "Reason for override (e.g., advanced athlete, sport-specific demand)",
+      "Risk assessment",
+      "Monitoring plan",
+      "Regression criteria"
+    ],
+    "example_valid_override": {
+      "athlete": "Elite basketball player, 5+ years training age",
+      "proposed": "Simultaneous progression of e-node (E2→E3) and reactivity (Continuous→Reactive) for sport-specific transfer",
+      "rationale": "Athlete has mastered both axes independently, competitive season requires integrated reactive work",
+      "monitoring": "Daily landing quality checks, weekly jump testing, immediate regression if any degradation",
+      "approved_by": "Austin Lawrence",
+      "date": "2025-12-22"
+    }
+  },
+
+  "version_control": {
+    "v1.0.1": {
+      "date": "2025-12-22",
+      "status": "ACTIVE",
+      "changes": [
+        "REQUIRED FIX: Added population_ceilings for direction_complexity axis (Youth 8-12 max: Lateral_Frontal, Youth 13-17: Multi_Directional with planned COD only, Adult: full access)",
+        "REQUIRED FIX: Added non_axis_variables section clarifying that tempo, rest, sets, reps are NOT formal axes",
+        "REQUIRED FIX: Added consolidation_duration_hierarchy clarifying 2 weeks = minimum legal (hard gate) vs axis-specific durations = recommended adaptation",
+        "Corrected upper_body_shooting_compatible_progression to use non-axis terminology",
+        "All three architectural issues from review resolved"
+      ],
+      "reviewer": "Austin Lawrence",
+      "approval_status": "APPROVED_FOR_PHASE_2",
+      "integration_ready": true
+    },
+    "v1.0.0": {
+      "date": "2025-12-22",
+      "changes": "Initial production release",
+      "basketball_progressions_validated": true,
+      "epa_integration_specified": true,
+      "coach_playbook_ready": true
+    }
+  }
+}

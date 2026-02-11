@@ -1,0 +1,1206 @@
+{
+  "meta": {
+    "documentId": "EFL-SPECIALIZATION-BLOCK-DECELERATION-BASKETBALL",
+    "name": "Deceleration Specialization Block - Basketball",
+    "version": "1.0.0",
+    "status": "ACTIVE",
+    "effectiveDate": "2025-12-22",
+    "blockType": "SPECIALIZATION",
+    "parent_mdp": "MDP_COURT_VERTICAL",
+    "sport_focus": "Basketball",
+    "owner": "Austin Lawrence, Director of Performance Systems",
+    "codexReference": "Exercise Progression Law v1.0.1, Load Standards v2.1.2, Governance v4.0, MDP_COURT_VERTICAL v1.3",
+    "integration_points": [
+      "EFL_ICP_DEFINITIONS_v2_3.json (basketball ICPs)",
+      "EFL_MOVEMENT_DEMAND_PROFILES_v1_3.json (MDP_COURT_VERTICAL)",
+      "EFL_EXERCISE_PROGRESSION_LAW_v1_0_1.json",
+      "EFL_SPECIALIZATION_BLOCK_ELASTIC_BASKETBALL_v1_0_1.json (complementary block)",
+      "EFL_Program_Architect_EPA_v2_2.py"
+    ]
+  },
+
+  "block_definition": {
+    "display_name": "Deceleration Specialization Block (Basketball)",
+    "block_id": "deceleration_specialization_basketball",
+    "description": "4-week intensive deceleration and change-of-direction block emphasizing braking mechanics, eccentric control, and COD efficiency for basketball athletes. Focuses on injury prevention and movement quality under direction change demands.",
+    "duration_weeks": 4,
+    "training_emphasis": "DECELERATION_MECHANICS_AND_COD_EFFICIENCY",
+    "adaptation_target": "Eccentric strength, braking force symmetry, COD speed (505 test), knee/ankle stability under direction change, movement efficiency",
+    
+    "parent_mdp": "MDP_COURT_VERTICAL",
+    "legal_seasons": ["OFF_SEASON", "PREP_SEASON"],
+    "forbidden_seasons": ["IN_SEASON_TIER_1", "IN_SEASON_TIER_2", "IN_SEASON_TIER_3", "POST_SEASON"],
+    "season_rationale": "Deceleration work is less CNS-demanding than elastic specialization and can extend into PREP_SEASON. IN_SEASON phases have too much competition-induced braking load to add focused decel training. POST_SEASON requires recovery, not decel emphasis.",
+    
+    "legal_populations": ["Youth_13_17", "Adult"],
+    "forbidden_populations": ["Youth_8_12"],
+    "population_rationale": "Youth 8-12 lack eccentric strength capacity and neuromuscular control for intensive deceleration training. This block operates at moderate-high intensity with significant unilateral and eccentric demands.",
+
+    "complementary_block": {
+      "block_id": "elastic_specialization_basketball",
+      "relationship": "Sequential or alternating emphasis within annual plan",
+      "recommendation": "Run elastic block in early OFF_SEASON (weeks 1-4), transition to baseline (weeks 5-6), then deceleration block (weeks 7-10). OR alternate elastic/decel blocks across training years.",
+      "caution": "Do NOT run elastic + decel blocks consecutively without 2+ week baseline buffer"
+    }
+  },
+
+  "entry_requirements": {
+    "description": "Mandatory gates that MUST be passed before athlete can enter block. EPA will validate these before generating week 1.",
+    
+    "readiness_gate": {
+      "required_flag": "GREEN",
+      "rationale": "Deceleration work requires full neuromuscular control and tissue health. YELLOW/RED states compromise eccentric capacity and injury risk.",
+      "enforcement": "HARD_GATE"
+    },
+
+    "season_gate": {
+      "required_seasons": ["OFF_SEASON", "PREP_SEASON"],
+      "rationale": "More flexible than elastic block - decel work can extend into prep phase as it supports sport-specific movement preparation",
+      "enforcement": "HARD_GATE"
+    },
+
+    "movement_quality_gates": {
+      "single_leg_squat_quality": {
+        "minimum": 7.0,
+        "maximum": 10.0,
+        "assessment_method": "FMS-style single-leg squat with scoring rubric (depth, control, alignment, stability)",
+        "rationale": "Unilateral strength and control are prerequisites for safe deceleration training. Score <7/10 indicates insufficient base.",
+        "enforcement": "HARD_GATE"
+      },
+      
+      "knee_valgus_status": {
+        "required": "ABSENT",
+        "assessment_method": "Single-leg squat, single-leg landing, lateral movement screening",
+        "rationale": "Any knee valgus present = immediate injury risk under deceleration loads. Must be corrected before entering block.",
+        "enforcement": "HARD_GATE"
+      },
+      
+      "hip_control_bilateral": {
+        "required_status": "PASS",
+        "assessment_method": "Bilateral squat, bilateral landing, hip hinge pattern assessment",
+        "rationale": "Hip-dominant braking pattern prerequisite for deceleration mechanics",
+        "enforcement": "HARD_GATE"
+      },
+
+      "ankle_dorsiflexion": {
+        "minimum_degrees": 35,
+        "assessment_method": "Weight-bearing lunge test",
+        "rationale": "Adequate ankle mobility required for proper deceleration shin angle and force absorption",
+        "enforcement": "SOFT_GATE (warn if <35°, allow with mobility supplementation)"
+      }
+    },
+
+    "strength_prerequisites": {
+      "bilateral_squat_competency": {
+        "required": true,
+        "definition": "Athlete can perform bodyweight squat to parallel with control for 10+ reps",
+        "rationale": "Foundational strength capacity required before eccentric emphasis",
+        "enforcement": "HARD_GATE"
+      },
+      
+      "eccentric_exposure_weeks": {
+        "minimum": 4,
+        "definition": "Athlete has completed minimum 4 weeks of tempo eccentric work (3/0/1 or slower)",
+        "rationale": "Eccentric capacity must be developed before intensive deceleration demands",
+        "enforcement": "HARD_GATE"
+      },
+
+      "unilateral_strength_asymmetry": {
+        "maximum_percent_difference": 15,
+        "assessment_method": "Single-leg hop test distance comparison L vs R",
+        "rationale": "Asymmetries >15% increase injury risk under unilateral deceleration loads",
+        "enforcement": "SOFT_GATE (warn if >15%, require corrective work alongside block)"
+      }
+    },
+
+    "contraindications": {
+      "absolute": [
+        "Active knee injury (ACL, meniscus, MCL/LCL sprain, patellar tendinopathy acute phase)",
+        "Active ankle sprain (<4 weeks)",
+        "Hip flexor strain or tear",
+        "Quadriceps strain (active)",
+        "Any fracture or stress fracture lower limb within 6 months",
+        "Chronic ankle instability without brace/support"
+      ],
+      "relative": [
+        "Recent upper respiratory infection (<1 week)",
+        "Chronic knee pain (managed but present)",
+        "Previous ACL reconstruction (<12 months)",
+        "Significant training interruption (>2 weeks off)"
+      ],
+      "enforcement": "Absolute contraindications = HARD_GATE, Relative = SOFT_GATE with monitoring and potential volume reduction"
+    }
+  },
+
+  "weekly_structure": {
+    "description": "Progressive 4-week deceleration emphasis cycle with deload week 4",
+    
+    "week_1": {
+      "week_number": 1,
+      "focus": "Bilateral Braking Mechanics",
+      "primary_adaptation": "Eccentric control, bilateral deceleration patterns, hip-dominant braking, force absorption",
+      "primary_patterns": [
+        "jump_stops_bilateral",
+        "decel_step_downs",
+        "eccentric_squats",
+        "bilateral_landings"
+      ],
+      "secondary_patterns": [
+        "hip_hinge_eccentric",
+        "trunk_control",
+        "ankle_stability"
+      ],
+      
+      "volume_targets": {
+        "Youth_13_17": {
+          "contacts_per_session": {"min": 50, "max": 70},
+          "contacts_per_week": {"min": 100, "max": 140},
+          "session_count": 3,
+          "session_spacing": "48_hours_minimum",
+          "tier_3_max_percent": 20,
+          "governance_ceiling": 120,
+          "operating_at_percent_ceiling": 58,
+          "sprint_meters_per_session": {"min": 100, "max": 300},
+          "sprint_meters_per_week": {"min": 300, "max": 600},
+          "cns_load_category": "MODERATE",
+          "note": "Lower contact volume than elastic block - decel work is less contact-dense but more eccentric-demanding. Sprint work integrated for decel context."
+        },
+        "Adult": {
+          "contacts_per_session": {"min": 60, "max": 90},
+          "contacts_per_week": {"min": 120, "max": 180},
+          "session_count": 3,
+          "session_spacing": "48_hours_minimum",
+          "tier_3_max_percent": 30,
+          "governance_ceiling": 140,
+          "operating_at_percent_ceiling": 64,
+          "sprint_meters_per_session": {"min": 150, "max": 400},
+          "sprint_meters_per_week": {"min": 400, "max": 800},
+          "cns_load_category": "MODERATE"
+        }
+      },
+
+      "exercise_selection_rules": {
+        "e_node_distribution": {
+          "E0": "60-70% (non-plyometric eccentric work, tempo squats, decel drills)",
+          "E1": "20-30% (low-amplitude landings, stick emphasis)",
+          "E2": "5-10% (moderate landings with decel intent)",
+          "E3": "0% (no reactive work week 1)",
+          "E4": "0%"
+        },
+        "stance_distribution": {
+          "Bilateral": "80-90% (foundational braking patterns)",
+          "Split": "10-15% (transitional)",
+          "Unilateral": "0-5% (minimal, assessment only)"
+        },
+        "tempo_emphasis": {
+          "eccentric_tempo": "3/0/1 to 5/0/1 on strength work",
+          "isometric_holds": "2-3 seconds on landing patterns",
+          "concentric": "Controlled, not explosive"
+        },
+        "deceleration_context": {
+          "planned_decel": "100% (all decel patterns are planned/coached)",
+          "reactive_decel": "0% (not introduced week 1)"
+        }
+      },
+
+      "sample_session_day_1": {
+        "session_id": "DECEL_W1_D1",
+        "focus": "Bilateral braking foundation",
+        "total_duration_min": 48,
+        "structure": {
+          "PRIME": {
+            "duration_min": 8,
+            "exercises": [
+              "Ankle Dorsiflexion Mobilization",
+              "Hip 90-90 Switches", 
+              "Glute Bridge (Eccentric Emphasis 3/0/1) 2×10"
+            ]
+          },
+          "PREP": {
+            "duration_min": 10,
+            "exercises": [
+              {
+                "exercise_id": "EX_00234",
+                "exercise_name": "A-March",
+                "sets": 2,
+                "reps": "20y",
+                "e_node": "E0",
+                "contacts": 0,
+                "aether_reference": "A_March_Linear"
+              },
+              {
+                "exercise_id": "EX_01235",
+                "exercise_name": "Snap Down (to Stick)",
+                "sets": 3,
+                "reps": 5,
+                "e_node": "E1",
+                "contacts": 15,
+                "cues": ["Absorb forces", "Stick 2 seconds", "Hip hinge"],
+                "aether_reference": "Snap_Down_Bilateral_Stick"
+              }
+            ],
+            "prep_contacts": 15
+          },
+          "WORK_A": {
+            "duration_min": 20,
+            "focus": "Bilateral deceleration mechanics",
+            "exercises": [
+              {
+                "exercise_id": "EX_00456",
+                "exercise_name": "Eccentric Squat (5/0/1 Tempo)",
+                "sets": 4,
+                "reps": 6,
+                "rest_sec": 90,
+                "load": "Band_1",
+                "e_node": "E0",
+                "contacts": 0,
+                "cues": ["5 second lower", "Control trunk", "Hip back"],
+                "note": "Primary eccentric strength builder",
+                "aether_reference": "Squat_Bilateral_Tempo_Eccentric"
+              },
+              {
+                "exercise_id": "EX_00678",
+                "exercise_name": "Jump Stop from Jog (10y approach)",
+                "sets": 4,
+                "reps": 6,
+                "rest_sec": 60,
+                "e_node": "E1",
+                "contacts": 24,
+                "cues": ["Hip back", "Feet parallel", "Stick landing 2 seconds"],
+                "note": "Foundational bilateral braking pattern",
+                "aether_reference": "Jump_Stop_Bilateral_Jog"
+              },
+              {
+                "exercise_id": "EX_00789",
+                "exercise_name": "Decel Step-Down (Bilateral)",
+                "sets": 3,
+                "reps": "8 per side",
+                "rest_sec": 60,
+                "e_node": "E1",
+                "contacts": 24,
+                "cues": ["Control descent", "Quiet landing", "No collapse"],
+                "note": "Eccentric control drill",
+                "aether_reference": "Step_Down_Bilateral_Controlled"
+              }
+            ],
+            "work_a_contacts": 48
+          },
+          "WORK_B": {
+            "duration_min": 8,
+            "focus": "Upper body + trunk anti-rotation",
+            "exercises": [
+              "Eccentric Push-Up (5/0/1) 3×6",
+              "Pallof Press (Half-Kneeling) 3×8/side"
+            ]
+          },
+          "CLEAR": {
+            "duration_min": 7,
+            "exercises": [
+              "Hip Flexor Stretch (Extended) 2×45s/side",
+              "Quad Foam Roll",
+              "Box Breathing 3min"
+            ]
+          }
+        },
+        "session_totals": {
+          "total_contacts": 63,
+          "tier_1_2_contacts": 63,
+          "tier_3_contacts": 0,
+          "tier_3_percent": 0,
+          "sprint_meters": 160,
+          "cns_load_category": "MODERATE",
+          "governance_status": "LEGAL",
+          "readiness_required": "GREEN",
+          "note": "Week 1 emphasizes E0-E1 work, bilateral patterns, eccentric tempo"
+        }
+      }
+    },
+
+    "week_2": {
+      "week_number": 2,
+      "focus": "Unilateral Deceleration + Eccentric Control",
+      "primary_adaptation": "Single-leg eccentric strength, unilateral braking patterns, lateral force absorption, asymmetry reduction",
+      "primary_patterns": [
+        "single_leg_landings",
+        "lateral_decel_drills",
+        "unilateral_step_downs",
+        "split_squat_eccentric"
+      ],
+      "secondary_patterns": [
+        "ankle_stability_unilateral",
+        "knee_control",
+        "hip_stability"
+      ],
+
+      "volume_targets": {
+        "Youth_13_17": {
+          "contacts_per_session": {"min": 60, "max": 80},
+          "contacts_per_week": {"min": 120, "max": 160},
+          "session_count": 3,
+          "tier_3_max_percent": 20,
+          "sprint_meters_per_session": {"min": 150, "max": 350},
+          "sprint_meters_per_week": {"min": 400, "max": 700},
+          "cns_load_category": "MODERATE-HIGH",
+          "note": "Volume increases slightly as unilateral work added"
+        },
+        "Adult": {
+          "contacts_per_session": {"min": 70, "max": 100},
+          "contacts_per_week": {"min": 140, "max": 200},
+          "session_count": 3,
+          "tier_3_max_percent": 30,
+          "sprint_meters_per_session": {"min": 200, "max": 450},
+          "sprint_meters_per_week": {"min": 500, "max": 900},
+          "cns_load_category": "MODERATE-HIGH"
+        }
+      },
+
+      "exercise_selection_rules": {
+        "e_node_distribution": {
+          "E0": "50-60% (eccentric strength work continues)",
+          "E1": "30-40% (unilateral landings, lateral work)",
+          "E2": "5-10% (moderate amplitude decel)",
+          "E3": "0% (still building foundation)",
+          "E4": "0%"
+        },
+        "stance_distribution": {
+          "Bilateral": "50-60% (reduced from week 1)",
+          "Split": "20-25% (increased significantly)",
+          "Unilateral": "15-25% (PRIMARY PROGRESSION)"
+        },
+        "direction_emphasis": {
+          "Sagittal": "50% (forward decel)",
+          "Frontal": "40% (lateral decel - PRIMARY EMPHASIS)",
+          "Combined": "10% (multi-directional intro)"
+        }
+      },
+
+      "sample_session_day_2": {
+        "session_id": "DECEL_W2_D2",
+        "focus": "Unilateral + lateral deceleration",
+        "total_duration_min": 52,
+        "structure": {
+          "PRIME": {
+            "duration_min": 8,
+            "exercises": ["Standard mobility sequence"]
+          },
+          "PREP": {
+            "duration_min": 10,
+            "exercises": [
+              {
+                "exercise_id": "EX_01236",
+                "exercise_name": "Single-Leg Balance Progression",
+                "sets": 2,
+                "reps": "30 seconds per leg",
+                "e_node": "E0",
+                "contacts": 0,
+                "aether_reference": "Balance_Single_Leg_Eyes_Open"
+              },
+              {
+                "exercise_id": "EX_01237",
+                "exercise_name": "Snap Down (Single-Leg to Stick)",
+                "sets": 3,
+                "reps": "4 per leg",
+                "e_node": "E1",
+                "contacts": 12,
+                "cues": ["Hip back", "Control landing", "No valgus"],
+                "aether_reference": "Snap_Down_Unilateral_Stick"
+              }
+            ],
+            "prep_contacts": 12
+          },
+          "WORK_A": {
+            "duration_min": 24,
+            "focus": "Unilateral eccentric + lateral decel",
+            "exercises": [
+              {
+                "exercise_id": "EX_00458",
+                "exercise_name": "Split Squat (Eccentric Emphasis 4/0/1)",
+                "sets": 4,
+                "reps": "6 per leg",
+                "rest_sec": 90,
+                "load": "Band_1",
+                "e_node": "E0",
+                "contacts": 0,
+                "note": "Unilateral eccentric strength foundation",
+                "aether_reference": "Split_Squat_Eccentric_Tempo"
+              },
+              {
+                "exercise_id": "EX_00680",
+                "exercise_name": "Single-Leg Landing (from 30cm box)",
+                "sets": 4,
+                "reps": "5 per leg",
+                "rest_sec": 90,
+                "e_node": "E2",
+                "contacts": 20,
+                "cues": ["Soft landing", "Hip absorb", "No valgus"],
+                "note": "Unilateral decel capacity building",
+                "aether_reference": "Single_Leg_Landing_30cm_Box"
+              },
+              {
+                "exercise_id": "EX_00791",
+                "exercise_name": "Lateral Shuffle to Jump Stop",
+                "sets": 4,
+                "reps": "6 per direction",
+                "rest_sec": 75,
+                "e_node": "E1",
+                "contacts": 24,
+                "cues": ["Push off outside foot", "Land bilateral", "Stick"],
+                "note": "Lateral decel pattern - basketball specific",
+                "aether_reference": "Lateral_Shuffle_Jump_Stop"
+              },
+              {
+                "exercise_id": "EX_00792",
+                "exercise_name": "Lateral Step-Down (Controlled)",
+                "sets": 3,
+                "reps": "8 per leg",
+                "rest_sec": 60,
+                "e_node": "E1",
+                "contacts": 24,
+                "note": "Lateral force absorption drill",
+                "aether_reference": "Step_Down_Lateral_Unilateral"
+              }
+            ],
+            "work_a_contacts": 68
+          },
+          "WORK_B": {
+            "duration_min": 8,
+            "exercises": [
+              "Push-Up Plus 3×10",
+              "Half-Kneeling Cable Press 3×8/side"
+            ]
+          },
+          "CLEAR": {
+            "duration_min": 7,
+            "exercises": ["Hip flexor stretch", "IT band foam roll", "Box breathing"]
+          }
+        },
+        "session_totals": {
+          "total_contacts": 80,
+          "tier_1_2_contacts": 80,
+          "tier_3_contacts": 0,
+          "tier_3_percent": 0,
+          "sprint_meters": 240,
+          "cns_load_category": "MODERATE-HIGH",
+          "governance_status": "LEGAL",
+          "note": "Week 2 adds unilateral + lateral emphasis, maintains eccentric focus"
+        }
+      }
+    },
+
+    "week_3": {
+      "week_number": 3,
+      "focus": "COD + Re-acceleration Integration",
+      "primary_adaptation": "Change-of-direction speed, braking-to-acceleration transition, multi-directional control, sport-specific COD patterns",
+      "primary_patterns": [
+        "45_degree_cuts",
+        "90_degree_cuts",
+        "brake_and_sprint",
+        "reactive_direction_changes"
+      ],
+      "secondary_patterns": [
+        "acceleration_out_of_decel",
+        "multi_plane_control",
+        "decision_making_under_fatigue"
+      ],
+
+      "volume_targets": {
+        "Youth_13_17": {
+          "contacts_per_session": {"min": 70, "max": 90},
+          "contacts_per_week": {"min": 140, "max": 180},
+          "session_count": 3,
+          "tier_3_max_percent": 30,
+          "sprint_meters_per_session": {"min": 200, "max": 400},
+          "sprint_meters_per_week": {"min": 500, "max": 800},
+          "cns_load_category": "MODERATE-HIGH",
+          "note": "Peak volume week - COD work is contact-dense but lower impact than reactive plyos"
+        },
+        "Adult": {
+          "contacts_per_session": {"min": 90, "max": 110},
+          "contacts_per_week": {"min": 180, "max": 220},
+          "session_count": 3,
+          "tier_3_max_percent": 40,
+          "sprint_meters_per_session": {"min": 300, "max": 500},
+          "sprint_meters_per_week": {"min": 700, "max": 1000},
+          "cns_load_category": "MODERATE-HIGH"
+        }
+      },
+
+      "exercise_selection_rules": {
+        "e_node_distribution": {
+          "E0": "30-40% (maintained for strength work)",
+          "E1": "40-50% (COD patterns, decel drills)",
+          "E2": "15-25% (higher amplitude COD, faster speeds)",
+          "E3": "0-5% (minimal reactive, advanced athletes only)",
+          "E4": "0%"
+        },
+        "stance_distribution": {
+          "Bilateral": "30-40% (reduced significantly)",
+          "Split": "20-25%",
+          "Unilateral": "35-50% (PRIMARY EMPHASIS)"
+        },
+        "direction_complexity": {
+          "Linear": "30%",
+          "Lateral": "30%",
+          "Multi_Directional": "40% (PRIMARY EMPHASIS)"
+        },
+        "cod_angle_progression": {
+          "45_degree": "40% (easier COD angle)",
+          "90_degree": "40% (basketball-relevant)",
+          "135_180_degree": "20% (advanced, planted cuts)"
+        }
+      },
+
+      "intensity_management": {
+        "rationale": "Week 3 is highest volume and multi-directional complexity. CNS demand moderate-high but lower than elastic block week 3 due to less reactive/shock work.",
+        "monitoring_required": [
+          "Daily knee alignment checks",
+          "Pre-session single-leg squat quality",
+          "COD mechanics assessment (plant foot position, trunk control)",
+          "Any hesitation or guarding on cuts",
+          "Fatigue-related technique degradation"
+        ],
+        "regression_protocol": {
+          "if_knee_valgus_emerges": "IMMEDIATE stop, regress to bilateral week 1 patterns",
+          "if_ankle_instability": "Reduce COD angles, increase straight-line decel emphasis",
+          "if_excessive_braking_distance": "Reduce speed, focus on mechanics over velocity",
+          "if_readiness_yellow": "Convert to week 2 emphasis (unilateral strength)",
+          "if_readiness_red": "Skip session or Zone 8 only"
+        }
+      },
+
+      "sample_session_day_2": {
+        "session_id": "DECEL_W3_D2",
+        "focus": "Multi-directional COD integration",
+        "total_duration_min": 54,
+        "structure": {
+          "PRIME": {
+            "duration_min": 8,
+            "exercises": ["Extended mobility sequence"]
+          },
+          "PREP": {
+            "duration_min": 10,
+            "exercises": [
+              {
+                "exercise_id": "EX_00235",
+                "exercise_name": "A-Skip",
+                "sets": 2,
+                "reps": "20y",
+                "e_node": "E0",
+                "contacts": 0,
+                "aether_reference": "A_Skip_Linear"
+              },
+              {
+                "exercise_id": "EX_00681",
+                "exercise_name": "Jump Stop from Sprint (15y approach)",
+                "sets": 3,
+                "reps": 4,
+                "e_node": "E1",
+                "contacts": 12,
+                "cues": ["Hip back", "Absorb force", "Stick"],
+                "aether_reference": "Jump_Stop_Bilateral_Sprint"
+              }
+            ],
+            "prep_contacts": 12
+          },
+          "WORK_A": {
+            "duration_min": 26,
+            "focus": "COD patterns - peak complexity",
+            "exercises": [
+              {
+                "exercise_id": "EX_00893",
+                "exercise_name": "45-Degree Cut (Planned, 75% speed)",
+                "sets": 5,
+                "reps": "4 per direction",
+                "rest_sec": 90,
+                "e_node": "E2",
+                "contacts": 20,
+                "cues": ["Plant outside foot", "Hip back", "Push through cut"],
+                "note": "Foundational COD angle",
+                "aether_reference": "COD_45_Degree_Planned"
+              },
+              {
+                "exercise_id": "EX_00894",
+                "exercise_name": "90-Degree Cut (Planned, 75% speed)",
+                "sets": 4,
+                "reps": "4 per direction",
+                "rest_sec": 90,
+                "e_node": "E2",
+                "contacts": 16,
+                "cues": ["Wider base", "Trunk control", "Accelerate out"],
+                "note": "Basketball-specific COD",
+                "aether_reference": "COD_90_Degree_Planned"
+              },
+              {
+                "exercise_id": "EX_00895",
+                "exercise_name": "L-Drill (Modified, controlled speed)",
+                "sets": 4,
+                "reps": 2,
+                "rest_sec": 120,
+                "e_node": "E2",
+                "contacts": 24,
+                "note": "Multi-directional COD sequence",
+                "aether_reference": "L_Drill_Modified"
+              },
+              {
+                "exercise_id": "EX_00793",
+                "exercise_name": "Single-Leg Decel Step-Down",
+                "sets": 3,
+                "reps": "6 per leg",
+                "rest_sec": 60,
+                "e_node": "E1",
+                "contacts": 18,
+                "note": "Unilateral eccentric control maintenance",
+                "aether_reference": "Step_Down_Unilateral_Controlled"
+              }
+            ],
+            "work_a_contacts": 78
+          },
+          "WORK_B": {
+            "duration_min": 8,
+            "exercises": [
+              "Med Ball Rotation Toss 3×6/side",
+              "Anti-Rotation Cable Hold 3×20s/side"
+            ]
+          },
+          "CLEAR": {
+            "duration_min": 7,
+            "exercises": ["Hip flexor stretch", "Glute foam roll", "Box breathing"]
+          }
+        },
+        "session_totals": {
+          "total_contacts": 90,
+          "tier_1_2_contacts": 90,
+          "tier_3_contacts": 0,
+          "tier_3_percent": 0,
+          "sprint_meters": 320,
+          "cns_load_category": "MODERATE-HIGH",
+          "governance_status": "LEGAL",
+          "note": "Week 3 peak volume + multi-directional complexity - requires excellent movement quality"
+        }
+      }
+    },
+
+    "week_4": {
+      "week_number": 4,
+      "focus": "Deload + COD Assessment",
+      "primary_adaptation": "Tissue restoration, movement quality refinement, performance assessment under reduced fatigue",
+      "purpose": "Reduce training stress by 40-50% while maintaining movement quality. Assess COD improvements and deceleration mechanics. Prepare for transition out of block.",
+      
+      "volume_targets": {
+        "Youth_13_17": {
+          "contacts_per_session": {"min": 30, "max": 50},
+          "contacts_per_week": {"min": 60, "max": 100},
+          "session_count": 2,
+          "volume_reduction_percent": 45,
+          "tier_3_max_percent": 10,
+          "sprint_meters_per_session": {"min": 100, "max": 250},
+          "sprint_meters_per_week": {"min": 200, "max": 400},
+          "cns_load_category": "LOW",
+          "note": "Significant volume reduction, assessment emphasis"
+        },
+        "Adult": {
+          "contacts_per_session": {"min": 40, "max": 60},
+          "contacts_per_week": {"min": 80, "max": 120},
+          "session_count": 2,
+          "volume_reduction_percent": 40,
+          "tier_3_max_percent": 10,
+          "sprint_meters_per_session": {"min": 150, "max": 300},
+          "sprint_meters_per_week": {"min": 250, "max": 500},
+          "cns_load_category": "LOW"
+        }
+      },
+
+      "exercise_selection_rules": {
+        "e_node_distribution": {
+          "E0": "60% (return to controlled strength work)",
+          "E1": "35% (quality decel patterns)",
+          "E2": "5% (assessment only)",
+          "E3": "0%",
+          "E4": "0%"
+        },
+        "intensity_management": "Low-moderate intensity, perfect technique emphasis, assessment-driven",
+        "assessment_integration": "Week 4 includes formal COD testing and movement quality re-screening"
+      },
+
+      "assessment_protocol": {
+        "required": true,
+        "assessments": [
+          {
+            "test": "505 Agility Test",
+            "method": "15m sprint, 180-degree turn, 5m return, measure best of 3 trials each direction",
+            "success_criterion": "≥3% improvement from block entry OR <10% asymmetry L vs R",
+            "timing": "Mid-week 4"
+          },
+          {
+            "test": "Deceleration Force Symmetry",
+            "method": "Force plate bilateral landing, compare L vs R peak force",
+            "success_criterion": "Asymmetry <10% (if force plates available)",
+            "timing": "Mid-week 4",
+            "alternative": "Single-leg hop distance test if no force plates"
+          },
+          {
+            "test": "Single-Leg Squat Quality Re-Assessment",
+            "method": "Same rubric as entry requirement",
+            "success_criterion": "Maintained or improved (≥7/10)",
+            "timing": "Throughout week 4"
+          },
+          {
+            "test": "Knee Valgus Screening",
+            "method": "Visual assessment on landings, cuts, single-leg work",
+            "success_criterion": "ABSENT on all patterns",
+            "timing": "Throughout week 4"
+          }
+        ],
+        "assessment_drives_exit_decision": true
+      },
+
+      "sample_session_day_1": {
+        "session_id": "DECEL_W4_D1",
+        "focus": "Deload - quality emphasis",
+        "total_duration_min": 42,
+        "structure": {
+          "PRIME": {
+            "duration_min": 10,
+            "exercises": ["Extended mobility + tissue quality work"]
+          },
+          "PREP": {
+            "duration_min": 8,
+            "exercises": [
+              {
+                "exercise_id": "EX_00236",
+                "exercise_name": "Wall Drill Series",
+                "sets": 2,
+                "reps": "15s per leg",
+                "e_node": "E0",
+                "contacts": 0,
+                "aether_reference": "Wall_Drill_Series"
+              },
+              {
+                "exercise_id": "EX_01238",
+                "exercise_name": "Snap Down (to Stick)",
+                "sets": 2,
+                "reps": 4,
+                "e_node": "E1",
+                "contacts": 8,
+                "cues": ["Perfect technique", "Stick 3 seconds"],
+                "aether_reference": "Snap_Down_Bilateral_Stick"
+              }
+            ],
+            "prep_contacts": 8
+          },
+          "WORK_A": {
+            "duration_min": 16,
+            "focus": "Low-intensity quality work + assessment",
+            "exercises": [
+              {
+                "exercise_id": "EX_00457",
+                "exercise_name": "Eccentric Squat (3/0/1)",
+                "sets": 3,
+                "reps": 6,
+                "e_node": "E0",
+                "contacts": 0,
+                "note": "Reduced tempo from week 1, maintain quality",
+                "aether_reference": "Squat_Bilateral_Tempo_Eccentric"
+              },
+              {
+                "exercise_id": "EX_00679",
+                "exercise_name": "Jump Stop from Jog",
+                "sets": 3,
+                "reps": 5,
+                "e_node": "E1",
+                "contacts": 15,
+                "cues": ["Perfect mechanics", "No rush"],
+                "aether_reference": "Jump_Stop_Bilateral_Jog"
+              },
+              {
+                "exercise_id": "EX_00896",
+                "exercise_name": "45-Degree Cut (Assessment - 85% speed)",
+                "sets": 2,
+                "reps": "3 per direction",
+                "e_node": "E2",
+                "contacts": 6,
+                "note": "Assessment emphasis, technique scoring",
+                "aether_reference": "COD_45_Degree_Planned"
+              }
+            ],
+            "work_a_contacts": 21
+          },
+          "ASSESSMENT": {
+            "duration_min": 10,
+            "test": "505 Agility Test - formal timing"
+          },
+          "CLEAR": {
+            "duration_min": 8,
+            "exercises": [
+              "Extended hip flexor stretch",
+              "Foam rolling full lower body",
+              "Box breathing 5min"
+            ]
+          }
+        },
+        "session_totals": {
+          "total_contacts": 29,
+          "tier_3_contacts": 0,
+          "sprint_meters": 180,
+          "cns_load_category": "LOW",
+          "governance_status": "LEGAL",
+          "note": "50% volume reduction from week 3, assessment integrated"
+        }
+      }
+    }
+  },
+
+  "exit_criteria": {
+    "description": "Mandatory performance and health checks before transitioning out of block",
+    "all_must_pass": true,
+    "enforcement": "EPA will not generate post-block programming until exit criteria validated",
+
+    "performance_criteria": {
+      "cod_speed_improvement": {
+        "test": "505 Agility Test",
+        "minimum_improvement_percent": 3,
+        "measurement_timing": "Week 4 mid-week",
+        "pass_threshold": "≥3% improvement from block entry baseline",
+        "rationale": "Primary adaptation target - COD efficiency must improve"
+      },
+      
+      "deceleration_force_symmetry": {
+        "test": "Bilateral landing force plate analysis OR single-leg hop distance test",
+        "maximum_asymmetry_percent": 10,
+        "pass_threshold": "L vs R asymmetry ≤10%",
+        "rationale": "Asymmetries indicate incomplete deceleration capacity development or injury risk"
+      },
+
+      "braking_mechanics_quality": {
+        "test": "Coach visual assessment of jump stop and COD patterns",
+        "minimum_score": 7.0,
+        "pass_threshold": "Mechanics score ≥7/10 on deceleration patterns",
+        "rationale": "Quality must be maintained under speed - not just speed improvement"
+      }
+    },
+
+    "movement_quality_criteria": {
+      "single_leg_squat_maintained": {
+        "test": "Single-leg squat quality re-assessment",
+        "minimum_score": 7.0,
+        "pass_threshold": "Score ≥7/10 AND no worse than block entry",
+        "rationale": "Unilateral control must be maintained despite training stress",
+        "enforcement": "HARD_GATE"
+      },
+
+      "knee_valgus_absent": {
+        "test": "Visual screening on landings, cuts, single-leg work",
+        "required_status": "ABSENT",
+        "pass_threshold": "Zero valgus present on all movement screens",
+        "rationale": "Any valgus emergence = block failed, tissue not ready for intensity",
+        "enforcement": "HARD_GATE"
+      }
+    },
+
+    "tissue_health_criteria": {
+      "no_knee_pain": {
+        "required_status": "Pain-free",
+        "pass_threshold": "No knee pain during or after deceleration/COD work",
+        "enforcement": "HARD_GATE"
+      },
+
+      "no_ankle_instability": {
+        "required_status": "Stable, no pain",
+        "pass_threshold": "No ankle pain, swelling, or instability on COD patterns",
+        "enforcement": "HARD_GATE"
+      },
+
+      "no_hip_flexor_strain": {
+        "required_status": "Pain-free",
+        "pass_threshold": "No hip flexor pain during deceleration or sprint work",
+        "enforcement": "HARD_GATE"
+      }
+    },
+
+    "readiness_criteria": {
+      "minimum_green_weeks": {
+        "required": 3,
+        "definition": "Athlete maintained GREEN readiness for at least 3 of 4 weeks",
+        "rationale": "If frequent YELLOW/RED, decel volume exceeded capacity",
+        "enforcement": "SOFT_GATE"
+      }
+    },
+
+    "exit_decision_matrix": {
+      "SUCCESSFUL_COMPLETION": {
+        "criteria": "All performance + movement quality + tissue health criteria passed",
+        "action": "Approve transition to next block or return to baseline",
+        "next_block_recommendation": "Return to MDP_COURT_VERTICAL baseline programming OR Elastic Specialization Block (if not already completed) OR Velocity/Acceleration Block"
+      },
+      
+      "PARTIAL_SUCCESS": {
+        "criteria": "COD speed improved BUT movement quality concerns OR tissue issue",
+        "action": "Require 1-week corrective protocol before next block",
+        "corrective_focus": "Address limiting factor (knee control, ankle stability, asymmetry correction)"
+      },
+
+      "FAILED_BLOCK": {
+        "criteria": "No COD improvement OR movement quality degraded OR tissue health issue",
+        "action": "TERMINATE specialization approach, return to bilateral foundational work",
+        "investigation_required": "Identify failure cause (insufficient prerequisites, volume too high, technique breakdown)"
+      }
+    }
+  },
+
+  "transition_protocol": {
+    "description": "How to safely exit block and return to baseline programming",
+    
+    "post_block_recovery": {
+      "minimum_days": 3,
+      "maximum_days": 5,
+      "activity_during_recovery": [
+        "Zone 8 work (mobility, skill)",
+        "Light Zone 5 work (tempo strength, submaximal)",
+        "Walking, swimming, light cycling",
+        "NO high-intensity COD work",
+        "NO plyometric work (if planning elastic block next)"
+      ],
+      "rationale": "Decel work is less CNS-demanding than elastic work, so shorter recovery window acceptable"
+    },
+
+    "re_entry_to_baseline_programming": {
+      "week_1_post_block": {
+        "volume": "60% of block average",
+        "intensity": "Low-moderate (E0-E1 emphasis)",
+        "focus": "General movement quality",
+        "sample_contacts": "Youth 13-17: 40-50/session, Adult: 50-70/session",
+        "sample_sprint_meters": "Youth 13-17: 200-300/week, Adult: 300-500/week"
+      },
+      "week_2_post_block": {
+        "volume": "75% of block average",
+        "intensity": "Moderate (E0-E2 allowed)",
+        "focus": "Rebuild consistency across patterns"
+      },
+      "week_3_post_block": {
+        "volume": "Return to MDP_COURT_VERTICAL seasonal defaults",
+        "intensity": "Normal range for season",
+        "note": "Athlete back to baseline programming"
+      }
+    },
+
+    "next_block_timing": {
+      "minimum_weeks_between_decel_blocks": 8,
+      "minimum_weeks_to_elastic_block": 2,
+      "rationale": "Decel block can transition to elastic block sooner than vice versa (less recovery needed). But still need 2-week buffer to rebalance training emphasis.",
+      "sequencing_recommendation": "If running both blocks in single training year: Elastic (weeks 1-4) → Baseline (weeks 5-6) → Decel (weeks 7-10) → Baseline remainder of off-season"
+    }
+  },
+
+  "monitoring_requirements": {
+    "description": "What must be tracked throughout block to ensure safety",
+    "frequency": "Every session",
+    
+    "pre_session_checks": {
+      "readiness_assessment": {
+        "method": "Sleep + Stress + RPE formula",
+        "action_if_yellow": "Reduce volume by 20%, reduce COD angles to 45° only",
+        "action_if_red": "Skip COD work, convert to bilateral eccentric emphasis (week 1 style) or Zone 8"
+      },
+      
+      "single_leg_squat_spot_check": {
+        "method": "3 reps per leg, assess alignment",
+        "action_if_degraded": "Reduce unilateral work, increase bilateral emphasis for session"
+      }
+    },
+
+    "during_session_monitoring": {
+      "knee_alignment": {
+        "monitor": "Visual screening on every landing and cut",
+        "action_if_valgus": "IMMEDIATE stop, regress to bilateral work, do not progress until corrected"
+      },
+      
+      "braking_distance": {
+        "monitor": "Distance required to decelerate from sprint",
+        "action_if_lengthened": "Reduce sprint speed, focus on hip-back mechanics"
+      },
+
+      "hesitation_or_guarding": {
+        "monitor": "Athlete hesitation before cuts or defensive body language",
+        "action_if_present": "Reduce complexity, increase confidence through simpler patterns"
+      }
+    },
+
+    "post_session_checks": {
+      "knee_pain_query": {
+        "method": "Ask athlete: any knee discomfort during or after session?",
+        "action_if_yes": "Ice, reduce volume next session by 30%, investigate mechanics"
+      },
+
+      "ankle_stability_check": {
+        "method": "Single-leg balance test, palpate for tenderness",
+        "action_if_unstable": "Add ankle stability work, may require brace for COD work"
+      }
+    },
+
+    "weekly_assessments": {
+      "cod_speed_test": {
+        "frequency": "Start of each week (weeks 2-4)",
+        "method": "Timed 45-degree cut (informal)",
+        "action_if_no_improvement": "Technique issue - focus on mechanics over speed"
+      },
+
+      "asymmetry_tracking": {
+        "method": "Single-leg hop distance L vs R",
+        "action_if_asymmetry_increasing": "Add corrective unilateral work for weaker side"
+      }
+    }
+  },
+
+  "coach_guidance": {
+    "description": "Coaching notes for implementing this block",
+
+    "when_to_use_this_block": [
+      "COD speed or deceleration mechanics identified as limiter",
+      "Knee injury risk reduction priority (valgus present, previous ACL)",
+      "OFF_SEASON or PREP_SEASON with no competitions for 5 weeks",
+      "Athlete has completed eccentric strength foundation (4+ weeks tempo work)",
+      "Single-leg squat quality ≥7/10",
+      "Readiness consistently GREEN"
+    ],
+
+    "when_NOT_to_use_this_block": [
+      "Any in-season phase (use maintenance COD work instead)",
+      "Active knee or ankle injury",
+      "Single-leg squat quality <7/10",
+      "Significant strength asymmetries (>15% L vs R)",
+      "Youth 8-12 population",
+      "Athlete has <4 weeks eccentric training exposure"
+    ],
+
+    "common_mistakes_to_avoid": [
+      "Progressing to reactive/unplanned COD before planned COD mastered",
+      "Adding volume beyond population ceilings (Youth 13-17: 120/session, Adult: 140/session)",
+      "Skipping bilateral foundation (week 1)",
+      "Ignoring knee valgus warnings",
+      "Running decel + elastic blocks consecutively without buffer",
+      "Treating as 'conditioning' rather than 'movement quality' work"
+    ],
+
+    "success_indicators": [
+      "505 test improves ≥3%",
+      "Deceleration asymmetry <10%",
+      "Landing mechanics maintained or improved",
+      "No knee pain throughout block",
+      "Athlete reports feeling more confident on cuts",
+      "Visual COD mechanics cleaner (hip back, trunk control, foot position)"
+    ],
+
+    "relationship_to_elastic_block": {
+      "complementary_not_redundant": "Elastic block = vertical/reactive power. Decel block = braking/COD efficiency. Different adaptations.",
+      "recommended_sequencing": "Elastic → Baseline → Decel OR Decel → Baseline → Elastic within single training year",
+      "do_not_stack": "Never run elastic + decel back-to-back. Minimum 2-week baseline buffer required.",
+      "population_considerations": "Youth 13-17 may only run ONE specialization block per training year. Adults can run both if separated properly."
+    }
+  },
+
+  "epa_integration_specifications": {
+    "description": "How EPA must use this block during session generation",
+
+    "pre_generation_validation": {
+      "step_1": "Validate all entry_requirements before generating week 1",
+      "step_2": "Confirm season = OFF_SEASON OR PREP_SEASON",
+      "step_3": "Confirm population = Youth_13_17 OR Adult",
+      "step_4": "Confirm readiness = GREEN",
+      "step_5": "Load athlete's single-leg squat score and asymmetry data",
+      "step_6": "IF any entry requirement fails → REJECT block, provide reason code + legal alternative"
+    },
+
+    "weekly_generation_logic": {
+      "week_1": "Use week_1.exercise_selection_rules, emphasize bilateral + eccentric, validate E0-E1 dominance",
+      "week_2": "Use week_2.exercise_selection_rules, add unilateral + lateral patterns, validate stance distribution shift",
+      "week_3": "Use week_3.exercise_selection_rules, integrate COD patterns, validate direction_complexity increase",
+      "week_4": "Use week_4.exercise_selection_rules, reduce volume 40-50%, integrate assessments"
+    },
+
+    "exercise_filtering_per_week": {
+      "method": "Apply e_node_distribution + stance_distribution as filters on AETHER library",
+      "example_week_2": "If session needs 80 contacts with stance_distribution Unilateral=15-25%, select unilateral exercises totaling 12-20 contacts",
+      "enforcement": "Weekly distributions are SOFT targets, population ceilings and tier caps are HARD enforcement",
+      "exercise_id_requirement": "CRITICAL: All selected exercises MUST include valid exercise_id from AETHER library"
+    },
+
+    "session_validation_gates": {
+      "gate_0": "Exercise_ID binding validated",
+      "gate_1": "Total contacts ≤ population ceiling (Youth 13-17: 120, Adult: 140)",
+      "gate_2": "Tier 3 contacts ≤ tier_3_max_percent (Youth 13-17: 20-30%, Adult: 30-40%)",
+      "gate_3": "Weekly contacts within week-specific range",
+      "gate_4": "All exercises pass Exercise Progression Law validation",
+      "gate_5": "Readiness = GREEN",
+      "gate_6": "Sprint meters within weekly caps",
+      "output_if_fail": "REJECTED with reason_code, legal alternative provided"
+    },
+
+    "post_block_validation": {
+      "requirement": "EPA must validate exit_criteria before generating post-block programming",
+      "if_exit_criteria_passed": "Generate transition_protocol week 1 programming (60% volume, E0-E1 emphasis)",
+      "if_exit_criteria_failed": "ESCALATE to coach for manual review and corrective programming"
+    }
+  },
+
+  "integration_with_exercise_progression_law": {
+    "description": "How this block applies Exercise Progression Law v1.0.1",
+
+    "week_1_baseline": {
+      "load_band": "Band_0 to Band_1",
+      "e_node": "E0 (60-70%), E1 (20-30%)",
+      "stance": "Bilateral dominant (80-90%)",
+      "reactivity": "Stick_Landing emphasis",
+      "direction": "Linear_Sagittal primarily"
+    },
+
+    "week_2_progression": {
+      "axes_progressed": "stance_complexity (bilateral→split→unilateral) + direction_complexity (sagittal→frontal)",
+      "axes_unchanged": "load_band, e_node_distribution (slight shift but within tier), reactivity",
+      "compliance": "TWO axes progressed - justified as block-level emphasis shift after week 1 consolidation"
+    },
+
+    "week_3_progression": {
+      "axes_progressed": "direction_complexity (frontal→multi_directional)",
+      "axes_unchanged": "load_band, e_node_distribution, stance (maintained), reactivity",
+      "compliance": "ONE_AXIS progression (direction only)"
+    },
+
+    "week_4_regression": {
+      "axes_regressed": "Multiple (volume, intensity, direction, stance)",
+      "purpose": "Deload week intentionally regresses for recovery"
+    },
+
+    "population_ceiling_enforcement": {
+      "Youth_13_17": {
+        "e_node_max": "E3 at ≤30% (lower than elastic block)",
+        "direction_max": "Multi_Directional_Combined (planned COD only per Exercise Progression Law)",
+        "load_band_max": "Band_2",
+        "all_enforced": "Throughout all 4 weeks"
+      },
+      "Adult": {
+        "e_node_max": "E3 at ≤40%",
+        "direction_max": "Multi_Directional_Combined (reactive COD allowed per Exercise Progression Law)",
+        "load_band_max": "Band_4 (though rarely used in decel block)",
+        "all_enforced": "Throughout all 4 weeks"
+      }
+    }
+  },
+
+  "version_control": {
+    "v1.0.0": {
+      "date": "2025-12-22",
+      "status": "ACTIVE",
+      "changes": "Initial production release - built from elastic block proven architecture",
+      "integration_ready": true,
+      "tested_populations": ["Youth_13_17", "Adult"],
+      "tested_seasons": ["OFF_SEASON", "PREP_SEASON"],
+      "validated_against": [
+        "Exercise Progression Law v1.0.1",
+        "Load Standards v2.1.2",
+        "Governance v4.0",
+        "Elastic Specialization Block v1.0.1 (architectural consistency)"
+      ],
+      "complementary_to": "EFL_SPECIALIZATION_BLOCK_ELASTIC_BASKETBALL_v1_0_1.json"
+    }
+  }
+}

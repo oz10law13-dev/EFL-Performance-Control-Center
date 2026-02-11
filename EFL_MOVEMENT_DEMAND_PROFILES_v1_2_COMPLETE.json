@@ -1,0 +1,852 @@
+{
+  "meta": {
+    "name": "EFL Movement Demand Profiles",
+    "version": "1.2.0",
+    "generated": "2025-12-16",
+    "owner": "Austin Lawrence, Director of Performance Systems",
+    "status": "ACTIVE · PRODUCTION READY",
+    "codexReference": "§4.4 Population Architecture; Sport Demands Grid v1.0; FV Schema v1.1; Load Standards v2.1.2",
+    "changes_from_v1_1": [
+      "Added MDP_CYCLIC_ENDURANCE (Swimming, Rowing, Cycling, Triathlon)",
+      "Added MDP_RELATIVE_STRENGTH (Rock Climbing, Gymnastics, Parkour)",
+      "Added MDP_MIXED_MODAL (CrossFit, Functional Fitness, Hyrox)",
+      "Expanded sport-to-MDP mapping from 14 to 44+ sports",
+      "Added special considerations for each new MDP",
+      "Added multi-sport guidance for new MDP combinations"
+    ]
+  },
+
+  "usage_instructions": {
+    "single_sport_athlete": "Map sport → MDP → Select population tier → Apply season modifier",
+    "multi_sport_same_mdp": "Basketball + Volleyball → Both MDP_COURT_VERTICAL → Single unified program",
+    "multi_sport_different_mdp": "Soccer + Baseball → Different MDPs → Prioritize in-season sport or create hybrid",
+    "population_selection": "Youth 8-12, Youth 13-17, or Adult based on chronological age and training maturity",
+    "season_modifier_required": "Always combine MDP with season modifier (OFFSEASON, PRESEASON, INSEASON_T1, INSEASON_T2, POSTSEASON)",
+    "mdp_count": "9 total MDPs covering 44+ sports and activities"
+  },
+
+  "sport_to_mdp_mapping": {
+    "_COURT_VERTICAL": {
+      "Basketball": "MDP_COURT_VERTICAL",
+      "Volleyball": "MDP_COURT_VERTICAL",
+      "Handball": "MDP_COURT_VERTICAL"
+    },
+    
+    "_FIELD_ENDURANCE": {
+      "Soccer": "MDP_FIELD_ENDURANCE",
+      "Lacrosse": "MDP_FIELD_ENDURANCE",
+      "Field_Hockey": "MDP_FIELD_ENDURANCE",
+      "Ultimate_Frisbee": "MDP_FIELD_ENDURANCE",
+      "Track_400m": "MDP_FIELD_ENDURANCE",
+      "Track_800m": "MDP_FIELD_ENDURANCE",
+      "Rugby_Back": "MDP_FIELD_ENDURANCE"
+    },
+    
+    "_ROTATIONAL_POWER": {
+      "Baseball": "MDP_ROTATIONAL_POWER",
+      "Softball": "MDP_ROTATIONAL_POWER",
+      "Golf": "MDP_ROTATIONAL_POWER",
+      "Cricket_Batting": "MDP_ROTATIONAL_POWER",
+      "Javelin": "MDP_ROTATIONAL_POWER"
+    },
+    
+    "_LINEAR_SPRINT": {
+      "Track_100m": "MDP_LINEAR_SPRINT",
+      "Track_200m": "MDP_LINEAR_SPRINT",
+      "Football_WR": "MDP_LINEAR_SPRINT",
+      "Football_RB": "MDP_LINEAR_SPRINT",
+      "Football_DB": "MDP_LINEAR_SPRINT",
+      "Football_Safety": "MDP_LINEAR_SPRINT"
+    },
+    
+    "_CONTACT_POWER": {
+      "Football_OL": "MDP_CONTACT_POWER",
+      "Football_DL": "MDP_CONTACT_POWER",
+      "Football_LB": "MDP_CONTACT_POWER",
+      "Rugby_Forward": "MDP_CONTACT_POWER",
+      "Ice_Hockey": "MDP_CONTACT_POWER",
+      "Wrestling_Heavyweight": "MDP_CONTACT_POWER"
+    },
+    
+    "_COURT_LATERAL": {
+      "Tennis": "MDP_COURT_LATERAL",
+      "Pickleball": "MDP_COURT_LATERAL",
+      "Racquetball": "MDP_COURT_LATERAL",
+      "Squash": "MDP_COURT_LATERAL",
+      "Badminton": "MDP_COURT_LATERAL",
+      "Table_Tennis": "MDP_COURT_LATERAL"
+    },
+    
+    "_CYCLIC_ENDURANCE": {
+      "Swimming_Sprint": "MDP_CYCLIC_ENDURANCE",
+      "Swimming_Distance": "MDP_CYCLIC_ENDURANCE",
+      "Swimming_IM": "MDP_CYCLIC_ENDURANCE",
+      "Rowing": "MDP_CYCLIC_ENDURANCE",
+      "Crew": "MDP_CYCLIC_ENDURANCE",
+      "Cycling_Road": "MDP_CYCLIC_ENDURANCE",
+      "Cycling_Track": "MDP_CYCLIC_ENDURANCE",
+      "Triathlon": "MDP_CYCLIC_ENDURANCE",
+      "Track_Distance": "MDP_CYCLIC_ENDURANCE"
+    },
+    
+    "_RELATIVE_STRENGTH": {
+      "Rock_Climbing": "MDP_RELATIVE_STRENGTH",
+      "Bouldering": "MDP_RELATIVE_STRENGTH",
+      "Sport_Climbing": "MDP_RELATIVE_STRENGTH",
+      "Gymnastics": "MDP_RELATIVE_STRENGTH",
+      "Parkour": "MDP_RELATIVE_STRENGTH",
+      "Ninja_Warrior": "MDP_RELATIVE_STRENGTH",
+      "Wrestling_Lightweight": "MDP_RELATIVE_STRENGTH"
+    },
+    
+    "_MIXED_MODAL": {
+      "CrossFit": "MDP_MIXED_MODAL",
+      "Functional_Fitness": "MDP_MIXED_MODAL",
+      "Hyrox": "MDP_MIXED_MODAL",
+      "Tactical_Athlete": "MDP_MIXED_MODAL",
+      "Military_Fitness": "MDP_MIXED_MODAL",
+      "Firefighter_Fitness": "MDP_MIXED_MODAL",
+      "Spartan_Race": "MDP_MIXED_MODAL"
+    },
+    
+    "_MAPPING_NOTES": {
+      "Tennis_serve_dominant": "Primary MDP_COURT_LATERAL, supplement with MDP_ROTATIONAL_POWER exercises for serve power",
+      "Track_400m_classification": "Classified as FIELD_ENDURANCE due to anaerobic capacity demands, not pure alactic sprint",
+      "Football_position_specific": "Skill positions use LINEAR_SPRINT, linemen use CONTACT_POWER, LB can use either based on scheme",
+      "Wrestling_weight_class": "Heavyweight → CONTACT_POWER, Lightweight → RELATIVE_STRENGTH",
+      "Swimming_distance_definition": "Sprint = 50m/100m, Distance = 400m+, IM uses same MDP with adjusted zone emphasis",
+      "Track_distance_cutoff": "1500m+ classified as CYCLIC_ENDURANCE, 400m/800m as FIELD_ENDURANCE"
+    }
+  },
+
+  "movement_demand_profiles": {
+    "MDP_COURT_VERTICAL": {
+      "description": "High-frequency vertical jumping, short-distance sprinting, and rapid direction changes in a confined court space.",
+      "applies_to_sports": ["Basketball", "Volleyball", "Handball"],
+      "primary_movement_demands": {
+        "vertical_jump_frequency": "very_high",
+        "sprint_distance_per_event": "short",
+        "cod_frequency": "very_high",
+        "contact_level": "low_to_moderate",
+        "endurance_requirement": "anaerobic_alactic_capacity"
+      },
+      "fv_zone_priorities": {
+        "primary": ["Zone_3", "Zone_4"],
+        "secondary": ["Zone_2", "Zone_6"],
+        "recovery": ["Zone_8", "Zone_5"]
+      },
+      "biomechanical_emphasis": {
+        "ankle_stiffness": "critical",
+        "hip_extension_power": "critical",
+        "knee_flexion_eccentric": "critical",
+        "trunk_stability": "high",
+        "ankle_dorsiflexion_mobility": "high"
+      },
+      "training_goals": [
+        "increase_vertical_jump",
+        "improve_repeated_jump_ability",
+        "enhance_short_sprint_acceleration",
+        "develop_multidirectional_speed"
+      ],
+      "population_parameters": {
+        "Youth_8_12": {
+          "governance_profile": "Youth_8_12",
+          "plyo_ceiling_per_session": 50,
+          "plyo_ceiling_per_week": 80,
+          "sprint_ceiling_per_week_m": 150,
+          "load_band_profile": "Band_1_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": [],
+          "default_readiness": "GREEN",
+          "notes": "Focus on movement skill acquisition, no depth jumps (E3+), emphasize coordination over performance"
+        },
+        "Youth_13_17": {
+          "governance_profile": "Youth_13_17_Performance",
+          "plyo_ceiling_per_session": 120,
+          "plyo_ceiling_per_week": 240,
+          "sprint_ceiling_per_week_m": 400,
+          "load_band_profile": "Band_2_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": ["E1", "E2", "E3"],
+          "default_readiness": "GREEN",
+          "notes": "Can progress to moderate elastic plyometrics (E2), introduce depth jumps cautiously (E3) in late HS"
+        },
+        "Adult": {
+          "governance_profile": "Adult_Performance",
+          "plyo_ceiling_per_session": 140,
+          "plyo_ceiling_per_week": 280,
+          "sprint_ceiling_per_week_m": 500,
+          "load_band_profile": "Band_3_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": ["E1", "E2", "E3", "E4"],
+          "default_readiness": "GREEN",
+          "notes": "Full access to advanced reactive work (E4), can handle high-volume/high-intensity plyometrics"
+        }
+      }
+    },
+
+    "MDP_FIELD_ENDURANCE": {
+      "description": "Sustained running with intermittent sprints and moderate change-of-direction on a large field.",
+      "applies_to_sports": ["Soccer", "Lacrosse", "Field_Hockey", "Track_400m", "Track_800m"],
+      "primary_movement_demands": {
+        "vertical_jump_frequency": "low",
+        "sprint_distance_per_event": "medium_to_long",
+        "cod_frequency": "moderate",
+        "contact_level": "low_to_moderate",
+        "endurance_requirement": "aerobic_with_anaerobic_bursts"
+      },
+      "fv_zone_priorities": {
+        "primary": ["Zone_4", "Zone_5", "Zone_7"],
+        "secondary": ["Zone_3", "Zone_6"],
+        "recovery": ["Zone_8"]
+      },
+      "biomechanical_emphasis": {
+        "hip_flexor_endurance": "critical",
+        "ankle_mobility": "high",
+        "aerobic_capacity": "critical",
+        "trunk_rotary_stability": "high",
+        "hip_extension_endurance": "critical"
+      },
+      "training_goals": [
+        "improve_repeat_sprint_ability",
+        "enhance_aerobic_capacity",
+        "develop_work_capacity",
+        "increase_movement_efficiency"
+      ],
+      "population_parameters": {
+        "Youth_8_12": {
+          "governance_profile": "Youth_8_12",
+          "plyo_ceiling_per_session": 40,
+          "plyo_ceiling_per_week": 80,
+          "sprint_ceiling_per_week_m": 240,
+          "load_band_profile": "Band_1_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": [],
+          "default_readiness": "GREEN",
+          "notes": "Lower plyometric emphasis than court sports, focus on aerobic base and movement variety"
+        },
+        "Youth_13_17": {
+          "governance_profile": "Youth_13_17_Performance",
+          "plyo_ceiling_per_session": 80,
+          "plyo_ceiling_per_week": 160,
+          "sprint_ceiling_per_week_m": 800,
+          "load_band_profile": "Band_2_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": ["E1", "E2"],
+          "default_readiness": "GREEN",
+          "notes": "Higher sprint volume than court sports, can include Zone_7 conditioning circuits"
+        },
+        "Adult": {
+          "governance_profile": "Adult_Performance",
+          "plyo_ceiling_per_session": 100,
+          "plyo_ceiling_per_week": 200,
+          "sprint_ceiling_per_week_m": 1000,
+          "load_band_profile": "Band_2_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": ["E1", "E2", "E3"],
+          "default_readiness": "GREEN",
+          "notes": "Highest sprint volume of any MDP, moderate plyometric emphasis, Zone_7 conditioning critical"
+        }
+      }
+    },
+
+    "MDP_ROTATIONAL_POWER": {
+      "description": "High-velocity rotation, unilateral power, and explosive single efforts with relatively low running volume.",
+      "applies_to_sports": ["Baseball", "Softball", "Golf", "Cricket"],
+      "primary_movement_demands": {
+        "vertical_jump_frequency": "minimal",
+        "sprint_distance_per_event": "short_bursts",
+        "cod_frequency": "low",
+        "contact_level": "low",
+        "endurance_requirement": "alactic_power_repeatability"
+      },
+      "fv_zone_priorities": {
+        "primary": ["Zone_2", "Zone_1"],
+        "secondary": ["Zone_6", "Zone_8"],
+        "recovery": ["Zone_5", "Zone_7"]
+      },
+      "biomechanical_emphasis": {
+        "hip_internal_rotation": "critical",
+        "thoracic_rotation": "critical",
+        "anti_rotation_core": "critical",
+        "scapular_stability": "critical",
+        "single_leg_power": "high"
+      },
+      "training_goals": [
+        "increase_rotational_power",
+        "improve_unilateral_strength",
+        "enhance_movement_sequencing",
+        "develop_core_stability"
+      ],
+      "population_parameters": {
+        "Youth_8_12": {
+          "governance_profile": "Youth_8_12",
+          "plyo_ceiling_per_session": 30,
+          "plyo_ceiling_per_week": 60,
+          "sprint_ceiling_per_week_m": 100,
+          "load_band_profile": "Band_1_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": [],
+          "default_readiness": "GREEN",
+          "notes": "Focus on movement patterns and coordination, avoid heavy rotational loads, emphasize bilateral before unilateral"
+        },
+        "Youth_13_17": {
+          "governance_profile": "Youth_13_17_Performance",
+          "plyo_ceiling_per_session": 60,
+          "plyo_ceiling_per_week": 120,
+          "sprint_ceiling_per_week_m": 200,
+          "load_band_profile": "Band_2_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": ["E1", "E2"],
+          "default_readiness": "GREEN",
+          "notes": "Can progress to moderate rotational loads, introduce medicine ball throws, develop unilateral strength"
+        },
+        "Adult": {
+          "governance_profile": "Adult_Performance",
+          "plyo_ceiling_per_session": 80,
+          "plyo_ceiling_per_week": 160,
+          "sprint_ceiling_per_week_m": 300,
+          "load_band_profile": "Band_3_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": ["E1", "E2"],
+          "default_readiness": "GREEN",
+          "notes": "Zone_1 max strength critical for power development, Zone_2 strength-speed for bat/club speed"
+        }
+      }
+    },
+
+    "MDP_LINEAR_SPRINT": {
+      "description": "Maximum-velocity sprinting and linear acceleration with minimal change-of-direction demands.",
+      "applies_to_sports": ["Track_100m", "Track_200m", "Football_Skill_Position"],
+      "primary_movement_demands": {
+        "vertical_jump_frequency": "low",
+        "sprint_distance_per_event": "medium_to_long",
+        "cod_frequency": "minimal",
+        "contact_level": "low",
+        "endurance_requirement": "alactic_power_capacity"
+      },
+      "fv_zone_priorities": {
+        "primary": ["Zone_4", "Zone_2"],
+        "secondary": ["Zone_1", "Zone_3"],
+        "recovery": ["Zone_8", "Zone_5"]
+      },
+      "biomechanical_emphasis": {
+        "hip_extension_strength": "critical",
+        "hamstring_eccentric": "critical",
+        "anterior_core_stiffness": "critical",
+        "ankle_dorsiflexion": "high",
+        "hip_flexor_power": "critical"
+      },
+      "training_goals": [
+        "increase_max_velocity",
+        "improve_acceleration_mechanics",
+        "develop_horizontal_power",
+        "enhance_elastic_strength"
+      ],
+      "population_parameters": {
+        "Youth_8_12": {
+          "governance_profile": "Youth_8_12",
+          "plyo_ceiling_per_session": 50,
+          "plyo_ceiling_per_week": 100,
+          "sprint_ceiling_per_week_m": 200,
+          "load_band_profile": "Band_1_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": [],
+          "default_readiness": "GREEN",
+          "notes": "Focus on acceleration mechanics, avoid max velocity training, emphasize movement skill"
+        },
+        "Youth_13_17": {
+          "governance_profile": "Youth_13_17_Performance",
+          "plyo_ceiling_per_session": 100,
+          "plyo_ceiling_per_week": 200,
+          "sprint_ceiling_per_week_m": 1000,
+          "load_band_profile": "Band_2_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": ["E1", "E2", "E3"],
+          "default_readiness": "GREEN",
+          "notes": "Can progress to max velocity work, introduce resisted sprints, develop horizontal power"
+        },
+        "Adult": {
+          "governance_profile": "Adult_Performance",
+          "plyo_ceiling_per_session": 120,
+          "plyo_ceiling_per_week": 240,
+          "sprint_ceiling_per_week_m": 1500,
+          "load_band_profile": "Band_3_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": ["E1", "E2", "E3", "E4"],
+          "default_readiness": "GREEN",
+          "notes": "Highest sprint volume, Zone_1 max strength critical for force production, Zone_4 for speed work"
+        }
+      }
+    },
+
+    "MDP_CONTACT_POWER": {
+      "description": "High collision frequency and strength-mass focus with short, powerful efforts.",
+      "applies_to_sports": ["Football_OL", "Football_DL", "Football_LB", "Rugby_Forward", "Ice_Hockey"],
+      "primary_movement_demands": {
+        "vertical_jump_frequency": "low",
+        "sprint_distance_per_event": "short",
+        "cod_frequency": "low_to_moderate",
+        "contact_level": "very_high",
+        "endurance_requirement": "repeated_power_bursts"
+      },
+      "fv_zone_priorities": {
+        "primary": ["Zone_1", "Zone_6"],
+        "secondary": ["Zone_2", "Zone_5"],
+        "recovery": ["Zone_8", "Zone_7"]
+      },
+      "biomechanical_emphasis": {
+        "total_body_strength": "critical",
+        "neck_isometric": "critical",
+        "collision_tolerance": "critical",
+        "trunk_bracing": "critical",
+        "hip_extension_strength": "critical"
+      },
+      "training_goals": [
+        "increase_max_strength",
+        "build_functional_mass",
+        "develop_collision_tolerance",
+        "enhance_repeat_power_ability"
+      ],
+      "population_parameters": {
+        "Youth_8_12": {
+          "governance_profile": "Youth_8_12",
+          "plyo_ceiling_per_session": 20,
+          "plyo_ceiling_per_week": 40,
+          "sprint_ceiling_per_week_m": 100,
+          "load_band_profile": "Band_1_Standard",
+          "node_access": ["A", "B", "C"],
+          "e_node_access": [],
+          "default_readiness": "GREEN",
+          "notes": "Minimal plyometric work, focus on movement quality and bodyweight strength, avoid heavy loading"
+        },
+        "Youth_13_17": {
+          "governance_profile": "Youth_13_17_Performance",
+          "plyo_ceiling_per_session": 40,
+          "plyo_ceiling_per_week": 80,
+          "sprint_ceiling_per_week_m": 150,
+          "load_band_profile": "Band_2_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": ["E1"],
+          "default_readiness": "GREEN",
+          "notes": "Can begin strength-mass focus, introduce barbell movements, conservative plyometric volume"
+        },
+        "Adult": {
+          "governance_profile": "Adult_Performance",
+          "plyo_ceiling_per_session": 60,
+          "plyo_ceiling_per_week": 120,
+          "sprint_ceiling_per_week_m": 200,
+          "load_band_profile": "Band_4_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": ["E1"],
+          "default_readiness": "GREEN",
+          "notes": "Zone_1 and Zone_6 emphasis for strength-mass, lowest plyometric volume of any MDP, Band_4 for heavy loading"
+        }
+      }
+    },
+
+    "MDP_COURT_LATERAL": {
+      "description": "Frequent lateral shuffling, short accelerations, and direction changes in a bounded court.",
+      "applies_to_sports": ["Tennis", "Pickleball", "Racquetball", "Squash", "Badminton"],
+      "primary_movement_demands": {
+        "vertical_jump_frequency": "low_to_moderate",
+        "sprint_distance_per_event": "short",
+        "cod_frequency": "very_high_lateral",
+        "contact_level": "low",
+        "endurance_requirement": "anaerobic_repeatability"
+      },
+      "fv_zone_priorities": {
+        "primary": ["Zone_4", "Zone_3"],
+        "secondary": ["Zone_5", "Zone_6"],
+        "recovery": ["Zone_8", "Zone_7"]
+      },
+      "biomechanical_emphasis": {
+        "lateral_hip_strength": "critical",
+        "ankle_inversion_eversion_control": "critical",
+        "single_leg_stability": "high",
+        "trunk_lateral_stability": "high",
+        "scapular_upward_rotation": "high"
+      },
+      "training_goals": [
+        "improve_lateral_speed",
+        "enhance_single_leg_stability",
+        "develop_multidirectional_power",
+        "increase_anaerobic_repeatability"
+      ],
+      "population_parameters": {
+        "Youth_8_12": {
+          "governance_profile": "Youth_8_12",
+          "plyo_ceiling_per_session": 40,
+          "plyo_ceiling_per_week": 80,
+          "sprint_ceiling_per_week_m": 150,
+          "load_band_profile": "Band_1_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": [],
+          "default_readiness": "GREEN",
+          "notes": "Focus on lateral movement skill, single-leg balance, movement efficiency"
+        },
+        "Youth_13_17": {
+          "governance_profile": "Youth_13_17_Performance",
+          "plyo_ceiling_per_session": 80,
+          "plyo_ceiling_per_week": 160,
+          "sprint_ceiling_per_week_m": 400,
+          "load_band_profile": "Band_2_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": ["E1", "E2"],
+          "default_readiness": "GREEN",
+          "notes": "Can progress to lateral plyometrics, single-leg power work, Zone_4 for speed"
+        },
+        "Adult": {
+          "governance_profile": "Adult_Performance",
+          "plyo_ceiling_per_session": 100,
+          "plyo_ceiling_per_week": 200,
+          "sprint_ceiling_per_week_m": 500,
+          "load_band_profile": "Band_2_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": ["E1", "E2", "E3"],
+          "default_readiness": "GREEN",
+          "notes": "Zone_3 for lateral reactive power, Zone_4 for first-step quickness, Zone_5 for work capacity"
+        }
+      }
+    },
+
+    "MDP_CYCLIC_ENDURANCE": {
+      "description": "High-volume cyclic movement in non-weight-bearing environment with shoulder-dominant endurance demands.",
+      "applies_to_sports": ["Swimming", "Rowing", "Cycling", "Triathlon"],
+      "primary_movement_demands": {
+        "vertical_jump_frequency": "none",
+        "sprint_distance_per_event": "n/a",
+        "cod_frequency": "none",
+        "contact_level": "none",
+        "endurance_requirement": "aerobic_to_anaerobic_threshold",
+        "repetition_volume": "very_high",
+        "technical_efficiency": "critical"
+      },
+      "fv_zone_priorities": {
+        "primary": ["Zone_5", "Zone_6", "Zone_7"],
+        "secondary": ["Zone_8", "Zone_2"],
+        "recovery": ["Zone_1"]
+      },
+      "biomechanical_emphasis": {
+        "shoulder_endurance": "critical",
+        "scapular_stability": "critical",
+        "thoracic_mobility": "critical",
+        "core_endurance": "high",
+        "hip_flexor_endurance": "high_for_swimming",
+        "posterior_chain_strength": "high_for_rowing",
+        "quad_endurance": "critical_for_cycling"
+      },
+      "training_goals": [
+        "increase_aerobic_capacity",
+        "improve_muscular_endurance",
+        "enhance_technical_efficiency",
+        "develop_lactate_threshold",
+        "build_shoulder_durability"
+      ],
+      "population_parameters": {
+        "Youth_8_12": {
+          "governance_profile": "Youth_8_12",
+          "plyo_ceiling_per_session": 0,
+          "plyo_ceiling_per_week": 0,
+          "sprint_ceiling_per_week_m": 100,
+          "load_band_profile": "Band_1_Standard",
+          "node_access": ["A", "B", "C"],
+          "e_node_access": [],
+          "default_readiness": "GREEN",
+          "notes": "NO plyometrics (non-weight-bearing sport), focus on movement efficiency, avoid heavy loading, emphasize scapular health"
+        },
+        "Youth_13_17": {
+          "governance_profile": "Youth_13_17_Performance",
+          "plyo_ceiling_per_session": 20,
+          "plyo_ceiling_per_week": 40,
+          "sprint_ceiling_per_week_m": 200,
+          "load_band_profile": "Band_2_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": [],
+          "default_readiness": "GREEN",
+          "notes": "Minimal plyos (dryland injury prevention only), add moderate strength work for durability"
+        },
+        "Adult": {
+          "governance_profile": "Adult_Performance",
+          "plyo_ceiling_per_session": 40,
+          "plyo_ceiling_per_week": 80,
+          "sprint_ceiling_per_week_m": 300,
+          "load_band_profile": "Band_2_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": ["E1"],
+          "default_readiness": "GREEN",
+          "notes": "Zone_5/6 for muscular endurance and durability, Zone_7 for conditioning, dryland power work supplemental"
+        }
+      },
+      "special_considerations": {
+        "swimming_sprint_vs_distance": "Sprint swimmers (50m/100m) need more Zone_2 strength-speed work, distance swimmers (400m+) need more Zone_7 conditioning",
+        "rowing_considerations": "Higher posterior chain emphasis than swimming, more Zone_6 hypertrophy acceptable for power development",
+        "cycling_considerations": "Quad hypertrophy critical for power output, lower upper body emphasis than swimming/rowing",
+        "triathlon_multi_discipline": "Must balance swimming/cycling/running demands - use Zone_5/7 as foundation across all three",
+        "buoyancy_considerations": "Excess upper body muscle mass can negatively impact swimming efficiency - lean mass optimization critical"
+      }
+    },
+
+    "MDP_RELATIVE_STRENGTH": {
+      "description": "Pull-dominant movements requiring high strength-to-weight ratio, grip endurance, and isometric capacity in varied planes.",
+      "applies_to_sports": ["Rock_Climbing", "Bouldering", "Sport_Climbing", "Gymnastics", "Parkour"],
+      "primary_movement_demands": {
+        "vertical_jump_frequency": "low",
+        "sprint_distance_per_event": "none",
+        "cod_frequency": "none",
+        "contact_level": "low",
+        "endurance_requirement": "isometric_capacity_plus_power_endurance",
+        "strength_to_weight_ratio": "critical",
+        "grip_endurance": "critical"
+      },
+      "fv_zone_priorities": {
+        "primary": ["Zone_6", "Zone_5"],
+        "secondary": ["Zone_1", "Zone_8"],
+        "recovery": ["Zone_7", "Zone_3"]
+      },
+      "biomechanical_emphasis": {
+        "pull_strength": "critical",
+        "grip_endurance": "critical",
+        "forearm_capacity": "critical",
+        "scapular_retraction": "critical",
+        "core_tension": "critical",
+        "hip_flexor_strength": "high",
+        "finger_flexor_endurance": "critical_for_climbing",
+        "shoulder_external_rotation": "high"
+      },
+      "training_goals": [
+        "increase_relative_strength",
+        "improve_grip_endurance",
+        "enhance_pull_capacity",
+        "develop_body_tension",
+        "optimize_strength_to_weight_ratio",
+        "increase_lock_off_strength"
+      ],
+      "population_parameters": {
+        "Youth_8_12": {
+          "governance_profile": "Youth_8_12",
+          "plyo_ceiling_per_session": 40,
+          "plyo_ceiling_per_week": 80,
+          "sprint_ceiling_per_week_m": 100,
+          "load_band_profile": "Band_1_Standard",
+          "node_access": ["A", "B", "C"],
+          "e_node_access": [],
+          "default_readiness": "GREEN",
+          "notes": "Focus on general pull strength and grip development, NO finger-intensive climbing, NO campus board, NO hangboard, emphasize bodyweight control"
+        },
+        "Youth_13_17": {
+          "governance_profile": "Youth_13_17_Performance",
+          "plyo_ceiling_per_session": 60,
+          "plyo_ceiling_per_week": 120,
+          "sprint_ceiling_per_week_m": 200,
+          "load_band_profile": "Band_2_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": ["E1"],
+          "default_readiness": "GREEN",
+          "notes": "Can progress to weighted pull-ups, introduce hangboard work cautiously (late HS only), campus board only for advanced late HS climbers"
+        },
+        "Adult": {
+          "governance_profile": "Adult_Performance",
+          "plyo_ceiling_per_session": 80,
+          "plyo_ceiling_per_week": 160,
+          "sprint_ceiling_per_week_m": 200,
+          "load_band_profile": "Band_2_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": ["E1", "E2"],
+          "default_readiness": "GREEN",
+          "notes": "Zone_1 for max relative strength, Zone_6 for lean mass, avoid excess hypertrophy (weight management critical), finger strength protocols essential"
+        }
+      },
+      "special_considerations": {
+        "climbing_grade_specific": "Beginner climbers (V0-V3/5.9-5.11) need more Zone_6 base strength, advanced climbers (V8+/5.13+) need more Zone_1 max strength and finger-specific work",
+        "gymnastics_vs_climbing": "Gymnastics emphasizes dynamic movements (more Zone_3 reactive power), climbing emphasizes isometric holds (more Zone_5/6 endurance)",
+        "injury_prevention_critical": "Finger pulley injuries extremely common in climbing - progressive loading protocols essential, avoid campus board for youth",
+        "body_composition_opposite_contact": "Unlike CONTACT_POWER which wants mass, RELATIVE_STRENGTH requires lean mass optimization - excess muscle mass is detrimental",
+        "finger_training_age_restriction": "No systematic finger training (hangboard/campus) before age 16 due to growth plate vulnerability",
+        "parkour_hybrid_demands": "Parkour requires both pull strength (climbing) AND reactive power (landing) - blend RELATIVE_STRENGTH with Zone_3 emphasis"
+      }
+    },
+
+    "MDP_MIXED_MODAL": {
+      "description": "Mixed-modal training requiring competency across weightlifting, gymnastics, and monostructural cardio with emphasis on work capacity and metabolic conditioning.",
+      "applies_to_sports": ["CrossFit", "Functional_Fitness", "Hyrox", "Tactical_Athlete", "Military_Fitness"],
+      "primary_movement_demands": {
+        "vertical_jump_frequency": "moderate",
+        "sprint_distance_per_event": "short_to_medium",
+        "cod_frequency": "low",
+        "contact_level": "low",
+        "endurance_requirement": "mixed_domain_work_capacity",
+        "technical_variety": "very_high",
+        "cns_demands": "high_sustained"
+      },
+      "fv_zone_priorities": {
+        "primary": ["Zone_7", "Zone_5", "Zone_2"],
+        "secondary": ["Zone_3", "Zone_6", "Zone_1"],
+        "recovery": ["Zone_8"]
+      },
+      "biomechanical_emphasis": {
+        "work_capacity": "critical",
+        "hip_extension_power": "high",
+        "olympic_lift_proficiency": "critical",
+        "gymnastics_pull_strength": "high",
+        "anterior_core_endurance": "critical",
+        "shoulder_stability_endurance": "critical",
+        "lactate_tolerance": "critical",
+        "recovery_capacity": "high"
+      },
+      "training_goals": [
+        "increase_work_capacity",
+        "improve_olympic_lift_technique",
+        "develop_gymnastics_strength",
+        "enhance_metabolic_conditioning",
+        "build_aerobic_base",
+        "improve_lactate_clearance"
+      ],
+      "population_parameters": {
+        "Youth_8_12": {
+          "governance_profile": "Youth_8_12",
+          "plyo_ceiling_per_session": 50,
+          "plyo_ceiling_per_week": 100,
+          "sprint_ceiling_per_week_m": 200,
+          "load_band_profile": "Band_1_Standard",
+          "node_access": ["A", "B", "C"],
+          "e_node_access": [],
+          "default_readiness": "GREEN",
+          "notes": "NOT RECOMMENDED - CrossFit methodology not appropriate for Youth 8-12 due to technical complexity under fatigue. Use GPP (General Physical Preparedness) instead with modified movements and NO AMRAPs/EMOMs."
+        },
+        "Youth_13_17": {
+          "governance_profile": "Youth_13_17_Performance",
+          "plyo_ceiling_per_session": 80,
+          "plyo_ceiling_per_week": 160,
+          "sprint_ceiling_per_week_m": 500,
+          "load_band_profile": "Band_2_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": ["E1", "E2"],
+          "default_readiness": "GREEN",
+          "notes": "Can introduce CrossFit methodology with scaled loads and simplified movements. Emphasize technique over intensity. Zone_7 conditioning work appropriate. NO high-rep olympic lifts under extreme fatigue."
+        },
+        "Adult": {
+          "governance_profile": "Adult_Performance",
+          "plyo_ceiling_per_session": 120,
+          "plyo_ceiling_per_week": 240,
+          "sprint_ceiling_per_week_m": 800,
+          "load_band_profile": "Band_3_Standard",
+          "node_access": ["A", "B", "C", "D"],
+          "e_node_access": ["E1", "E2", "E3"],
+          "default_readiness": "GREEN",
+          "notes": "Zone_7 emphasis critical for metabolic conditioning, Zone_2 for olympic lift power, Zone_5 for work capacity base, high CNS demands require careful periodization and recovery management"
+        }
+      },
+      "special_considerations": {
+        "competition_vs_fitness": "Competitive CrossFit athletes need more Zone_1/2 max strength work, general fitness enthusiasts need more Zone_7 conditioning emphasis",
+        "olympic_lift_prerequisite": "Requires technical proficiency in olympic lifts (clean, snatch, jerk) before high-rep or fatigued variations - may need preliminary strength phase",
+        "recovery_demands_higher": "Higher recovery demands than single-sport athletes due to multi-domain CNS fatigue - monitor readiness closely",
+        "injury_risk_under_fatigue": "High injury risk when technique breaks down under metabolic stress - conservative progression critical, emphasize 'mechanics → consistency → intensity'",
+        "periodization_non_traditional": "Less sport-specific periodization (no true 'season'), focus on competition prep cycles (8-12 week blocks targeting specific events/Open)",
+        "gymnastics_strength_foundation": "Requires baseline pull-up/dip/handstand capacity before advanced gymnastics movements (muscle-ups, HSPU) under fatigue",
+        "tactical_athlete_modifications": "Military/LEO/Fire athletes prioritize functional capacity over competitive metrics - more Zone_5/7, less Zone_1 max strength emphasis"
+      }
+    }
+  },
+
+  "multi_sport_guidance": {
+    "same_mdp_scenario": {
+      "example": "Basketball + Volleyball",
+      "mdp_result": "MDP_COURT_VERTICAL",
+      "approach": "Single unified program - both sports have identical movement demands",
+      "notes": "No programming conflict, can train for both simultaneously"
+    },
+    "complementary_mdp_scenario": {
+      "example": "Soccer + Track Sprints",
+      "mdp_result": "MDP_FIELD_ENDURANCE primary, MDP_LINEAR_SPRINT secondary",
+      "approach": "Hybrid program - both emphasize Zone_4, adjust volume based on competitive calendar",
+      "notes": "Field endurance provides aerobic base, sprint work enhances speed - complementary adaptations"
+    },
+    "conflicting_mdp_scenario": {
+      "example": "Baseball + Soccer",
+      "mdp_result": "MDP_ROTATIONAL_POWER vs MDP_FIELD_ENDURANCE (conflict)",
+      "approach": "Prioritize in-season sport, maintain secondary sport during offseason",
+      "notes": "Baseball season = ROTATIONAL_POWER focus, Soccer season = FIELD_ENDURANCE focus, switch seasonally"
+    },
+    "three_sport_scenario": {
+      "example": "Football (fall) + Basketball (winter) + Track (spring)",
+      "approach": "Season-specific MDP selection with minimal offseason",
+      "notes": "Fall = MDP_CONTACT_POWER or LINEAR_SPRINT, Winter = COURT_VERTICAL, Spring = LINEAR_SPRINT, Summer = Choose primary for development"
+    },
+    "swimming_multi_sport": {
+      "example": "Swimming + Water Polo",
+      "mdp_result": "MDP_CYCLIC_ENDURANCE + MDP_FIELD_ENDURANCE elements",
+      "approach": "Swimming base with water polo conditioning - blend Zone_5/7 emphasis",
+      "notes": "Compatible - both require endurance base, water polo adds some reactive work"
+    },
+    "climbing_crossfit": {
+      "example": "Climbing + CrossFit",
+      "mdp_result": "MDP_RELATIVE_STRENGTH vs MDP_MIXED_MODAL (conflict)",
+      "approach": "Choose primary - climbing needs lean mass optimization, CrossFit builds more mass",
+      "notes": "Conflicting body composition goals - excess mass hurts climbing performance"
+    },
+    "tactical_athlete_hybrid": {
+      "example": "Military/LEO athlete training for fitness test + duty demands",
+      "mdp_result": "MDP_MIXED_MODAL with specific test prep phases",
+      "approach": "Year-round Zone_5/7 base with 8-week Zone_2 blocks for test prep",
+      "notes": "Must maintain broad fitness while peaking for specific events (ACFT, PFT, CPAT)"
+    }
+  },
+
+  "quick_reference_table": {
+    "MDP_COURT_VERTICAL": {
+      "sports": "Basketball, Volleyball, Handball",
+      "primary_zones": "Z3, Z4",
+      "plyo_volume": "HIGH",
+      "sprint_volume": "LOW"
+    },
+    "MDP_FIELD_ENDURANCE": {
+      "sports": "Soccer, Lacrosse, Field Hockey",
+      "primary_zones": "Z4, Z5, Z7",
+      "plyo_volume": "MODERATE",
+      "sprint_volume": "HIGH"
+    },
+    "MDP_ROTATIONAL_POWER": {
+      "sports": "Baseball, Softball, Golf",
+      "primary_zones": "Z2, Z1",
+      "plyo_volume": "LOW",
+      "sprint_volume": "LOW"
+    },
+    "MDP_LINEAR_SPRINT": {
+      "sports": "Track Sprints, Football Skill",
+      "primary_zones": "Z4, Z2",
+      "plyo_volume": "MODERATE",
+      "sprint_volume": "VERY HIGH"
+    },
+    "MDP_CONTACT_POWER": {
+      "sports": "Football Line, Rugby Forward",
+      "primary_zones": "Z1, Z6",
+      "plyo_volume": "VERY LOW",
+      "sprint_volume": "LOW"
+    },
+    "MDP_COURT_LATERAL": {
+      "sports": "Tennis, Pickleball, Racquetball",
+      "primary_zones": "Z4, Z3",
+      "plyo_volume": "MODERATE",
+      "sprint_volume": "MODERATE"
+    },
+    "MDP_CYCLIC_ENDURANCE": {
+      "sports": "Swimming, Rowing, Cycling",
+      "primary_zones": "Z5, Z6, Z7",
+      "plyo_volume": "NONE/MINIMAL",
+      "sprint_volume": "MINIMAL"
+    },
+    "MDP_RELATIVE_STRENGTH": {
+      "sports": "Climbing, Gymnastics, Parkour",
+      "primary_zones": "Z6, Z5",
+      "plyo_volume": "LOW",
+      "sprint_volume": "MINIMAL"
+    },
+    "MDP_MIXED_MODAL": {
+      "sports": "CrossFit, Hyrox, Tactical",
+      "primary_zones": "Z7, Z5, Z2",
+      "plyo_volume": "MODERATE",
+      "sprint_volume": "MODERATE"
+    }
+  }
+}

@@ -1,0 +1,660 @@
+{
+  "metadata": {
+    "specid": "EFL_PROJECT_REGISTRY",
+    "version": "1.0",
+    "effectivedate": "2026-01-15",
+    "status": "PRODUCTION-LOCKED",
+    "owner": "Elite Fitness Lab \u2014 Director of Performance Systems",
+    "purpose": "Canonical registry binding projectid \u2192 wrapper + outputspec + runtime requirements. Glue layer between Router decisions and generator/runtime behavior."
+  },
+  "projects": {
+    "R2P_ACL": {
+      "projectid": "R2P_ACL",
+      "projecttype": "R2P",
+      "wrapper": {
+        "file": "EFL_SP_PROJECT_WRAPPER_R2P_ACL_v1_1.md",
+        "version": "1.1"
+      },
+      "outputspec": {
+        "file": "EFL_SP_OUTPUT_SPEC_R2P_ACL_v1_0.md",
+        "version": "1.0",
+        "targets": [
+          "BRIDGEATHLETIC",
+          "COACHSHEET",
+          "MESOCYCLE"
+        ]
+      },
+      "system1": {
+        "engine_id": "R2P_ACL_SYSTEM1",
+        "schema_file": "EFL_R2P_ACL_SYSTEM1_LEGALITY_ENGINE_v1_0_6.json",
+        "required": [
+          "inputs.medicalstatus",
+          "inputs.performancegates",
+          "inputs.trainingcontext_global",
+          "derived.r2p_systemone_output"
+        ]
+      },
+      "router_binding": {
+        "allowed_populations": [
+          "Youth812",
+          "Youth1316",
+          "Youth17Advanced",
+          "Adult_GENERAL",
+          "Adult_ATHLETE"
+        ],
+        "allowed_seasons": [
+          "OFFSEASON",
+          "PRESEASON",
+          "INSEASON",
+          "POSTSEASON"
+        ],
+        "requires_r2p_enrollment": true
+      },
+      "required_inputs": {
+        "critical": [
+          "inputs.medicalstatus.isinr2pservice",
+          "inputs.medicalstatus.injurytype",
+          "inputs.medicalstatus.hardstopstatus",
+          "inputs.trainingcontext_global.seasontype"
+        ],
+        "optional": [
+          "inputs.performancegates",
+          "derived.macrocounters"
+        ]
+      },
+      "exit_gates": {
+        "required_flags": []
+      },
+      "macro_caps": {
+        "counters": []
+      }
+    },
+    "COURT_SPORT_FOUNDATIONS": {
+      "projectid": "COURT_SPORT_FOUNDATIONS",
+      "projecttype": "SP_FOUNDATIONS",
+      "wrapper": {
+        "file": "EFL_SP_PROJECT_WRAPPER_COURT_SPORT_FOUNDATIONS_v1_0.md",
+        "version": "1.0"
+      },
+      "outputspec": {
+        "file": "EFL_SP_OUTPUT_SPEC_COURT_SPORT_FOUNDATIONS_v1_0.md",
+        "version": "1.0",
+        "targets": [
+          "BRIDGEATHLETIC",
+          "COACHSHEET",
+          "MESOCYCLE"
+        ]
+      },
+      "system1": null,
+      "router_binding": {
+        "allowed_populations": [
+          "Youth812",
+          "Youth1316",
+          "Youth17Advanced"
+        ],
+        "allowed_seasons": [
+          "OFFSEASON",
+          "PRESEASON"
+        ],
+        "requires_r2p_enrollment": false
+      },
+      "required_inputs": {
+        "critical": [
+          "inputs.trainingcontext_global.seasontype"
+        ],
+        "optional": [
+          "inputs.performancegates.exitflagssp",
+          "derived.macrocounters"
+        ]
+      },
+      "exit_gates": {
+        "required_flags": []
+      },
+      "macro_caps": {
+        "counters": []
+      }
+    },
+    "ELASTIC_RELOAD": {
+      "projectid": "ELASTIC_RELOAD",
+      "projecttype": "SP_RELOAD",
+      "wrapper": {
+        "file": "EFL-ELASTIC-RELOAD-BLOCK-WRAPPER-v1.0.md",
+        "version": "1.0"
+      },
+      "outputspec": {
+        "file": "EFL_OUTPUTSPEC_ELASTIC_RELOAD_v1.0.json",
+        "version": "1.0",
+        "targets": [
+          "BRIDGEATHLETIC",
+          "COACHSHEET",
+          "MESOCYCLE"
+        ]
+      },
+      "system1": null,
+      "router_binding": {
+        "allowed_populations": [
+          "Youth812",
+          "Youth1316",
+          "Youth17Advanced"
+        ],
+        "allowed_seasons": [
+          "OFFSEASON",
+          "PRESEASON"
+        ],
+        "requires_r2p_enrollment": false
+      },
+      "required_inputs": {
+        "critical": [
+          "inputs.trainingcontext_global.seasontype"
+        ],
+        "optional": [
+          "inputs.performancegates.exitflagssp",
+          "derived.macrocounters"
+        ]
+      },
+      "exit_gates": {
+        "required_flags": []
+      },
+      "macro_caps": {
+        "counters": []
+      }
+    },
+    "ELASTIC_SPECIALIZATION": {
+      "projectid": "ELASTIC_SPECIALIZATION",
+      "projecttype": "SP_SPECIALIZATION",
+      "wrapper": {
+        "file": "EFL_SP_PROJECT_WRAPPER_ELASTIC_SPECIALIZATION_v1_0.md",
+        "version": "1.0"
+      },
+      "outputspec": {
+        "file": "EFL_OUTPUTSPEC_ELASTIC_SPECIALIZATION_v1.0.json",
+        "version": "1.0",
+        "targets": [
+          "BRIDGEATHLETIC",
+          "COACHSHEET",
+          "MESOCYCLE"
+        ]
+      },
+      "system1": null,
+      "router_binding": {
+        "allowed_populations": [
+          "Youth17Advanced",
+          "Adult_ATHLETE"
+        ],
+        "allowed_seasons": [
+          "OFFSEASON",
+          "PRESEASON"
+        ],
+        "requires_r2p_enrollment": false
+      },
+      "required_inputs": {
+        "critical": [
+          "inputs.performancegates.exitflagssp.elasticreloadexitpassed",
+          "derived.macrocounters.elasticspecialization_blocks_used"
+        ],
+        "optional": [
+          "inputs.trainingcontext_global.fvbiascurrent"
+        ]
+      },
+      "exit_gates": {
+        "required_flags": [
+          "inputs.performancegates.exitflagssp.elasticreloadexitpassed"
+        ]
+      },
+      "macro_caps": {
+        "counters": [
+          "derived.macrocounters.elasticspecialization_blocks_used"
+        ]
+      }
+    },
+    "DECEL_SPECIALIZATION": {
+      "projectid": "DECEL_SPECIALIZATION",
+      "projecttype": "SP_SPECIALIZATION",
+      "wrapper": {
+        "file": "EFL_SP_PROJECT_WRAPPER_DECEL_SPECIALIZATION_v1_0.md",
+        "version": "1.0"
+      },
+      "outputspec": {
+        "file": "EFL_OUTPUTSPEC_DECEL_SPECIALIZATION_v1.0.json",
+        "version": "1.0",
+        "targets": [
+          "BRIDGEATHLETIC",
+          "COACHSHEET",
+          "MESOCYCLE"
+        ]
+      },
+      "system1": null,
+      "router_binding": {
+        "allowed_populations": [
+          "Youth17Advanced",
+          "Adult_ATHLETE"
+        ],
+        "allowed_seasons": [
+          "OFFSEASON",
+          "PRESEASON"
+        ],
+        "requires_r2p_enrollment": false
+      },
+      "required_inputs": {
+        "critical": [
+          "inputs.performancegates.exitflagssp.foundationsexitpassed",
+          "derived.macrocounters.decel_specialization_blocks_used"
+        ],
+        "optional": []
+      },
+      "exit_gates": {
+        "required_flags": [
+          "inputs.performancegates.exitflagssp.foundationsexitpassed"
+        ]
+      },
+      "macro_caps": {
+        "counters": [
+          "derived.macrocounters.decel_specialization_blocks_used"
+        ]
+      }
+    },
+    "FORCE_SPECIALIZATION": {
+      "projectid": "FORCE_SPECIALIZATION",
+      "projecttype": "SP_SPECIALIZATION",
+      "wrapper": {
+        "file": "EFL_SP_PROJECT_WRAPPER_FORCE_SPECIALIZATION_v1_0.md",
+        "version": "1.0"
+      },
+      "outputspec": {
+        "file": "EFL_OUTPUTSPEC_FORCE_SPECIALIZATION_v1.0.json",
+        "version": "1.0",
+        "targets": [
+          "BRIDGEATHLETIC",
+          "COACHSHEET",
+          "MESOCYCLE"
+        ]
+      },
+      "system1": null,
+      "router_binding": {
+        "allowed_populations": [
+          "Youth17Advanced",
+          "Adult_ATHLETE"
+        ],
+        "allowed_seasons": [
+          "OFFSEASON",
+          "PRESEASON"
+        ],
+        "requires_r2p_enrollment": false
+      },
+      "required_inputs": {
+        "critical": [
+          "inputs.performancegates.exitflagssp.foundationsexitpassed",
+          "derived.macrocounters.forcebias_specialization_blocks_used"
+        ],
+        "optional": []
+      },
+      "exit_gates": {
+        "required_flags": [
+          "inputs.performancegates.exitflagssp.foundationsexitpassed"
+        ]
+      },
+      "macro_caps": {
+        "counters": [
+          "derived.macrocounters.forcebias_specialization_blocks_used"
+        ]
+      }
+    },
+    "ICP_BASKETBALL_INSEASON": {
+      "projectid": "ICP_BASKETBALL_INSEASON",
+      "projecttype": "ICP",
+      "wrapper": {
+        "file": "EFL_ICP_BASKETBALL_INSEASON_WRAPPER_v1_0.md",
+        "version": "1.0"
+      },
+      "outputspec": {
+        "file": "EFL_OUTPUTSPEC_ICP_BASKETBALL_IN_v1.0.json",
+        "version": "1.0",
+        "targets": [
+          "BRIDGEATHLETIC",
+          "COACHSHEET",
+          "MESOCYCLE"
+        ]
+      },
+      "system1": null,
+      "router_binding": {
+        "allowed_populations": [
+          "Youth1316",
+          "Youth17Advanced"
+        ],
+        "allowed_seasons": [
+          "INSEASON"
+        ],
+        "requires_r2p_enrollment": false
+      },
+      "required_inputs": {
+        "critical": [
+          "inputs.trainingcontext_global.seasontype",
+          "inputs.athleteprofile.sport"
+        ],
+        "optional": [
+          "inputs.trainingcontext_global.practicegamesperweek",
+          "inputs.trainingcontext_global.daysuntilnextgame"
+        ]
+      },
+      "exit_gates": {
+        "required_flags": []
+      },
+      "macro_caps": {
+        "counters": [
+          "derived.macrocounters.consecutive_highcns_blocks"
+        ]
+      }
+    },
+    "ICP_VOLLEYBALL_INSEASON": {
+      "projectid": "ICP_VOLLEYBALL_INSEASON",
+      "projecttype": "ICP",
+      "wrapper": {
+        "file": "EFL_ICP_VOLLEYBALL_INSEASON_WRAPPER_v1_0.md",
+        "version": "1.0"
+      },
+      "outputspec": {
+        "file": "EFL_OUTPUTSPEC_ICP_VOLLEYBALL_IN_v1.0.json",
+        "version": "1.0",
+        "targets": [
+          "BRIDGEATHLETIC",
+          "COACHSHEET",
+          "MESOCYCLE"
+        ]
+      },
+      "system1": null,
+      "router_binding": {
+        "allowed_populations": [
+          "Youth1316",
+          "Youth17Advanced"
+        ],
+        "allowed_seasons": [
+          "INSEASON"
+        ],
+        "requires_r2p_enrollment": false
+      },
+      "required_inputs": {
+        "critical": [
+          "inputs.trainingcontext_global.seasontype",
+          "inputs.athleteprofile.sport"
+        ],
+        "optional": [
+          "inputs.trainingcontext_global.practicegamesperweek",
+          "inputs.trainingcontext_global.daysuntilnextgame"
+        ]
+      },
+      "exit_gates": {
+        "required_flags": []
+      },
+      "macro_caps": {
+        "counters": [
+          "derived.macrocounters.consecutive_highcns_blocks"
+        ]
+      }
+    },
+    "ICP_BASKETBALL_POSTSEASON": {
+      "projectid": "ICP_BASKETBALL_POSTSEASON",
+      "projecttype": "ICP",
+      "wrapper": {
+        "file": "EFL_ICP_BASKETBALL_POSTSEASON_WRAPPER_v1_0.md",
+        "version": "1.0"
+      },
+      "outputspec": {
+        "file": "EFL_OUTPUTSPEC_ICP_BASKETBALL_POST_v1.0.json",
+        "version": "1.0",
+        "targets": [
+          "BRIDGEATHLETIC",
+          "COACHSHEET",
+          "MESOCYCLE"
+        ]
+      },
+      "system1": null,
+      "router_binding": {
+        "allowed_populations": [
+          "Youth1316",
+          "Youth17Advanced"
+        ],
+        "allowed_seasons": [
+          "POSTSEASON"
+        ],
+        "requires_r2p_enrollment": false
+      },
+      "required_inputs": {
+        "critical": [
+          "inputs.trainingcontext_global.seasontype",
+          "inputs.athleteprofile.sport"
+        ],
+        "optional": [
+          "inputs.trainingcontext_global.practicegamesperweek",
+          "inputs.trainingcontext_global.daysuntilnextgame"
+        ]
+      },
+      "exit_gates": {
+        "required_flags": []
+      },
+      "macro_caps": {
+        "counters": [
+          "derived.macrocounters.consecutive_highcns_blocks"
+        ]
+      }
+    },
+    "ICP_VOLLEYBALL_POSTSEASON": {
+      "projectid": "ICP_VOLLEYBALL_POSTSEASON",
+      "projecttype": "ICP",
+      "wrapper": {
+        "file": "EFL_ICP_VOLLEYBALL_POSTSEASON_WRAPPER_v1_0.md",
+        "version": "1.0"
+      },
+      "outputspec": {
+        "file": "EFL_OUTPUTSPEC_ICP_VOLLEYBALL_POST_v1.0.json",
+        "version": "1.0",
+        "targets": [
+          "BRIDGEATHLETIC",
+          "COACHSHEET",
+          "MESOCYCLE"
+        ]
+      },
+      "system1": null,
+      "router_binding": {
+        "allowed_populations": [
+          "Youth1316",
+          "Youth17Advanced"
+        ],
+        "allowed_seasons": [
+          "POSTSEASON"
+        ],
+        "requires_r2p_enrollment": false
+      },
+      "required_inputs": {
+        "critical": [
+          "inputs.trainingcontext_global.seasontype",
+          "inputs.athleteprofile.sport"
+        ],
+        "optional": [
+          "inputs.trainingcontext_global.practicegamesperweek",
+          "inputs.trainingcontext_global.daysuntilnextgame"
+        ]
+      },
+      "exit_gates": {
+        "required_flags": []
+      },
+      "macro_caps": {
+        "counters": [
+          "derived.macrocounters.consecutive_highcns_blocks"
+        ]
+      }
+    },
+    "OFF_SEASON_BASELINE_COURT_VERTICAL": {
+      "projectid": "OFF_SEASON_BASELINE_COURT_VERTICAL",
+      "projecttype": "BASELINE",
+      "wrapper": {
+        "file": "EFL_SP_PROJECT_WRAPPER_OFFSEASON_BASELINE_COURT_VERTICAL_v1_0.md",
+        "version": "1.0"
+      },
+      "outputspec": {
+        "file": "EFL_OUTPUTSPEC_BASELINE_COURT_VERTICAL_v1.0.json",
+        "version": "1.0",
+        "targets": [
+          "BRIDGEATHLETIC",
+          "COACHSHEET",
+          "MESOCYCLE"
+        ]
+      },
+      "system1": null,
+      "router_binding": {
+        "allowed_populations": [
+          "Youth1316",
+          "Youth17Advanced"
+        ],
+        "allowed_seasons": [
+          "OFFSEASON",
+          "PRESEASON"
+        ],
+        "requires_r2p_enrollment": false
+      },
+      "required_inputs": {
+        "critical": [
+          "inputs.trainingcontext_global.seasontype"
+        ],
+        "optional": []
+      },
+      "exit_gates": {
+        "required_flags": []
+      },
+      "macro_caps": {
+        "counters": []
+      }
+    },
+    "ADULT_STRENGTH": {
+      "projectid": "ADULT_STRENGTH",
+      "projecttype": "ADULT",
+      "wrapper": {
+        "file": "EFL_ADULT_STRENGTH_WRAPPER_v1_0.md",
+        "version": "1.0"
+      },
+      "outputspec": {
+        "file": "EFL_OUTPUTSPEC_ADULT_STRENGTH_v1.0.json",
+        "version": "1.0",
+        "targets": [
+          "BRIDGEATHLETIC",
+          "COACHSHEET",
+          "MICROSESSION"
+        ]
+      },
+      "system1": null,
+      "router_binding": {
+        "allowed_populations": [
+          "Adult_GENERAL",
+          "Adult_ATHLETE"
+        ],
+        "allowed_seasons": [
+          "OFFSEASON",
+          "PRESEASON",
+          "INSEASON",
+          "POSTSEASON"
+        ],
+        "requires_r2p_enrollment": false
+      },
+      "required_inputs": {
+        "critical": [
+          "inputs.trainingcontext_global.seasontype",
+          "inputs.athleteprofile.athletetrack"
+        ],
+        "optional": []
+      },
+      "exit_gates": {
+        "required_flags": []
+      },
+      "macro_caps": {
+        "counters": []
+      }
+    },
+    "ADULT_MOBILITY": {
+      "projectid": "ADULT_MOBILITY",
+      "projecttype": "ADULT",
+      "wrapper": {
+        "file": "EFL_ADULT_MOBILITY_WRAPPER_v1_0.md",
+        "version": "1.0"
+      },
+      "outputspec": {
+        "file": "EFL_OUTPUTSPEC_ADULT_MOBILITY_v1.0.json",
+        "version": "1.0",
+        "targets": [
+          "BRIDGEATHLETIC",
+          "COACHSHEET",
+          "MICROSESSION"
+        ]
+      },
+      "system1": null,
+      "router_binding": {
+        "allowed_populations": [
+          "Adult_GENERAL",
+          "Adult_ATHLETE"
+        ],
+        "allowed_seasons": [
+          "OFFSEASON",
+          "PRESEASON",
+          "INSEASON",
+          "POSTSEASON"
+        ],
+        "requires_r2p_enrollment": false
+      },
+      "required_inputs": {
+        "critical": [
+          "inputs.trainingcontext_global.seasontype",
+          "inputs.athleteprofile.athletetrack"
+        ],
+        "optional": []
+      },
+      "exit_gates": {
+        "required_flags": []
+      },
+      "macro_caps": {
+        "counters": []
+      }
+    },
+    "ADULT_ERL": {
+      "projectid": "ADULT_ERL",
+      "projecttype": "ADULT",
+      "wrapper": {
+        "file": "EFL_ADULT_ERL_WRAPPER_v1_0.md",
+        "version": "1.0"
+      },
+      "outputspec": {
+        "file": "EFL_OUTPUTSPEC_ADULT_ERL_v1.0.json",
+        "version": "1.0",
+        "targets": [
+          "BRIDGEATHLETIC",
+          "COACHSHEET",
+          "MICROSESSION"
+        ]
+      },
+      "system1": null,
+      "router_binding": {
+        "allowed_populations": [
+          "Adult_GENERAL",
+          "Adult_ATHLETE"
+        ],
+        "allowed_seasons": [
+          "OFFSEASON",
+          "PRESEASON",
+          "INSEASON",
+          "POSTSEASON"
+        ],
+        "requires_r2p_enrollment": false
+      },
+      "required_inputs": {
+        "critical": [
+          "inputs.trainingcontext_global.seasontype",
+          "inputs.athleteprofile.athletetrack"
+        ],
+        "optional": []
+      },
+      "exit_gates": {
+        "required_flags": []
+      },
+      "macro_caps": {
+        "counters": []
+      }
+    }
+  }
+}
