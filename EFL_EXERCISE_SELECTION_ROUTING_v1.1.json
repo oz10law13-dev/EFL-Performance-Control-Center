@@ -1,0 +1,279 @@
+{
+  "$schema": "https://efl-systems.com/schemas/exercise_selection_routing_v1.2.json",
+  "$id": "EFL-EXERCISE-SELECTION-ROUTING-v1.2",
+
+  "meta": {
+    "documentId": "EFL-EXERCISE-SELECTION-ROUTING",
+    "version": "1.2.0",
+    "status": "PRODUCTION_READY",
+    "effectiveDate": "2026-01-01",
+    "replaces": "v1.1.0",
+    "owner": "Austin Lawrence + STRATA Logic Steward",
+    "purpose": "Deterministic routing rules for Exercise Selection. Maps context → filtered AETHER pools → prioritized candidates for Algorithm v1.1.",
+    "authority": {
+      "load_standards_version": "2.1.2",
+      "governance_version": "4.0",
+      "playbook_version": "0.4.0",
+      "epa_version": "2.1",
+      "algorithm_version": "1.1",
+      "exercise_library": "EFL_BA_Exercise_Library_v2.0_LOAD_BANDS_COMPLETE.csv"
+    },
+    "role_definition": {
+      "scope_includes": [
+        "Read Client State and block context",
+        "Filter AETHER exercise pool by legality and constraints",
+        "Prioritize candidates per slot (PRIME/PREP/WORK/CLEAR)",
+        "Apply pre-execution eligibility checks (default-deny on missing critical data)"
+      ],
+      "scope_excludes": [
+        "Computing plyo or sprint ceilings (Load Standards + EPA do this)",
+        "Deciding legality (Governance v4.0 + EPA do this)",
+        "Counting contacts or meters (Algorithm v1.1 does this)",
+        "Choosing exact reps/sets (Algorithm v1.1 does this)"
+      ],
+      "deny_semantics": "ROUTING_DENY = do not auto-populate a slot; escalate to coach or Governance/EPA. Does NOT mean medical or legal clearance is revoked."
+    },
+    "exercise_library_fields_required": [
+      "exercise_id",
+      "exercise_name",
+      "movement_pattern",
+      "aether_pattern",
+      "aether_node",
+      "aether_difficulty",
+      "load_band_primary",
+      "contraindicated_populations",
+      "contraindicated_patterns",
+      "e_node_classification",
+      "intensity_percent_vmax",
+      "equipment"
+    ]
+  },
+
+  "inputs": {
+    "client_state": {
+      "population": "Youth_8_12 | Youth_13_17 | Adult",
+      "r2p_stage": "R2P_Stage_1 | R2P_Stage_2 | R2P_Stage_3 | R2P_Stage_4 | null",
+      "season_type": "OFF_SEASON | PRE_SEASON | IN_SEASON_TIER_1 | IN_SEASON_TIER_2 | IN_SEASON_TIER_3 | POST_SEASON",
+      "readiness_flag": "GREEN | YELLOW | RED",
+      "max_band_allowed": "Band_0 | Band_1 | Band_2 | Band_3 | Band_4",
+      "max_node_allowed": "A | B | C | D",
+      "max_e_node_allowed": "E0_only | E1 | E2 | E3 | E4",
+      "plyo_contacts_cap_session": "number",
+      "plyo_contacts_cap_weekly": "number",
+      "sprint_meters_cap_session": "number",
+      "sprint_meters_cap_weekly": "number",
+      "max_sprint_sessions_per_week": "number",
+      "injury_flags": "array<string>",
+      "equipment_available": "array<string>"
+    },
+
+    "block_context": {
+      "block_tag": "string",
+      "session_type": "FULL_SESSION | MICROSESSION",
+      "seasonal_operating_range_tag": "string"
+    },
+
+    "session_context": {
+      "completed_sessions_this_week": "number",
+      "completed_sprint_sessions_this_week": "number",
+      "weekly_contacts_accumulated": "number",
+      "weekly_sprint_meters_accumulated": "number",
+      "weekly_pattern_frequency": {
+        "Squat": "number",
+        "Hinge": "number",
+        "Push": "number",
+        "Pull": "number",
+        "Sprint": "number"
+      }
+    }
+  },
+
+  "routing_laws": {
+    "description": "Routing and filtering rules for PRIME, PREP, WORK, CLEAR candidate pools.",
+
+    "global_filters": {
+      "description": "Filters applied to the entire AETHER pool before block-specific routing.",
+      "rules": [
+        {
+          "name": "LIBRARY_FIELD_COMPLETENESS",
+          "logic": "EXCLUDE any exercise missing a required meta field defined in meta.exercise_library_fields_required."
+        },
+        {
+          "name": "BAND_CEILING",
+          "logic": "EXCLUDE any exercise where load_band_primary > client_state.max_band_allowed."
+        },
+        {
+          "name": "NODE_CEILING",
+          "logic": "EXCLUDE any exercise where aether_node > client_state.max_node_allowed."
+        },
+        {
+          "name": "E_NODE_CEILING",
+          "logic": "EXCLUDE any exercise where e_node_classification > client_state.max_e_node_allowed (respecting E0_only semantics)."
+        },
+        {
+          "name": "INJURY_GATES",
+          "logic": "FOR each exercise: IF exercise.contraindicated_patterns intersects client_state.injury_flags THEN EXCLUDE.",
+          "reference": "Governance v4.0 – Injury Contraindications Gate."
+        },
+        {
+          "name": "EQUIPMENT_AVAILABILITY",
+          "logic": "EXCLUDE any exercise requiring equipment not present in client_state.equipment_available. IF equipment_available == ['bodyweight_only'] THEN restrict to bodyweight-only exercises."
+        }
+      ]
+    },
+
+    "session_type_routing": {
+      "description": "Additional filters based on session_type and population.",
+      "rules": [
+        {
+          "name": "ADULT_MICROSESSION_FILTER",
+          "applies_when": "block_context.session_type == 'MICROSESSION' AND client_state.population == 'Adult'",
+          "logic": [
+            "EXCLUDE exercises with e_node_classification NOT IN ['E0','E1']",
+            "EXCLUDE sprint exercises (movement_pattern == 'Sprint' OR aether_pattern == 'Sprint')"
+          ],
+          "note": "Guidance for Adult MicroSessions: recovery focus; Algorithm v1.1 enforces 60-contact guidance and no true sprinting."
+        },
+        {
+          "name": "ATHLETE_MICROSESSION_FILTER",
+          "applies_when": "block_context.session_type == 'MICROSESSION' AND client_state.population IN ['Youth_8_12','Youth_13_17']",
+          "logic": [
+            "RESPECT client_state.max_e_node_allowed when filtering elasticity",
+            "PREFER exercises tagged with warm-up, elasticity, or sport-specific categories"
+          ]
+        }
+      ]
+    },
+
+    "sprint_session_eligibility": {
+      "description": "Pre-check before exposing sprint candidates.",
+      "rules": [
+        {
+          "name": "SPRINT_SESSION_CAP",
+          "logic": "IF session_context.completed_sprint_sessions_this_week >= client_state.max_sprint_sessions_per_week THEN mark routing_state.sprint_allowed = false; DO NOT include sprint exercises in any candidate pool.",
+          "note": "Algorithm v1.1 still validates meters vs sprint caps; routing only hides sprint options when weekly sprint-session cap is hit."
+        }
+      ]
+    },
+
+    "block_specific_filters": {
+      "PRIME": {
+        "description": "Warm-up / mobility / activation block.",
+        "allowed_patterns": ["Mobility", "Stability", "Activation", "Breathing"],
+        "band_constraints": "load_band_primary IN ['Band_0','Band_1']",
+        "e_node_constraints": "e_node_classification == 'E0'",
+        "forbidden": [
+          "Plyometric exercises (any E1+)",
+          "Heavy bilateral loading (Band_2+)",
+          "Sprint exercises"
+        ]
+      },
+
+      "PREP": {
+        "description": "Pattern rehearsal and light loading.",
+        "allowed_patterns": "Patterns that match or directly support WORK patterns.",
+        "band_constraints": "load_band_primary IN ['Band_0','Band_1','Band_2']",
+        "e_node_constraints": "e_node_classification IN ['E0','E1']",
+        "forbidden": [
+          "Tier 2-3 plyometrics (E2+)",
+          "Band_3+ loading",
+          "Competition-intensity sprint work"
+        ]
+      },
+
+      "WORK": {
+        "description": "Primary stimulus block.",
+        "allowed_patterns": "All legal patterns defined in block manifest (Squat, Hinge, Lunge, Push, Pull, Land, Sprint, etc.).",
+        "band_constraints": "load_band_primary <= client_state.max_band_allowed",
+        "e_node_constraints": "e_node_classification <= client_state.max_e_node_allowed",
+        "notes": [
+          "Candidate list still subject to Algorithm v1.1 contact/sprint/tier checks.",
+          "Routing does NOT compute volumes; it only provides legal candidates."
+        ]
+      },
+
+      "CLEAR": {
+        "description": "Cool-down and recovery.",
+        "allowed_patterns": ["Mobility", "Breathing", "Recovery", "Low-Intensity Core"],
+        "band_constraints": "load_band_primary IN ['Band_0','Band_1']",
+        "e_node_constraints": "e_node_classification == 'E0'",
+        "forbidden": [
+          "Plyometrics (E1+)",
+          "Sprint work",
+          "High-load strength"
+        ]
+      }
+    },
+
+    "pattern_bias_and_frequency": {
+      "description": "How routing respects pattern emphasis and weekly frequency caps.",
+      "rules": [
+        {
+          "name": "PATTERN_EMPHASIS_INCLUSION",
+          "logic": "FOR each pattern in manifest.patternEmphasis: ensure at least one candidate remains for that pattern in WORK; if none found, relax sport-specific tags then band, and log a routing_note."
+        },
+        {
+          "name": "PATTERN_FREQUENCY_GUARD",
+          "logic": "BEFORE promoting an exercise to the candidate shortlist, check session_context.weekly_pattern_frequency[pattern] against population-specific caps. IF already at or above cap, DOWN-RANK or EXCLUDE that pattern from suggestions.",
+          "reference": "Pattern frequency caps enforced explicitly in Algorithm v1.1."
+        }
+      ]
+    },
+
+    "tier3_visibility_rules": {
+      "description": "Tier 3 (E3/E4) visibility for Youth populations.",
+      "rules": [
+        {
+          "name": "YOUTH_8_12_TIER3_HIDDEN",
+          "logic": "IF client_state.population == 'Youth_8_12' THEN EXCLUDE all E3/E4 exercises from candidate pools."
+        },
+        {
+          "name": "YOUTH_13_17_TIER3_GATED",
+          "logic": "IF client_state.population == 'Youth_13_17' THEN KEEP E3/E4 exercises available to Algorithm v1.1 but flag them with routing_state.requires_tier3_fraction_check = true.",
+          "note": "Tier‑3 ≤40% enforcement occurs inside Algorithm v1.1 via running tallies."
+        }
+      ]
+    }
+  },
+
+  "week_override_registry": {
+    "description": "Optional week-level routing tweaks bound to law versions; mirrors old registry but normalized to v2.1.2.",
+    "structure": {
+      "key_format": "<block_tag>::<phaseCode>::W<weekInMacro>",
+      "example": "SP_OFF_DEV::FND::W3"
+    },
+    "entries": {
+      "SP_OFF_DEV::FND::W1": {
+        "allowedOverrideTypes": ["elasticity_visibility", "pattern_priority"],
+        "versionBoundTo": {
+          "loadStandardsVersion": "2.1.2",
+          "algorithmVersion": "1.1"
+        },
+        "status": "ACTIVE",
+        "details": {
+          "elasticity_visibility": "HIDE_E_NODES",
+          "pattern_priority": ["Mobility", "Landing"]
+        }
+      }
+    },
+    "enforcementRule": "If any versionBoundTo field is older than current system version, mark override as QUARANTINE_REQUIRED_REVIEW and ignore until manually validated."
+  },
+
+  "outputs": {
+    "description": "Routing outputs handed to Algorithm v1.1 for final selection.",
+    "fields": {
+      "candidate_pools": {
+        "PRIME": "array<exercise_id>",
+        "PREP": "array<exercise_id>",
+        "WORK": "array<exercise_id>",
+        "CLEAR": "array<exercise_id>"
+      },
+      "routing_state_flags": {
+        "sprint_allowed_this_session": "boolean",
+        "tier3_candidates_available": "boolean",
+        "requires_tier3_fraction_check": "boolean",
+        "notes": "array<string>"
+      }
+    }
+  }
+}

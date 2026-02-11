@@ -1,0 +1,515 @@
+{
+  "metadata": {
+    "title": "EFL Router Test Fixtures v1.0",
+    "description": "Reference test cases for Router validation: 4 collapse scenarios + 2 legal routing cases",
+    "schema_version": "EFL_GLOBAL_CLIENT_STATE_v1.0.1",
+    "created": "2026-01-15"
+  },
+  "fixtures": [
+    {
+      "test_id": "COLLAPSE_01_MISSING_CRITICAL_INPUTS",
+      "description": "Missing seasontype (critical input) triggers default-deny collapse",
+      "expected_outcome": "activeproject=NONE, all projects denied with DEFAULTDENY_MISSING_CRITICAL_INPUTS",
+      "state": {
+        "clientid": "TEST-COLLAPSE-01",
+        "lastupdated": "2026-01-15T12:00:00-06:00",
+        "stateheader": {
+          "clientid": "TEST-COLLAPSE-01",
+          "lastupdated": "2026-01-15T12:00:00-06:00",
+          "activeproject": "NONE",
+          "seasontype": "OFFSEASON",
+          "readinessflag": "YELLOW",
+          "routerversion": "EFL_GLOBAL_ROUTER_WRAPPER_v1.0",
+          "eligible_for_training_today": false
+        },
+        "inputs": {
+          "athleteprofile": {
+            "age": 15,
+            "sport": "BASKETBALL",
+            "athletetrack": "ATHLETE"
+          },
+          "medicalstatus": {
+            "isinr2pservice": false,
+            "injurytype": "NONE",
+            "hardstopstatus": {
+              "hardstoptriggered": false,
+              "hardstopreasons": [],
+              "hardstopeventlog": [],
+              "medicallocktriggered": false,
+              "medicallockreason": null
+            }
+          },
+          "trainingcontext_global": {
+            "seasontype": "OFFSEASON",
+            "sessionsperweek_planned": 3
+          }
+        },
+        "derived": null,
+        "decisions": {
+          "activeproject": "NONE",
+          "legal_projects": [],
+          "illegal_projects_with_reasons": [
+            {
+              "projectid": "R2P_ACL",
+              "reasoncode": "DEFAULTDENY_MISSING_CRITICAL_INPUTS"
+            },
+            {
+              "projectid": "COURT_SPORT_FOUNDATIONS",
+              "reasoncode": "DEFAULTDENY_MISSING_CRITICAL_INPUTS"
+            },
+            {
+              "projectid": "ELASTIC_RELOAD",
+              "reasoncode": "DEFAULTDENY_MISSING_CRITICAL_INPUTS"
+            },
+            {
+              "projectid": "ELASTIC_SPECIALIZATION",
+              "reasoncode": "DEFAULTDENY_MISSING_CRITICAL_INPUTS"
+            },
+            {
+              "projectid": "DECEL_SPECIALIZATION",
+              "reasoncode": "DEFAULTDENY_MISSING_CRITICAL_INPUTS"
+            },
+            {
+              "projectid": "FORCE_SPECIALIZATION",
+              "reasoncode": "DEFAULTDENY_MISSING_CRITICAL_INPUTS"
+            },
+            {
+              "projectid": "ICP_BASKETBALL_INSEASON",
+              "reasoncode": "DEFAULTDENY_MISSING_CRITICAL_INPUTS"
+            },
+            {
+              "projectid": "ICP_VOLLEYBALL_INSEASON",
+              "reasoncode": "DEFAULTDENY_MISSING_CRITICAL_INPUTS"
+            },
+            {
+              "projectid": "ICP_BASKETBALL_POSTSEASON",
+              "reasoncode": "DEFAULTDENY_MISSING_CRITICAL_INPUTS"
+            },
+            {
+              "projectid": "ICP_VOLLEYBALL_POSTSEASON",
+              "reasoncode": "DEFAULTDENY_MISSING_CRITICAL_INPUTS"
+            },
+            {
+              "projectid": "OFF_SEASON_BASELINE_COURT_VERTICAL",
+              "reasoncode": "DEFAULTDENY_MISSING_CRITICAL_INPUTS"
+            },
+            {
+              "projectid": "ADULT_STRENGTH",
+              "reasoncode": "DEFAULTDENY_MISSING_CRITICAL_INPUTS"
+            },
+            {
+              "projectid": "ADULT_MOBILITY",
+              "reasoncode": "DEFAULTDENY_MISSING_CRITICAL_INPUTS"
+            },
+            {
+              "projectid": "ADULT_ERL",
+              "reasoncode": "DEFAULTDENY_MISSING_CRITICAL_INPUTS"
+            }
+          ],
+          "eligible_for_training_today": false,
+          "router_reasoncodes": [
+            "DEFAULTDENY_MISSING_CRITICAL_INPUTS"
+          ],
+          "routerversion": "EFL_GLOBAL_ROUTER_WRAPPER_v1.0",
+          "rationale_stack": []
+        }
+      }
+    },
+    {
+      "test_id": "COLLAPSE_02_VERSION_MISMATCH",
+      "description": "Router version not in allowlist triggers version mismatch collapse",
+      "expected_outcome": "activeproject=NONE, reasoncode=DEFAULTDENY_VERSION_MISMATCH",
+      "state": {
+        "clientid": "TEST-COLLAPSE-02",
+        "lastupdated": "2026-01-15T12:00:00-06:00",
+        "stateheader": {
+          "clientid": "TEST-COLLAPSE-02",
+          "lastupdated": "2026-01-15T12:00:00-06:00",
+          "activeproject": "NONE",
+          "seasontype": "OFFSEASON",
+          "readinessflag": "YELLOW",
+          "routerversion": "EFL_GLOBAL_ROUTER_WRAPPER_v9.9",
+          "eligible_for_training_today": false
+        },
+        "inputs": {
+          "athleteprofile": {
+            "age": 35,
+            "sport": "GENERAL",
+            "athletetrack": "GENERAL"
+          },
+          "medicalstatus": {
+            "isinr2pservice": false,
+            "injurytype": "NONE",
+            "hardstopstatus": {
+              "hardstoptriggered": false,
+              "hardstopreasons": [],
+              "hardstopeventlog": [],
+              "medicallocktriggered": false,
+              "medicallockreason": null
+            }
+          },
+          "trainingcontext_global": {
+            "seasontype": "OFFSEASON",
+            "sessionsperweek_planned": 2
+          }
+        },
+        "derived": null,
+        "decisions": {
+          "activeproject": "NONE",
+          "legal_projects": [],
+          "illegal_projects_with_reasons": [
+            {
+              "projectid": "ADULT_STRENGTH",
+              "reasoncode": "DEFAULTDENY_VERSION_MISMATCH"
+            }
+          ],
+          "eligible_for_training_today": false,
+          "router_reasoncodes": [
+            "DEFAULTDENY_VERSION_MISMATCH"
+          ],
+          "routerversion": "EFL_GLOBAL_ROUTER_WRAPPER_v9.9",
+          "rationale_stack": []
+        }
+      }
+    },
+    {
+      "test_id": "COLLAPSE_03_MEDICAL_LOCK",
+      "description": "\u22652 hardstops within 14 days triggers medical lock, all training blocked",
+      "expected_outcome": "activeproject=NONE, reasoncode=DEFAULTDENY_MEDICAL_LOCK",
+      "state": {
+        "clientid": "TEST-COLLAPSE-03",
+        "lastupdated": "2026-01-15T12:00:00-06:00",
+        "stateheader": {
+          "clientid": "TEST-COLLAPSE-03",
+          "lastupdated": "2026-01-15T12:00:00-06:00",
+          "activeproject": "NONE",
+          "seasontype": "OFFSEASON",
+          "readinessflag": "RED",
+          "routerversion": "EFL_GLOBAL_ROUTER_WRAPPER_v1.0",
+          "eligible_for_training_today": false
+        },
+        "inputs": {
+          "athleteprofile": {
+            "age": 16,
+            "sport": "BASKETBALL",
+            "athletetrack": "ATHLETE"
+          },
+          "medicalstatus": {
+            "isinr2pservice": true,
+            "injurytype": "ACLRECONSTRUCTION",
+            "weekspostop": 10,
+            "grafttype": "PATELLARTENDON",
+            "providerclearance": {
+              "resistancetrainingcleared": true,
+              "runningcleared": false,
+              "codcleared": false,
+              "fullsportcleared": false
+            },
+            "hardstopstatus": {
+              "hardstoptriggered": true,
+              "hardstopreasons": [
+                "GATEHARDSTOP_GIVING_WAY"
+              ],
+              "hardstopeventlog": [
+                {
+                  "eventid": "HS-001",
+                  "triggerdate": "2026-01-08",
+                  "hardstopreasons": [
+                    "GATEHARDSTOP_EFFUSION_INCREASE"
+                  ],
+                  "resolutiondate": "2026-01-10"
+                },
+                {
+                  "eventid": "HS-002",
+                  "triggerdate": "2026-01-14",
+                  "hardstopreasons": [
+                    "GATEHARDSTOP_GIVING_WAY"
+                  ],
+                  "resolutiondate": null
+                }
+              ],
+              "medicallocktriggered": true,
+              "medicallockreason": "REPEATEDHARDSTOP"
+            }
+          },
+          "trainingcontext_global": {
+            "seasontype": "OFFSEASON",
+            "sessionsperweek_planned": 3,
+            "readinessflag": "RED"
+          }
+        },
+        "derived": null,
+        "decisions": {
+          "activeproject": "NONE",
+          "legal_projects": [],
+          "illegal_projects_with_reasons": [
+            {
+              "projectid": "R2P_ACL",
+              "reasoncode": "DEFAULTDENY_MEDICAL_LOCK"
+            }
+          ],
+          "eligible_for_training_today": false,
+          "router_reasoncodes": [
+            "DEFAULTDENY_MEDICAL_LOCK"
+          ],
+          "routerversion": "EFL_GLOBAL_ROUTER_WRAPPER_v1.0",
+          "rationale_stack": []
+        }
+      }
+    },
+    {
+      "test_id": "COLLAPSE_04_STATEHEADER_MISMATCH",
+      "description": "stateheader.activeproject != decisions.activeproject triggers coherence failure",
+      "expected_outcome": "activeproject=NONE, reasoncode=DEFAULTDENY_STATEHEADER_MISMATCH",
+      "state": {
+        "clientid": "TEST-COLLAPSE-04",
+        "lastupdated": "2026-01-15T12:00:00-06:00",
+        "stateheader": {
+          "clientid": "TEST-COLLAPSE-04",
+          "lastupdated": "2026-01-15T12:00:00-06:00",
+          "activeproject": "ADULT_STRENGTH",
+          "seasontype": "OFFSEASON",
+          "readinessflag": "YELLOW",
+          "routerversion": "EFL_GLOBAL_ROUTER_WRAPPER_v1.0",
+          "eligible_for_training_today": true
+        },
+        "inputs": {
+          "athleteprofile": {
+            "age": 35,
+            "sport": "GENERAL",
+            "athletetrack": "GENERAL"
+          },
+          "medicalstatus": {
+            "isinr2pservice": false,
+            "injurytype": "NONE",
+            "hardstopstatus": {
+              "hardstoptriggered": false,
+              "hardstopreasons": [],
+              "hardstopeventlog": [],
+              "medicallocktriggered": false,
+              "medicallockreason": null
+            }
+          },
+          "trainingcontext_global": {
+            "seasontype": "OFFSEASON",
+            "sessionsperweek_planned": 2
+          }
+        },
+        "derived": null,
+        "decisions": {
+          "activeproject": "NONE",
+          "legal_projects": [],
+          "illegal_projects_with_reasons": [
+            {
+              "projectid": "ADULT_STRENGTH",
+              "reasoncode": "DEFAULTDENY_STATEHEADER_MISMATCH"
+            }
+          ],
+          "eligible_for_training_today": false,
+          "router_reasoncodes": [
+            "DEFAULTDENY_STATEHEADER_MISMATCH"
+          ],
+          "routerversion": "EFL_GLOBAL_ROUTER_WRAPPER_v1.0",
+          "rationale_stack": []
+        }
+      }
+    },
+    {
+      "test_id": "LEGAL_01_YOUTH1316_FOUNDATIONS",
+      "description": "Youth 13-16, OFFSEASON, non-R2P \u2192 routes to COURT_SPORT_FOUNDATIONS",
+      "expected_outcome": "activeproject=COURT_SPORT_FOUNDATIONS, derived populated, enode_accent_cap_pct=0.40",
+      "state": {
+        "clientid": "TEST-LEGAL-01",
+        "lastupdated": "2026-01-15T12:00:00-06:00",
+        "stateheader": {
+          "clientid": "TEST-LEGAL-01",
+          "lastupdated": "2026-01-15T12:00:00-06:00",
+          "activeproject": "COURT_SPORT_FOUNDATIONS",
+          "seasontype": "OFFSEASON",
+          "readinessflag": "YELLOW",
+          "routerversion": "EFL_GLOBAL_ROUTER_WRAPPER_v1.0",
+          "eligible_for_training_today": true
+        },
+        "inputs": {
+          "athleteprofile": {
+            "age": 14,
+            "sport": "BASKETBALL",
+            "athletetrack": "ATHLETE",
+            "population": null
+          },
+          "medicalstatus": {
+            "isinr2pservice": false,
+            "injurytype": "NONE",
+            "hardstopstatus": {
+              "hardstoptriggered": false,
+              "hardstopreasons": [],
+              "hardstopeventlog": [],
+              "medicallocktriggered": false,
+              "medicallockreason": null
+            }
+          },
+          "trainingcontext_global": {
+            "seasontype": "OFFSEASON",
+            "sessionsperweek_planned": 3,
+            "readinessflag": null
+          }
+        },
+        "derived": {
+          "populationoverrides": {
+            "population_enforced": "Youth1316",
+            "maxbandallowed_population": "Band2",
+            "maxenodeallowed_population": "E2",
+            "enode_accent_cap_pct": 0.4,
+            "fvbiaslock": "BALANCED_ONLY",
+            "weeklycontactscap_population": 80,
+            "sessioncontactscap_population": 30
+          },
+          "readinessmultipliers": {
+            "weeklymultiplier": 0.75,
+            "sessionmultiplier": 0.8
+          },
+          "icp_bridge_allowed": false
+        },
+        "decisions": {
+          "activeproject": "COURT_SPORT_FOUNDATIONS",
+          "legal_projects": [
+            "COURT_SPORT_FOUNDATIONS",
+            "ELASTIC_RELOAD",
+            "OFF_SEASON_BASELINE_COURT_VERTICAL"
+          ],
+          "illegal_projects_with_reasons": [
+            {
+              "projectid": "ELASTIC_SPECIALIZATION",
+              "reasoncode": "AGE_POPULATION_DENY"
+            },
+            {
+              "projectid": "FORCE_SPECIALIZATION",
+              "reasoncode": "AGE_POPULATION_DENY"
+            },
+            {
+              "projectid": "ICP_BASKETBALL_INSEASON",
+              "reasoncode": "SEASON_DENY"
+            }
+          ],
+          "eligible_for_training_today": true,
+          "router_reasoncodes": [
+            "DEFAULT_READINESS_YELLOW"
+          ],
+          "routerversion": "EFL_GLOBAL_ROUTER_WRAPPER_v1.0",
+          "rationale_stack": [
+            {
+              "priority": 10,
+              "rule": "DEFAULT_READINESS_IF_NULL",
+              "fired": true,
+              "effect": "readinessflag=YELLOW; multipliers applied"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "test_id": "LEGAL_02_R2P_ENROLLMENT_LOCKS_SP",
+      "description": "R2P enrolled athlete routes to R2P_ACL, all SP Performance projects locked",
+      "expected_outcome": "activeproject=R2P_ACL, legal_projects=[R2P_ACL], SP locked with R2P_ENROLLMENT_LOCKS_SP",
+      "state": {
+        "clientid": "TEST-LEGAL-02",
+        "lastupdated": "2026-01-15T12:00:00-06:00",
+        "stateheader": {
+          "clientid": "TEST-LEGAL-02",
+          "lastupdated": "2026-01-15T12:00:00-06:00",
+          "activeproject": "R2P_ACL",
+          "seasontype": "OFFSEASON",
+          "readinessflag": "GREEN",
+          "routerversion": "EFL_GLOBAL_ROUTER_WRAPPER_v1.0",
+          "eligible_for_training_today": true
+        },
+        "inputs": {
+          "athleteprofile": {
+            "age": 17,
+            "sport": "BASKETBALL",
+            "athletetrack": "ATHLETE"
+          },
+          "medicalstatus": {
+            "isinr2pservice": true,
+            "injurytype": "ACLRECONSTRUCTION",
+            "weekspostop": 24,
+            "grafttype": "QUADTENDON",
+            "providerclearance": {
+              "resistancetrainingcleared": true,
+              "runningcleared": false,
+              "codcleared": false,
+              "fullsportcleared": false
+            },
+            "hardstopstatus": {
+              "hardstoptriggered": false,
+              "hardstopreasons": [],
+              "hardstopeventlog": [],
+              "medicallocktriggered": false,
+              "medicallockreason": null
+            }
+          },
+          "trainingcontext_global": {
+            "seasontype": "OFFSEASON",
+            "sessionsperweek_planned": 3,
+            "readinessflag": "GREEN"
+          }
+        },
+        "derived": {
+          "populationoverrides": {
+            "population_enforced": "Youth17Advanced",
+            "maxbandallowed_population": "Band3",
+            "maxenodeallowed_population": "E3",
+            "enode_accent_cap_pct": null,
+            "fvbiaslock": "BALANCED_OR_FORCE",
+            "weeklycontactscap_population": 100,
+            "sessioncontactscap_population": 40
+          },
+          "readinessmultipliers": {
+            "weeklymultiplier": 1.0,
+            "sessionmultiplier": 1.0
+          },
+          "icp_bridge_allowed": false
+        },
+        "decisions": {
+          "activeproject": "R2P_ACL",
+          "legal_projects": [
+            "R2P_ACL"
+          ],
+          "illegal_projects_with_reasons": [
+            {
+              "projectid": "COURT_SPORT_FOUNDATIONS",
+              "reasoncode": "R2P_ENROLLMENT_LOCKS_SP"
+            },
+            {
+              "projectid": "ELASTIC_RELOAD",
+              "reasoncode": "R2P_ENROLLMENT_LOCKS_SP"
+            },
+            {
+              "projectid": "ELASTIC_SPECIALIZATION",
+              "reasoncode": "R2P_ENROLLMENT_LOCKS_SP"
+            },
+            {
+              "projectid": "DECEL_SPECIALIZATION",
+              "reasoncode": "R2P_ENROLLMENT_LOCKS_SP"
+            },
+            {
+              "projectid": "FORCE_SPECIALIZATION",
+              "reasoncode": "R2P_ENROLLMENT_LOCKS_SP"
+            }
+          ],
+          "eligible_for_training_today": true,
+          "router_reasoncodes": [],
+          "routerversion": "EFL_GLOBAL_ROUTER_WRAPPER_v1.0",
+          "rationale_stack": [
+            {
+              "priority": 1,
+              "rule": "R2P_ENROLLMENT_LOCKS_SP",
+              "fired": true,
+              "effect": "activeproject=R2P_ACL; restrict legal_projects to R2P only"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

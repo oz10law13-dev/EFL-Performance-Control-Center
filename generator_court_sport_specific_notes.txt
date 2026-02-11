@@ -1,0 +1,46 @@
+# Add this import at top of generator_court.py
+from .sport_exercise_selector import get_sport_exercise_selector
+
+# In _generate_court_sport_work_blocks(), replace manual exercise selection with:
+
+def _generate_court_sport_work_blocks(...):
+    """Generate WORK blocks with sport-specific exercises"""
+    
+    # Get sport-specific selector
+    sport_selector = get_sport_exercise_selector()
+    
+    # Get sport-prioritized exercises
+    sport_exercises = sport_selector.select_exercises_for_sport(
+        df=df,
+        mapper=mapper,
+        sport=sport,
+        day_type=day_type,
+        readiness=readiness,
+        band_allowed=band_allowed,
+        enode_allowed=enode_allowed
+    )
+    
+    # For Basketball Day A: Emphasize vertical power + decel
+    if sport == "Basketball" and day_type == "A":
+        # Use sport-specific squat exercises
+        squat_ex = sport_exercises["squat_primary"][0]
+        unilateral_ex = sport_exercises["unilateral"][0]
+        
+        # Prioritize vertical plyos with decel component
+        plyo_vertical = sport_exercises["plyos_vertical"][0]
+        plyo_decel = sport_exercises["decel"][0] if sport_exercises["decel"] else sport_exercises["plyos_vertical"][1]
+        
+        # Build blocks with sport-specific emphasis...
+    
+    # For Volleyball Day A: Emphasize repeated vertical + rotational power
+    elif sport == "Volleyball" and day_type == "A":
+        # More volume, less intensity (match demands)
+        squat_ex = sport_exercises["squat_primary"][0]
+        
+        # Use continuous jump variations
+        plyo_continuous = sport_exercises["plyos_vertical"][0]
+        
+        # Add rotational work
+        rotational_ex = sport_exercises["rotational"][0]
+        
+        # Build blocks with volleyball emphasis...

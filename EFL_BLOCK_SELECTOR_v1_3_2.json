@@ -1,0 +1,366 @@
+{
+  "meta": {
+    "document_id": "EFL-BLOCK-SELECTOR",
+    "version": "1.4.0",
+    "status": "PRODUCTION_READY",
+    "effective_date": "2026-01-01",
+    "replaces": "v1.3.2",
+    "bound_to": {
+      "load_standards_version": "2.1.2",
+      "governance_version": "4.0",
+      "playbook_version": "0.4.0",
+      "epa_version": "2.1"
+    },
+    "role_definition": {
+      "description": "Deterministic routing layer that selects a legal macro block tag and normalizes state for Governance/EPA.",
+      "scope_includes": [
+        "Read normalized client_profile, season_context, and red_flags inputs",
+        "Compute season_type from season_phase and games_per_week",
+        "Select one block_tag per request (no ranges, no 'coach choice')",
+        "Apply pre-execution eligibility checks (default-deny when critical data missing)",
+        "Output advisory fields for sprint/session guidance"
+      ],
+      "scope_excludes": [
+        "Enforcing plyometric or sprint volumes",
+        "Validating individual exercise legality (bands, nodes, injuries)",
+        "Overriding Governance v4.0 safety gates or Load Standards ceilings",
+        "Mutating decision trees at runtime (changes require manifest update)"
+      ],
+      "deny_semantics": "Block Selector DENY = do not auto-assign a block; Governance/EPA remain the final arbiters of legality."
+    },
+    "change_log": {
+      "v1.3.2_to_v1.4.0": [
+        "Promoted pre-execution eligibility checks and default-deny behavior to explicit top-level role definition",
+        "Normalized population to Youth_8_12, Youth_13_17, Adult with r2p_stage as a separate field",
+        "Locked Adult MicroSession pre-rules at 60 contacts, E0-E1 only (selector-level guidance), leaving enforcement to Governance",
+        "Clarified readiness-based block routing: RED -> recovery/regression blocks only; YELLOW may downshift phase within same family",
+        "Added explicit season_type computation section mapping season_phase + games_per_week to OFF/PRE/IN_TIER_1/2/3/POST",
+        "Added advisory_fields for recommended sprint_session_count and max_high_intensity_sessions_per_week by population + season_type"
+      ]
+    }
+  },
+
+  "inputs": {
+    "required": {
+      "client_profile": {
+        "service_line": {
+          "type": "enum",
+          "values": [
+            "Youth_Lab",
+            "SP_Performance",
+            "Adult_Strength",
+            "R2P",
+            "ERL",
+            "Mobility_Lab"
+          ],
+          "description": "Primary service line enrollment."
+        },
+        "population": {
+          "type": "enum",
+          "values": [
+            "Youth_8_12",
+            "Youth_13_17",
+            "Adult"
+          ],
+          "description": "Load Standards v2.1.2 population classification. R2P clients use population=Adult plus r2p_stage."
+        },
+        "icp_primary": {
+          "type": "string",
+          "description": "Primary ICP tag (e.g., Blueprint_Competitor, Youth_Mover)."
+        },
+        "training_age_yrs": {
+          "type": "number",
+          "description": "Years of consistent training experience."
+        },
+        "current_phase": {
+          "type": "enum",
+          "values": [
+            "Foundation",
+            "Development",
+            "Power",
+            "Integration"
+          ],
+          "description": "Current macro training phase per Meso/Macro manifest."
+        },
+        "readiness_flag": {
+          "type": "enum",
+          "values": [
+            "GREEN",
+            "YELLOW",
+            "RED"
+          ],
+          "description": "Computed readiness state from Load Standards v2.1.2 (GREEN/YELLOW/RED)."
+        },
+        "r2p_stage": {
+          "type": "enum",
+          "values": [
+            "R2P_Stage_1",
+            "R2P_Stage_2",
+            "R2P_Stage_3",
+            "R2P_Stage_4",
+            null
+          ],
+          "nullable": true,
+          "description": "R2P progression stage if applicable (null for non-R2P clients)."
+        }
+      },
+
+      "season_context": {
+        "season_phase": {
+          "type": "enum",
+          "values": [
+            "OFF_SEASON",
+            "PRE_SEASON",
+            "EARLY_IN_SEASON",
+            "PEAK_IN_SEASON",
+            "POST_SEASON"
+          ],
+          "description": "Calendar-based season phase."
+        },
+        "games_per_week": {
+          "type": "number",
+          "nullable": true,
+          "description": "Average games/competitions per week (current + next 2 weeks). Required for in-season tiers."
+        },
+        "days_to_next_competition": {
+          "type": "number",
+          "nullable": true,
+          "description": "Days until next scheduled competition (null if unknown or not applicable)."
+        },
+        "active_tournament_block": {
+          "type": "boolean",
+          "description": "True if in multi-day tournament (3+ games in 5 days)."
+        },
+        "session_type": {
+          "type": "enum",
+          "values": [
+            "FULL_SESSION",
+            "MICROSESSION"
+          ],
+          "description": "Requested session type for this block."
+        },
+        "planned_sessions_this_week": {
+          "type": "number",
+          "description": "Total training sessions planned for current week."
+        },
+        "completed_sessions_this_week": {
+          "type": "number",
+          "description": "Training sessions already completed this week."
+        }
+      },
+
+      "red_flags": {
+        "pain_gate": {
+          "type": "number",
+          "min": 0,
+          "max": 10,
+          "description": "Pain level (0=none, 10=severe)."
+        },
+        "stress_level": {
+          "type": "number",
+          "min": 0,
+          "max": 10,
+          "description": "Stress level (0=low, 10=extreme)."
+        },
+        "injury_flags": {
+          "type": "array",
+          "items": "string",
+          "description": "Active injury or clearance flags (e.g., ['RF_INJURY_ANKLE', 'RF_NO_CLEARANCE'])."
+        }
+      }
+    }
+  },
+
+  "routing_logic": {
+    "season_type_computation": {
+      "description": "Map season_phase + games_per_week to normalized season_type used by Load Standards and Governance.",
+      "rules": [
+        {
+          "name": "OFF_SEASON",
+          "condition": "season_phase == 'OFF_SEASON'",
+          "output": "OFF_SEASON"
+        },
+        {
+          "name": "PRE_SEASON",
+          "condition": "season_phase == 'PRE_SEASON'",
+          "output": "PRE_SEASON"
+        },
+        {
+          "name": "POST_SEASON",
+          "condition": "season_phase == 'POST_SEASON'",
+          "output": "POST_SEASON"
+        },
+        {
+          "name": "IN_SEASON_DYNAMIC",
+          "condition": "season_phase in ['EARLY_IN_SEASON', 'PEAK_IN_SEASON']",
+          "subrouting": [
+            {
+              "name": "TIER_1_HIGH_FIXTURE",
+              "condition": "games_per_week != null && games_per_week >= 3",
+              "output": "IN_SEASON_TIER_1",
+              "description": "High fixture density (3+ games/week)."
+            },
+            {
+              "name": "TIER_2_MODERATE_FIXTURE",
+              "condition": "games_per_week != null && games_per_week == 2",
+              "output": "IN_SEASON_TIER_2",
+              "description": "Moderate fixture density (2 games/week)."
+            },
+            {
+              "name": "TIER_3_LOW_FIXTURE",
+              "condition": "games_per_week != null && games_per_week <= 1",
+              "output": "IN_SEASON_TIER_3",
+              "description": "Low fixture density (0–1 games/week)."
+            }
+          ],
+          "missing_games_behavior": {
+            "condition": "games_per_week == null",
+            "action": "DENY",
+            "reason": "In-season phase without games_per_week data; cannot safely tier load."
+          }
+        }
+      ]
+    },
+
+    "readiness_block_routing": {
+      "description": "How readiness_flag influences block choice (not ceilings).",
+      "GREEN": {
+        "behavior": "Allow performance block for current_phase within family.",
+        "phase_shift": "none"
+      },
+      "YELLOW": {
+        "behavior": "Prefer conservative block within same family; may downshift one phase (e.g., Power -> Development) based on manifest rules.",
+        "phase_shift": "optional_downshift"
+      },
+      "RED": {
+        "behavior": "Force recovery or mobility-oriented blocks only (no performance blocks).",
+        "phase_shift": "regress_to_foundation_or_recovery"
+      }
+    },
+
+    "microsession_pre_rules": {
+      "description": "Selector-level pre-checks for MICROSESSION requests (final enforcement by Governance v4.0).",
+      "adult_microsession": {
+        "applies_when": "service_line == 'Adult_Strength' && session_type == 'MICROSESSION'",
+        "guidance": {
+          "max_contacts": 60,
+          "allowed_e_nodes": ["E0", "E1"],
+          "max_load_band": "Band_1",
+          "true_sprinting_allowed": false
+        },
+        "note": "These are eligibility guidelines; Load Standards and Governance enforce hard caps (e.g., 100-contact Adult MicroSession ceiling)."
+      },
+      "athlete_microsession": {
+        "applies_when": "service_line in ['Youth_Lab', 'SP_Performance'] && session_type == 'MICROSESSION'",
+        "guidance": {
+          "max_contacts_fraction_of_full": 0.6,
+          "respect_population_caps": true,
+          "respect_seasonal_operating_ranges": true
+        },
+        "note": "Selector does not compute exact contact counts; it only ensures MICROSESSION requests are compatible with overall plan structure."
+      }
+    },
+
+    "deny_rules": {
+      "description": "Conditions where selector must not auto-assign a block_tag.",
+      "rules": [
+        {
+          "name": "MISSING_IN_SEASON_FIXTURE_DATA",
+          "condition": "season_phase in ['EARLY_IN_SEASON', 'PEAK_IN_SEASON'] && games_per_week == null",
+          "action": "DENY",
+          "reason": "Cannot determine in-season tier without fixture density."
+        },
+        {
+          "name": "RED_FLAG_NO_CLEARANCE",
+          "condition": "injury_flags contains 'RF_NO_CLEARANCE'",
+          "action": "DENY",
+          "reason": "Medical/clearance missing; block selection must be escalated."
+        },
+        {
+          "name": "PAIN_CRITICAL",
+          "condition": "pain_gate >= 7",
+          "action": "DENY",
+          "reason": "High pain; route to coach/medical for manual decision."
+        }
+      ],
+      "semantics": "DENY means selector returns no block_tag; system must escalate to coach/medical or Governance/EPA."
+    }
+  },
+
+  "outputs": {
+    "required_fields": {
+      "block_tag": {
+        "type": "string",
+        "description": "Selected block identifier (e.g., 'YL_GEN_FND8WK', 'SP_OFF_DEV16WK')."
+      },
+      "season_type": {
+        "type": "enum",
+        "values": [
+          "OFF_SEASON",
+          "PRE_SEASON",
+          "IN_SEASON_TIER_1",
+          "IN_SEASON_TIER_2",
+          "IN_SEASON_TIER_3",
+          "POST_SEASON"
+        ],
+        "description": "Computed season type for Load Standards v2.1.2 and Governance."
+      },
+      "session_type": {
+        "type": "enum",
+        "values": [
+          "FULL_SESSION",
+          "MICROSESSION"
+        ],
+        "description": "Passthrough from input season_context.session_type."
+      },
+      "population": {
+        "type": "enum",
+        "values": [
+          "Youth_8_12",
+          "Youth_13_17",
+          "Adult"
+        ],
+        "description": "Passthrough from client_profile.population."
+      },
+      "readiness_flag": {
+        "type": "enum",
+        "values": [
+          "GREEN",
+          "YELLOW",
+          "RED"
+        ],
+        "description": "Passthrough from client_profile.readiness_flag."
+      },
+      "r2p_stage": {
+        "type": "enum",
+        "values": [
+          "R2P_Stage_1",
+          "R2P_Stage_2",
+          "R2P_Stage_3",
+          "R2P_Stage_4",
+          null
+        ],
+        "nullable": true,
+        "description": "Passthrough from client_profile.r2p_stage."
+      }
+    },
+
+    "advisory_fields": {
+      "description": "Non-binding hints derived from Load Standards v2.1.2; Governance/EPA enforce true limits.",
+      "fields": {
+        "recommended_max_sessions_this_week": {
+          "type": "number",
+          "description": "Suggested maximum total training sessions per week for this population + season_type."
+        },
+        "recommended_max_sprint_sessions_per_week": {
+          "type": "number",
+          "description": "Suggested maximum sessions per week that include true sprinting (>=90% Vmax) for this population + season_type."
+        },
+        "seasonal_operating_range_tag": {
+          "type": "string",
+          "description": "Reference key into Load Standards seasonal operating ranges (e.g., 'Youth_13_17_IN_SEASON_TIER_1')."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,888 @@
+{
+  "meta": {
+    "name": "EFL Individual Client Profile - High School Basketball Off-Season",
+    "icp_id": "ICP_HS_BASKETBALL_OFFSEASON",
+    "version": "2.3.1",
+    "generated": "2025-12-23",
+    "owner": "Austin Lawrence, Director of Performance Systems",
+    "status": "ACTIVE · PRODUCTION READY",
+    "parent_document": "EFL_ICP_DEFINITIONS_v2_3.json",
+    "codexReference": "§4.4 Population Architecture; Sport Demands Grid v2.0; Load Standards v2.2.0; EFL_Periodization_FV_Schema_v2_1; EFL_Governance_v4_1; EFL_Coach_AI_Playbook_v0_5_0; MDP_COURT_VERTICAL v1.4",
+    "changes_from_v2_3": [
+      "Added fv_bias_profile block with default VELOCITY_BIASED, legal biases per season/population, assessment protocol",
+      "Added fv_bias population/season override rules aligned to Governance v4.1 Gate 2",
+      "Updated population_ceilings.rationale to reference Load Standards v2.2.0",
+      "Added fv_band_targets showing zone distribution targets by bias profile (VELOCITY_BIASED 65% velocity zones, BALANCED 50/50)",
+      "Added fv_zone_emphasis and supported_bias_profiles to elastic and deceleration blocks",
+      "Added gate7_fv_bias_validation sub-section explaining EPA Gate 7 algorithm, variance thresholds, and coach actions",
+      "Updated epa_integration_notes.specialization_block_activation with Gate 7 behavior and bias legality validation",
+      "Updated codexReference to include Load Standards v2.2.0, Periodization v2.1, Governance v4.1, Playbook v0.5.0",
+      "Aligned all load ceiling language and bias rules to v2.2.0 and Governance v4.1 standards"
+    ],
+    "integration_points": [
+      "EFL_SPECIALIZATION_BLOCK_ELASTIC_BASKETBALL_v1_0_1.json",
+      "EFL_SPECIALIZATION_BLOCK_DECELERATION_BASKETBALL_v1_0.json",
+      "EFL_MDP_COURT_VERTICAL_v1_4.json",
+      "EFL_EXERCISE_PROGRESSION_LAW_v1_0_1.json",
+      "EFL_LOAD_STANDARDS_v2_2_0_COMPLETE_FV_TARGETING.json",
+      "EFL_Periodization_FV_Schema_v2_1.md",
+      "EFL_Governance_v4_1.md",
+      "EFL_Coach_AI_Playbook_v0_5_0.md",
+      "EPA_v2_2_1_Exercise_Library_Law.md"
+    ]
+  },
+
+  "icp_definition": {
+    "display_name": "High School Basketball - Off-Season Development",
+    "icp_id": "ICP_HS_BASKETBALL_OFFSEASON",
+    "description": "High school basketball athlete (ages 14-18, grades 9-12) in off-season development phase. Focus on vertical jump, reactive strength, deceleration mechanics, and multi-directional speed. Eligible for specialization blocks with proper prerequisites. F-V bias aware with legal bias determination per population/season.",
+    
+    "target_population": {
+      "age_range": "14-18 years",
+      "grade_range": "9-12",
+      "sport": "Basketball",
+      "season": "OFF_SEASON",
+      "training_age_minimum": "1 year (6 months for baseline programming, 1 year for specialization blocks)",
+      "governance_profile": "Youth_13_17_Performance",
+      "population_band": "Band_2",
+      "population_node": "Node_D",
+      "population_e_node": "E4 (with tier 3 cap at 40%)"
+    },
+
+    "fv_bias_profile": {
+      "description": "Force-Velocity bias rules for HS Basketball Off-Season per Load Standards v2.2.0 and Governance v4.1",
+      "default_bias": "VELOCITY_BIASED",
+      "rationale_for_default": "Youth 13-17 basketball emphasizes elastic power (vertical jump, reactive strength) and COD speed. VELOCITY_BIASED bias targets Z3/Z4/Z7/Z8 zones naturally suited to basketball demands. See Periodization Schema v2.1 Section 3F for zone→bias alignment.",
+      "legal_biases_offseason": ["BALANCED", "VELOCITY_BIASED"],
+      "legal_biases_prep_season": ["BALANCED", "VELOCITY_BIASED"],
+      "legal_biases_inseason": ["BALANCED"],
+      "legal_biases_postseason": ["BALANCED"],
+      "assessment_protocol": "CMJ height + RSI (30cm drop), Squat 1RM vs BW ratio per Load Standards v2.2.0 Section 4.1 Diagnostics. Assessment date required in EPA input.",
+      "assessment_required": true,
+      "assessment_frequency_weeks": 4,
+      "bias_override_rules": {
+        "rule_1": "If IN_SEASON or POST_SEASON detected, EPA automatically overrides to BALANCED per Governance v4.1 Gate 2, regardless of athlete history",
+        "rule_2": "Youth 16 & under: BALANCED only (all seasons) per Load Standards v2.2.0 Table 5.2 Population Rules",
+        "rule_3": "Youth 17 advanced: VELOCITY_BIASED/FORCE_BIASED allowed OFF/PRE seasons only; BALANCED forced IN/POST per Governance v4.1 Gate 1"
+      },
+      "note": "This ICP applies exclusively to OFF_SEASON athletes. In-season basketball athletes use separate ICP_HS_BASKETBALL_INSEASON with bias forced BALANCED per Governance v4.1 Gate 2."
+    },
+
+    "parent_mdp": {
+      "mdp_id": "MDP_COURT_VERTICAL",
+      "mdp_version": "1.4.0",
+      "applies_to_sports": ["Basketball", "Volleyball", "Handball"],
+      "primary_movement_demands": [
+        "vertical_jump_frequency_very_high",
+        "cod_frequency_very_high",
+        "sprint_distance_short",
+        "elastic_demand_very_high",
+        "deceleration_frequency_very_high"
+      ]
+    },
+
+    "default_readiness": "GREEN",
+    "typical_season_duration_weeks": "12-16",
+    
+    "training_goals": {
+      "primary": [
+        "increase_vertical_jump (target: +2-4 inches over off-season)",
+        "improve_reactive_strength_index (target: RSI ≥1.8-2.0)",
+        "enhance_cod_speed (target: 505 test improvement ≥3%)",
+        "develop_deceleration_mechanics (target: landing quality ≥7/10)",
+        "build_explosive_strength (target: trap bar jump 1.5x BW)"
+      ],
+      "secondary": [
+        "improve_repeat_jump_capacity (target: <15% decrement)",
+        "increase_sprint_acceleration (target: 10y time improvement)",
+        "enhance_lateral_movement_speed",
+        "develop_landing_control (target: knee valgus absent)",
+        "build_unilateral_strength (target: <10% asymmetry)"
+      ],
+      "supportive": [
+        "maintain_shooting_mechanics (upper body must not interfere)",
+        "develop_trunk_control",
+        "improve_ankle_mobility (target: ≥35° dorsiflexion)",
+        "enhance_work_capacity"
+      ]
+    }
+  },
+
+  "load_standard_profile": {
+    "description": "Youth 13-17 basketball athlete load ceilings and targets, aligned to Load Standards v2.2.0",
+    
+    "population_ceilings": {
+      "plyo_contacts_per_session": 120,
+      "plyo_contacts_per_week": 240,
+      "sprint_meters_per_week": 600,
+      "load_band_ceiling": "Band_2",
+      "node_access": ["A", "B", "C", "D"],
+      "e_node_ceiling": "E4",
+      "tier_3_max_percent_session": 40,
+      "rationale": "Load Standards v2.2.0 Youth 13-17 hard ceilings enforced across ALL programming. See Load Standards v2.2.0 Table 3.2 (Youth 13-17 Hard Caps). Ceilings apply regardless of F-V bias selection."
+    },
+
+    "baseline_programming_targets": {
+      "description": "Default MDP_COURT_VERTICAL programming when NOT in specialization block",
+      "plyo_contacts_per_session": {"min": 80, "max": 100, "typical": 90},
+      "plyo_contacts_per_week": {"min": 160, "max": 200, "typical": 180},
+      "sprint_meters_per_week": {"min": 400, "max": 600, "typical": 500},
+      "session_frequency": "3-4x per week",
+      "cns_load_category": "MODERATE-HIGH",
+      "tier_3_typical_percent": "20-30%",
+      "e_node_distribution": {
+        "E0": "20-30%",
+        "E1": "40-50%",
+        "E2": "20-30%",
+        "E3": "5-10%",
+        "E4": "0-5%"
+      },
+      "note": "Baseline programming operates at 75-83% of population ceilings, leaving headroom for specialization blocks"
+    },
+
+    "fv_band_targets": {
+      "description": "Weekly zone distribution targets aligned to FV Periodization Schema v2.1 Section 2B and Gate 7 compliance",
+      "applies_to": "Baseline MDP programming (FULLSESSION); specialization blocks override with block-specific zones",
+      "default_distribution_balanced": {
+        "Z1_Max_Strength": "5-10%",
+        "Z2_Strength_Speed": "10-15%",
+        "Z3_Speed_Strength": "25-35%",
+        "Z4_Elastic_Reactive": "10-15%",
+        "Z5_Strength_Endurance": "15-20%",
+        "Z6_Hypertrophy": "5-10%",
+        "Z7_Speed_Linear": "5-10%",
+        "Z8_Agility_COD": "5-10%"
+      },
+      "velocity_biased_distribution": {
+        "velocity_zones_z3_z4_z7_z8_target_percent": 65,
+        "strength_zones_z1_z2_z5_z6_target_percent": 35,
+        "rationale": "VELOCITY_BIASED profile targets 65-70% volume in velocity/elastic/speed zones (Z3/Z4/Z7/Z8) per Periodization Schema v2.1 Section 3F"
+      },
+      "balanced_distribution": {
+        "target_percent_velocity_bands": 50,
+        "target_percent_strength_bands": 50,
+        "rationale": "BALANCED profile targets 50/50 distribution across velocity and strength zones per Periodization Schema v2.1 Section 3F"
+      },
+      "zone_reference": "See EFL_Periodization_FV_Schema_v2_1.md Section 2 for zone definitions and Section 2B for band mapping",
+      "gate7_note": "Weekly zone distribution validated by EPA v2.2.1 Gate 7 against declared fv_bias_profile. Variance ≤10% GREEN, 11-20% YELLOW, >20% QUARANTINED_REVIEW per EPA v2.2.1 Section 6 Step 5"
+    },
+
+    "specialization_block_adjustments": {
+      "elastic_block": {
+        "plyo_contacts_per_session": {"min": 80, "max": 100},
+        "plyo_contacts_per_week": {"min": 160, "max": 180},
+        "operating_at_percent_ceiling": 83,
+        "tier_3_max_percent": 40,
+        "cns_load_category": "HIGH",
+        "fv_zone_emphasis": ["Z3", "Z4", "Z8"],
+        "supported_bias_profiles": ["BALANCED", "VELOCITY_BIASED"],
+        "fv_note": "Elastic block emphasizes Z3 (Speed-Strength), Z4 (Elastic/Reactive), and Z8 (COD recovery) per Periodization Schema v2.1. Aligns naturally with VELOCITY_BIASED and BALANCED profiles. E3 (reactive shock) allowed up to 40% per Load Standards v2.2.0 Tier 3 youth cap. Expected EPA Gate 7 status: GREEN for VELOCITY_BIASED athletes.",
+        "note": "Operates at 83% of ceiling - higher than baseline but with safety margin"
+      },
+      "deceleration_block": {
+        "plyo_contacts_per_session": {"weeks_1_3": {"min": 50, "max": 90}},
+        "plyo_contacts_per_week": {"weeks_1_3": {"min": 100, "max": 180}},
+        "operating_at_percent_ceiling": "58-75% (progressive)",
+        "tier_3_max_percent": "20-30%",
+        "cns_load_category": "MODERATE-HIGH",
+        "sprint_meters_per_week": {"min": 300, "max": 800},
+        "fv_zone_emphasis": ["Z2", "Z5", "Z8"],
+        "supported_bias_profiles": ["BALANCED"],
+        "fv_note": "Deceleration block emphasizes Z2 (Strength-Speed loaded jumps), Z5 (Strength-Endurance eccentric work), and Z8 (COD braking) per Periodization Schema v2.1. Best supported by BALANCED bias for control/stability emphasis. E3 minimized (20-30% max) to favor control/stability over shock. Expected EPA Gate 7 status: GREEN for BALANCED athletes, YELLOW if VELOCITY_BIASED (bias mismatch).",
+        "note": "Lower contact volume than elastic, more eccentric emphasis, sprint work integrated"
+      }
+    }
+  },
+
+  "specialization_block_eligibility": {
+    "description": "Rules for when HS basketball athletes can access specialization blocks",
+    
+    "general_eligibility_requirements": {
+      "age_minimum": 14,
+      "training_age_minimum_months": 12,
+      "season_requirement": "OFF_SEASON (elastic + decel) OR PREP_SEASON (decel only)",
+      "readiness_requirement": "GREEN",
+      "movement_quality_minimum": "Landing quality ≥7/10, knee valgus ABSENT",
+      "injury_status": "No active lower limb injuries",
+      "blocks_allowed_per_year": "ONE maximum (Youth 13-17 population constraint)",
+      "fv_bias_legality_requirement": "Bias must be legal for population/season per fv_bias_profile rules above",
+      "rationale": "Youth 13-17 tissue maturation and training age limit specialization frequency to prevent overuse. F-V bias must align with population maturity and season per Load Standards v2.2.0 and Governance v4.1."
+    },
+
+    "elastic_specialization_block": {
+      "block_id": "elastic_specialization_basketball",
+      "block_reference": "EFL_SPECIALIZATION_BLOCK_ELASTIC_BASKETBALL_v1_0_1.json",
+      "eligible": true,
+      "season_restriction": "OFF_SEASON only",
+      
+      "prerequisite_training_requirements": {
+        "plyometric_exposure_weeks": {
+          "minimum": 8,
+          "description": "Athlete must have completed minimum 8 weeks of progressive plyometric training (E0→E1→E2)",
+          "rationale": "Elastic block operates at E1-E3 with 40% Tier 3 - requires established plyo base"
+        },
+        "landing_quality_baseline": {
+          "minimum_score": 7.0,
+          "assessment_method": "Coach-scored landing quality rubric (depth, control, sound, alignment)",
+          "rationale": "Poor landing mechanics + high plyo volume = injury risk"
+        },
+        "previous_vertical_jump_training": {
+          "required": true,
+          "description": "Athlete has previous exposure to bilateral/unilateral jumps across E0-E2",
+          "rationale": "Block emphasizes E2-E3 reactive work - needs foundation"
+        },
+        "tissue_health_status": {
+          "knee_status": "No pain, no history of patellar tendinopathy active phase",
+          "ankle_status": "No sprain within 8 weeks, adequate dorsiflexion (≥35°)",
+          "achilles_status": "No tendon pain, no history of Achilles tendinopathy",
+          "rationale": "Elastic block = high tendon load, tissue must be healthy"
+        }
+      },
+
+      "entry_gates_summary": {
+        "readiness": "GREEN (HARD_GATE)",
+        "season": "OFF_SEASON (HARD_GATE)",
+        "landing_quality": "≥7/10 (HARD_GATE)",
+        "knee_valgus": "ABSENT (HARD_GATE)",
+        "training_exposure": "8+ weeks plyometric work (HARD_GATE)",
+        "injury_status": "No active lower limb injury (HARD_GATE)",
+        "fv_bias_legality": "BALANCED or VELOCITY_BIASED (HARD_GATE per Governance v4.1 Gate 1)"
+      },
+
+      "performance_targets": {
+        "vertical_jump_improvement": "≥5% increase from block entry baseline",
+        "rsi_target": "≥2.0 OR ≥10% improvement",
+        "repeat_jump_capacity": "Decrement <15% over 10 continuous jumps",
+        "landing_quality_maintenance": "≥7/10 throughout block"
+      },
+
+      "position_specific_recommendations": {
+        "guards": {
+          "priority": "HIGH",
+          "rationale": "Guards benefit significantly from vertical elastic power for finishing at rim, rebounding from perimeter",
+          "emphasis_adjustment": "Week 2 can increase lateral bounds for defensive slides"
+        },
+        "wings": {
+          "priority": "HIGH",
+          "rationale": "Wings need vertical power for rebounding, cutting, finishing through contact",
+          "emphasis_adjustment": "Standard block structure optimal"
+        },
+        "posts": {
+          "priority": "MODERATE-HIGH",
+          "rationale": "Posts need vertical power for rebounding and rim protection, but also need strength base",
+          "emphasis_adjustment": "Consider strength block first if squat <1.5x BW, then elastic block",
+          "caution": "Higher body mass = higher landing forces, monitor knee/ankle closely"
+        }
+      },
+
+      "typical_athlete_profile": {
+        "primary_limiter": "Vertical jump below position average",
+        "secondary_indicators": [
+          "RSI <1.8",
+          "Repeat-jump capacity poor (>20% decrement)",
+          "Good landing mechanics but low elastic output",
+          "Athlete reports 'feeling slow off ground'"
+        ],
+        "best_timing": "Weeks 1-4 of off-season (highest recovery capacity)"
+      }
+    },
+
+    "deceleration_specialization_block": {
+      "block_id": "deceleration_specialization_basketball",
+      "block_reference": "EFL_SPECIALIZATION_BLOCK_DECELERATION_BASKETBALL_v1_0.json",
+      "eligible": true,
+      "season_restriction": "OFF_SEASON or PREP_SEASON",
+
+      "prerequisite_training_requirements": {
+        "eccentric_exposure_weeks": {
+          "minimum": 4,
+          "description": "Athlete must have completed minimum 4 weeks of tempo eccentric work (3/0/1 or slower)",
+          "rationale": "Decel block emphasizes eccentric control - requires tissue adaptation to eccentric loads"
+        },
+        "single_leg_squat_quality": {
+          "minimum_score": 7.0,
+          "assessment_method": "FMS-style single-leg squat scoring (depth, control, alignment, stability)",
+          "rationale": "Unilateral control prerequisite for deceleration safety"
+        },
+        "bilateral_squat_competency": {
+          "required": true,
+          "description": "Athlete can perform bodyweight squat to parallel with control for 10+ reps",
+          "rationale": "Foundational strength required before intensive deceleration work"
+        },
+        "tissue_health_status": {
+          "knee_status": "No active injury, no recent MCL/ACL issues, patellar tendon healthy",
+          "ankle_status": "No sprain within 4 weeks, adequate dorsiflexion (≥35°), no chronic instability without support",
+          "hip_status": "No active hip flexor strain",
+          "rationale": "Decel block = high braking forces, tissue must tolerate eccentric loads"
+        }
+      },
+
+      "entry_gates_summary": {
+        "readiness": "GREEN (HARD_GATE)",
+        "season": "OFF_SEASON or PREP_SEASON (HARD_GATE)",
+        "single_leg_squat_quality": "≥7/10 (HARD_GATE)",
+        "knee_valgus": "ABSENT (HARD_GATE)",
+        "eccentric_exposure": "4+ weeks tempo work (HARD_GATE)",
+        "hip_control": "Bilateral squat competency PASS (HARD_GATE)",
+        "fv_bias_legality": "BALANCED (HARD_GATE per decel block design)"
+      },
+
+      "performance_targets": {
+        "505_agility_improvement": "≥3% improvement OR <10% L vs R asymmetry",
+        "deceleration_force_symmetry": "<10% L vs R difference",
+        "braking_mechanics_quality": "≥7/10 coach visual assessment",
+        "single_leg_squat_maintenance": "≥7/10 throughout block"
+      },
+
+      "position_specific_recommendations": {
+        "guards": {
+          "priority": "CRITICAL",
+          "rationale": "Guards need elite COD for defensive pressure, closeouts, transition defense. High injury risk position (ACL) - prevention focus.",
+          "emphasis_adjustment": "Week 3 can emphasize 90° cuts and defensive-specific patterns (defensive slides to jump stop)",
+          "injury_prevention_note": "Guards highest ACL injury rate - decel block is injury prevention priority"
+        },
+        "wings": {
+          "priority": "HIGH",
+          "rationale": "Wings need COD for closeouts, help-side defense, cutting. Moderate injury risk.",
+          "emphasis_adjustment": "Standard block structure optimal, focus on multi-directional control"
+        },
+        "posts": {
+          "priority": "MODERATE",
+          "rationale": "Posts need deceleration for rebounding positioning and post defense, but less COD frequency than perimeter players",
+          "emphasis_adjustment": "Week 1-2 can extend (bilateral braking emphasis), Week 3 can reduce volume",
+          "caution": "Higher body mass = higher braking forces, extra attention to knee alignment"
+        }
+      },
+
+      "typical_athlete_profile": {
+        "primary_limiter": "COD speed below position average OR previous knee injury",
+        "secondary_indicators": [
+          "505 test >10% asymmetry L vs R",
+          "Knee valgus present on cuts (corrective needed)",
+          "Braking mechanics poor (long deceleration distance)",
+          "Previous ACL or meniscus injury (prevention focus)",
+          "Athlete reports 'feeling out of control on cuts'"
+        ],
+        "best_timing": "Weeks 1-4 OR 7-10 of off-season (flexible), can extend into prep season"
+      }
+    },
+
+    "block_contraindications": {
+      "description": "When NOT to use specialization blocks for HS basketball athletes",
+      
+      "absolute_contraindications": [
+        {
+          "condition": "Active lower limb injury",
+          "applies_to": "Both blocks",
+          "rationale": "Specialization intensity will exacerbate injury"
+        },
+        {
+          "condition": "Athlete already completed one specialization block this training year",
+          "applies_to": "Both blocks",
+          "rationale": "Youth 13-17 population limit is ONE block per year - tissue maturation constraint"
+        },
+        {
+          "condition": "IN_SEASON phase (any tier)",
+          "applies_to": "Both blocks",
+          "rationale": "Competition load + block volume = exceeds weekly ceilings per Load Standards v2.2.0"
+        },
+        {
+          "condition": "Training age <12 months",
+          "applies_to": "Both blocks",
+          "rationale": "Insufficient training base for specialization intensity"
+        },
+        {
+          "condition": "Readiness YELLOW or RED",
+          "applies_to": "Both blocks",
+          "rationale": "Specialization requires full recovery capacity - compromised readiness = injury risk"
+        },
+        {
+          "condition": "Movement quality <7/10 (landing or single-leg squat)",
+          "applies_to": "Elastic block: landing quality, Decel block: single-leg squat",
+          "rationale": "Poor movement quality + high volume = technique breakdown and injury"
+        },
+        {
+          "condition": "F-V bias illegal for population/season",
+          "applies_to": "Both blocks",
+          "rationale": "Governance v4.1 Gate 1 prohibits certain biases per population/season. EPA will REJECT if bias illegal."
+        }
+      ],
+
+      "relative_contraindications": [
+        {
+          "condition": "Multiple movement limiters present",
+          "recommendation": "Use baseline MDP programming for general development",
+          "rationale": "Specialization is for targeted adaptation - generalists need broad base first"
+        },
+        {
+          "condition": "Recent training interruption (>2 weeks off)",
+          "recommendation": "Return to baseline programming, rebuild base before block",
+          "rationale": "Detraining + specialization intensity = injury risk"
+        },
+        {
+          "condition": "Chronic injury history (multiple same-site injuries)",
+          "recommendation": "Conservative approach - corrective work before specialization",
+          "rationale": "Tissue quality may not tolerate specialization volume"
+        },
+        {
+          "condition": "Body mass significantly above position average (>95th percentile)",
+          "recommendation": "Extra monitoring, may need volume reduction 10-15%",
+          "rationale": "Higher mass = higher landing/braking forces - increased tissue stress",
+          "applies_to": "Both blocks"
+        }
+      ],
+
+      "use_baseline_instead_if": [
+        "No clear performance limiter identified",
+        "Athlete needs broad athletic development (not specialist yet)",
+        "Insufficient prerequisites met (training age, exposure, movement quality)",
+        "Recovery capacity limited (readiness frequently YELLOW/RED)",
+        "Post-injury returning to training (need gradual rebuild)",
+        "First off-season with structured training (build base first)"
+      ]
+    },
+
+    "block_sequencing_for_youth_13_17": {
+      "description": "How to choose which block to use when limited to ONE per training year",
+      
+      "decision_tree": {
+        "step_1": {
+          "question": "Does athlete have previous knee injury (ACL, meniscus) OR knee valgus present?",
+          "if_yes": "CHOOSE DECELERATION BLOCK (injury prevention priority)",
+          "if_no": "Proceed to step 2"
+        },
+        "step_2": {
+          "question": "Is athlete's position guard (PG, SG, combo guard)?",
+          "if_yes": "LEAN TOWARD DECELERATION BLOCK (guards highest ACL risk + COD critical)",
+          "if_no": "Proceed to step 3"
+        },
+        "step_3": {
+          "question": "What is the PRIMARY performance limiter?",
+          "if_vertical_jump_low": "CHOOSE ELASTIC BLOCK",
+          "if_cod_speed_low": "CHOOSE DECELERATION BLOCK",
+          "if_both_similar": "Proceed to step 4"
+        },
+        "step_4": {
+          "question": "Which adaptation would have greatest sport impact?",
+          "if_more_explosive_finishes_needed": "ELASTIC BLOCK (vertical power)",
+          "if_better_defensive_positioning_needed": "DECELERATION BLOCK (COD efficiency)",
+          "if_still_unclear": "Use baseline programming this year, reassess next off-season"
+        }
+      },
+
+      "multi_year_planning": {
+        "year_1_offseason": {
+          "recommendation": "Choose ONE block based on primary limiter",
+          "example": "Freshman year: Deceleration block (build movement quality + injury prevention)"
+        },
+        "year_2_offseason": {
+          "recommendation": "Choose OTHER block OR repeat same block if limiter persists",
+          "example": "Sophomore year: Elastic block (now that movement quality established)"
+        },
+        "year_3_offseason": {
+          "recommendation": "Alternate or focus on persistent limiter",
+          "example": "Junior year: Return to deceleration (ACL prevention priority for in-season)"
+        },
+        "year_4_offseason": {
+          "recommendation": "Peak performance emphasis",
+          "example": "Senior year: Elastic block (maximize vertical for recruitment/performance)"
+        },
+        "note": "This is ONE possible progression - actual path depends on individual athlete development, injury history, position demands"
+      },
+
+      "gate7_fv_bias_validation": {
+        "description": "How EPA v2.2.1 validates block programming against F-V bias per EPA Section 6 Gate 7",
+        "applies_when": "Any session generated for this athlete is run through EPA v2.2.1",
+        "validation_algorithm": "EPA sums zone volumes per session, maps to bands per Periodization Schema v2.1 Section 2B, compares actual to bias target (70% for FORCE/VELOCITY_BIASED, 50/50 for BALANCED)",
+        "variance_thresholds": {
+          "green_threshold": "≤10% variance from bias target → Program approved, meets F-V bias target",
+          "yellow_threshold": "11-20% variance → Program outputs but flagged for coach review; functional but off-target",
+          "red_threshold": ">20% variance → QUARANTINED_REVIEW, coach must revise zone selection"
+        },
+        "elastic_block_gate7_note": "Elastic block zones (Z3, Z4, Z8) naturally support VELOCITY_BIASED and BALANCED. Expected weekly distribution should align with declared bias. If athlete is VELOCITY_BIASED, elastic block programs typically GREEN Gate 7. If BALANCED, may run YELLOW but still acceptable.",
+        "decel_block_gate7_note": "Decel block zones (Z2, Z5, Z8) emphasize strength/stability, best for BALANCED bias. If athlete is BALANCED, decel programs typically GREEN Gate 7. If athlete is VELOCITY_BIASED and assigned decel block, weekly programs may run YELLOW Gate 7 (bias mismatch) unless coach adjusts zone mix (add more Z3/Z4).",
+        "coach_action_if_red": "If EPA returns RED Gate 7 (variance >20%), coach must either: (a) revise zone selection to match athlete bias, or (b) reassess if block choice aligns with athlete profile and F-V bias"
+      }
+    }
+  },
+
+  "performance_assessment_battery": {
+    "description": "Testing protocols for block entry validation and exit criteria verification",
+    
+    "entry_assessments": {
+      "required_for_all_blocks": [
+        {
+          "test": "Readiness Assessment",
+          "method": "Sleep + Stress + RPE formula",
+          "pass_threshold": "GREEN status",
+          "timing": "Day before block start",
+          "frequency": "Daily throughout block"
+        },
+        {
+          "test": "Knee Valgus Screening",
+          "method": "Visual assessment on single-leg squat, single-leg landing, lateral movement",
+          "pass_threshold": "ABSENT on all patterns",
+          "timing": "Entry assessment",
+          "frequency": "Every session"
+        },
+        {
+          "test": "Injury Status Query",
+          "method": "Athlete self-report + coach observation + manual palpation if indicated",
+          "pass_threshold": "No active lower limb pain or injury",
+          "timing": "Entry assessment"
+        },
+        {
+          "test": "F-V Bias Assessment (NEW for v2.3.1)",
+          "method": "CMJ height + RSI (30cm drop), Squat 1RM vs BW per Load Standards v2.2.0 Diagnostics",
+          "pass_threshold": "Assessment date recorded, bias determined and documented",
+          "timing": "Entry assessment",
+          "purpose": "Provide EPA v2.2.1 with fv_bias, fv_bias_assessment_date, fv_bias_rationale"
+        }
+      ],
+
+      "elastic_block_specific": [
+        {
+          "test": "Landing Quality Assessment",
+          "method": "Bilateral landing from 30cm box, scored on depth, control, sound, alignment (0-10 scale)",
+          "pass_threshold": "≥7/10",
+          "timing": "Entry assessment",
+          "frequency": "Weekly throughout block"
+        },
+        {
+          "test": "Countermovement Jump (CMJ)",
+          "method": "3 max effort jumps, best height recorded",
+          "purpose": "Baseline for ≥5% improvement target",
+          "timing": "Entry assessment + Week 4 exit"
+        },
+        {
+          "test": "Reactive Strength Index (RSI)",
+          "method": "Drop jump from 30cm, calculate RSI = jump height / ground contact time",
+          "purpose": "Baseline for ≥2.0 target OR ≥10% improvement",
+          "timing": "Entry assessment + Week 4 exit"
+        },
+        {
+          "test": "Repeat Jump Test",
+          "method": "10 continuous max jumps, calculate decrement from first to last",
+          "purpose": "Baseline for <15% decrement target",
+          "timing": "Entry assessment + Week 4 exit"
+        }
+      ],
+
+      "deceleration_block_specific": [
+        {
+          "test": "Single-Leg Squat Quality",
+          "method": "FMS-style scoring (depth, control, alignment, stability, 0-10 scale)",
+          "pass_threshold": "≥7/10 both legs",
+          "timing": "Entry assessment",
+          "frequency": "Weekly throughout block"
+        },
+        {
+          "test": "505 Agility Test",
+          "method": "15m sprint, 180° turn, 5m return, time both directions",
+          "purpose": "Baseline for ≥3% improvement OR <10% asymmetry target",
+          "timing": "Entry assessment + Week 4 exit"
+        },
+        {
+          "test": "Single-Leg Hop for Distance",
+          "method": "Max distance hop on each leg, compare L vs R",
+          "purpose": "Baseline for asymmetry tracking (<10% target)",
+          "timing": "Entry assessment + Week 4 exit"
+        },
+        {
+          "test": "Ankle Dorsiflexion (Weight-Bearing Lunge)",
+          "method": "Measure knee-to-wall distance, convert to degrees",
+          "purpose": "≥35° required for proper deceleration shin angle",
+          "timing": "Entry assessment"
+        }
+      ]
+    },
+
+    "exit_assessments": {
+      "elastic_block": {
+        "tests_required": [
+          "CMJ height (≥5% improvement)",
+          "RSI from 30cm (≥2.0 OR ≥10% improvement)",
+          "Repeat jump test (decrement <15%)",
+          "Landing quality (≥7/10 maintained)",
+          "Knee valgus screening (ABSENT)",
+          "Tissue health query (no knee pain, no tendon irritation)"
+        ],
+        "success_definition": "All performance + movement quality + tissue health criteria passed",
+        "timing": "Mid-week 4"
+      },
+
+      "deceleration_block": {
+        "tests_required": [
+          "505 agility test (≥3% improvement OR <10% asymmetry)",
+          "Single-leg hop asymmetry (<10% L vs R)",
+          "Single-leg squat quality (≥7/10 maintained)",
+          "Knee valgus screening (ABSENT)",
+          "Tissue health query (no knee/ankle/hip pain)"
+        ],
+        "success_definition": "All COD speed + movement quality + tissue health criteria passed",
+        "timing": "Mid-week 4"
+      }
+    }
+  },
+
+  "tissue_health_monitoring": {
+    "description": "What to monitor throughout blocks to ensure athlete safety",
+    
+    "daily_monitoring": {
+      "pre_session": [
+        "Readiness assessment (sleep + stress + RPE)",
+        "Subjective pain/soreness query (any knee, ankle, hip, achilles discomfort?)",
+        "Landing quality spot-check (3 reps, visual assessment)"
+      ],
+      "during_session": [
+        "Knee alignment on every landing (valgus = immediate stop)",
+        "Landing sound quality (loud thuds = technique breakdown)",
+        "Athlete hesitation or guarding behavior",
+        "Braking distance on deceleration drills (lengthening = fatigue/technique issue)"
+      ],
+      "post_session": [
+        "Pain query (any knee, ankle, tendon pain during or after?)",
+        "Joint stability check (ankle single-leg balance, knee stability)",
+        "Athlete subjective report (how did it feel?)"
+      ]
+    },
+
+    "weekly_monitoring": {
+      "assessments": [
+        "Readiness trend analysis (≥3 GREEN days required per week)",
+        "Movement quality re-check (landing or single-leg squat)",
+        "Performance tracking (jump height or COD time)",
+        "Asymmetry check (single-leg hop distance)",
+        "Body composition (if available - excessive weight loss = underrecovery)"
+      ],
+      "red_flags": [
+        "Readiness YELLOW/RED ≥3 days in one week",
+        "Movement quality degrading (score dropping)",
+        "Knee valgus emerging (was absent, now present)",
+        "Persistent joint pain (same location >3 days)",
+        "Performance plateauing or declining",
+        "Athlete reporting excessive fatigue or lack of motivation"
+      ],
+      "action_if_red_flag": [
+        "Immediately reduce volume 20-30%",
+        "Consider week 4 deload protocol early",
+        "Add extra recovery day",
+        "Consult with coach/parent/athletic trainer",
+        "May need to terminate block and return to baseline"
+      ]
+    }
+  },
+
+  "annual_periodization_template": {
+    "description": "Sample 16-week off-season structure showing block placement, aligned to F-V bias and EPA requirements",
+    
+    "scenario_1_elastic_emphasis": {
+      "athlete_profile": "Wing player, vertical jump limiter, VELOCITY_BIASED bias, no injury history",
+      "structure": [
+        {
+          "weeks": "1-4",
+          "phase": "ELASTIC SPECIALIZATION BLOCK",
+          "volume": "160-180 contacts/week",
+          "focus": "Vertical/reactive power development (Z3/Z4 emphasis)",
+          "cns": "HIGH",
+          "fv_bias": "VELOCITY_BIASED",
+          "expected_gate7": "GREEN (elastic naturally supports VELOCITY_BIASED)"
+        },
+        {
+          "weeks": "5-6",
+          "phase": "Baseline Transition",
+          "volume": "100-140 contacts/week (60% → 75%)",
+          "focus": "Recovery + re-entry to baseline MDP (Zone 8 primary)",
+          "cns": "MODERATE",
+          "fv_bias": "VELOCITY_BIASED",
+          "expected_gate7": "GREEN (recovery focus, Z8 recovery zones)"
+        },
+        {
+          "weeks": "7-14",
+          "phase": "Baseline MDP Programming",
+          "volume": "160-200 contacts/week",
+          "focus": "General athletic development, maintain elastic gains (Z3/Z4/Z7/Z8 emphasis per baseline distribution)",
+          "cns": "MODERATE-HIGH",
+          "fv_bias": "VELOCITY_BIASED",
+          "expected_gate7": "GREEN (baseline targets 65% velocity zones for VELOCITY_BIASED)"
+        },
+        {
+          "weeks": "15-16",
+          "phase": "Sport-Specific Preparation (PREP_SEASON)",
+          "volume": "120-160 contacts/week",
+          "focus": "Bridge to in-season, game-like movements (Z3/Z4 with Z8 skill emphasis)",
+          "cns": "MODERATE",
+          "fv_bias": "VELOCITY_BIASED",
+          "expected_gate7": "GREEN (sport-specific Z3/Z4 emphasis)"
+        }
+      ],
+      "note": "Youth 13-17 limit = ONE block, so elastic only this year. VELOCITY_BIASED bias maintained throughout OFF/PREP seasons per fv_bias_profile rules."
+    },
+
+    "scenario_2_deceleration_emphasis": {
+      "athlete_profile": "Guard, previous ACL injury (cleared for full activity), COD limiter, BALANCED bias (conservative)",
+      "structure": [
+        {
+          "weeks": "1-2",
+          "phase": "Baseline MDP Programming",
+          "volume": "160-180 contacts/week",
+          "focus": "General development + movement quality refinement (balanced Z1-Z8 mix)",
+          "cns": "MODERATE",
+          "fv_bias": "BALANCED",
+          "expected_gate7": "GREEN (baseline balanced distribution)"
+        },
+        {
+          "weeks": "3-6",
+          "phase": "DECELERATION SPECIALIZATION BLOCK",
+          "volume": "100-180 contacts/week (progressive)",
+          "focus": "Braking mechanics + COD efficiency + injury prevention (Z2/Z5/Z8 emphasis)",
+          "cns": "MODERATE-HIGH",
+          "fv_bias": "BALANCED",
+          "expected_gate7": "GREEN (decel supports BALANCED bias, 50/50 Z2/Z5 strength with Z8 control)"
+        },
+        {
+          "weeks": "7-8",
+          "phase": "Baseline Transition",
+          "volume": "120-150 contacts/week (60% → 75%)",
+          "focus": "Recovery + re-entry to baseline MDP",
+          "cns": "MODERATE",
+          "fv_bias": "BALANCED",
+          "expected_gate7": "GREEN (recovery focus)"
+        },
+        {
+          "weeks": "9-14",
+          "phase": "Baseline MDP Programming",
+          "volume": "160-200 contacts/week",
+          "focus": "General athletic development, maintain COD gains (balanced Z1-Z8 with Z5/Z2 emphasis)",
+          "cns": "MODERATE-HIGH",
+          "fv_bias": "BALANCED",
+          "expected_gate7": "GREEN (baseline balanced distribution)"
+        },
+        {
+          "weeks": "15-16",
+          "phase": "Sport-Specific Preparation (PREP_SEASON)",
+          "volume": "120-160 contacts/week",
+          "focus": "Bridge to in-season, defensive emphasis (Z2/Z5/Z8 skill emphasis)",
+          "cns": "MODERATE",
+          "fv_bias": "BALANCED",
+          "expected_gate7": "GREEN (decel skills in PREP season)"
+        }
+      ],
+      "note": "Decel block delayed to weeks 3-6 to allow general prep first, injury prevention priority for guard position."
+    },
+
+    "scenario_3_no_specialization": {
+      "athlete_profile": "Post player, multiple limiters (strength, conditioning, movement quality), first structured off-season, BALANCED bias",
+      "structure": [
+        {
+          "weeks": "1-16",
+          "phase": "Baseline MDP Programming (entire off-season)",
+          "volume": "160-200 contacts/week",
+          "focus": "General athletic development across all qualities (balanced Z1-Z8 distribution per fv_band_targets)",
+          "cns": "MODERATE-HIGH",
+          "fv_bias": "BALANCED",
+          "expected_gate7": "GREEN (baseline programming follows balanced targets)"
+        }
+      ],
+      "rationale": "Athlete needs broad development, not specialist yet. Specialization blocks inappropriate for generalists. Build base this year, consider block next off-season.",
+      "note": "Not all athletes need specialization blocks - baseline MDP is excellent programming aligned to Load Standards v2.2.0 and FV Schema v2.1"
+    }
+  },
+
+  "fv_zone_focus": {
+    "description": "Default zone emphasis when using baseline MDP programming (not in specialization block), aligned to Periodization Schema v2.1",
+    "primary_zones": ["Zone_3", "Zone_4"],
+    "secondary_zones": ["Zone_2", "Zone_6"],
+    "recovery_zones": ["Zone_8", "Zone_5"],
+    "zone_distribution_typical_week": {
+      "Zone_1": "0-5% (minimal max strength emphasis in off-season)",
+      "Zone_2": "15-20% (explosive strength support)",
+      "Zone_3": "30-40% (PRIMARY - elastic-reactive power)",
+      "Zone_4": "20-30% (velocity/speed development)",
+      "Zone_5": "5-10% (strength-endurance base)",
+      "Zone_6": "0-5% (hypertrophy minimal in off-season)",
+      "Zone_7": "5-10% (linear speed/conditioning work)",
+      "Zone_8": "10-15% (mobility/skill/recovery)"
+    },
+    "note": "Specialization blocks override this with block-specific zone emphasis (see load_standard_profile.specialization_block_adjustments). EPA Gate 7 validates weekly zone distribution against declared fv_bias_profile per Periodization Schema v2.1 Section 2B."
+  },
+
+  "epa_integration_notes": {
+    "baseline_programming": {
+      "trigger": "ICP_HS_BASKETBALL_OFFSEASON selected + no active specialization block",
+      "session_generation": "EPA uses MDP_COURT_VERTICAL seasonal defaults for OFF_SEASON",
+      "fv_bias_input": "EPA must receive fv_bias, fv_bias_assessment_date, fv_bias_rationale as part of client input contract per EPA v2.2.1 Section 1A",
+      "volume_targets": "baseline_programming_targets from load_standard_profile",
+      "exercise_selection": "EPA filters AETHER by Band_2, Node_D, E4 ceiling, applies fv_zone_focus per fv_bias_profile",
+      "gate7_validation": "EPA validates weekly zone distribution against fv_band_targets for declared bias (variance ≤10% GREEN, 11-20% YELLOW, >20% QUARANTINED_REVIEW)",
+      "validation": "Standard EPA gates (contacts ≤120/session, tier 3 ≤40%, readiness, Gate 7 bias compliance)"
+    },
+
+    "specialization_block_activation": {
+      "trigger": "Coach selects block_id (elastic_specialization_basketball OR deceleration_specialization_basketball)",
+      "pre_generation_validation": [
+        "Check blocks_allowed_per_year (ONE for Youth 13-17)",
+        "Check season (OFF_SEASON for elastic, OFF_SEASON or PREP_SEASON for decel)",
+        "Validate all entry_gates_summary requirements",
+        "Load performance_assessment_battery baselines",
+        "Confirm no absolute contraindications present",
+        "NEW: Verify fv_bias_profile is legal for population/season per Governance v4.1 Gate 1 + Gate 2",
+        "NEW: Confirm fv_bias matches or complements block supported_bias_profiles (elastic supports BALANCED/VELOCITY_BIASED, decel supports BALANCED)"
+      ],
+      "generation": "EPA uses block-specific weekly_structure from block JSON, not ICP defaults. EPA applies block-declared fv_zone_emphasis to exercise selection.",
+      "gate7_behavior": "EPA validates that block week generates sessions where zone distribution aligns to athlete's fv_bias within variance thresholds. If variance >20%, session QUARANTINED_REVIEW per EPA v2.2.1 Section 6 Step 5.",
+      "monitoring": "EPA enforces daily + weekly monitoring from tissue_health_monitoring",
+      "exit_validation": "EPA validates exit_assessments before returning to baseline"
+    },
+
+    "block_rejection_scenarios": {
+      "if_already_completed_block_this_year": "REJECT with reason: Youth 13-17 limit of ONE block per year reached",
+      "if_wrong_season": "REJECT with reason: Block not legal in current season (e.g., elastic in PREP_SEASON)",
+      "if_entry_gates_fail": "REJECT with reason code + specific requirement failed + legal alternative",
+      "if_contraindication_present": "REJECT with reason + corrective action required",
+      "if_bias_illegal_for_season_or_population": "REJECT per Governance v4.1 Gate 1: F-V Bias [BIAS] not allowed for [POPULATION] in [SEASON]. Athlete must use BALANCED for this season/population combination."
+    },
+
+    "transition_handling": {
+      "post_block_recovery": "EPA generates 3-7 day recovery window (Zone 8 only, no plyos)",
+      "re_entry_to_baseline": "EPA uses transition protocol (60% → 75% → 100% volume over 3 weeks)",
+      "next_block_prevention": "EPA enforces minimum 8 weeks before any next specialization block (even though Youth 13-17 limit = ONE per year)"
+    }
+  },
+
+  "version_control": {
+    "v2_3_1": {
+      "date": "2025-12-23",
+      "status": "ACTIVE · PRODUCTION READY",
+      "parent_version": "v2.3.0",
+      "changes": [
+        "Added fv_bias_profile block (default VELOCITY_BIASED, legal biases per season/population, assessment protocol, season override rules)",
+        "Added F-V bias population/season override rules aligned to Governance v4.1 Gate 1 + Gate 2",
+        "Updated population_ceilings.rationale to reference Load Standards v2.2.0 Table 3.2",
+        "Added fv_band_targets showing zone distribution targets by bias (VELOCITY_BIASED 65% velocity zones Z3/Z4/Z7/Z8, BALANCED 50/50)",
+        "Added fv_zone_emphasis and supported_bias_profiles to elastic and deceleration blocks",
+        "Added gate7_fv_bias_validation sub-section explaining EPA v2.2.1 Gate 7 algorithm, variance thresholds, and coach actions",
+        "Updated epa_integration_notes.specialization_block_activation with Gate 7 behavior, bias legality checks, and block-bias matching",
+        "Added F-V Bias Assessment to entry_assessments (CMJ + RSI + Squat 1RM)",
+        "Updated codexReference to include Load Standards v2.2.0, Periodization v2.1, Governance v4.1, Playbook v0.5.0",
+        "Aligned all load ceiling language and bias rules to v2.2.0 and Governance v4.1 standards",
+        "Added FV zone focus notes to periodization templates showing expected EPA Gate 7 status (GREEN/YELLOW)"
+      ],
+      "integration_ready": true,
+      "validated_with": [
+        "Load Standards v2.2.0",
+        "Governance v4.1",
+        "Periodization Schema v2.1",
+        "Coach & AI Playbook v0.5.0",
+        "EPA v2.2.1"
+      ],
+      "backward_compatible": false,
+      "note": "v2.3.1 requires EPA v2.2.1 or later for full Gate 7 compliance. Earlier EPA versions will reject F-V bias fields in input."
+    },
+    "v2_3_0": {
+      "date": "2025-12-22",
+      "status": "SUPERSEDED",
+      "changes": "Initial specialization block integration without F-V bias awareness"
+    }
+  }
+}
